@@ -1,0 +1,30 @@
+AutomataConstraintLibrary LinguaFrancaUtils{ 
+	import "platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/kernel.ccslLib" as ccsl;
+	RelationLibrary LinguaFrancaLib{
+
+		AutomataRelationDefinition AlternatesFSMDef [ AlternatesFSM ] {
+
+			init:  S1
+
+			from S1 to even : S1Toeven
+			-> ( )
+
+			from even to odd : evenToodd
+			-> ( when left )
+
+			from odd to even : oddToeven
+			-> ( when right )
+
+			State S1 ( out : S1Toeven )
+
+			State even ( in : S1Toeven, oddToeven out : evenToodd )
+
+			State odd ( in : evenToodd out : oddToeven )
+		}
+		
+		RelationDeclaration AlternatesFSM(left:clock , right: clock)
+	
+		
+	}
+
+}

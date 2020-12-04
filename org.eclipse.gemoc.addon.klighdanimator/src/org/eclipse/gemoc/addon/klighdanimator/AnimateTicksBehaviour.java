@@ -15,6 +15,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.cau.cs.kieler.klighd.ViewContext;
@@ -77,7 +78,11 @@ public class AnimateTicksBehaviour {
 			return;
 		}
 		EObject associatedObject = _ce.getReferencedElement().get(_ce.getReferencedElement().size()-1);
+		if(associatedObject instanceof EOperation){
+			associatedObject = _ce.getReferencedElement().get(_ce.getReferencedElement().size()-2);
+		}
 		EObject associatedObjectInKlighRes = ((EObject)vc.getInputModel()).eResource().getEObject(EcoreUtil.getURI(associatedObject).fragment());
+		
 		Collection<EObject> diagramElements = vc.getTargetElements(associatedObjectInKlighRes);
 		
 		for(EObject diagramElement : diagramElements ) {

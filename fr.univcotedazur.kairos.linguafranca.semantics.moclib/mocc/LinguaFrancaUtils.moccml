@@ -10,10 +10,10 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( )
 
 			from even to odd : evenToodd
-			-> ( when left )
+			-> ( when AlternatesFSM_left )
 
 			from odd to even : oddToeven
-			-> ( when right )
+			-> ( when AlternatesFSM_right )
 
 			State S1 ( out : S1Toeven )
 
@@ -21,9 +21,53 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 
 			State odd ( in : evenToodd out : oddToeven )
 		}
-		
-		RelationDeclaration AlternatesFSM(left:clock , right: clock)
-	
+
+		AutomataRelationDefinition TimerConstraintDef [ TimerConstraint ] {
+
+			init:  TCD_S1
+
+			from TCD_S1 to TCD_S2 : TCD_S1ToTCD_S2
+			-> ( )
+
+			from TCD_S2 to TCD_S4 : TCD_S2ToTCD_S3
+			-> ( when TimerConstraint_starts )
+
+			from TCD_S3 to TCD_S2 : TCD_S3ToTCD_S2
+			-> ( when TimerConstraint_release )
+
+			from TCD_S3 to TCD_S3 : TCD_S3ToTCD_S32
+			-> ( when TimerConstraint_canTick, TimerConstraint_wait )
+
+			from TCD_S4 to TCD_S3 : TCD_S4ToTCD_S3
+			-> ( when TimerConstraint_canTick )
+
+			State TCD_S1 ( out : TCD_S1ToTCD_S2 )
+
+			State TCD_S2 ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2 out : TCD_S2ToTCD_S3 )
+
+			State TCD_S3 ( in : TCD_S3ToTCD_S32, TCD_S4ToTCD_S3 out : TCD_S3ToTCD_S2,
+			TCD_S3ToTCD_S32 )
+
+			State TCD_S4 ( in : TCD_S2ToTCD_S3 out : TCD_S4ToTCD_S3 )
+		}
+
+		AutomataRelationDefinition neverTickDef [ NeverTick ] {
+
+			init:  TD_S1
+
+			from TD_S1 to TD_S2 : TD_S1ToTD_S2
+			-> ( )
+
+			from TD_S2 to TD_S2 : TD_S2ToTD_S2
+			-> ( when not (nevertCickingClock))
+
+			State TD_S1 ( out : TD_S1ToTD_S2 )
+
+			State TD_S2 ( in : TD_S1ToTD_S2, TD_S2ToTD_S2 out : TD_S2ToTD_S2 )
+		}
+		RelationDeclaration AlternatesFSM(AlternatesFSM_left:clock , AlternatesFSM_right: clock)
+		RelationDeclaration TimerConstraint(TimerConstraint_starts:clock , TimerConstraint_canTick: clock, TimerConstraint_wait: clock, TimerConstraint_release:clock)
+		RelationDeclaration NeverTick(nevertCickingClock : clock)
 		
 	}
 

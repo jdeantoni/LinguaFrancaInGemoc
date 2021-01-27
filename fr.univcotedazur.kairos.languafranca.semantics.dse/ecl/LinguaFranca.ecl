@@ -9,7 +9,6 @@ ECLimport "platform:/resource/fr.univcotedazur.kairos.linguafranca.semantics.moc
 
 
 
-
 /**
  * TODO: 
  *    deal correctly with timer (auto restart)
@@ -17,8 +16,6 @@ ECLimport "platform:/resource/fr.univcotedazur.kairos.linguafranca.semantics.moc
  *    correct semantics of multiple inputs for reaction
  *    add priority between untimed and timed
  */
-
-
 
 
 
@@ -43,7 +40,7 @@ package linguaFranca
  
 
 context Model
-	def: timeJump : Event = self.timeJump()
+	def : timeJump : Event = self.timeJump()
 	def : untimedAction : Event = self
 	def : allTimerAndActionRelease : Event = self
 	def : allCanRelease : Event = self
@@ -65,14 +62,14 @@ context Variable
 -- not needed it is a variable, can use update
 context Timer
 	def : starts : Event = self.schedule() --coincides with update since Action is a Variable
-	def : releases : Event = self
+	def : releases : Event = self.release()
 	def : wait : Event = self
 	def if(true) : canRelease : Event = self.canTick()[res] 
 			       switch case (res = true) force releases; -- on Model.allInstances()->asSequence()->first().oclAsType(Model).timeJump ; 
 					      case (res = false) force wait; --until canRelease; 
 context Action
 	def : starts : Event = self.schedule() --coincides with update since Action is a Variable
-	def : releases  : Event = self
+	def : releases  : Event = self.release()
 	def if(self.minDelay <> null and self.minDelay.time <> null) : wait : Event = self
 	def if(self.minDelay <> null and self.minDelay.time <> null) : canRelease : Event = self.canTick()[res] 
 														      switch case (res = true) force releases; -- on Model.allInstances()->asSequence()->first().oclAsType(Model).timeJump ; 
@@ -84,10 +81,14 @@ context Action
  */
 
 context Model
-	inv untimedPriorTimed:
-		Prior : self.allCanRelease  prevails on self.timeJump 
-	inv untimedPriorTimedExclusion:
-		Relation Exclusion(self.allCanRelease, self.timeJump)
+	inv untimedPriorTimed0:
+		Prior : self.untimedAction prevails on self.timeJump
+
+--	inv untimedPriorTimed:
+--		Prior : self.timeJump prevails on self.allCanRelease
+
+--	inv untimedPriorTimedExclusion:
+--		Relation Exclusion(self.allCanRelease, self.timeJump)
 
 	inv ForUntimedPriorTimed2:
 		let _allActionCanRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action).canRelease) in
@@ -102,25 +103,18 @@ context Model
 		Relation Coincides(_allTimerAndActionRelease,allTimerAndActionRelease)
 
 	inv untimedPriorTimed2:
-		Prior : self.untimedAction  prevails on self.allCanRelease
+		Prior : self.allTimerAndActionRelease prevails on self.untimedAction
 	inv untimedPriorTimed2Exclusion:
-		Relation Exclusion(self.untimedAction, self.allCanRelease)
-
-/**
+		Relation Exclusion(self.untimedAction, allTimerAndActionRelease)
+ 
+/** 
  * TIMED ELEMENTS
  */
 
 context Model
---	inv forFiniteStateSpace1:
---		let firstInternalExec : Event = Expression Inf(self.reactors->select(r | r._main).instantiations.startExecuting) in
---		let lastInternalExec : Event = Expression Sup(self.reactors->select(r | r._main).instantiations.finishExecuting) in
---		Relation AlternatesFSM(firstInternalExec, lastInternalExec) 
-	inv timeJumpIfActionRelease:
---		let allActionRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action).releases) in
---		let allTimerRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(Timer).releases) in
---		let allTimerAndActionRelease : Event = Expression Union(allActionRelease,allTimerRelease) in
-		Relation Coincides(self.timeJump, allTimerAndActionRelease)
- 
+--	inv timeJumpIfActionRelease:
+--		Relation Coincides(self.timeJump, allTimerAndActionRelease)
+
  	inv allUntimedAction:
  		let allSynchronousExecution: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Reaction)).oclAsType(Reaction).synchronousExecution) in
 		let allUpdates: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Port)).oclAsType(Port).updates) in
@@ -141,6 +135,9 @@ context Model
 		Relation Exclusion(self.timeJump, self.untimedAction)
  	
 context Timer
+	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
+
+
 	inv timerStartsWhenUpdates:
 		Relation Coincides(self.updates, self.starts)
 		 
@@ -148,9 +145,12 @@ context Timer
 	    Relation Exclusion(self.wait, self.releases)
 
 	inv timerSetActionLifeCycle:
-		Relation TimerConstraint(self.starts, self.canRelease, self.wait, self.releases) 
+		Relation TimerConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 		
 context Action
+	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
+
+
 	inv actionStartsWhenUpdates:
 		Relation Coincides(self.updates, self.starts) 
 
@@ -188,7 +188,7 @@ context Action
 	 */
 	inv setActionLifeCycle:
 	(self.minDelay <> null and self.minDelay.time <> null) implies
-		Relation TimerConstraint(self.starts, self.canRelease, self.wait, self.releases) 
+		Relation TimerConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 		
 	inv setNullLifeCycle:
 	(self.minDelay = null or self.minDelay.time = null) implies

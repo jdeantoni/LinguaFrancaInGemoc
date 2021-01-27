@@ -80,23 +80,10 @@ public class ModelAspect {
   }
   
   protected static void _privk3_timeJump(final ModelAspectModelAspectProperties _self_, final Model _self) {
-    final int jumpSize = ModelAspect.startedTimers(_self).getFirst().delta;
-    ModelAspect.startedTimers(_self).removeFirst();
+    ModelAspect.currentTime(_self, ModelAspect.startedTimers(_self).getFirst().releaseDate);
     Integer _currentTime = ModelAspect.currentTime(_self);
-    int _plus = ((_currentTime).intValue() + jumpSize);
-    ModelAspect.currentTime(_self, Integer.valueOf(_plus));
-    int indexUntilWhichToRemoveElemExcluded = 0;
-    while (((indexUntilWhichToRemoveElemExcluded < ModelAspect.startedTimers(_self).size()) && (ModelAspect.startedTimers(_self).get(indexUntilWhichToRemoveElemExcluded).delta == 0))) {
-      indexUntilWhichToRemoveElemExcluded++;
-    }
-    LinkedList<StartedAction> tempList = new LinkedList<StartedAction>();
-    for (int i = indexUntilWhichToRemoveElemExcluded; (i < ModelAspect.startedTimers(_self).size()); i++) {
-      tempList.add(ModelAspect.startedTimers(_self).get(i));
-    }
-    ModelAspect.startedTimers(_self, tempList);
-    Integer _currentTime_1 = ModelAspect.currentTime(_self);
-    String _plus_1 = ("currentTime is now " + _currentTime_1);
-    InputOutput.<String>println(_plus_1);
+    String _plus = ("currentTime is now " + _currentTime);
+    InputOutput.<String>println(_plus);
   }
   
   protected static void _privk3_schedule(final ModelAspectModelAspectProperties _self_, final Model _self, final Variable a, final int duration) {
@@ -108,49 +95,47 @@ public class ModelAspect {
     LinkedList<StartedAction> _startedTimers = ModelAspect.startedTimers(_self);
     String _plus_4 = (_plus_3 + _startedTimers);
     InputOutput.<String>println(_plus_4);
-    int summedDelta = 0;
     boolean _isEmpty = ModelAspect.startedTimers(_self).isEmpty();
     if (_isEmpty) {
       LinkedList<StartedAction> _startedTimers_1 = ModelAspect.startedTimers(_self);
-      StartedAction _startedAction = new StartedAction(a, duration);
+      Integer _currentTime = ModelAspect.currentTime(_self);
+      int _plus_5 = ((_currentTime).intValue() + duration);
+      StartedAction _startedAction = new StartedAction(a, _plus_5);
       _startedTimers_1.add(_startedAction);
       LinkedList<StartedAction> _startedTimers_2 = ModelAspect.startedTimers(_self);
-      String _plus_5 = ("afterSchedule: " + _startedTimers_2);
-      InputOutput.<String>println(_plus_5);
+      String _plus_6 = ("afterSchedule: " + _startedTimers_2);
+      InputOutput.<String>println(_plus_6);
       return;
     }
     for (int i = 0; (i < ModelAspect.startedTimers(_self).size()); i++) {
       {
-        int _summedDelta = summedDelta;
-        summedDelta = (_summedDelta + ModelAspect.startedTimers(_self).get(i).delta);
-        if ((summedDelta > duration)) {
-          final int aDelta = (duration - (summedDelta - ModelAspect.startedTimers(_self).get(i).delta));
+        Integer _currentTime_1 = ModelAspect.currentTime(_self);
+        int _plus_7 = ((_currentTime_1).intValue() + duration);
+        boolean _greaterThan = ((ModelAspect.startedTimers(_self).get(i).releaseDate).intValue() > _plus_7);
+        if (_greaterThan) {
           LinkedList<StartedAction> _startedTimers_3 = ModelAspect.startedTimers(_self);
           int _max = Math.max(0, (i - 1));
-          StartedAction _startedAction_1 = new StartedAction(a, aDelta);
+          Integer _currentTime_2 = ModelAspect.currentTime(_self);
+          int _plus_8 = ((_currentTime_2).intValue() + duration);
+          StartedAction _startedAction_1 = new StartedAction(a, _plus_8);
           _startedTimers_3.add(_max, _startedAction_1);
-          for (int j = (i + 1); (j < ModelAspect.startedTimers(_self).size()); j++) {
-            if ((ModelAspect.startedTimers(_self).get(j).delta != 0)) {
-              int _delta = ModelAspect.startedTimers(_self).get(j).delta;
-              ModelAspect.startedTimers(_self).get(j).delta = (_delta - aDelta);
-            }
-          }
           LinkedList<StartedAction> _startedTimers_4 = ModelAspect.startedTimers(_self);
-          String _plus_6 = ("startedTimer (1): " + _startedTimers_4);
-          InputOutput.<String>println(_plus_6);
+          String _plus_9 = ("startedTimer (1): " + _startedTimers_4);
+          InputOutput.<String>println(_plus_9);
           return;
         }
         int _size = ModelAspect.startedTimers(_self).size();
         int _minus = (_size - 1);
         boolean _equals = (i == _minus);
         if (_equals) {
-          final int aDelta_1 = (duration - summedDelta);
           LinkedList<StartedAction> _startedTimers_5 = ModelAspect.startedTimers(_self);
-          StartedAction _startedAction_2 = new StartedAction(a, aDelta_1);
+          Integer _currentTime_3 = ModelAspect.currentTime(_self);
+          int _plus_10 = ((_currentTime_3).intValue() + duration);
+          StartedAction _startedAction_2 = new StartedAction(a, _plus_10);
           _startedTimers_5.add(_startedAction_2);
           LinkedList<StartedAction> _startedTimers_6 = ModelAspect.startedTimers(_self);
-          String _plus_7 = ("startedTimer: (3)" + _startedTimers_6);
-          InputOutput.<String>println(_plus_7);
+          String _plus_11 = ("startedTimer: (3)" + _startedTimers_6);
+          InputOutput.<String>println(_plus_11);
           return;
         }
       }

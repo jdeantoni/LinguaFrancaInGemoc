@@ -12,16 +12,16 @@ import org.icyphy.linguaFranca.Variable
 import org.icyphy.linguaFranca.Reactor
 
 class StartedAction{
-	public var int delta
+	public var Integer releaseDate
 	public val Variable variable
 	
 	new(Variable v, int d){
-		delta = d
+		releaseDate = d
 		variable = v
 	}
-	
+
 	override String toString(){
-		return "("+variable.name+" in "+delta+")"
+		return "("+variable.name+"@"+releaseDate+")"
 	}
 }
 
@@ -35,44 +35,44 @@ class ModelAspect {
 	
 	
 	def void timeJump(){
-		val jumpSize = _self.startedTimers.first.delta
-		_self.startedTimers.removeFirst
-		_self.currentTime = _self.currentTime + jumpSize
-		var int indexUntilWhichToRemoveElemExcluded = 0
-		while( 
-			indexUntilWhichToRemoveElemExcluded < _self.startedTimers.size
-			&& _self.startedTimers.get(indexUntilWhichToRemoveElemExcluded).delta == 0
-			){
-				indexUntilWhichToRemoveElemExcluded++
-			}; 
-		
-		
-		var tempList = new LinkedList()
-		for(var int i = indexUntilWhichToRemoveElemExcluded; i < _self.startedTimers.size ; i++){
-			tempList.add(_self.startedTimers.get(i))
-		}
-		_self.startedTimers = tempList
+		_self.currentTime = _self.startedTimers.first.releaseDate
+		//_self.startedTimers.removeFirst
+//		_self.currentTime = _self.currentTime + jumpSize
+//		var int indexUntilWhichToRemoveElemExcluded = 0
+//		while( 
+//			indexUntilWhichToRemoveElemExcluded < _self.startedTimers.size
+//			&& _self.startedTimers.get(indexUntilWhichToRemoveElemExcluded).delta == 0
+//			){
+//				indexUntilWhichToRemoveElemExcluded++
+//			}; 
+//		
+//		
+//		var tempList = new LinkedList()
+//		for(var int i = indexUntilWhichToRemoveElemExcluded; i < _self.startedTimers.size ; i++){
+//			tempList.add(_self.startedTimers.get(i))
+//		}
+//		_self.startedTimers = tempList
 		println("currentTime is now "+_self.currentTime)
 	}
 	
 	def void schedule(Variable a, int duration){
 		println("beforeSchedule: of "+a.name+" for "+duration+" --> "+_self.startedTimers)
-		var int summedDelta = 0
+//		var int summedDelta = 0
 		if(_self.startedTimers.isEmpty){
-			_self.startedTimers.add(new StartedAction(a, duration))
+			_self.startedTimers.add(new StartedAction(a, _self.currentTime+duration))
 			println("afterSchedule: "+_self.startedTimers)
 			return
 		}//else
 		for(var int i = 0; i < _self.startedTimers.size; i++){
-			summedDelta += _self.startedTimers.get(i).delta
-			if(summedDelta > duration){
-				val int aDelta = duration - (summedDelta - _self.startedTimers.get(i).delta)
-				_self.startedTimers.add(java.lang.Math.max(0, i-1), new StartedAction(a, aDelta)) //Max in case i == 0 (add before)
-				for(var int j = i+1; j < _self.startedTimers.size; j++){ //offset the rest of the list
-					if (_self.startedTimers.get(j).delta != 0){
-						_self.startedTimers.get(j).delta -= aDelta
-					}
-				}
+//			summedDelta += _self.startedTimers.get(i).delta
+			if(_self.startedTimers.get(i).releaseDate > _self.currentTime+duration){
+//				val int aDelta = duration - (summedDelta - _self.startedTimers.get(i).delta)
+				_self.startedTimers.add(java.lang.Math.max(0, i-1), new StartedAction(a, _self.currentTime+duration)) //Max in case i == 0 (add before)
+//				for(var int j = i+1; j < _self.startedTimers.size; j++){ //offset the rest of the list
+//					if (_self.startedTimers.get(j).delta != 0){
+//						_self.startedTimers.get(j).delta -= aDelta
+//					}
+//				}
 				println("startedTimer (1): "+_self.startedTimers)
 				return
 			}
@@ -86,8 +86,8 @@ class ModelAspect {
 //				return
 //			}
 			if (i == (_self.startedTimers.size -1)){
-				val int aDelta = duration - summedDelta
-				_self.startedTimers.add(new StartedAction(a, aDelta))//push to the end
+//				val int aDelta = duration - summedDelta
+				_self.startedTimers.add(new StartedAction(a, _self.currentTime+duration))//push to the end
 				println("startedTimer: (3)"+_self.startedTimers)
 				return
 			}
@@ -110,6 +110,13 @@ class ModelAspect {
 
 @Aspect(className=Timer)
 class TimerAspect{
+	def void release(){
+		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
+		val indexOfSelf = model.getIndexOfTimer(_self)
+		model.startedTimers.remove(indexOfSelf)
+		println("Timer released ("+model.startedTimers+")")
+	}
+	
 	def void schedule(){
 		println("enter schedule of "+_self.name)
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
@@ -130,12 +137,14 @@ class TimerAspect{
 		print("Timer "+_self.name+".canRelease() ->")
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
-		var result = false;
-		switch ( indexOfSelf ){
-			case -1 : throw new RuntimeException("ERROR: TimerAspect::canTick() -> timer is not started !")
-			case 0  : result = true
-			case indexOfSelf > 0: result = (model.startedTimers.get(indexOfSelf).delta == 0) && model.startedTimers.subList(1, indexOfSelf).forall[e | e.delta == 0]
-		}
+//		var result = false;
+//		switch ( indexOfSelf ){
+//			case -1 : throw new RuntimeException("ERROR: TimerAspect::canTick() -> timer is not started !")
+//			case 0  : result = true
+//			case indexOfSelf > 0: result = (model.startedTimers.get(indexOfSelf).delta == 0) && model.startedTimers.subList(1, indexOfSelf).forall[e | e.delta == 0]
+//		}
+		val list = model.startedTimers
+		var result = (model.currentTime == list.get(indexOfSelf).releaseDate)
 		println(result)
 		return result
 	}
@@ -144,6 +153,13 @@ class TimerAspect{
 
 @Aspect(className=Action)
 class ActionAspect{
+	def void release(){
+		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
+		val indexOfSelf = model.getIndexOfTimer(_self)
+		model.startedTimers.remove(indexOfSelf)
+		println("Action released ("+model.startedTimers+")")
+	}
+	
 	
 	def void schedule(){
 		if(_self.minDelay === null || _self.minDelay.time === null) return;
@@ -158,12 +174,14 @@ class ActionAspect{
 		print("Action "+_self.name+".canRelease() ->")
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
-		var result = false;
-		switch ( indexOfSelf ){
-			case -1 : throw new RuntimeException("ERROR: ActionAspect::canTick() -> timer is not started !")
-			case 0  : result = true
-			case indexOfSelf > 0: result = (model.startedTimers.get(indexOfSelf).delta == 0) && model.startedTimers.subList(1, indexOfSelf).forall[e | e.delta == 0]
-		}
+//		var result = false;
+//		switch ( indexOfSelf ){
+//			case -1 : throw new RuntimeException("ERROR: TimerAspect::canTick() -> timer is not started !")
+//			case 0  : result = true
+//			case indexOfSelf > 0: result = (model.startedTimers.get(indexOfSelf).delta == 0) && model.startedTimers.subList(1, indexOfSelf).forall[e | e.delta == 0]
+//		}
+		val list = model.startedTimers
+		var result = (model.currentTime == list.get(indexOfSelf).releaseDate)
 		println(result)
 		return result
 	}

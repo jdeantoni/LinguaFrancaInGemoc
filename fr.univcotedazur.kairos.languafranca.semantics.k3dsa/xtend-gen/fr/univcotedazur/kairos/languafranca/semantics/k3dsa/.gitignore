@@ -14,3 +14,13 @@
 /.TimerAspect.java._trace
 /.TimerAspectTimerAspectContext.java._trace
 /.TimerAspectTimerAspectProperties.java._trace
+/ActionAspect.java
+/ActionAspectActionAspectContext.java
+/ActionAspectActionAspectProperties.java
+/ModelAspect.java
+/ModelAspectModelAspectContext.java
+/ModelAspectModelAspectProperties.java
+/StartedAction.java
+/TimerAspect.java
+/TimerAspectTimerAspectContext.java
+/TimerAspectTimerAspectProperties.java

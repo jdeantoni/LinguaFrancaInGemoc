@@ -35,20 +35,33 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			from TCD_S3 to TCD_S2 : TCD_S3ToTCD_S2
 			-> ( when TimerConstraint_release )
 
-			from TCD_S3 to TCD_S3 : TCD_S3ToTCD_S32
+			from TCD_S3 to TCD_S6 : TCD_S3ToTCD_S32
 			-> ( when TimerConstraint_canTick, TimerConstraint_wait )
 
-			from TCD_S4 to TCD_S3 : TCD_S4ToTCD_S3
+			from TCD_S5 to TCD_S3 : TCD_S4ToTCD_S3
 			-> ( when TimerConstraint_canTick )
+
+			from TCD_S4 to TCD_S5 : TCD_S4ToTCD_S5
+			-> ( when TimerConstraint_timeJump )
+
+			from TCD_S2 to TCD_S2 : TCD_S2ToTCD_S2
+			-> ( when TimerConstraint_timeJump )
+
+			from TCD_S6 to TCD_S5 : TCD_S6ToTCD_S3
+			-> ( when TimerConstraint_timeJump )
 
 			State TCD_S1 ( out : TCD_S1ToTCD_S2 )
 
-			State TCD_S2 ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2 out : TCD_S2ToTCD_S3 )
+			State TCD_S2 ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2, TCD_S2ToTCD_S2 out : TCD_S2ToTCD_S3, TCD_S2ToTCD_S2 )
 
-			State TCD_S3 ( in : TCD_S3ToTCD_S32, TCD_S4ToTCD_S3 out : TCD_S3ToTCD_S2,
+			State TCD_S3 ( in : TCD_S4ToTCD_S3 out : TCD_S3ToTCD_S2,
 			TCD_S3ToTCD_S32 )
 
-			State TCD_S4 ( in : TCD_S2ToTCD_S3 out : TCD_S4ToTCD_S3 )
+			State TCD_S4 ( in : TCD_S2ToTCD_S3 out : TCD_S4ToTCD_S5 )
+
+			State TCD_S5 ( in : TCD_S4ToTCD_S5, TCD_S6ToTCD_S3 out : TCD_S4ToTCD_S3 )
+
+			State TCD_S6 ( in : TCD_S3ToTCD_S32 out : TCD_S6ToTCD_S3 )
 		}
 
 		AutomataRelationDefinition neverTickDef [ NeverTick ] {
@@ -66,7 +79,7 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			State TD_S2 ( in : TD_S1ToTD_S2, TD_S2ToTD_S2 out : TD_S2ToTD_S2 )
 		}
 		RelationDeclaration AlternatesFSM(AlternatesFSM_left:clock , AlternatesFSM_right: clock)
-		RelationDeclaration TimerConstraint(TimerConstraint_starts:clock , TimerConstraint_canTick: clock, TimerConstraint_wait: clock, TimerConstraint_release:clock)
+		RelationDeclaration TimerConstraint(TimerConstraint_starts:clock , TimerConstraint_canTick: clock, TimerConstraint_wait: clock, TimerConstraint_release:clock, TimerConstraint_timeJump:clock)
 		RelationDeclaration NeverTick(nevertCickingClock : clock)
 		
 	}

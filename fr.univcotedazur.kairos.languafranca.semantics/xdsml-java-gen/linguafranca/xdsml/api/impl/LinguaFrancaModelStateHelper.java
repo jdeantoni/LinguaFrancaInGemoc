@@ -49,16 +49,6 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 			EObject elem = allContentIt.next();
 
 			Class<?> clazz =null;
-			clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect.class);
-			if (clazz.isInstance(elem)) {
-				ElementState elemState = theFactory.createElementState();
-				elemState.setModelElement(elem);
-				res.getOwnedElementstates().add(elemState);
-				AttributeNameToValue n2v0 = new AttributeNameToValue("currentTime", LinguaFrancaRTDAccessor.getcurrentTime(elem));
-				elemState.getSavedRTDs().add(n2v0);
-				AttributeNameToValue n2v1 = new AttributeNameToValue("startedTimer", LinguaFrancaRTDAccessor.getstartedTimer(elem));
-				elemState.getSavedRTDs().add(n2v1);
-			}
 		}
 		return res;
 		}

@@ -185,9 +185,6 @@ main() {
 
 
 		
-		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map untimedPriorTimedExclusion12untimedPriorTimedExclusion();
-		
-		
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map ForUntimedPriorTimed242ForUntimedPriorTimed2();
 		
 		
@@ -201,9 +198,6 @@ main() {
 		
 
 
-		
-		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map timeJumpIfActionRelease12timeJumpIfActionRelease();
-		
 		
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map allUntimedAction102allUntimedAction();
 		
@@ -2179,6 +2173,8 @@ main() {
 			name:= getNameOrUID(self.oclAsType(EObject))+'_releases';
 			tickingEvent := object TimeModel::Event{
  				referencedObjectRefs += self.oclAsType(EObject);
+				//referencedObjectRefs += self.oclAsType(EObject);
+				referencedObjectRefs += self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "release")->first().oclAsType(EObject);
 			
 				name := 'evt_'+getNameOrUID(self.oclAsType(EObject))+'_releases';
 			kind :=TimeModel::EventKind::undefined;
@@ -2250,6 +2246,8 @@ main() {
 			name:= getNameOrUID(self.oclAsType(EObject))+'_releases';
 			tickingEvent := object TimeModel::Event{
  				referencedObjectRefs += self.oclAsType(EObject);
+				//referencedObjectRefs += self.oclAsType(EObject);
+				referencedObjectRefs += self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "release")->first().oclAsType(EObject);
 			
 				name := 'evt_'+getNameOrUID(self.oclAsType(EObject))+'_releases';
 			kind :=TimeModel::EventKind::undefined;
@@ -2303,25 +2301,6 @@ main() {
 //relation stuff		
 		
 	
-		mapping inMM2::Model::untimedPriorTimedExclusion12untimedPriorTimedExclusion(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
-		{
-		 	name := getNameOrUID(self.oclAsType(EObject))+"Exclusion_untimedPriorTimedExclusion";
-			type := seqOfRelationDeclaration->select(rd | rd.name = "Exclusion")->first();
-			
-			
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allCanRelease']->first();
-					_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
-				};
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
-				};
-		
-		theMainBlock.relations += result;
-		}
-		
-	
 		mapping inMM2::Model::ForUntimedPriorTimed242ForUntimedPriorTimed2(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Coincides_ForUntimedPriorTimed2";
@@ -2372,7 +2351,7 @@ main() {
 					_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allCanRelease']->first();
+					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allTimerAndActionRelease']->first();
 					_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
 				};
 		
@@ -2381,25 +2360,6 @@ main() {
 		
 
 //relation stuff		
-	
-		mapping inMM2::Model::timeJumpIfActionRelease12timeJumpIfActionRelease(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
-		{
-		 	name := getNameOrUID(self.oclAsType(EObject))+"Coincides_timeJumpIfActionRelease";
-			type := seqOfRelationDeclaration->select(rd | rd.name = "Coincides")->first();
-			
-			
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
-				};
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allTimerAndActionRelease']->first();
-					_abstract := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
-				};
-		
-		theMainBlock.relations += result;
-		}
-		
 	
 		mapping inMM2::Model::allUntimedAction102allUntimedAction(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 		{
@@ -2445,6 +2405,7 @@ main() {
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Coincides_timerStartsWhenUpdates";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Coincides")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
@@ -2464,6 +2425,7 @@ main() {
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Exclusion_timerWaitOrRelease";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Exclusion")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
@@ -2483,6 +2445,7 @@ main() {
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"TimerConstraint_timerSetActionLifeCycle";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "TimerConstraint")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
@@ -2501,6 +2464,10 @@ main() {
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_releases']->first();
 					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_release']->first();
 				};
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
+					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_timeJump']->first();
+				};
 		
 		theMainBlock.relations += result;
 		}
@@ -2512,6 +2479,7 @@ main() {
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Coincides_actionStartsWhenUpdates";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Coincides")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
@@ -2529,6 +2497,7 @@ main() {
 	
 		mapping inMM2::Action::actionWaitOrRelease22actionWaitOrRelease(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
+						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.minDelay <> null and self.minDelay.time <> null) 
 				
@@ -2536,6 +2505,7 @@ main() {
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Exclusion_actionWaitOrRelease";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Exclusion")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
@@ -2553,6 +2523,7 @@ main() {
 	
 		mapping inMM2::Action::ActionSourceCoincidesTarget42ActionSourceCoincidesTarget(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
+						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.minDelay = null or self.minDelay.time = null) 
 				
@@ -2560,6 +2531,7 @@ main() {
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Precedes_ActionSourceCoincidesTarget";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Precedes")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 					var source : Reaction := self.oclAsType(ecore::EObject).eContainer().oclAsType(Reactor).reactions
 							->select(r | r.effects->first().variable.name = self.name)->first();
@@ -2581,6 +2553,7 @@ main() {
 	
 		mapping inMM2::Action::ActionSourceBeforeTarget42ActionSourceBeforeTarget(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
+						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.minDelay <> null and self.minDelay.time <> null) 
 				
@@ -2588,6 +2561,7 @@ main() {
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Precedes_ActionSourceBeforeTarget";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Precedes")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 					var source : Reaction := self.oclAsType(ecore::EObject).eContainer().oclAsType(Reactor).reactions
 							->select(r | r.effects->first().variable.name = self.name)->first();
@@ -2609,6 +2583,7 @@ main() {
 	
 		mapping inMM2::Action::ActionTargetWhenReleased32ActionTargetWhenReleased(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
+						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.minDelay <> null and self.minDelay.time <> null) 
 				
@@ -2616,6 +2591,7 @@ main() {
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Precedes_ActionTargetWhenReleased";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Precedes")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 					var target : Reaction := self.oclAsType(ecore::EObject).eContainer().oclAsType(Reactor).reactions
 							->select(r | r.triggers->first().oclIsKindOf(VarRef) and r.triggers.oclAsType(VarRef)->first().variable.name = self.name)->first();
@@ -2635,6 +2611,7 @@ main() {
 	
 		mapping inMM2::Action::setActionLifeCycle22setActionLifeCycle(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
+						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.minDelay <> null and self.minDelay.time <> null) 
 				
@@ -2642,6 +2619,7 @@ main() {
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"TimerConstraint_setActionLifeCycle";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "TimerConstraint")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
@@ -2660,6 +2638,10 @@ main() {
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_releases']->first();
 					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_release']->first();
 				};
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
+					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_timeJump']->first();
+				};
 		
 		theMainBlock.relations += result;
 		}
@@ -2667,6 +2649,7 @@ main() {
 	
 		mapping inMM2::Action::setNullLifeCycle22setNullLifeCycle(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
+						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.minDelay = null or self.minDelay.time = null) 
 				
@@ -2674,6 +2657,7 @@ main() {
 		{
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Precedes_setNullLifeCycle";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Precedes")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
@@ -3317,6 +3301,8 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 		{
 			name:= 'MSE_'+getNameOrUID(self.oclAsType(EObject))+'_releases';
 
+				caller := self.oclAsType(EObject);
+				action := self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "release")->first();
 				solverEvent := theMainBlock.elements[TimeModel::Clock]->select(c|c.name=getNameOrUID(self.oclAsType(EObject))+'_releases')->first().oclAsType(EObject);
 				
 			end{
@@ -3366,6 +3352,8 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 		{
 			name:= 'MSE_'+getNameOrUID(self.oclAsType(EObject))+'_releases';
 
+				caller := self.oclAsType(EObject);
+				action := self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "release")->first();
 				solverEvent := theMainBlock.elements[TimeModel::Clock]->select(c|c.name=getNameOrUID(self.oclAsType(EObject))+'_releases')->first().oclAsType(EObject);
 				
 			end{
@@ -3490,22 +3478,22 @@ mapping inMM2::Model::ecore2Priority()  :Priority::PrioritySpecification  {
 	importedModel := object Priority::ImportStatement{
 		importURI := getModelPath(ccsl.objectsOfType(TimeModel::Clock)->asSequence()->first().oclAsType(EObject));
 	}; 
-		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map untimedPriorTimed12untimedPriorTimed();
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map untimedPriorTimed012untimedPriorTimed0();
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map untimedPriorTimed212untimedPriorTimed2();
 }	
 
-		mapping inMM2::Model::untimedPriorTimed12untimedPriorTimed() :Priority::PriorityRelation 
+		mapping inMM2::Model::untimedPriorTimed012untimedPriorTimed0() :Priority::PriorityRelation 
 		{
 			lower  := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_timeJump']->first();
-			higher := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allCanRelease']->first();
+			higher := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_untimedAction']->first();
 			end{
 				thePrioritySpec.relations += result;
 			}
 		}
 		mapping inMM2::Model::untimedPriorTimed212untimedPriorTimed2() :Priority::PriorityRelation 
 		{
-			lower  := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allCanRelease']->first();
-			higher := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_untimedAction']->first();
+			lower  := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_untimedAction']->first();
+			higher := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allTimerAndActionRelease']->first();
 			end{
 				thePrioritySpec.relations += result;
 			}

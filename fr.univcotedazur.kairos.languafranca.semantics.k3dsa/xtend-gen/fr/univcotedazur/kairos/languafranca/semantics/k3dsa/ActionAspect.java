@@ -57,8 +57,9 @@ public class ActionAspect {
   
   protected static boolean _privk3_canTick(final ActionAspectActionAspectProperties _self_, final Action _self) {
     String _name = _self.getName();
-    String _plus = (_name + ".canTick() ->");
-    InputOutput.<String>print(_plus);
+    String _plus = ("Action " + _name);
+    String _plus_1 = (_plus + ".canRelease() ->");
+    InputOutput.<String>print(_plus_1);
     final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
       @Override
       public Boolean apply(final EObject eo) {
@@ -83,7 +84,7 @@ public class ActionAspect {
     if (!_matched) {
       if ((indexOfSelf > 0)) {
         _matched=true;
-        result = ((ModelAspect.startedTimer(model).get(indexOfSelf).delta == 0) && IterableExtensions.<StartedAction>forall(ModelAspect.startedTimer(model).subList(1, indexOfSelf), new Function1<StartedAction, Boolean>() {
+        result = ((ModelAspect.startedTimers(model).get(indexOfSelf).delta == 0) && IterableExtensions.<StartedAction>forall(ModelAspect.startedTimers(model).subList(1, indexOfSelf), new Function1<StartedAction, Boolean>() {
           @Override
           public Boolean apply(final StartedAction e) {
             return Boolean.valueOf((e.delta == 0));

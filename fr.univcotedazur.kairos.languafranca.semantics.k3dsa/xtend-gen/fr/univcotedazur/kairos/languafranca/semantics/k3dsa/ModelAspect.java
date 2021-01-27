@@ -61,100 +61,96 @@ public class ModelAspect {
     };
   }
   
-  public static LinkedList<StartedAction> startedTimer(final Model _self) {
+  public static LinkedList<StartedAction> startedTimers(final Model _self) {
     final fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectProperties _self_ = fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectContext.getSelf(_self);
     Object result = null;
-    // #DispatchPointCut_before# LinkedList<StartedAction> startedTimer()
+    // #DispatchPointCut_before# LinkedList<StartedAction> startedTimers()
     if (_self instanceof org.icyphy.linguaFranca.Model){
-    	result = fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect._privk3_startedTimer(_self_, (org.icyphy.linguaFranca.Model)_self);
+    	result = fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect._privk3_startedTimers(_self_, (org.icyphy.linguaFranca.Model)_self);
     };
     return (java.util.LinkedList<fr.univcotedazur.kairos.languafranca.semantics.k3dsa.StartedAction>)result;
   }
   
-  public static void startedTimer(final Model _self, final LinkedList<StartedAction> startedTimer) {
+  public static void startedTimers(final Model _self, final LinkedList<StartedAction> startedTimers) {
     final fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectProperties _self_ = fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectContext.getSelf(_self);
-    // #DispatchPointCut_before# void startedTimer(LinkedList<StartedAction>)
+    // #DispatchPointCut_before# void startedTimers(LinkedList<StartedAction>)
     if (_self instanceof org.icyphy.linguaFranca.Model){
-    	fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect._privk3_startedTimer(_self_, (org.icyphy.linguaFranca.Model)_self,startedTimer);
+    	fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect._privk3_startedTimers(_self_, (org.icyphy.linguaFranca.Model)_self,startedTimers);
     };
   }
   
   protected static void _privk3_timeJump(final ModelAspectModelAspectProperties _self_, final Model _self) {
-    final int jumpSize = ModelAspect.startedTimer(_self).getFirst().delta;
-    ModelAspect.startedTimer(_self).removeFirst();
+    final int jumpSize = ModelAspect.startedTimers(_self).getFirst().delta;
+    ModelAspect.startedTimers(_self).removeFirst();
     Integer _currentTime = ModelAspect.currentTime(_self);
     int _plus = ((_currentTime).intValue() + jumpSize);
     ModelAspect.currentTime(_self, Integer.valueOf(_plus));
     int indexUntilWhichToRemoveElemExcluded = 0;
-    while (((indexUntilWhichToRemoveElemExcluded < ModelAspect.startedTimer(_self).size()) && (ModelAspect.startedTimer(_self).get(indexUntilWhichToRemoveElemExcluded).delta == 0))) {
+    while (((indexUntilWhichToRemoveElemExcluded < ModelAspect.startedTimers(_self).size()) && (ModelAspect.startedTimers(_self).get(indexUntilWhichToRemoveElemExcluded).delta == 0))) {
       indexUntilWhichToRemoveElemExcluded++;
     }
     LinkedList<StartedAction> tempList = new LinkedList<StartedAction>();
-    for (int i = indexUntilWhichToRemoveElemExcluded; (i < ModelAspect.startedTimer(_self).size()); i++) {
-      tempList.add(ModelAspect.startedTimer(_self).get(i));
+    for (int i = indexUntilWhichToRemoveElemExcluded; (i < ModelAspect.startedTimers(_self).size()); i++) {
+      tempList.add(ModelAspect.startedTimers(_self).get(i));
     }
-    ModelAspect.startedTimer(_self, tempList);
+    ModelAspect.startedTimers(_self, tempList);
     Integer _currentTime_1 = ModelAspect.currentTime(_self);
     String _plus_1 = ("currentTime is now " + _currentTime_1);
     InputOutput.<String>println(_plus_1);
   }
   
   protected static void _privk3_schedule(final ModelAspectModelAspectProperties _self_, final Model _self, final Variable a, final int duration) {
+    String _name = a.getName();
+    String _plus = ("beforeSchedule: of " + _name);
+    String _plus_1 = (_plus + " for ");
+    String _plus_2 = (_plus_1 + Integer.valueOf(duration));
+    String _plus_3 = (_plus_2 + " --> ");
+    LinkedList<StartedAction> _startedTimers = ModelAspect.startedTimers(_self);
+    String _plus_4 = (_plus_3 + _startedTimers);
+    InputOutput.<String>println(_plus_4);
     int summedDelta = 0;
-    boolean _isEmpty = ModelAspect.startedTimer(_self).isEmpty();
+    boolean _isEmpty = ModelAspect.startedTimers(_self).isEmpty();
     if (_isEmpty) {
-      LinkedList<StartedAction> _startedTimer = ModelAspect.startedTimer(_self);
+      LinkedList<StartedAction> _startedTimers_1 = ModelAspect.startedTimers(_self);
       StartedAction _startedAction = new StartedAction(a, duration);
-      _startedTimer.add(_startedAction);
-      LinkedList<StartedAction> _startedTimer_1 = ModelAspect.startedTimer(_self);
-      String _plus = ("startedTimer: " + _startedTimer_1);
-      InputOutput.<String>println(_plus);
+      _startedTimers_1.add(_startedAction);
+      LinkedList<StartedAction> _startedTimers_2 = ModelAspect.startedTimers(_self);
+      String _plus_5 = ("afterSchedule: " + _startedTimers_2);
+      InputOutput.<String>println(_plus_5);
       return;
     }
-    for (int i = 0; (i < ModelAspect.startedTimer(_self).size()); i++) {
+    for (int i = 0; (i < ModelAspect.startedTimers(_self).size()); i++) {
       {
         int _summedDelta = summedDelta;
-        summedDelta = (_summedDelta + ModelAspect.startedTimer(_self).get(i).delta);
+        summedDelta = (_summedDelta + ModelAspect.startedTimers(_self).get(i).delta);
         if ((summedDelta > duration)) {
-          final int aDelta = (duration - (summedDelta - ModelAspect.startedTimer(_self).get(i).delta));
-          LinkedList<StartedAction> _startedTimer_2 = ModelAspect.startedTimer(_self);
+          final int aDelta = (duration - (summedDelta - ModelAspect.startedTimers(_self).get(i).delta));
+          LinkedList<StartedAction> _startedTimers_3 = ModelAspect.startedTimers(_self);
           int _max = Math.max(0, (i - 1));
           StartedAction _startedAction_1 = new StartedAction(a, aDelta);
-          _startedTimer_2.add(_max, _startedAction_1);
-          for (int j = i; (j < ModelAspect.startedTimer(_self).size()); j++) {
-            int _delta = ModelAspect.startedTimer(_self).get(j).delta;
-            ModelAspect.startedTimer(_self).get(j).delta = (_delta - aDelta);
+          _startedTimers_3.add(_max, _startedAction_1);
+          for (int j = (i + 1); (j < ModelAspect.startedTimers(_self).size()); j++) {
+            if ((ModelAspect.startedTimers(_self).get(j).delta != 0)) {
+              int _delta = ModelAspect.startedTimers(_self).get(j).delta;
+              ModelAspect.startedTimers(_self).get(j).delta = (_delta - aDelta);
+            }
           }
-          LinkedList<StartedAction> _startedTimer_3 = ModelAspect.startedTimer(_self);
-          String _plus_1 = ("startedTimer: " + _startedTimer_3);
-          InputOutput.<String>println(_plus_1);
+          LinkedList<StartedAction> _startedTimers_4 = ModelAspect.startedTimers(_self);
+          String _plus_6 = ("startedTimer (1): " + _startedTimers_4);
+          InputOutput.<String>println(_plus_6);
           return;
         }
-        if (((summedDelta == duration) && (i < (ModelAspect.startedTimer(_self).size() - 1)))) {
-          final int aDelta_1 = 0;
-          LinkedList<StartedAction> _startedTimer_4 = ModelAspect.startedTimer(_self);
-          StartedAction _startedAction_2 = new StartedAction(a, aDelta_1);
-          _startedTimer_4.add(i, _startedAction_2);
-          for (int j = i; (j < ModelAspect.startedTimer(_self).size()); j++) {
-            int _delta = ModelAspect.startedTimer(_self).get(j).delta;
-            ModelAspect.startedTimer(_self).get(j).delta = (_delta - aDelta_1);
-          }
-          LinkedList<StartedAction> _startedTimer_5 = ModelAspect.startedTimer(_self);
-          String _plus_2 = ("startedTimer: " + _startedTimer_5);
-          InputOutput.<String>println(_plus_2);
-          return;
-        }
-        int _size = ModelAspect.startedTimer(_self).size();
+        int _size = ModelAspect.startedTimers(_self).size();
         int _minus = (_size - 1);
         boolean _equals = (i == _minus);
         if (_equals) {
-          final int aDelta_2 = (duration - summedDelta);
-          LinkedList<StartedAction> _startedTimer_6 = ModelAspect.startedTimer(_self);
-          StartedAction _startedAction_3 = new StartedAction(a, aDelta_2);
-          _startedTimer_6.add(_startedAction_3);
-          LinkedList<StartedAction> _startedTimer_7 = ModelAspect.startedTimer(_self);
-          String _plus_3 = ("startedTimer: " + _startedTimer_7);
-          InputOutput.<String>println(_plus_3);
+          final int aDelta_1 = (duration - summedDelta);
+          LinkedList<StartedAction> _startedTimers_5 = ModelAspect.startedTimers(_self);
+          StartedAction _startedAction_2 = new StartedAction(a, aDelta_1);
+          _startedTimers_5.add(_startedAction_2);
+          LinkedList<StartedAction> _startedTimers_6 = ModelAspect.startedTimers(_self);
+          String _plus_7 = ("startedTimer: (3)" + _startedTimers_6);
+          InputOutput.<String>println(_plus_7);
           return;
         }
       }
@@ -162,8 +158,8 @@ public class ModelAspect {
   }
   
   protected static int _privk3_getIndexOfTimer(final ModelAspectModelAspectProperties _self_, final Model _self, final Variable v) {
-    for (int i = 0; (i < ModelAspect.startedTimer(_self).size()); i++) {
-      boolean _equals = Objects.equal(ModelAspect.startedTimer(_self).get(i).variable, v);
+    for (int i = 0; (i < ModelAspect.startedTimers(_self).size()); i++) {
+      boolean _equals = Objects.equal(ModelAspect.startedTimers(_self).get(i).variable, v);
       if (_equals) {
         return i;
       }
@@ -208,10 +204,10 @@ public class ModelAspect {
     }
   }
   
-  protected static LinkedList<StartedAction> _privk3_startedTimer(final ModelAspectModelAspectProperties _self_, final Model _self) {
+  protected static LinkedList<StartedAction> _privk3_startedTimers(final ModelAspectModelAspectProperties _self_, final Model _self) {
     try {
     	for (java.lang.reflect.Method m : _self.getClass().getMethods()) {
-    		if (m.getName().equals("getStartedTimer") &&
+    		if (m.getName().equals("getStartedTimers") &&
     			m.getParameterTypes().length == 0) {
     				Object ret = m.invoke(_self);
     				if (ret != null) {
@@ -224,16 +220,16 @@ public class ModelAspect {
     } catch (Exception e) {
     	// Chut !
     }
-    return _self_.startedTimer;
+    return _self_.startedTimers;
   }
   
-  protected static void _privk3_startedTimer(final ModelAspectModelAspectProperties _self_, final Model _self, final LinkedList<StartedAction> startedTimer) {
+  protected static void _privk3_startedTimers(final ModelAspectModelAspectProperties _self_, final Model _self, final LinkedList<StartedAction> startedTimers) {
     boolean setterCalled = false;
     try {
     	for (java.lang.reflect.Method m : _self.getClass().getMethods()) {
-    		if (m.getName().equals("setStartedTimer")
+    		if (m.getName().equals("setStartedTimers")
     				&& m.getParameterTypes().length == 1) {
-    			m.invoke(_self, startedTimer);
+    			m.invoke(_self, startedTimers);
     			setterCalled = true;
     		}
     	}
@@ -241,7 +237,7 @@ public class ModelAspect {
     	// Chut !
     }
     if (!setterCalled) {
-    	_self_.startedTimer = startedTimer;
+    	_self_.startedTimers = startedTimers;
     }
   }
 }

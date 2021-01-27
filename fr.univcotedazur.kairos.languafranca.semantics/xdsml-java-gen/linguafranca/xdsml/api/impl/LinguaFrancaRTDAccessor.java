@@ -9,16 +9,16 @@ import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
 
 
 public class LinguaFrancaRTDAccessor {
-	public static java.lang.Integer getCurrentTime(org.icyphy.linguaFranca.Model eObject) {
+  public static java.lang.Integer getcurrentTime(EObject eObject) {
 		return (java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "currentTime");
 	}
-	public static boolean setCurrentTime(org.icyphy.linguaFranca.Model eObject, java.lang.Integer newValue) {
+	public static boolean setcurrentTime(EObject eObject, java.lang.Integer newValue) {
 		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "currentTime", newValue);
 	}
-	public static java.util.LinkedList getStartedTimer(org.icyphy.linguaFranca.Model eObject) {
+  public static java.util.LinkedList getstartedTimer(EObject eObject) {
 		return (java.util.LinkedList)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "startedTimer");
 	}
-	public static boolean setStartedTimer(org.icyphy.linguaFranca.Model eObject, java.util.LinkedList newValue) {
+	public static boolean setstartedTimer(EObject eObject, java.util.LinkedList newValue) {
 		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "startedTimer", newValue);
 	}
 

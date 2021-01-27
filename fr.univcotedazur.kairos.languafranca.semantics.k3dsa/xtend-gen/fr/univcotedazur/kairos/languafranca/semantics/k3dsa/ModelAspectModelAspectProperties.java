@@ -7,5 +7,5 @@ import java.util.LinkedList;
 public class ModelAspectModelAspectProperties {
   public Integer currentTime = Integer.valueOf(0);
   
-  public LinkedList<StartedAction> startedTimer = new LinkedList<StartedAction>();
+  public LinkedList<StartedAction> startedTimers = new LinkedList<StartedAction>();
 }

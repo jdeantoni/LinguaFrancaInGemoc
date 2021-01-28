@@ -9,6 +9,18 @@ import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
 
 
 public class LinguaFrancaRTDAccessor {
+  public static java.lang.Integer getcurrentTime(EObject eObject) {
+		return new java.lang.Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "currentTime"));
+	}
+	public static boolean setcurrentTime(EObject eObject, java.lang.Integer newValue) {
+		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "currentTime", new java.lang.Integer(newValue));
+	}
+  public static java.util.ArrayList getstartedTimers(EObject eObject) {
+		return new java.util.ArrayList((java.util.ArrayList)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "startedTimers"));
+	}
+	public static boolean setstartedTimers(EObject eObject, java.util.ArrayList newValue) {
+		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "startedTimers", new java.util.ArrayList(newValue));
+	}
 
 	public static Object getAspectProperty(EObject eObject, String languageName, String aspectName, String propertyName) {
 		List<Class<?>> aspects = K3DslHelper.getAspectsOn(languageName, eObject.getClass());

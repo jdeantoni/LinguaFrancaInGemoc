@@ -11,10 +11,8 @@ ECLimport "platform:/resource/fr.univcotedazur.kairos.linguafranca.semantics.moc
 
 /**
  * TODO: 
- *    deal correctly with timer (auto restart)
  *    deal with timer offset
- *    correct semantics of multiple inputs for reaction
- *    add priority between untimed and timed
+ *    correct semantics of multiple inputs for reaction ?
  */
 
 
@@ -22,19 +20,11 @@ ECLimport "platform:/resource/fr.univcotedazur.kairos.linguafranca.semantics.moc
 
 
 
-
-
-
-
-package ecore --ack to retrieve QVTo facilities
+package ecore --hack to retrieve QVTo facilities
 	context EObject
 		def : allSubobjects() : Collection(EObject) = self.eAllContents().oclAsType(Collection(EObject))
 endpackage
 
---package ocl
---	context AnyType --ack to retrieve QVTo facilities
---		def : allSubobjects() : Collection(ecore::EObject) = self.oclAsType(ecore::EObject).eAllContents().oclAsType(Collection(ecore::EObject))	
---endpackage
 
 package linguaFranca
  
@@ -81,31 +71,53 @@ context Action
  */
 
 context Model
-	inv untimedPriorTimed0:
+	inv untimedPriorTimed:
 		Prior : self.untimedAction prevails on self.timeJump
-
---	inv untimedPriorTimed:
---		Prior : self.timeJump prevails on self.allCanRelease
-
---	inv untimedPriorTimedExclusion:
---		Relation Exclusion(self.allCanRelease, self.timeJump)
-
-	inv ForUntimedPriorTimed2:
-		let _allActionCanRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action).canRelease) in
-		let _allTimerCanRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(Timer).canRelease) in
-		let _allTimerAndActionCanRelease : Event = Expression Union(_allActionCanRelease,_allTimerCanRelease) in
-		Relation Coincides(_allTimerAndActionCanRelease,allCanRelease)
-
-	inv ForUntimedPriorTimed3:
-		let _allActionRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action).releases) in
-		let _allTimerRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(Timer).releases) in
-		let _allTimerAndActionRelease : Event = Expression Union(_allActionRelease,_allTimerRelease) in
-		Relation Coincides(_allTimerAndActionRelease,allTimerAndActionRelease)
-
-	inv untimedPriorTimed2:
+	inv eitherTimedOrUntimed:
+		Relation Exclusion(self.timeJump, self.untimedAction)
+		
+	inv releasePriorUntimed:
 		Prior : self.allTimerAndActionRelease prevails on self.untimedAction
 	inv untimedPriorTimed2Exclusion:
 		Relation Exclusion(self.untimedAction, allTimerAndActionRelease)
+		
+	inv canReleasePriorUntimed:
+		Prior : self.allCanRelease prevails on self.untimedAction
+	inv untimedPriorTimed3Exclusion:
+		Relation Exclusion(self.untimedAction, allCanRelease)
+ 
+/**For priority propagation (see paper@RIFV2019 */
+ 
+context Reaction
+	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
+	inv propagatesPrio1:
+		Relation SubClock(self.synchronousExecution, theModel.untimedAction)
+
+context Port
+	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
+	inv propagatesPrio2:
+		Relation SubClock(self.updates, theModel.untimedAction)
+
+context Instantiation
+	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
+	inv propagatesPrio3:
+		Relation SubClock(self.startExecuting, theModel.untimedAction)
+	inv propagatesPrio4:
+		Relation SubClock(self.finishExecuting, theModel.untimedAction)
+
+context Timer
+	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
+	inv propagatesPrio5:
+		Relation SubClock(self.starts, theModel.untimedAction)
+	inv propagatesPrio7:
+		Relation SubClock(self.canRelease, theModel.allCanRelease)
+
+context Action
+	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
+	inv propagatesPrio6:
+		Relation SubClock(self.starts, theModel.untimedAction)
+ 	inv propagatesPrio8:
+		Relation SubClock(self.canRelease, theModel.allCanRelease)
  
 /** 
  * TIMED ELEMENTS
@@ -115,24 +127,32 @@ context Model
 --	inv timeJumpIfActionRelease:
 --		Relation Coincides(self.timeJump, allTimerAndActionRelease)
 
- 	inv allUntimedAction:
+ 	inv defUntimedAction:
  		let allSynchronousExecution: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Reaction)).oclAsType(Reaction).synchronousExecution) in
 		let allUpdates: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Port)).oclAsType(Port).updates) in
 		let allStartExecution : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Instantiation)).oclAsType(Instantiation).startExecuting) in
-		--let allTimerCanRelease: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(Timer).canRelease) in
-		--let allActionCanRelease: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action).canRelease) in
+		let allFinishExecution : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Instantiation)).oclAsType(Instantiation).finishExecuting) in
 		let allTimerStarts: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(Timer).starts) in
 		let allActionStarts: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action).starts) in
 		let union1_2 : Event = Expression Union(allSynchronousExecution, allUpdates) in
 		let union1_2_3 : Event = Expression Union(union1_2, allStartExecution) in
-		--let union1_2_3_4 : Event = Expression Union(union1_2_3, allTimerCanRelease) in
-		--let union1_2_3_4_5 : Event = Expression Union(union1_2_3_4, allActionCanRelease) in
-		let union1_2_3_4_5_6 : Event = Expression Union(union1_2_3, allTimerStarts) in
-		let union1_2_3_4_5_6_7 : Event = Expression Union(union1_2_3_4_5_6, allActionStarts) in
-		Relation Coincides(self.untimedAction, union1_2_3_4_5_6_7)
+		let union1_2_3Prime : Event = Expression Union(union1_2_3, allFinishExecution) in
+		let union1_2_3_4 : Event = Expression Union(union1_2_3Prime, allTimerStarts) in
+		let union1_2_3_4_5 : Event = Expression Union(union1_2_3_4, allActionStarts) in
+		Relation Coincides(self.untimedAction, union1_2_3_4_5)
 		
-	inv eitherTimedOrUntimed:
-		Relation Exclusion(self.timeJump, self.untimedAction)
+		
+	inv defAllCanRelease:
+		let _allActionCanRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action).canRelease) in
+		let _allTimerCanRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(Timer).canRelease) in
+		let _allTimerAndActionCanRelease : Event = Expression Union(_allActionCanRelease,_allTimerCanRelease) in
+		Relation Coincides(_allTimerAndActionCanRelease,allCanRelease)
+
+	inv defAllTimerAndActionRelease:
+		let _allActionRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action).releases) in
+		let _allTimerRelease : Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(Timer).releases) in
+		let _allTimerAndActionRelease : Event = Expression Union(_allActionRelease,_allTimerRelease) in
+		Relation Coincides(_allTimerAndActionRelease,allTimerAndActionRelease)
  	
 context Timer
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)

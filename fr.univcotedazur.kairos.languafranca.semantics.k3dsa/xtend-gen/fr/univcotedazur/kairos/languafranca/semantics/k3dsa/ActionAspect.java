@@ -5,7 +5,7 @@ import fr.inria.diverse.k3.al.annotationprocessor.Aspect;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ActionAspectActionAspectProperties;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.StartedAction;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -52,11 +52,18 @@ public class ActionAspect {
     EObject _findFirst = IteratorExtensions.<EObject>findFirst(_self.eResource().getAllContents(), _function);
     Model model = ((Model) _findFirst);
     final int indexOfSelf = ModelAspect.getIndexOfTimer(model, _self);
-    ModelAspect.startedTimers(model).remove(indexOfSelf);
-    LinkedList<StartedAction> _startedTimers = ModelAspect.startedTimers(model);
-    String _plus = ("Action released (" + _startedTimers);
-    String _plus_1 = (_plus + ")");
-    InputOutput.<String>println(_plus_1);
+    if ((indexOfSelf != (-1))) {
+      ModelAspect.startedTimers(model).remove(indexOfSelf);
+      ArrayList<StartedAction> _startedTimers = ModelAspect.startedTimers(model);
+      String _plus = ("Action released (" + _startedTimers);
+      String _plus_1 = (_plus + ")");
+      InputOutput.<String>println(_plus_1);
+    } else {
+      ArrayList<StartedAction> _startedTimers_1 = ModelAspect.startedTimers(model);
+      String _plus_2 = ("error ? Action already released (" + _startedTimers_1);
+      String _plus_3 = (_plus_2 + ")");
+      InputOutput.<String>println(_plus_3);
+    }
   }
   
   protected static void _privk3_schedule(final ActionAspectActionAspectProperties _self_, final Action _self) {
@@ -94,7 +101,7 @@ public class ActionAspect {
     EObject _findFirst = IteratorExtensions.<EObject>findFirst(_self.eResource().getAllContents(), _function);
     Model model = ((Model) _findFirst);
     final int indexOfSelf = ModelAspect.getIndexOfTimer(model, _self);
-    final LinkedList<StartedAction> list = ModelAspect.startedTimers(model);
+    final ArrayList<StartedAction> list = ModelAspect.startedTimers(model);
     Integer _currentTime = ModelAspect.currentTime(model);
     boolean result = Objects.equal(_currentTime, list.get(indexOfSelf).releaseDate);
     InputOutput.<Boolean>println(Boolean.valueOf(result));

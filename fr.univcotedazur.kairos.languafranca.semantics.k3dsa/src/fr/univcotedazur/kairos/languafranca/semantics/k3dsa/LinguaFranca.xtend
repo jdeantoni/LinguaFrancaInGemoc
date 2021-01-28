@@ -3,13 +3,13 @@ package fr.univcotedazur.kairos.languafranca.semantics.k3dsa;
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import org.icyphy.linguaFranca.Model
 import org.icyphy.linguaFranca.Action
-import java.util.LinkedList
 
 
 import static extension fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect.*;
 import org.icyphy.linguaFranca.Timer
 import org.icyphy.linguaFranca.Variable
 import org.icyphy.linguaFranca.Reactor
+import java.util.ArrayList
 
 class StartedAction{
 	public var Integer releaseDate
@@ -27,66 +27,32 @@ class StartedAction{
 
 @Aspect(className=Model)
 class ModelAspect { 
-	public Integer currentTime = 0;
+	public var Integer currentTime = 0;
 	/**
 	 * This list contains the started timer and the time to wait after the previous timer released
 	 */
-	public LinkedList<StartedAction> startedTimers = new LinkedList() //for now only Actions but it should also encompass Timer and their first common superclass is Variable
+	public var ArrayList<StartedAction> startedTimers = new ArrayList(); //for now only Actions but it should also encompass Timer and their first common superclass is Variable
 	
 	
 	def void timeJump(){
-		_self.currentTime = _self.startedTimers.first.releaseDate
-		//_self.startedTimers.removeFirst
-//		_self.currentTime = _self.currentTime + jumpSize
-//		var int indexUntilWhichToRemoveElemExcluded = 0
-//		while( 
-//			indexUntilWhichToRemoveElemExcluded < _self.startedTimers.size
-//			&& _self.startedTimers.get(indexUntilWhichToRemoveElemExcluded).delta == 0
-//			){
-//				indexUntilWhichToRemoveElemExcluded++
-//			}; 
-//		
-//		
-//		var tempList = new LinkedList()
-//		for(var int i = indexUntilWhichToRemoveElemExcluded; i < _self.startedTimers.size ; i++){
-//			tempList.add(_self.startedTimers.get(i))
-//		}
-//		_self.startedTimers = tempList
+		_self.currentTime = _self.startedTimers.get(0).releaseDate
 		println("currentTime is now "+_self.currentTime)
 	}
 	
 	def void schedule(Variable a, int duration){
 		println("beforeSchedule: of "+a.name+" for "+duration+" --> "+_self.startedTimers)
-//		var int summedDelta = 0
 		if(_self.startedTimers.isEmpty){
 			_self.startedTimers.add(new StartedAction(a, _self.currentTime+duration))
 			println("afterSchedule: "+_self.startedTimers)
 			return
 		}//else
 		for(var int i = 0; i < _self.startedTimers.size; i++){
-//			summedDelta += _self.startedTimers.get(i).delta
 			if(_self.startedTimers.get(i).releaseDate > _self.currentTime+duration){
-//				val int aDelta = duration - (summedDelta - _self.startedTimers.get(i).delta)
 				_self.startedTimers.add(java.lang.Math.max(0, i-1), new StartedAction(a, _self.currentTime+duration)) //Max in case i == 0 (add before)
-//				for(var int j = i+1; j < _self.startedTimers.size; j++){ //offset the rest of the list
-//					if (_self.startedTimers.get(j).delta != 0){
-//						_self.startedTimers.get(j).delta -= aDelta
-//					}
-//				}
 				println("startedTimer (1): "+_self.startedTimers)
 				return
 			}
-//			if (summedDelta == duration && i < (_self.startedTimers.size -1)){
-//				val int aDelta = 0
-//				_self.startedTimers.add(i, new StartedAction(a, aDelta)) //add after
-//				for(var int j = i; j < _self.startedTimers.size; j++){ //offset the rest of the list
-//					_self.startedTimers.get(j).delta -= aDelta
-//				}
-//				println("startedTimer: (2)"+_self.startedTimers)
-//				return
-//			}
 			if (i == (_self.startedTimers.size -1)){
-//				val int aDelta = duration - summedDelta
 				_self.startedTimers.add(new StartedAction(a, _self.currentTime+duration))//push to the end
 				println("startedTimer: (3)"+_self.startedTimers)
 				return
@@ -113,8 +79,12 @@ class TimerAspect{
 	def void release(){
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
-		model.startedTimers.remove(indexOfSelf)
-		println("Timer released ("+model.startedTimers+")")
+		if (indexOfSelf != -1) {
+			model.startedTimers.remove(indexOfSelf)
+			println("Timer released ("+model.startedTimers+")")
+		}else{
+			println("error ? Timer already released ("+model.startedTimers+")")
+		}
 	}
 	
 	def void schedule(){
@@ -137,12 +107,6 @@ class TimerAspect{
 		print("Timer "+_self.name+".canRelease() ->")
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
-//		var result = false;
-//		switch ( indexOfSelf ){
-//			case -1 : throw new RuntimeException("ERROR: TimerAspect::canTick() -> timer is not started !")
-//			case 0  : result = true
-//			case indexOfSelf > 0: result = (model.startedTimers.get(indexOfSelf).delta == 0) && model.startedTimers.subList(1, indexOfSelf).forall[e | e.delta == 0]
-//		}
 		val list = model.startedTimers
 		var result = (model.currentTime == list.get(indexOfSelf).releaseDate)
 		println(result)
@@ -156,8 +120,12 @@ class ActionAspect{
 	def void release(){
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
-		model.startedTimers.remove(indexOfSelf)
-		println("Action released ("+model.startedTimers+")")
+		if (indexOfSelf != -1) {
+			model.startedTimers.remove(indexOfSelf)
+			println("Action released ("+model.startedTimers+")")
+		}else{
+			println("error ? Action already released ("+model.startedTimers+")")
+		}
 	}
 	
 	
@@ -174,12 +142,6 @@ class ActionAspect{
 		print("Action "+_self.name+".canRelease() ->")
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
-//		var result = false;
-//		switch ( indexOfSelf ){
-//			case -1 : throw new RuntimeException("ERROR: TimerAspect::canTick() -> timer is not started !")
-//			case 0  : result = true
-//			case indexOfSelf > 0: result = (model.startedTimers.get(indexOfSelf).delta == 0) && model.startedTimers.subList(1, indexOfSelf).forall[e | e.delta == 0]
-//		}
 		val list = model.startedTimers
 		var result = (model.currentTime == list.get(indexOfSelf).releaseDate)
 		println(result)

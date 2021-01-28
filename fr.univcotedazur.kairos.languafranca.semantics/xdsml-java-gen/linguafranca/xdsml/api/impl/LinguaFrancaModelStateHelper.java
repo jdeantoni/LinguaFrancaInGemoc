@@ -3,6 +3,7 @@
 package linguafranca.xdsml.api.impl;
 import java.io.Serializable;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -44,11 +45,32 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 	public K3ModelState getK3ModelState(EObject model) {
 		K3ModelState res = theFactory.createK3ModelState();
 
+		Class<?> clazz =null;
+		clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect.class);
+		if (clazz.isInstance(model)) {
+			ElementState elemState = theFactory.createElementState();
+			elemState.setModelElement(model);
+			res.getOwnedElementstates().add(elemState);
+			AttributeNameToValue n2v0 = new AttributeNameToValue("currentTime", LinguaFrancaRTDAccessor.getcurrentTime(model));
+			elemState.getSavedRTDs().add(n2v0);
+			AttributeNameToValue n2v1 = new AttributeNameToValue("startedTimers",  LinguaFrancaRTDAccessor.getstartedTimers(model));
+			elemState.getSavedRTDs().add(n2v1);
+		}
+		
 		TreeIterator<EObject> allContentIt = model.eAllContents();
 		while (allContentIt.hasNext()) {
 			EObject elem = allContentIt.next();
 
-			Class<?> clazz =null;
+			clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect.class);
+			if (clazz.isInstance(elem)) {
+				ElementState elemState = theFactory.createElementState();
+				elemState.setModelElement(elem);
+				res.getOwnedElementstates().add(elemState);
+				AttributeNameToValue n2v0 = new AttributeNameToValue("currentTime", LinguaFrancaRTDAccessor.getcurrentTime(elem));
+				elemState.getSavedRTDs().add(n2v0);
+				AttributeNameToValue n2v1 = new AttributeNameToValue("startedTimers", LinguaFrancaRTDAccessor.getstartedTimers(elem));
+				elemState.getSavedRTDs().add(n2v1);
+			}
 		}
 		return res;
 		}

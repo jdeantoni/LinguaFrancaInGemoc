@@ -2,9 +2,11 @@ package fr.univcotedazur.kairos.languafranca.semantics.k3dsa;
 
 import com.google.common.base.Objects;
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect;
+import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.DebugLevel;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectProperties;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.StartedAction;
 import java.util.ArrayList;
+import org.eclipse.gemoc.execution.concurrent.ccsljavaxdsml.api.extensions.languages.NotInStateSpace;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.icyphy.linguaFranca.Model;
 import org.icyphy.linguaFranca.Variable;
@@ -43,6 +45,7 @@ public class ModelAspect {
     return (int)result;
   }
   
+  @NotInStateSpace
   public static Integer currentTime(final Model _self) {
     final fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectProperties _self_ = fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectContext.getSelf(_self);
     Object result = null;
@@ -53,6 +56,7 @@ public class ModelAspect {
     return (java.lang.Integer)result;
   }
   
+  @NotInStateSpace
   public static void currentTime(final Model _self, final Integer currentTime) {
     final fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectProperties _self_ = fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectContext.getSelf(_self);
     // #DispatchPointCut_before# void currentTime(Integer)
@@ -80,48 +84,62 @@ public class ModelAspect {
   }
   
   protected static void _privk3_timeJump(final ModelAspectModelAspectProperties _self_, final Model _self) {
-    ModelAspect.currentTime(_self, ModelAspect.startedTimers(_self).get(0).releaseDate);
+    int _size = ModelAspect.startedTimers(_self).size();
+    boolean _equals = (_size == 0);
+    if (_equals) {
+      InputOutput.<String>println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ERROR ? not time Jump to do (no timer armed)");
+      return;
+    }
+    Integer jumpSize = ModelAspect.startedTimers(_self).get(0).releaseDate;
     Integer _currentTime = ModelAspect.currentTime(_self);
-    String _plus = ("currentTime is now " + _currentTime);
-    InputOutput.<String>println(_plus);
+    int _plus = ((jumpSize).intValue() + (_currentTime).intValue());
+    ModelAspect.currentTime(_self, Integer.valueOf(_plus));
+    ArrayList<StartedAction> _startedTimers = ModelAspect.startedTimers(_self);
+    for (final StartedAction sa : _startedTimers) {
+      sa.releaseDate = Integer.valueOf(((sa.releaseDate).intValue() - (jumpSize).intValue()));
+    }
+    if ((DebugLevel.level > 0)) {
+      Integer _currentTime_1 = ModelAspect.currentTime(_self);
+      String _plus_1 = ("currentTime is now " + _currentTime_1);
+      InputOutput.<String>println(_plus_1);
+    }
   }
   
   protected static void _privk3_schedule(final ModelAspectModelAspectProperties _self_, final Model _self, final Variable a, final int duration) {
-    String _name = a.getName();
-    String _plus = ("beforeSchedule: of " + _name);
-    String _plus_1 = (_plus + " for ");
-    String _plus_2 = (_plus_1 + Integer.valueOf(duration));
-    String _plus_3 = (_plus_2 + " --> ");
-    ArrayList<StartedAction> _startedTimers = ModelAspect.startedTimers(_self);
-    String _plus_4 = (_plus_3 + _startedTimers);
-    InputOutput.<String>println(_plus_4);
+    if ((DebugLevel.level > 0)) {
+      String _name = a.getName();
+      String _plus = ("beforeSchedule: of " + _name);
+      String _plus_1 = (_plus + " for ");
+      String _plus_2 = (_plus_1 + Integer.valueOf(duration));
+      String _plus_3 = (_plus_2 + " --> ");
+      ArrayList<StartedAction> _startedTimers = ModelAspect.startedTimers(_self);
+      String _plus_4 = (_plus_3 + _startedTimers);
+      InputOutput.<String>println(_plus_4);
+    }
     boolean _isEmpty = ModelAspect.startedTimers(_self).isEmpty();
     if (_isEmpty) {
       ArrayList<StartedAction> _startedTimers_1 = ModelAspect.startedTimers(_self);
-      Integer _currentTime = ModelAspect.currentTime(_self);
-      int _plus_5 = ((_currentTime).intValue() + duration);
-      StartedAction _startedAction = new StartedAction(a, _plus_5);
+      StartedAction _startedAction = new StartedAction(a, duration);
       _startedTimers_1.add(_startedAction);
-      ArrayList<StartedAction> _startedTimers_2 = ModelAspect.startedTimers(_self);
-      String _plus_6 = ("afterSchedule: " + _startedTimers_2);
-      InputOutput.<String>println(_plus_6);
+      if ((DebugLevel.level > 0)) {
+        ArrayList<StartedAction> _startedTimers_2 = ModelAspect.startedTimers(_self);
+        String _plus_5 = ("afterSchedule: " + _startedTimers_2);
+        InputOutput.<String>println(_plus_5);
+      }
       return;
     }
     for (int i = 0; (i < ModelAspect.startedTimers(_self).size()); i++) {
       {
-        Integer _currentTime_1 = ModelAspect.currentTime(_self);
-        int _plus_7 = ((_currentTime_1).intValue() + duration);
-        boolean _greaterThan = ((ModelAspect.startedTimers(_self).get(i).releaseDate).intValue() > _plus_7);
-        if (_greaterThan) {
+        if (((ModelAspect.startedTimers(_self).get(i).releaseDate).intValue() > duration)) {
           ArrayList<StartedAction> _startedTimers_3 = ModelAspect.startedTimers(_self);
           int _max = Math.max(0, (i - 1));
-          Integer _currentTime_2 = ModelAspect.currentTime(_self);
-          int _plus_8 = ((_currentTime_2).intValue() + duration);
-          StartedAction _startedAction_1 = new StartedAction(a, _plus_8);
+          StartedAction _startedAction_1 = new StartedAction(a, duration);
           _startedTimers_3.add(_max, _startedAction_1);
-          ArrayList<StartedAction> _startedTimers_4 = ModelAspect.startedTimers(_self);
-          String _plus_9 = ("startedTimer (1): " + _startedTimers_4);
-          InputOutput.<String>println(_plus_9);
+          if ((DebugLevel.level > 0)) {
+            ArrayList<StartedAction> _startedTimers_4 = ModelAspect.startedTimers(_self);
+            String _plus_6 = ("startedTimer (1): " + _startedTimers_4);
+            InputOutput.<String>println(_plus_6);
+          }
           return;
         }
         int _size = ModelAspect.startedTimers(_self).size();
@@ -129,13 +147,13 @@ public class ModelAspect {
         boolean _equals = (i == _minus);
         if (_equals) {
           ArrayList<StartedAction> _startedTimers_5 = ModelAspect.startedTimers(_self);
-          Integer _currentTime_3 = ModelAspect.currentTime(_self);
-          int _plus_10 = ((_currentTime_3).intValue() + duration);
-          StartedAction _startedAction_2 = new StartedAction(a, _plus_10);
+          StartedAction _startedAction_2 = new StartedAction(a, duration);
           _startedTimers_5.add(_startedAction_2);
-          ArrayList<StartedAction> _startedTimers_6 = ModelAspect.startedTimers(_self);
-          String _plus_11 = ("startedTimer: (3)" + _startedTimers_6);
-          InputOutput.<String>println(_plus_11);
+          if ((DebugLevel.level > 0)) {
+            ArrayList<StartedAction> _startedTimers_6 = ModelAspect.startedTimers(_self);
+            String _plus_7 = ("startedTimer: (3)" + _startedTimers_6);
+            InputOutput.<String>println(_plus_7);
+          }
           return;
         }
       }

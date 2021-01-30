@@ -12,7 +12,7 @@ import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.k3.rtd.m
 import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.k3.dsa.helper.IK3ModelStateHelper;import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
 
 
-public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
+public class LinguaFrancaModelStateHelper_saved implements IK3ModelStateHelper{
 	private static class AttributeNameToValue implements Serializable{
 
 		private static final long serialVersionUID = 0;		String name;

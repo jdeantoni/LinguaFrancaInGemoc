@@ -2,6 +2,7 @@ package fr.univcotedazur.kairos.languafranca.semantics.k3dsa;
 
 import com.google.common.base.Objects;
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect;
+import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.DebugLevel;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.StartedAction;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.TimerAspectTimerAspectProperties;
@@ -59,22 +60,28 @@ public class TimerAspect {
     final int indexOfSelf = ModelAspect.getIndexOfTimer(model, _self);
     if ((indexOfSelf != (-1))) {
       ModelAspect.startedTimers(model).remove(indexOfSelf);
-      ArrayList<StartedAction> _startedTimers = ModelAspect.startedTimers(model);
-      String _plus = ("Timer released (" + _startedTimers);
-      String _plus_1 = (_plus + ")");
-      InputOutput.<String>println(_plus_1);
+      if ((DebugLevel.level > 0)) {
+        ArrayList<StartedAction> _startedTimers = ModelAspect.startedTimers(model);
+        String _plus = ("Timer released (" + _startedTimers);
+        String _plus_1 = (_plus + ")");
+        InputOutput.<String>println(_plus_1);
+      }
     } else {
-      ArrayList<StartedAction> _startedTimers_1 = ModelAspect.startedTimers(model);
-      String _plus_2 = ("error ? Timer already released (" + _startedTimers_1);
-      String _plus_3 = (_plus_2 + ")");
-      InputOutput.<String>println(_plus_3);
+      if ((DebugLevel.level > 0)) {
+        ArrayList<StartedAction> _startedTimers_1 = ModelAspect.startedTimers(model);
+        String _plus_2 = ("####################################   error ? Timer already released (" + _startedTimers_1);
+        String _plus_3 = (_plus_2 + ")");
+        InputOutput.<String>println(_plus_3);
+      }
     }
   }
   
   protected static void _privk3_schedule(final TimerAspectTimerAspectProperties _self_, final Timer _self) {
-    String _name = _self.getName();
-    String _plus = ("enter schedule of " + _name);
-    InputOutput.<String>println(_plus);
+    if ((DebugLevel.level > 0)) {
+      String _name = _self.getName();
+      String _plus = ("enter schedule of " + _name);
+      InputOutput.<String>println(_plus);
+    }
     final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
       @Override
       public Boolean apply(final EObject eo) {
@@ -83,10 +90,12 @@ public class TimerAspect {
     };
     EObject _findFirst = IteratorExtensions.<EObject>findFirst(_self.eResource().getAllContents(), _function);
     Model model = ((Model) _findFirst);
+    final int indexOfSelf = ModelAspect.getIndexOfTimer(model, _self);
+    int period = 0;
     Time _time = _self.getPeriod().getTime();
     boolean _tripleNotEquals = (_time != null);
     if (_tripleNotEquals) {
-      ModelAspect.schedule(model, _self, _self.getPeriod().getTime().getInterval());
+      period = _self.getPeriod().getTime().getInterval();
     } else {
       final Function1<Reactor, Boolean> _function_1 = new Function1<Reactor, Boolean>() {
         @Override
@@ -113,19 +122,31 @@ public class TimerAspect {
           return Boolean.valueOf(Objects.equal(_name, _name_1));
         }
       };
-      int period = IterableExtensions.<Assignment>findFirst(theInstance.getParameters(), _function_3).getRhs().get(0).getTime().getInterval();
-      ModelAspect.schedule(model, _self, period);
+      period = IterableExtensions.<Assignment>findFirst(theInstance.getParameters(), _function_3).getRhs().get(0).getTime().getInterval();
     }
-    String _name_1 = _self.getName();
-    String _plus_1 = ("exit schedule of " + _name_1);
-    InputOutput.<String>println(_plus_1);
+    if ((indexOfSelf != (-1))) {
+      if (((ModelAspect.startedTimers(model).get(indexOfSelf).releaseDate).intValue() != period)) {
+        StartedAction _get = ModelAspect.startedTimers(model).get(indexOfSelf);
+        String _plus_1 = ("->>>>>>>>>>>>>>>>>>>>>>>>>>>>    ERROR ? this timer is already armed for this deadline: " + _get);
+        InputOutput.<String>println(_plus_1);
+        return;
+      }
+    }
+    ModelAspect.schedule(model, _self, period);
+    if ((DebugLevel.level > 0)) {
+      String _name_1 = _self.getName();
+      String _plus_2 = ("exit schedule of " + _name_1);
+      InputOutput.<String>println(_plus_2);
+    }
   }
   
   protected static boolean _privk3_canTick(final TimerAspectTimerAspectProperties _self_, final Timer _self) {
-    String _name = _self.getName();
-    String _plus = ("Timer " + _name);
-    String _plus_1 = (_plus + ".canRelease() ->");
-    InputOutput.<String>print(_plus_1);
+    if ((DebugLevel.level > 0)) {
+      String _name = _self.getName();
+      String _plus = ("Timer " + _name);
+      String _plus_1 = (_plus + ".canRelease() ->");
+      InputOutput.<String>print(_plus_1);
+    }
     final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
       @Override
       public Boolean apply(final EObject eo) {
@@ -136,9 +157,10 @@ public class TimerAspect {
     Model model = ((Model) _findFirst);
     final int indexOfSelf = ModelAspect.getIndexOfTimer(model, _self);
     final ArrayList<StartedAction> list = ModelAspect.startedTimers(model);
-    Integer _currentTime = ModelAspect.currentTime(model);
-    boolean result = Objects.equal(_currentTime, list.get(indexOfSelf).releaseDate);
-    InputOutput.<Boolean>println(Boolean.valueOf(result));
+    boolean result = ((list.get(indexOfSelf).releaseDate).intValue() == 0);
+    if ((DebugLevel.level > 0)) {
+      InputOutput.<Boolean>println(Boolean.valueOf(result));
+    }
     return result;
   }
 }

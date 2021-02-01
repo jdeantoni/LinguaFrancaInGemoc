@@ -316,7 +316,7 @@ context Connection
 context Reaction  --we consider that we have either input or timer but not a mixed of them
 				  --we consider a reaction can be triggered only by one timer.
 				  --we consider that triggers are always VarRefs
-				  
+				 
 	inv startWhenTheOnlyInputArrivedNoTimer:
 		let allInputsNoTimer : Sequence(Variable) = self.triggers.oclAsType(VarRef).variable->select(t|t.oclIsKindOf(Variable) and (not t.oclIsKindOf(Timer)) and (not t.oclIsKindOf(Action))) in
 		(allInputsNoTimer->size() = 1) implies --check this condition that seems not sufficient

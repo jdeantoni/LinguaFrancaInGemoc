@@ -43,14 +43,13 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 		K3ModelStateFactory theFactory = K3ModelStateFactory.eINSTANCE; 
 	public K3ModelState getK3ModelState(EObject model) {
 		K3ModelState res = theFactory.createK3ModelState();
+
 		Class<?> clazz =null;
 		clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect.class);
 		if (clazz.isInstance(model)) {
 			ElementState elemState = theFactory.createElementState();
 			elemState.setModelElement(model);
 			res.getOwnedElementstates().add(elemState);
-//			AttributeNameToValue n2v0 = new AttributeNameToValue("currentTime", LinguaFrancaRTDAccessor.getcurrentTime(elem));
-//			elemState.getSavedRTDs().add(n2v0);
 			AttributeNameToValue n2v1 = new AttributeNameToValue("startedTimers", LinguaFrancaRTDAccessor.getstartedTimers(model));
 			elemState.getSavedRTDs().add(n2v1);
 		}
@@ -65,8 +64,8 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 				ElementState elemState = theFactory.createElementState();
 				elemState.setModelElement(elem);
 				res.getOwnedElementstates().add(elemState);
-//				AttributeNameToValue n2v0 = new AttributeNameToValue("currentTime", LinguaFrancaRTDAccessor.getcurrentTime(elem));
-//				elemState.getSavedRTDs().add(n2v0);
+				AttributeNameToValue n2v0 = new AttributeNameToValue("currentTime", LinguaFrancaRTDAccessor.getcurrentTime(elem));
+				elemState.getSavedRTDs().add(n2v0);
 				AttributeNameToValue n2v1 = new AttributeNameToValue("startedTimers", LinguaFrancaRTDAccessor.getstartedTimers(elem));
 				elemState.getSavedRTDs().add(n2v1);
 			}

@@ -3,10 +3,10 @@ package fr.univcotedazur.kairos.languafranca.semantics.k3dsa;
 import com.google.common.base.Objects;
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.DebugLevel;
+import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.StartedAction;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.TimerAspectTimerAspectProperties;
-import java.util.ArrayList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -61,14 +61,14 @@ public class TimerAspect {
     if ((indexOfSelf != (-1))) {
       ModelAspect.startedTimers(model).remove(indexOfSelf);
       if ((DebugLevel.level > 0)) {
-        ArrayList<StartedAction> _startedTimers = ModelAspect.startedTimers(model);
+        EventList _startedTimers = ModelAspect.startedTimers(model);
         String _plus = ("Timer released (" + _startedTimers);
         String _plus_1 = (_plus + ")");
         InputOutput.<String>println(_plus_1);
       }
     } else {
       if ((DebugLevel.level > 0)) {
-        ArrayList<StartedAction> _startedTimers_1 = ModelAspect.startedTimers(model);
+        EventList _startedTimers_1 = ModelAspect.startedTimers(model);
         String _plus_2 = ("####################################   error ? Timer already released (" + _startedTimers_1);
         String _plus_3 = (_plus_2 + ")");
         InputOutput.<String>println(_plus_3);
@@ -156,7 +156,7 @@ public class TimerAspect {
     EObject _findFirst = IteratorExtensions.<EObject>findFirst(_self.eResource().getAllContents(), _function);
     Model model = ((Model) _findFirst);
     final int indexOfSelf = ModelAspect.getIndexOfTimer(model, _self);
-    final ArrayList<StartedAction> list = ModelAspect.startedTimers(model);
+    final EventList list = ModelAspect.startedTimers(model);
     boolean result = ((list.get(indexOfSelf).releaseDate).intValue() == 0);
     if ((DebugLevel.level > 0)) {
       InputOutput.<Boolean>println(Boolean.valueOf(result));

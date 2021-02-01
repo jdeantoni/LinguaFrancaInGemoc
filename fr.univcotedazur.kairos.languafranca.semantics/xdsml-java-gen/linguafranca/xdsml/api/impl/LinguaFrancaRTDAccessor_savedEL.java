@@ -10,7 +10,7 @@ import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList;
 
 
-public class LinguaFrancaRTDAccessor {
+public class LinguaFrancaRTDAccessor_savedEL {
   public static java.lang.Integer getcurrentTime(EObject eObject) {
 		return new Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "currentTime"));
 	}

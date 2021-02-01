@@ -36,6 +36,28 @@ class StartedAction{
 	}
 }
 
+class EventList extends ArrayList<StartedAction>{
+	
+	new(EventList el) {
+		super(el);	
+	}
+	new() {
+		super();	
+	}
+	
+	override boolean equals(Object o){
+		if(o instanceof EventList){
+			return this.equals(o as EventList)
+		}
+		return false
+	}
+	
+	def boolean equals(EventList o){
+		return this.size() == o.size() && this.containsAll(o) && o.containsAll(this);
+	}
+	
+}
+
 class DebugLevel{
 	public static int level = 0
 }
@@ -47,7 +69,7 @@ class ModelAspect {
 	/**
 	 * This list contains the started timer and the time to wait after the previous timer released
 	 */
-	public var ArrayList<StartedAction> startedTimers = new ArrayList(); //for now only Actions but it should also encompass Timer and their first common superclass is Variable
+	public var EventList startedTimers = new EventList(); //for now only Actions but it should also encompass Timer and their first common superclass is Variable
 	
 	
 	def void timeJump(){

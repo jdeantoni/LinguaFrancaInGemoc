@@ -3,9 +3,9 @@ package fr.univcotedazur.kairos.languafranca.semantics.k3dsa;
 import com.google.common.base.Objects;
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.DebugLevel;
+import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectProperties;
 import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.StartedAction;
-import java.util.ArrayList;
 import org.eclipse.gemoc.execution.concurrent.ccsljavaxdsml.api.extensions.languages.NotInStateSpace;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.icyphy.linguaFranca.Model;
@@ -65,19 +65,19 @@ public class ModelAspect {
     };
   }
   
-  public static ArrayList<StartedAction> startedTimers(final Model _self) {
+  public static EventList startedTimers(final Model _self) {
     final fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectProperties _self_ = fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectContext.getSelf(_self);
     Object result = null;
-    // #DispatchPointCut_before# ArrayList<StartedAction> startedTimers()
+    // #DispatchPointCut_before# EventList startedTimers()
     if (_self instanceof org.icyphy.linguaFranca.Model){
     	result = fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect._privk3_startedTimers(_self_, (org.icyphy.linguaFranca.Model)_self);
     };
-    return (java.util.ArrayList<fr.univcotedazur.kairos.languafranca.semantics.k3dsa.StartedAction>)result;
+    return (fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList)result;
   }
   
-  public static void startedTimers(final Model _self, final ArrayList<StartedAction> startedTimers) {
+  public static void startedTimers(final Model _self, final EventList startedTimers) {
     final fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectProperties _self_ = fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspectModelAspectContext.getSelf(_self);
-    // #DispatchPointCut_before# void startedTimers(ArrayList<StartedAction>)
+    // #DispatchPointCut_before# void startedTimers(EventList)
     if (_self instanceof org.icyphy.linguaFranca.Model){
     	fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect._privk3_startedTimers(_self_, (org.icyphy.linguaFranca.Model)_self,startedTimers);
     };
@@ -94,7 +94,7 @@ public class ModelAspect {
     Integer _currentTime = ModelAspect.currentTime(_self);
     int _plus = ((jumpSize).intValue() + (_currentTime).intValue());
     ModelAspect.currentTime(_self, Integer.valueOf(_plus));
-    ArrayList<StartedAction> _startedTimers = ModelAspect.startedTimers(_self);
+    EventList _startedTimers = ModelAspect.startedTimers(_self);
     for (final StartedAction sa : _startedTimers) {
       sa.releaseDate = Integer.valueOf(((sa.releaseDate).intValue() - (jumpSize).intValue()));
     }
@@ -112,17 +112,17 @@ public class ModelAspect {
       String _plus_1 = (_plus + " for ");
       String _plus_2 = (_plus_1 + Integer.valueOf(duration));
       String _plus_3 = (_plus_2 + " --> ");
-      ArrayList<StartedAction> _startedTimers = ModelAspect.startedTimers(_self);
+      EventList _startedTimers = ModelAspect.startedTimers(_self);
       String _plus_4 = (_plus_3 + _startedTimers);
       InputOutput.<String>println(_plus_4);
     }
     boolean _isEmpty = ModelAspect.startedTimers(_self).isEmpty();
     if (_isEmpty) {
-      ArrayList<StartedAction> _startedTimers_1 = ModelAspect.startedTimers(_self);
+      EventList _startedTimers_1 = ModelAspect.startedTimers(_self);
       StartedAction _startedAction = new StartedAction(a, duration);
       _startedTimers_1.add(_startedAction);
       if ((DebugLevel.level > 0)) {
-        ArrayList<StartedAction> _startedTimers_2 = ModelAspect.startedTimers(_self);
+        EventList _startedTimers_2 = ModelAspect.startedTimers(_self);
         String _plus_5 = ("afterSchedule: " + _startedTimers_2);
         InputOutput.<String>println(_plus_5);
       }
@@ -131,12 +131,12 @@ public class ModelAspect {
     for (int i = 0; (i < ModelAspect.startedTimers(_self).size()); i++) {
       {
         if (((ModelAspect.startedTimers(_self).get(i).releaseDate).intValue() > duration)) {
-          ArrayList<StartedAction> _startedTimers_3 = ModelAspect.startedTimers(_self);
+          EventList _startedTimers_3 = ModelAspect.startedTimers(_self);
           int _max = Math.max(0, (i - 1));
           StartedAction _startedAction_1 = new StartedAction(a, duration);
           _startedTimers_3.add(_max, _startedAction_1);
           if ((DebugLevel.level > 0)) {
-            ArrayList<StartedAction> _startedTimers_4 = ModelAspect.startedTimers(_self);
+            EventList _startedTimers_4 = ModelAspect.startedTimers(_self);
             String _plus_6 = ("startedTimer (1): " + _startedTimers_4);
             InputOutput.<String>println(_plus_6);
           }
@@ -146,11 +146,11 @@ public class ModelAspect {
         int _minus = (_size - 1);
         boolean _equals = (i == _minus);
         if (_equals) {
-          ArrayList<StartedAction> _startedTimers_5 = ModelAspect.startedTimers(_self);
+          EventList _startedTimers_5 = ModelAspect.startedTimers(_self);
           StartedAction _startedAction_2 = new StartedAction(a, duration);
           _startedTimers_5.add(_startedAction_2);
           if ((DebugLevel.level > 0)) {
-            ArrayList<StartedAction> _startedTimers_6 = ModelAspect.startedTimers(_self);
+            EventList _startedTimers_6 = ModelAspect.startedTimers(_self);
             String _plus_7 = ("startedTimer: (3)" + _startedTimers_6);
             InputOutput.<String>println(_plus_7);
           }
@@ -207,14 +207,14 @@ public class ModelAspect {
     }
   }
   
-  protected static ArrayList<StartedAction> _privk3_startedTimers(final ModelAspectModelAspectProperties _self_, final Model _self) {
+  protected static EventList _privk3_startedTimers(final ModelAspectModelAspectProperties _self_, final Model _self) {
     try {
     	for (java.lang.reflect.Method m : _self.getClass().getMethods()) {
     		if (m.getName().equals("getStartedTimers") &&
     			m.getParameterTypes().length == 0) {
     				Object ret = m.invoke(_self);
     				if (ret != null) {
-    					return (java.util.ArrayList) ret;
+    					return (fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList) ret;
     				} else {
     					return null;
     				}
@@ -226,7 +226,7 @@ public class ModelAspect {
     return _self_.startedTimers;
   }
   
-  protected static void _privk3_startedTimers(final ModelAspectModelAspectProperties _self_, final Model _self, final ArrayList<StartedAction> startedTimers) {
+  protected static void _privk3_startedTimers(final ModelAspectModelAspectProperties _self_, final Model _self, final EventList startedTimers) {
     boolean setterCalled = false;
     try {
     	for (java.lang.reflect.Method m : _self.getClass().getMethods()) {

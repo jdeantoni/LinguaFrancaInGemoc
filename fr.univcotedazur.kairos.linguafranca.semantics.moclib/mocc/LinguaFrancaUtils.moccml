@@ -36,7 +36,7 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( when TimerConstraint_release )
 
 			from TCD_S3 to TCD_S6 : TCD_S3ToTCD_S32
-			-> ( when TimerConstraint_canTick, TimerConstraint_wait )
+			-> ( when TimerConstraint_wait )
 
 			from TCD_S5 to TCD_S3 : TCD_S4ToTCD_S3
 			-> ( when TimerConstraint_canTick )

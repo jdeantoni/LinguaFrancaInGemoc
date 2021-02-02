@@ -85,6 +85,10 @@ context Model
 		Prior : self.allCanRelease prevails on self.untimedAction
 	inv untimedPriorTimed3Exclusion:
 		Relation Exclusion(self.untimedAction, allCanRelease)
+--	inv canReleasePriorRelease:
+--		Prior : self.allCanRelease prevails on self.allTimerAndActionRelease						--TODO: check why this does not work (create deadlock)
+--	inv canReleasePriorReleaseExclusion:
+--		Relation Exclusion(self.allCanRelease, self.allTimerAndActionRelease)
  
 /**For priority propagation (see paper@RIFV2019 */
  
@@ -286,7 +290,7 @@ context Instantiation
 		(    (type.timers->size() = 0)
 		 and (type.inputs->size() > 0)
 		) implies
-		let allInputUpdates : Event = Expression Union(type.inputs.updates) in
+		let allInputUpdates : Event = Expression Sup(type.inputs.updates) in						--WARNING ! was Union. Just a test here ! KIt works but forces synchronization that should not be forced this way
 		Relation AlternatesFSM(allInputUpdates, self.startExecuting)
 
 	inv startComputeInputAndTimer:
@@ -294,7 +298,7 @@ context Instantiation
 		 and (type.inputs->size() > 0)
 		) implies
 		let allTimers2 : Event = Expression Union(type.timers.updates) in
-		let allInputUpdates2 : Event = Expression Union(type.inputs.updates) in
+		let allInputUpdates2 : Event = Expression Union(type.inputs.updates) in						
 		let allTriggers : Event = Expression Union(allTimers2, allInputUpdates2) in
 		Relation AlternatesFSM(allTriggers, self.startExecuting)
 		

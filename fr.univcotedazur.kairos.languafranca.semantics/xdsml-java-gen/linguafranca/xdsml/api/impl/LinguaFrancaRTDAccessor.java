@@ -5,23 +5,22 @@ import org.eclipse.emf.ecore.EObject;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.lang.reflect.Method;
+import org.eclipse.gemoc.execution.concurrent.ccsljavaxdsml.api.extensions.languages.NotInStateSpace;
 import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
-
-import fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList;
 
 
 public class LinguaFrancaRTDAccessor {
   public static java.lang.Integer getcurrentTime(EObject eObject) {
-		return new Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "currentTime"));
+		return new java.lang.Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "currentTime"));
 	}
 	public static boolean setcurrentTime(EObject eObject, java.lang.Integer newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "currentTime", new Integer(newValue));
+		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "currentTime", new java.lang.Integer(newValue));
 	}
   public static fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList getstartedTimers(EObject eObject) {
-		return new EventList((fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "startedTimers"));
+		return new fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList((fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "startedTimers"));
 	}
 	public static boolean setstartedTimers(EObject eObject, fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "startedTimers", new EventList(newValue));
+		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "startedTimers", new fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList(newValue));
 	}
 
 	public static Object getAspectProperty(EObject eObject, String languageName, String aspectName, String propertyName) {

@@ -11,18 +11,27 @@ import org.icyphy.linguaFranca.Timer
 import org.icyphy.linguaFranca.Variable
 import org.icyphy.linguaFranca.Reactor
 import java.util.ArrayList
+import org.icyphy.linguaFranca.Connection
+
+class DebugLevel{
+	public static int level = 0 //0 -> no log 
+}
 
 class StartedAction{
 	public var Integer releaseDate
-	public val Variable variable
+	public val Object variable
 	
-	new(Variable v, int d){
+	new(Object v, int d){
 		releaseDate = d
 		variable = v
 	}
 
 	override String toString(){
-		return "("+variable.name+"@"+releaseDate+")"
+		if (variable instanceof Variable){
+			return "("+variable.name+"@"+releaseDate+")"
+		}else{
+			return "( aConnection@"+releaseDate+")"
+		}
 	}
 	
 	override boolean equals(Object v){
@@ -58,14 +67,11 @@ class EventList extends ArrayList<StartedAction>{
 	
 }
 
-class DebugLevel{
-	public static int level = 0
-}
 
 @Aspect(className=Model)
 class ModelAspect {
 	@NotInStateSpace
-	public var Integer currentTime = 0; //0 -> no log
+	public var Integer currentTime = 0; 
 	/**
 	 * This list contains the started timer and the time to wait after the previous timer released
 	 */
@@ -85,8 +91,8 @@ class ModelAspect {
 		if (DebugLevel.level > 0) println("currentTime is now "+_self.currentTime)
 	}
 	
-	def void schedule(Variable a, int duration){
-		if (DebugLevel.level > 0) println("beforeSchedule: of "+a.name+" for "+duration+" --> "+_self.startedTimers)
+	def void schedule(Object a, int duration){
+		if (DebugLevel.level > 0) println("beforeSchedule: of "+a+" for "+duration+" --> "+_self.startedTimers)
 		if(_self.startedTimers.isEmpty){
 			_self.startedTimers.add(new StartedAction(a, duration))
 			if (DebugLevel.level > 0) println("afterSchedule: "+_self.startedTimers)
@@ -110,7 +116,7 @@ class ModelAspect {
 	 *
 	 *	@Return Value: The method returns the index or position of the first occurrence of the element in the list else -1 if the element is not present in the list. The returned value is of integer type.
 	 */
-	def int getIndexOfTimer(Variable v){
+	def int getIndexOfTimer(Object v){
 		for(var int i = 0; i < _self.startedTimers.size ; i++){
 			if (_self.startedTimers.get(i).variable == v){
 				return i;
@@ -141,11 +147,11 @@ class TimerAspect{
 		//TODO: deal with offset
 		var period = 0
 		if (_self.period.time !== null){
-			period = _self.period.time.interval
+			period = _self.period.time.interval * 1000 //TODO use the unit
 		}else{
 			//look for the parameter in the instance
 			var theInstance = model.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (_self.eContainer as Reactor).name]
-			period = theInstance.parameters.findFirst[p | p.lhs.name == _self.period.parameter.name].rhs.get(0).time.interval
+			period = theInstance.parameters.findFirst[p | p.lhs.name == _self.period.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
 		}
 		if(indexOfSelf != -1){ //a timer is already armed
 				if(model.startedTimers.get(indexOfSelf).releaseDate != period){ //at the same time
@@ -195,7 +201,7 @@ class ActionAspect{
 					return
 				}
 		}
-		model.schedule(_self, _self.minDelay.time.interval)
+		model.schedule(_self, _self.minDelay.time.interval * 1000) //TODO use the unit
 		if (DebugLevel.level > 0) println("exit schedule of "+_self.name)
 	}
 	
@@ -210,4 +216,48 @@ class ActionAspect{
 	}
 	
 
+}
+
+@Aspect(className=Connection)
+class ConnectionAspect{
+	def void release(){
+		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
+		val indexOfSelf = model.getIndexOfTimer(_self)
+		if (indexOfSelf != -1) {
+			model.startedTimers.remove(indexOfSelf)
+			if (DebugLevel.level > 0) println("Connection released ("+model.startedTimers+")")
+		}else{
+			if (DebugLevel.level > 0) println("####################################   error ? Connection already released ("+model.startedTimers+")")
+		}
+	}
+	
+	def void schedule(){
+		if (DebugLevel.level > 0) println("enter schedule of a connection"+_self)
+		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
+		val indexOfSelf = model.getIndexOfTimer(_self)
+		
+		var period = 0
+		if (_self.delay.time !== null){
+			period = _self.delay.time.interval
+		}
+		if(indexOfSelf != -1){ //a timer is already armed
+			if(model.startedTimers.get(indexOfSelf).releaseDate != period){ //at the same time
+				println("->>>>>>>>>>>>>>>>>>>>>>>>>>>>    ERROR ? this timer is already armed for this deadline: "+model.startedTimers.get(indexOfSelf));
+				return
+			}
+		}
+		model.schedule(_self, period)
+		if (DebugLevel.level > 0) println("exit schedule of "+_self)
+	}
+	
+	def boolean canTick(){
+		if (DebugLevel.level > 0) print("Connection "+_self+".canRelease() ->")
+		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
+		val indexOfSelf = model.getIndexOfTimer(_self)
+		val list = model.startedTimers
+		var result = (list.get(indexOfSelf).releaseDate == 0)
+		if (DebugLevel.level > 0) println(result)
+		return result
+	}
+	
 }

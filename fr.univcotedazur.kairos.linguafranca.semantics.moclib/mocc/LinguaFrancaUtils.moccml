@@ -1,5 +1,6 @@
 AutomataConstraintLibrary LinguaFrancaUtils{ 
 	import "platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/kernel.ccslLib" as ccsl;
+	import "platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/CCSL.ccslLib" as ccsl;
 	RelationLibrary LinguaFrancaLib{
 
 		AutomataRelationDefinition AlternatesFSMDef [ AlternatesFSM ] {
@@ -23,6 +24,9 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 		}
 
 		AutomataRelationDefinition TimerConstraintDef [ TimerConstraint ] {
+			variables {
+				Integer i = 0
+			}
 
 			init:  TCD_S1
 
@@ -30,8 +34,10 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( )
 
 			from TCD_S2 to TCD_S4 : TCD_S2ToTCD_S3
-			-> ( when TimerConstraint_starts )
-
+			-> ( when TimerConstraint_starts if ( i < TimerConstraint_nbStarts .value )
+			do i = (i + one)
+			)
+ 
 			from TCD_S3 to TCD_S2 : TCD_S3ToTCD_S2
 			-> ( when TimerConstraint_release )
 
@@ -42,13 +48,17 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( when TimerConstraint_canTick )
 
 			from TCD_S4 to TCD_S5 : TCD_S4ToTCD_S5
-			-> ( when TimerConstraint_timeJump )
+			-> ( when TimerConstraint_timeJump do i = zero )
 
 			from TCD_S2 to TCD_S2 : TCD_S2ToTCD_S2
 			-> ( when TimerConstraint_timeJump )
 
 			from TCD_S6 to TCD_S5 : TCD_S6ToTCD_S3
 			-> ( when TimerConstraint_timeJump )
+
+			from TCD_S4 to TCD_S4 : TCD_S4ToTCD_S4
+			-> ( when TimerConstraint_starts if ( i < TimerConstraint_nbStarts .value )
+			do i = (i + one) )
 
 			State TCD_S1 ( out : TCD_S1ToTCD_S2 )
 
@@ -57,7 +67,8 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			State TCD_S3 ( in : TCD_S4ToTCD_S3 out : TCD_S3ToTCD_S2,
 			TCD_S3ToTCD_S32 )
 
-			State TCD_S4 ( in : TCD_S2ToTCD_S3 out : TCD_S4ToTCD_S5 )
+			State TCD_S4 ( in : TCD_S2ToTCD_S3, TCD_S4ToTCD_S4 out : TCD_S4ToTCD_S5,
+			TCD_S4ToTCD_S4 )
 
 			State TCD_S5 ( in : TCD_S4ToTCD_S5, TCD_S6ToTCD_S3 out : TCD_S4ToTCD_S3 )
 
@@ -79,7 +90,7 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			State TD_S2 ( in : TD_S1ToTD_S2, TD_S2ToTD_S2 out : TD_S2ToTD_S2 )
 		}
 		RelationDeclaration AlternatesFSM(AlternatesFSM_left:clock , AlternatesFSM_right: clock)
-		RelationDeclaration TimerConstraint(TimerConstraint_starts:clock , TimerConstraint_canTick: clock, TimerConstraint_wait: clock, TimerConstraint_release:clock, TimerConstraint_timeJump:clock)
+		RelationDeclaration TimerConstraint(TimerConstraint_starts:clock , TimerConstraint_canTick: clock, TimerConstraint_wait: clock, TimerConstraint_release:clock, TimerConstraint_timeJump:clock, TimerConstraint_nbStarts:int)
 		RelationDeclaration NeverTick(nevertCickingClock : clock)
 		
 	}

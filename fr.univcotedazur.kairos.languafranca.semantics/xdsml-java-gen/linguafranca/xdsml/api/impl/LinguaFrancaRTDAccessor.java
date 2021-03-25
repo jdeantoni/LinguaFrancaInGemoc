@@ -22,6 +22,12 @@ public class LinguaFrancaRTDAccessor {
 	public static boolean setstartedTimers(EObject eObject, fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList newValue) {
 		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "startedTimers", new fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList(newValue));
 	}
+  public static java.lang.Boolean getoffsetToDo(EObject eObject) {
+		return new java.lang.Boolean((java.lang.Boolean)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.TimerAspect", "offsetToDo"));
+	}
+	public static boolean setoffsetToDo(EObject eObject, java.lang.Boolean newValue) {
+		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.TimerAspect", "offsetToDo", new java.lang.Boolean(newValue));
+	}
 
 	public static Object getAspectProperty(EObject eObject, String languageName, String aspectName, String propertyName) {
 		List<Class<?>> aspects = K3DslHelper.getAspectsOn(languageName, eObject.getClass());

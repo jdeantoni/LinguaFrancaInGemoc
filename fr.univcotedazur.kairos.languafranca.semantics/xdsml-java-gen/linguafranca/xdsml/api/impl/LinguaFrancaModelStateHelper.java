@@ -47,6 +47,15 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 		K3ModelState res = theFactory.createK3ModelState();
 
 		Class<?> clazz =null;
+		clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.languafranca.semantics.k3dsa.TimerAspect.class);
+		if (clazz.isInstance(model)) {
+			ElementState elemState = theFactory.createElementState();
+			elemState.setModelElement(model);
+			res.getOwnedElementstates().add(elemState);
+				AttributeNameToValue n2v0 = new AttributeNameToValue("offsetToDo", LinguaFrancaRTDAccessor.getoffsetToDo(model));
+				elemState.getSavedRTDs().add(n2v0);
+			}
+	//property not in state space:currentTime
 		clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect.class);
 		if (clazz.isInstance(model)) {
 			ElementState elemState = theFactory.createElementState();
@@ -60,6 +69,14 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 			EObject elem = allContentIt.next();
 
 			clazz =null;
+			clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.languafranca.semantics.k3dsa.TimerAspect.class);
+			if (clazz.isInstance(elem)) {
+				ElementState elemState = theFactory.createElementState();
+				elemState.setModelElement(elem);
+				res.getOwnedElementstates().add(elemState);
+				AttributeNameToValue n2v0 = new AttributeNameToValue("offsetToDo", LinguaFrancaRTDAccessor.getoffsetToDo(elem));
+				elemState.getSavedRTDs().add(n2v0);
+			}
 			clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect.class);
 			if (clazz.isInstance(elem)) {
 				ElementState elemState = theFactory.createElementState();

@@ -89,8 +89,39 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 
 			State TD_S2 ( in : TD_S1ToTD_S2, TD_S2ToTD_S2 out : TD_S2ToTD_S2 )
 		}
+
+		AutomataRelationDefinition MultipleInputsReactionDef [ MultipleInputsReaction
+		] {
+			variables {
+				Integer nb_t = 0
+			}
+			init:  MIRD_S1
+
+			from MIRD_S1 to MIRD_S2 : MIRD_S1ToMIRD_S2
+			-> ( )
+
+			from MIRD_S2 to MIRD_S3 : MIRD_S2ToMIRD_S3
+			-> ( when MultipleInputsReaction_trigger do nb_t = ( nb_t + one ) )
+
+			from MIRD_S3 to MIRD_S3 : MIRD_S3ToMIRD_S3
+			-> ( when MultipleInputsReaction_trigger if ( nb_t <
+			MultipleInputsReaction_nbInputs .value ) do nb_t = ( nb_t + one ) )
+
+			from MIRD_S3 to MIRD_S2 : MIRD_S3ToMIRD_S2
+			-> ( when MultipleInputsReaction_executes do nb_t = zero )
+
+			State MIRD_S1 ( out : MIRD_S1ToMIRD_S2 )
+
+			State MIRD_S2 ( in : MIRD_S1ToMIRD_S2, MIRD_S3ToMIRD_S2 out :
+			MIRD_S2ToMIRD_S3 )
+
+			State MIRD_S3 ( in : MIRD_S2ToMIRD_S3, MIRD_S3ToMIRD_S3 out :
+			MIRD_S3ToMIRD_S3, MIRD_S3ToMIRD_S2 )
+		}
 		RelationDeclaration AlternatesFSM(AlternatesFSM_left:clock , AlternatesFSM_right: clock)
 		RelationDeclaration TimerConstraint(TimerConstraint_starts:clock , TimerConstraint_canTick: clock, TimerConstraint_wait: clock, TimerConstraint_release:clock, TimerConstraint_timeJump:clock, TimerConstraint_nbStarts:int)
+		RelationDeclaration MultipleInputsReaction(MultipleInputsReaction_trigger:clock , MultipleInputsReaction_executes: clock, MultipleInputsReaction_nbInputs:int)
+		
 		RelationDeclaration NeverTick(nevertCickingClock : clock)
 		
 	}

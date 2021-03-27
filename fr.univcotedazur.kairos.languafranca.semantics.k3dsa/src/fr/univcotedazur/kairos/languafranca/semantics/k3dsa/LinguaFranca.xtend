@@ -14,38 +14,43 @@ import java.util.ArrayList
 import org.icyphy.linguaFranca.Connection
 
 class DebugLevel{
-	public static int level = 1 //0 -> no log //1 -> normal log //2 all logs
+	public static int level = 2 //0 -> no log //1 -> normal log //2 all logs
 }
 
-class StartedAction{
+class ScheduledAction{
 	public var Integer releaseDate
+	public var Integer microStep = 0
+	
 	public val Object variable
 	
-	new(Object v, int d){
+	new(Object v, int d, int s){
 		releaseDate = d
+		microStep = s
 		variable = v
 	}
 
 	override String toString(){
 		if (variable instanceof Variable){
-			return "("+variable.name+"@"+releaseDate+")"
+			return variable.name+"@("+releaseDate+","+microStep+")"
 		}else{
-			return "( aConnection@"+releaseDate+")"
+			return "aConnection@("+releaseDate+","+microStep+")"
 		}
 	}
 	
 	override boolean equals(Object v){
-		if(v instanceof StartedAction){
+		if(v instanceof ScheduledAction){
 			return 
-				(releaseDate == (v as StartedAction).releaseDate)
+				(releaseDate == (v as ScheduledAction).releaseDate)
+				&&
+				(microStep == (v as ScheduledAction).microStep)
 				&& 
-				variable == (v as StartedAction).variable
+				variable == (v as ScheduledAction).variable
 		}
 		return false
 	}
 }
 
-class EventList extends ArrayList<StartedAction>{
+class EventList extends ArrayList<ScheduledAction>{
 	
 	new(EventList el) {
 		super(el);	
@@ -72,10 +77,13 @@ class EventList extends ArrayList<StartedAction>{
 class ModelAspect {
 	@NotInStateSpace
 	public var Integer currentTime = 0; 
+	@NotInStateSpace
+	public var Integer microStep = 0; 
+	
 	/**
-	 * This list contains the started timer and the time to wait after the previous timer released
+	 * This list contains the scheduled action, the time to wait from the previous timer released and the microStep
 	 */
-	public var EventList startedTimers = new EventList(); //for now only Actions but it should also encompass Timer and their first common superclass is Variable
+	public var EventList startedTimers = new EventList(); //super dense time priority FIFO
 	
 	
 	def void timeJump(){
@@ -89,34 +97,35 @@ class ModelAspect {
 		}
 		var jumpSize = _self.startedTimers.get(0).releaseDate
 		_self.currentTime = jumpSize + _self.currentTime
+		_self.microStep = _self.startedTimers.get(0).microStep
 		var EventList newEl = new EventList()
-		for(StartedAction sa : _self.startedTimers){
-			newEl.add(new StartedAction(sa.variable, sa.releaseDate - jumpSize))			
+		for(ScheduledAction sa : _self.startedTimers){
+			newEl.add(new ScheduledAction(sa.variable, sa.releaseDate - jumpSize, sa.microStep - _self.microStep))			
 		}
 		_self.startedTimers = newEl
-		if (DebugLevel.level > 0) println("currentTime: "+_self.currentTime)
+		if (DebugLevel.level > 0) println("currentTime: "+_self.currentTime+","+_self.microStep)
 		if (DebugLevel.level > 1){
 			var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model	
 			println("startedTimer: "+model.startedTimers)
 		}
 	}
 	
-	def void schedule(Object a, int duration){
+	def void schedule(Object a, int duration, int s){
 		if (DebugLevel.level > 1) println("beforeSchedule: of "+a+" for "+duration+" --> "+_self.startedTimers)
 		if(_self.startedTimers.isEmpty){
-			_self.startedTimers.add(new StartedAction(a, duration))
+			_self.startedTimers.add(new ScheduledAction(a, duration, s))
 			if (DebugLevel.level > 1) println("afterSchedule: "+_self.startedTimers)
 			return
 		}//else
 		for(var int i = 0; i < _self.startedTimers.size; i++){
 			if(_self.startedTimers.get(i).releaseDate > duration){
-				_self.startedTimers.add(java.lang.Math.max(0, i-1), new StartedAction(a, duration)) //Max in case i == 0 (add before)
-				if (DebugLevel.level > 1) println("startedTimer (1): "+_self.startedTimers)
+				_self.startedTimers.add(java.lang.Math.max(0, i-1), new ScheduledAction(a, duration, s)) //Max in case i == 0 (add before)
+				if (DebugLevel.level > 1) println("afterSchedule (1): "+_self.startedTimers)
 				return
 			}
 			if (i == (_self.startedTimers.size -1)){
-				_self.startedTimers.add(new StartedAction(a, duration))//push to the end
-				if (DebugLevel.level > 1) println("startedTimer: (3)"+_self.startedTimers)
+				_self.startedTimers.add(new ScheduledAction(a, duration, s))//push to the end
+				if (DebugLevel.level > 1) println("afterSchedule: (3)"+_self.startedTimers)
 				return
 			}
 		}
@@ -189,7 +198,7 @@ class TimerAspect{
 //					return
 //				}
 //		}
-		model.schedule(_self, nextTimeHop)
+		model.schedule(_self, nextTimeHop, 0)
 		if (DebugLevel.level > 1) println("exit schedule of "+_self.name)
 	}
 	
@@ -224,10 +233,17 @@ class ActionAspect{
 	
 	
 	def void schedule(){
-		if(_self.minDelay === null || _self.minDelay.time === null) return;
+		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
+		if(_self.minDelay === null || _self.minDelay.time === null){ //micro step !
+			if (DebugLevel.level > 1) println("enter micro step schedule of "+_self.name)
+			model.schedule(_self, 0, model.microStep+1)
+			if (DebugLevel.level > 1) println("exit micro step schedule of "+_self.name)
+			return
+			
+		};
 		
 		if (DebugLevel.level > 1) println("enter schedule of "+_self.name)
-		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
+		
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		if(indexOfSelf != -1){ //a timer is already armed -> not an error if at the same logical step
 //				if(model.startedTimers.get(indexOfSelf).releaseDate != _self.minDelay.time.interval){ //at the same time
@@ -235,7 +251,7 @@ class ActionAspect{
 //					return
 //				}
 		}
-		model.schedule(_self, _self.minDelay.time.interval * 1000) //TODO use the unit
+		model.schedule(_self, _self.minDelay.time.interval * 1000, 0) //TODO use the unit
 		if (DebugLevel.level > 1) println("exit schedule of "+_self.name)
 	}
 	
@@ -280,7 +296,7 @@ class ConnectionAspect{
 				return
 			}
 		}
-		model.schedule(_self, period*1000)
+		model.schedule(_self, period*1000, 0) //TODO: use unit
 		if (DebugLevel.level > 1) println("exit schedule of "+_self)
 	}
 	

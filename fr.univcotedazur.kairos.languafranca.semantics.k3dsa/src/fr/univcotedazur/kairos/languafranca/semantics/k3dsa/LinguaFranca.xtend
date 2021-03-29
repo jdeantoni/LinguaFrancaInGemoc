@@ -12,14 +12,16 @@ import org.icyphy.linguaFranca.Variable
 import org.icyphy.linguaFranca.Reactor
 import java.util.ArrayList
 import org.icyphy.linguaFranca.Connection
+import org.icyphy.linguaFranca.Reaction
+import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 
 class DebugLevel{
-	public static int level = 2 //0 -> no log //1 -> normal log //2 all logs
-}
+	public static int level =  1 //0 -> no log //1 -> normal log //2 all logs
+} 
 
 class ScheduledAction{
 	public var Integer releaseDate
-	public var Integer microStep = 0
+	public var Integer microStep
 	
 	public val Object variable
 	
@@ -78,7 +80,7 @@ class ModelAspect {
 	@NotInStateSpace
 	public var Integer currentTime = 0; 
 	@NotInStateSpace
-	public var Integer microStep = 0; 
+	public var Integer currentMicroStep = 0; 
 	
 	/**
 	 * This list contains the scheduled action, the time to wait from the previous timer released and the microStep
@@ -86,55 +88,65 @@ class ModelAspect {
 	public var EventList startedTimers = new EventList(); //super dense time priority FIFO
 	
 	
+	@InitializeModel
+	def void init(String[] s){
+		if (DebugLevel.level > 0) println("\u001B[34m")
+		if (DebugLevel.level > 0) println("currentTime: "+_self.currentTime+"us --- "+_self.currentMicroStep)
+	}
+	
 	def void timeJump(){
 		if (DebugLevel.level > 1){
 			var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model	
-			println("startedTimer: "+model.startedTimers)
+			println("\u001B[34m startedTimer: "+model.startedTimers)
 		}
 		if (_self.startedTimers.size() == 0){
-			println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ERROR ! no time Jump to do (no timer armed)")
+			println("\u001B[31m ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ERROR ! no time Jump to do (no timer armed)")
 			return
 		}
 		var jumpSize = _self.startedTimers.get(0).releaseDate
 		_self.currentTime = jumpSize + _self.currentTime
-		_self.microStep = _self.startedTimers.get(0).microStep
+		_self.currentMicroStep = _self.startedTimers.get(0).microStep
 		var EventList newEl = new EventList()
 		for(ScheduledAction sa : _self.startedTimers){
 			if(sa.releaseDate == jumpSize){
-				newEl.add(new ScheduledAction(sa.variable, sa.releaseDate - jumpSize, sa.microStep - _self.microStep))
+				newEl.add(new ScheduledAction(sa.variable, sa.releaseDate - jumpSize, sa.microStep - _self.currentMicroStep))
 			}else{
 				newEl.add(new ScheduledAction(sa.variable, sa.releaseDate - jumpSize, sa.microStep))
 			}			
 		}
 		_self.startedTimers = newEl
-		if (DebugLevel.level > 0) println("currentTime: "+_self.currentTime+","+_self.microStep)
+		if (DebugLevel.level > 0) println("\u001B[34mcurrentTime: "+_self.currentTime+"us --- "+_self.currentMicroStep)
 		if (DebugLevel.level > 1){
 			var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model	
-			println("startedTimer: "+model.startedTimers)
+			println("\u001B[34m startedTimer: "+model.startedTimers)
 		}
 	}
 	
 	def void schedule(Object a, int duration, int s){
-		//TODO: add ordering in the micro steps
-		if (DebugLevel.level > 1) println("beforeSchedule: of "+a+" for "+duration+" --> "+_self.startedTimers)
+		if (DebugLevel.level > 1) println("\u001B[34m beforeSchedule: of "+a+" for "+duration+" --> "+_self.startedTimers)
 		if(_self.startedTimers.isEmpty){
 			_self.startedTimers.add(new ScheduledAction(a, duration, s))
-			if (DebugLevel.level > 1) println("afterSchedule: "+_self.startedTimers)
+			if (DebugLevel.level > 1) println("\u001B[34m afterSchedule: "+_self.startedTimers)
 			return
 		}//else
 		for(var int i = 0; i < _self.startedTimers.size; i++){
+			if(_self.startedTimers.get(i).releaseDate == duration && _self.startedTimers.get(i).microStep > s){ //micro steps ordering
+				_self.startedTimers.add(java.lang.Math.max(0, i-1), new ScheduledAction(a, duration, s)) //Max in case i == 0 (add before)
+				if (DebugLevel.level > 1) println("\u001B[34m afterSchedule (0): "+_self.startedTimers)
+				return
+			}
 			if(_self.startedTimers.get(i).releaseDate > duration){
 				_self.startedTimers.add(java.lang.Math.max(0, i-1), new ScheduledAction(a, duration, s)) //Max in case i == 0 (add before)
-				if (DebugLevel.level > 1) println("afterSchedule (1): "+_self.startedTimers)
+				if (DebugLevel.level > 1) println("\u001B[34m afterSchedule (1): "+_self.startedTimers)
 				return
 			}
 			if (i == (_self.startedTimers.size -1)){
 				_self.startedTimers.add(new ScheduledAction(a, duration, s))//push to the end
-				if (DebugLevel.level > 1) println("afterSchedule: (3)"+_self.startedTimers)
+				if (DebugLevel.level > 1) println("\u001B[34m afterSchedule: (3)"+_self.startedTimers)
 				return
 			}
 		}
-		if (DebugLevel.level > 0) println("\t\tscheduled tasks: "+_self.startedTimers)
+		if (DebugLevel.level > 0) println("\t\t\u001B[34m scheduled actions: "+_self.startedTimers)
 	}
 	/**
 	 *  @Parameters: The parameter element is of the type Action. It specifies the element whose occurrence is needed to be checked in the startedTimer LinkedList.
@@ -160,20 +172,20 @@ class TimerAspect{
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		if (indexOfSelf != -1) {
 			model.startedTimers.remove(indexOfSelf)
-			if (DebugLevel.level > 0) println("\t\t"+_self.name+ " released ("+model.startedTimers+")")
+			if (DebugLevel.level > 0) println("\u001B[34m\t\t"+_self.name+ " released ("+model.startedTimers+")")
 		}else{
-			if (DebugLevel.level > 0) println("####################################   error ? Timer already released ("+model.startedTimers+")")
+			if (DebugLevel.level > 0) println("\u001B[31m ####################################   error ? Timer already released ("+model.startedTimers+")")
 		}
 	}
 	
 	def void schedule(){
-		if (DebugLevel.level > 1) println("enter schedule of "+_self.name)
+		if (DebugLevel.level > 1) println("\u001B[34m enter schedule of "+_self.name)
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		
 		var nextTimeHop = -1
 		if(_self.offsetToDo){
-			if (DebugLevel.level > 1) println("deal with offset of "+_self.name)
+			if (DebugLevel.level > 1) println("\u001B[34m deal with offset of "+_self.name)
 			var offset = 0
 			if (_self.offset.time !== null){
 				offset = _self.offset.time.interval * 1000 //TODO use the unit
@@ -196,22 +208,18 @@ class TimerAspect{
 			nextTimeHop = period
 		}
 		
-//	NOT AN ERROR, two starts arrived in the same logical steps
-//		if(indexOfSelf != -1){ //a timer is already armed
-//				if(model.startedTimers.get(indexOfSelf).releaseDate != nextTimeHop){ //at the same time
-//					println("->>>>>>>>>>>>>>>>>>>>>>>>>>>>    ERROR ? this timer is already armed for this deadline: "+model.startedTimers.get(indexOfSelf));
-//					return
-//				}
-//		}
-		model.schedule(_self, nextTimeHop, 0)
-		if (DebugLevel.level > 1) println("exit schedule of "+_self.name)
+		if(indexOfSelf == -1){ //the same timer is not already armed
+					model.schedule(_self, nextTimeHop, 0)
+		}
+		if (DebugLevel.level > 1) println("\u001B[34m exit schedule of "+_self.name)
+		if (DebugLevel.level > 0) println("\u001B[34m\t"+_self.name+"scheduled: "+model.startedTimers)
 	}
 	
 	def boolean canTick(){
 		if (DebugLevel.level > 1){
 			var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model	
-			println("startedTimer: "+model.startedTimers)
-			print("         Timer "+_self.name+".canRelease() ->")
+			println("\u001B[34m startedTimer: "+model.startedTimers)
+			print("\u001B[34m         Timer "+_self.name+".canRelease() ->")
 		}
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
@@ -230,38 +238,40 @@ class ActionAspect{
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		if (indexOfSelf != -1) {
 			model.startedTimers.remove(indexOfSelf)
-			if (DebugLevel.level > 0) println("\t\t"+_self.name+ " released ("+model.startedTimers+")")
+			if (DebugLevel.level > 0) println("\u001B[34m\t\t"+_self.name+ " released ("+model.startedTimers+")")
 		}else{
-			if (DebugLevel.level > 0) println("error ? Action already released ("+model.startedTimers+")")
+			if (DebugLevel.level > 0) println("\u001B[31m error ? Action already released ("+model.startedTimers+")")
 		}
 	}
 	
 	
 	def void schedule(){
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
+		val indexOfSelf = model.getIndexOfTimer(_self)
+		
 		if(_self.minDelay === null || _self.minDelay.time === null){ //micro step !
-			if (DebugLevel.level > 1) println("enter micro step schedule of "+_self.name)
-			model.schedule(_self, 0, model.microStep+1)
-			if (DebugLevel.level > 1) println("exit micro step schedule of "+_self.name)
+			if(indexOfSelf == -1){ //the same action is not already armed
+				if (DebugLevel.level > 1) println("\u001B[34m enter micro step schedule of "+_self.name)
+				model.schedule(_self, 0, model.currentMicroStep+1)
+				if (DebugLevel.level > 1) println("\u001B[34m exit micro step schedule of "+_self.name)
+			}
 			return
 			
 		};
 		
-		if (DebugLevel.level > 1) println("enter schedule of "+_self.name)
+		if (DebugLevel.level > 1) println("\u001B[34m enter schedule of "+_self.name)
 		
-		val indexOfSelf = model.getIndexOfTimer(_self)
-		if(indexOfSelf != -1){ //a timer is already armed -> not an error if at the same logical step
-//				if(model.startedTimers.get(indexOfSelf).releaseDate != _self.minDelay.time.interval){ //at the same time
-//					println("->>>>>>>>>>>>>>>>>>>>>>>>>>>>    ERROR ? this timed action is already armed for this deadline: "+model.startedTimers.get(indexOfSelf));
-//					return
-//				}
+		
+		if(indexOfSelf == -1){ //the same action is not already armed
+			model.schedule(_self, _self.minDelay.time.interval * 1000, 0) //TODO use the unit
 		}
-		model.schedule(_self, _self.minDelay.time.interval * 1000, 0) //TODO use the unit
-		if (DebugLevel.level > 1) println("exit schedule of "+_self.name)
+		
+		if (DebugLevel.level > 1) println("\u001B[34m exit schedule of "+_self.name)
+		if (DebugLevel.level > 0) println("\u001B[34m\t"+_self.name+"scheduled: "+model.startedTimers)
 	}
 	
 	def boolean canTick(){
-		if (DebugLevel.level > 1) print("Action "+_self.name+".canRelease() ->")
+		if (DebugLevel.level > 1) print("\u001B[34m Action "+_self.name+".canRelease() ->")
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		val list = model.startedTimers
@@ -280,14 +290,14 @@ class ConnectionAspect{
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		if (indexOfSelf != -1) {
 			model.startedTimers.remove(indexOfSelf)
-			if (DebugLevel.level > 0) println("\t\t"+ "connection released ("+model.startedTimers+")")
+			if (DebugLevel.level > 0) println("\u001B[34m\t\t"+ "connection released ("+model.startedTimers+")")
 		}else{
-			if (DebugLevel.level > 0) println("####################################   error ? Connection already released ("+model.startedTimers+")")
+			if (DebugLevel.level > 0) println("\u001B[31m ####################################   error ? Connection already released ("+model.startedTimers+")")
 		}
 	}
 	
 	def void schedule(){
-		if (DebugLevel.level > 1) println("enter schedule of a connection"+_self)
+		if (DebugLevel.level > 1) println("\u001B[34m enter schedule of a connection"+_self)
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		
@@ -295,24 +305,29 @@ class ConnectionAspect{
 		if (_self.delay !== null){
 			period = _self.delay.interval
 		}
-		if(indexOfSelf != -1){ //a timer is already armed
-			if(model.startedTimers.get(indexOfSelf).releaseDate != period){ //at the same time
-				println("->>>>>>>>>>>>>>>>>>>>>>>>>>>>    ERROR ? this timer is already armed for this deadline: "+model.startedTimers.get(indexOfSelf));
-				return
-			}
+		if(indexOfSelf == -1){ //the connection is not already armed
+			model.schedule(_self, period*1000, 0) //TODO: use unit
 		}
-		model.schedule(_self, period*1000, 0) //TODO: use unit
-		if (DebugLevel.level > 1) println("exit schedule of "+_self)
+		if (DebugLevel.level > 1) println("\u001B[34m exit schedule of "+_self)
+		if (DebugLevel.level > 0) println("\u001B[34m\t"+_self.rightPorts.get(0).variable.name+"_to_"+_self.leftPorts.get(0).variable.name+"scheduled: "+model.startedTimers)
 	}
 	
 	def boolean canTick(){
-		if (DebugLevel.level > 1) print("Connection "+_self+".canRelease() ->")
+		if (DebugLevel.level > 1) print("\u001B[34m Connection "+_self+".canRelease() ->")
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		val list = model.startedTimers
 		var result = (list.get(indexOfSelf).releaseDate == 0)
-		if (DebugLevel.level > 1) println(result)
+		if (DebugLevel.level > 1) println("\u001B[34m"+result)
 		return result
+	}
+	
+}
+
+@Aspect(className=Reaction)
+class ReactionAspect{
+	def void exec(){
+		if (DebugLevel.level > 0) println("\u001B[34m \tReaction "+_self.name+" executed")
 	}
 	
 }

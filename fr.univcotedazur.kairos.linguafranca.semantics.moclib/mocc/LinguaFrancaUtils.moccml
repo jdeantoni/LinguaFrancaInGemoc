@@ -60,9 +60,6 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( when TimerConstraint_starts if ( i < TimerConstraint_nbStarts .value )
 			do i = (i + one) )
 
-			from TCD_S6 to TCD_S6 : TCD_S6ToTCD_S6
-			-> ( when TimerConstraint_starts )
-
 			State TCD_S1 ( out : TCD_S1ToTCD_S2 )
 
 			State TCD_S2 ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2, TCD_S2ToTCD_S2 out : TCD_S2ToTCD_S3, TCD_S2ToTCD_S2 )
@@ -75,8 +72,7 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 
 			State TCD_S5 ( in : TCD_S4ToTCD_S5, TCD_S6ToTCD_S3 out : TCD_S4ToTCD_S3 )
 
-			State TCD_S6 ( in : TCD_S3ToTCD_S32, TCD_S6ToTCD_S6 out : TCD_S6ToTCD_S3,
-			TCD_S6ToTCD_S6 )
+			State TCD_S6 ( in : TCD_S3ToTCD_S32 out : TCD_S6ToTCD_S3 )
 		}
 
 		AutomataRelationDefinition neverTickDef [ NeverTick ] {

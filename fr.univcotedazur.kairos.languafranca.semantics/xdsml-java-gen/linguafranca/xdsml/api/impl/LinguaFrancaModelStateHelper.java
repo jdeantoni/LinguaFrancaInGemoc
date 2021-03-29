@@ -13,8 +13,10 @@ import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.k3.dsa.h
 
 
 public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
-	private static class AttributeNameToValue implements Serializable{
+	public boolean showRestoredState = true; 
 
+	
+	private static class AttributeNameToValue implements Serializable{
 		private static final long serialVersionUID = 0;		String name;
 		Object value;
 		public AttributeNameToValue(String n, Object v) {
@@ -40,7 +42,7 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 			}
 			return true;
 		}	}
-		K3ModelStateFactory theFactory = K3ModelStateFactory.eINSTANCE; 
+		K3ModelStateFactory theFactory = K3ModelStateFactory.eINSTANCE;
 
 	public K3ModelState getK3StateSpaceModelState(EObject model) {
 		return getK3ModelState(model, false);
@@ -72,8 +74,8 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 				AttributeNameToValue n2v0 = new AttributeNameToValue("currentTime", LinguaFrancaRTDAccessor.getcurrentTime(model));
 				elemState.getSavedRTDs().add(n2v0);
 			}
-			if (allRTDs) {  //property not in state space:microStep
-				AttributeNameToValue n2v1 = new AttributeNameToValue("microStep", LinguaFrancaRTDAccessor.getmicroStep(model));
+			if (allRTDs) {  //property not in state space:currentMicroStep
+				AttributeNameToValue n2v1 = new AttributeNameToValue("currentMicroStep", LinguaFrancaRTDAccessor.getcurrentMicroStep(model));
 				elemState.getSavedRTDs().add(n2v1);
 			}
 				AttributeNameToValue n2v2 = new AttributeNameToValue("startedTimers", LinguaFrancaRTDAccessor.getstartedTimers(model));
@@ -101,8 +103,8 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 				AttributeNameToValue n2v0 = new AttributeNameToValue("currentTime", LinguaFrancaRTDAccessor.getcurrentTime(elem));
 				elemState.getSavedRTDs().add(n2v0);
 				}
-				if (allRTDs) {  //property not in state space:microStep
-				AttributeNameToValue n2v1 = new AttributeNameToValue("microStep", LinguaFrancaRTDAccessor.getmicroStep(elem));
+				if (allRTDs) {  //property not in state space:currentMicroStep
+				AttributeNameToValue n2v1 = new AttributeNameToValue("currentMicroStep", LinguaFrancaRTDAccessor.getcurrentMicroStep(elem));
 				elemState.getSavedRTDs().add(n2v1);
 				}
 				AttributeNameToValue n2v2 = new AttributeNameToValue("startedTimers", LinguaFrancaRTDAccessor.getstartedTimers(elem));
@@ -113,9 +115,11 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 		}
 
 	public void restoreModelState(K3ModelState state) {
+		if (showRestoredState) System.out.println("\u001B[35m"+"restored state: ");
 		for(ElementState elemState : state.getOwnedElementstates()) {
 			for(Object o : elemState.getSavedRTDs()) {
 				AttributeNameToValue n2v = (AttributeNameToValue)o;
+				if (showRestoredState) System.out.println("\u001B[35m\t"+n2v.name+"="+n2v.value);
 				try {
 					if (n2v.value != null) {
 						Method m = LinguaFrancaRTDAccessor.class.getMethod("set"+n2v.name, EObject.class, n2v.value.getClass());

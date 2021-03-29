@@ -12,12 +12,9 @@ ECLimport "platform:/resource/fr.univcotedazur.kairos.linguafranca.semantics.moc
 /**
  * TODO: 
  *    correct semantics of multiple inputs for reaction ?
- *    add support for systems with not timed elements
+ *    add support for systems with no timed elements
  *    add support for link between logical and physical time
  */
-
-
-
 
 
 
@@ -25,6 +22,10 @@ package ecore --trick to retrieve QVTo facilities
 	context EObject
 		def : allSubobjects() : Collection(EObject) = self.eAllContents().oclAsType(Collection(EObject))
 endpackage
+
+
+
+
 
 
 package linguaFranca
@@ -41,7 +42,7 @@ context Model
 	def : allWait : Event = self
 
 context Reaction
-	def: synchronousExecution: Event = self 
+	def: synchronousExecution: Event = self.exec()
 
 context Variable
 	def : updates : Event(receiveEvent) = self
@@ -184,9 +185,9 @@ context Connection
 		let nbInputs : Integer = 1 in --connections always have a single input (actually 0 but a single start by timeJump
 		Relation TimerConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump, nbInputs) 
 		
-	inv TimedConnectorStartsWithSource:
-		(self.delay <> null) implies
-		Relation Coincides(self.starts, self.leftPorts.variable->first().updates)
+	inv TimedConnectorStartsWithSource:		--does not coincides since it can be activated several times while waiting (see "Anomaly.lf" example)
+		(self.delay <> null) implies	
+		Relation Precedes(self.leftPorts.variable->first().updates, self.starts)
 		
 	inv TimedConnectorReleaseWithTarget:
 		(self.delay <> null) implies
@@ -359,32 +360,32 @@ context TriggerRef
   * begin state space shrinking:
 	  * remove irrelevant internal interleaving
 	  */
-context Model
-	
-	 def : allTimedConcepts : Collection(TimedConcept) =
-	  self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
-				->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
-			    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null)).oclAsType(Connection)
-
-	
-	inv onlyOneCanTickAtATime1:
-		Relation Exclusion(allTimedConcepts.canRelease)	
-	
-	inv onlyOneReleaseAtATime1:
-		Relation Exclusion(allTimedConcepts.releases)	
-		
-	inv onlyOneWaitAtATime1:
-		Relation Exclusion(allTimedConcepts.wait)	
-
-	inv canReleasePriorRelease:
-		Prior : self.allCanRelease prevails on self.allRelease					
-	inv canReleasePriorReleaseExclusion:
-		Relation Exclusion(self.allCanRelease, self.allRelease)
-	
-	inv canReleasePriorWait:
-		Prior : self.allCanRelease prevails on self.allWait						
-	inv canReleasePriorWaitExclusion:
-		Relation Exclusion(self.allCanRelease, self.allWait)
+--context Model
+--	
+--	 def : allTimedConcepts : Collection(TimedConcept) =
+--	  self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
+--				->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
+--			    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection))
+--
+--	
+--	inv onlyOneCanTickAtATime1:
+--		Relation Exclusion(allTimedConcepts.canRelease)	
+--	
+--	inv onlyOneReleaseAtATime1:
+--		Relation Exclusion(allTimedConcepts.releases)	
+--		
+--	inv onlyOneWaitAtATime1:
+--		Relation Exclusion(allTimedConcepts.wait)	
+--
+--	inv canReleasePriorRelease:
+--		Prior : self.allCanRelease prevails on self.allRelease					
+--	inv canReleasePriorReleaseExclusion:
+--		Relation Exclusion(self.allCanRelease, self.allRelease)
+--	
+--	inv canReleasePriorWait:
+--		Prior : self.allCanRelease prevails on self.allWait						
+--	inv canReleasePriorWaitExclusion:
+--		Relation Exclusion(self.allCanRelease, self.allWait)
 	
 	 /** 
 	  * end state space shrinking

@@ -100,7 +100,11 @@ class ModelAspect {
 		_self.microStep = _self.startedTimers.get(0).microStep
 		var EventList newEl = new EventList()
 		for(ScheduledAction sa : _self.startedTimers){
-			newEl.add(new ScheduledAction(sa.variable, sa.releaseDate - jumpSize, sa.microStep - _self.microStep))			
+			if(sa.releaseDate == jumpSize){
+				newEl.add(new ScheduledAction(sa.variable, sa.releaseDate - jumpSize, sa.microStep - _self.microStep))
+			}else{
+				newEl.add(new ScheduledAction(sa.variable, sa.releaseDate - jumpSize, sa.microStep))
+			}			
 		}
 		_self.startedTimers = newEl
 		if (DebugLevel.level > 0) println("currentTime: "+_self.currentTime+","+_self.microStep)
@@ -111,6 +115,7 @@ class ModelAspect {
 	}
 	
 	def void schedule(Object a, int duration, int s){
+		//TODO: add ordering in the micro steps
 		if (DebugLevel.level > 1) println("beforeSchedule: of "+a+" for "+duration+" --> "+_self.startedTimers)
 		if(_self.startedTimers.isEmpty){
 			_self.startedTimers.add(new ScheduledAction(a, duration, s))

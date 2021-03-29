@@ -16,6 +16,12 @@ public class LinguaFrancaRTDAccessor {
 	public static boolean setcurrentTime(EObject eObject, java.lang.Integer newValue) {
 		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "currentTime", new java.lang.Integer(newValue));
 	}
+  public static java.lang.Integer getmicroStep(EObject eObject) {
+		return new java.lang.Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "microStep"));
+	}
+	public static boolean setmicroStep(EObject eObject, java.lang.Integer newValue) {
+		return setAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "microStep", new java.lang.Integer(newValue));
+	}
   public static fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList getstartedTimers(EObject eObject) {
 		return new fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList((fr.univcotedazur.kairos.languafranca.semantics.k3dsa.EventList)  getAspectProperty(eObject, "fr.univcotedazur.kairos.languafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.languafranca.semantics.k3dsa.ModelAspect", "startedTimers"));
 	}

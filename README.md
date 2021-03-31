@@ -17,3 +17,8 @@ It is also possible to do some exhaustive simulation to explore all the state sp
  - [video about a demo of the omniscient debugger](https://unice-my.sharepoint.com/:v:/g/personal/julien_deantoni_unice_fr/ESTC5OgpnMdKsWne9hfnS6sB6JTRb26DjIEF4KqidfzfVQ?e=8BaRHq) for LF, allowing to navigate forward and backward in time
  - [video about a demo of the check of assertions](https://unice-my.sharepoint.com/:v:/g/personal/julien_deantoni_unice_fr/ESbXfVCpMFJEu9k0cWPm6n8BQWzOjyShwCNkjY7tKQQxsA?e=tY8T66) for a specific LF program. Assertions are written in CCSL
  - [video about a demo of model checking](https://unice-my.sharepoint.com/:v:/g/personal/julien_deantoni_unice_fr/EQGaYGG9q_RMmJYawCy7eRoBdjiuOw7LnWWkFQN5v5S-bQ?e=kcaIV6) LF program and injection of the counter example back into the debugging environment
+
+
+## Notes
+
+this work is based on this fork of the LF tooling: https://github.com/jdeantoni/lingua-franca

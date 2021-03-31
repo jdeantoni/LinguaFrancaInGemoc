@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MoCCML mapping specification
+Bundle-SymbolicName: fr.univcotedazur.kairos.linguafranca.semantics.dse
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Université Cote d'Azur (I3S/INRIA Kairos)

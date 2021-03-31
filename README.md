@@ -10,3 +10,10 @@ This is still a work in progess but it is already possible to debug LF models li
 It is also possible to do some exhaustive simulation to explore all the state space of a LF program. Resulting state spaces are amenable to model checking in the CADP tool:
 
 ![LFstateSpace](/screenshots/scatterGatherStateSpace.png)
+
+## Videos
+
+ - [video of slides](https://unice-my.sharepoint.com/:v:/g/personal/julien_deantoni_unice_fr/EZIZL5ROok1DupbGhVNspKgB8d2mrKEFbTLkXeam6s0Lsg?e=1KDpUK) explaining what I understood so far about the concurrent and timed operational semantics of LF, as weel as few explanations on how it is implemented
+ - [video about a demo of the omniscient debugger](https://unice-my.sharepoint.com/:v:/g/personal/julien_deantoni_unice_fr/ESTC5OgpnMdKsWne9hfnS6sB6JTRb26DjIEF4KqidfzfVQ?e=8BaRHq) for LF, allowing to navigate forward and backward in time
+ - [video about a demo of the check of assertions](https://unice-my.sharepoint.com/:v:/g/personal/julien_deantoni_unice_fr/ESbXfVCpMFJEu9k0cWPm6n8BQWzOjyShwCNkjY7tKQQxsA?e=tY8T66) for a specific LF program. Assertions are written in CCSL
+ - [video about a demo of model checking](https://unice-my.sharepoint.com/:v:/g/personal/julien_deantoni_unice_fr/EQGaYGG9q_RMmJYawCy7eRoBdjiuOw7LnWWkFQN5v5S-bQ?e=kcaIV6) LF program and injection of the counter example back into the debugging environment

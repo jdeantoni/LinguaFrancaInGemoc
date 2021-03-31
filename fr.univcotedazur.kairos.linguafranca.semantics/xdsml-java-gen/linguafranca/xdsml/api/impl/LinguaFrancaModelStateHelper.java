@@ -13,6 +13,8 @@ import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.k3.dsa.h
 
 
 public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
+	public boolean showRestoredState = true;
+	
 	private static class AttributeNameToValue implements Serializable{
 
 		private static final long serialVersionUID = 0;		String name;
@@ -113,9 +115,11 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 		}
 
 	public void restoreModelState(K3ModelState state) {
+		if (showRestoredState) System.out.println("\u001B[35m"+"restored state: ");
 		for(ElementState elemState : state.getOwnedElementstates()) {
 			for(Object o : elemState.getSavedRTDs()) {
 				AttributeNameToValue n2v = (AttributeNameToValue)o;
+				if (showRestoredState) System.out.println("\u001B[35m\t"+n2v.name+"="+n2v.value);
 				try {
 					if (n2v.value != null) {
 						Method m = LinguaFrancaRTDAccessor.class.getMethod("set"+n2v.name, EObject.class, n2v.value.getClass());

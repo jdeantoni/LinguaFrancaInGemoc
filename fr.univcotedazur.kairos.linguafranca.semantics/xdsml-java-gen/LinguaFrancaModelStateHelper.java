@@ -1,6 +1,6 @@
 /* GENERATED FILE, do not modify manually                                                    *
  * If you need to modify it, copy it first */
-package linguafranca.xdsml.api.impl;
+
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
@@ -55,14 +55,6 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 		K3ModelState res = theFactory.createK3ModelState();
 
 		Class<?> clazz =null;
-		clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect.class);
-		if (clazz.isInstance(model)) {
-			ElementState elemState = theFactory.createElementState();
-			elemState.setModelElement(model);
-			res.getOwnedElementstates().add(elemState);
-				AttributeNameToValue n2v0 = new AttributeNameToValue("currentStateValue", LinguaFrancaRTDAccessor.getcurrentStateValue(model));
-				elemState.getSavedRTDs().add(n2v0);
-		}
 		clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect.class);
 		if (clazz.isInstance(model)) {
 			ElementState elemState = theFactory.createElementState();
@@ -104,14 +96,6 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 			EObject elem = allContentIt.next();
 
 			clazz =null;
-			clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect.class);
-			if (clazz.isInstance(elem)) {
-				ElementState elemState = theFactory.createElementState();
-				elemState.setModelElement(elem);
-				res.getOwnedElementstates().add(elemState);
-				AttributeNameToValue n2v0 = new AttributeNameToValue("currentStateValue", LinguaFrancaRTDAccessor.getcurrentStateValue(elem));
-				elemState.getSavedRTDs().add(n2v0);
-			}
 			clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect.class);
 			if (clazz.isInstance(elem)) {
 				ElementState elemState = theFactory.createElementState();

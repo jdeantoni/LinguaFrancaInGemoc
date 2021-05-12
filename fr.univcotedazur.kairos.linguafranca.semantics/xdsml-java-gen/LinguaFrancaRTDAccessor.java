@@ -1,6 +1,6 @@
 /* GENERATED FILE, do not modify manually                                                    *
  * If you need to modify it, copy it first */
-package linguafranca.xdsml.api.impl;
+
 import org.eclipse.emf.ecore.EObject;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -47,12 +47,6 @@ public class LinguaFrancaRTDAccessor {
 	public static boolean setcurrentValue(EObject eObject, java.lang.Integer newValue) {
 		int theValue = newValue == null ? null: new java.lang.Integer(newValue);
 		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect", "currentValue", theValue);
-	}
-  public static java.lang.Integer getcurrentStateValue(EObject eObject) {
-		return new java.lang.Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect", "currentStateValue"));
-	}
-	public static boolean setcurrentStateValue(EObject eObject, java.lang.Integer newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect", "currentStateValue", new java.lang.Integer(newValue));
 	}
 
 	public static Object getAspectProperty(EObject eObject, String languageName, String aspectName, String propertyName) {

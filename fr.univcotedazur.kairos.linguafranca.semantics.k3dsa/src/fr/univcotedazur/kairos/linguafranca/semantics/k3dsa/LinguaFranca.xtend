@@ -124,7 +124,7 @@ class ModelAspect {
 		if (DebugLevel.level > 0) println(Colors.RED+"currentTime: "+_self.currentTime+" micro seconds"+Colors.RESET+"   ---   "+Colors.GREEN+_self.currentMicroStep+" micro steps"+Colors.RESET)
 		for(Reactor r : _self.reactors){
 			for(StateVar sv : r.stateVars){
-				sv.currentValue = Integer.valueOf(sv.init.get(0).literal)
+				sv.currentStateValue = Integer.valueOf(sv.init.get(0).literal)
 				//println ("init "+sv.name+"="+sv.currentValue)
 			}
 		}
@@ -412,7 +412,7 @@ class VarRefAspect{
 
 @Aspect(className=StateVar)
 class StateVarAspect{
-	public Object currentValue
+	public Integer currentStateValue
 }
 
 class ReactionExecutionContext{
@@ -452,7 +452,7 @@ class ReactionAspect{
 			print(Colors.BLUE+"\t\tReaction "+_self.name+" executed (")
 			var sep=""
 			for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
-				print(sep+sv.name+'='+sv.currentValue)
+				print(sep+sv.name+'='+sv.currentStateValue)
 				sep=', '
 			}
 			println(")"+Colors.RESET)
@@ -476,7 +476,7 @@ class ReactionAspect{
 		var String returnStatement = '\n return ['
 		var String sep = ""	
 		for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
-			binding.setVariable(sv.name, sv.currentValue)
+			binding.setVariable(sv.name, sv.currentStateValue)
 			returnStatement = returnStatement + sep + sv.name
 		}
 		returnStatement = returnStatement + ']'
@@ -490,8 +490,8 @@ class ReactionAspect{
 								returnStatement)
 				as ArrayList<Object>
 		
-		println("context from RW= "+ context.outAssignements)
-		println("context from RW= "+ context.newSchedules)
+//		println("context from RW= "+ context.outAssignements)
+//		println("context from RW= "+ context.newSchedules)
 		
 		for(VarRef vRef : _self.sources + _self.effects) {
 			if (context.outAssignements.containsKey(vRef.variable)){
@@ -502,13 +502,13 @@ class ReactionAspect{
 			}
 			if (context.newSchedules.containsKey(vRef.variable)){
 				(vRef.variable as Action).nextSchedule = context.newSchedules.get(vRef.variable) as Integer *1000 //TODO: use unit
-				println("#########    sched "+vRef.variable.name+" in "+ (vRef.variable as Action).nextSchedule)
+//				println("#########    sched "+vRef.variable.name+" in "+ (vRef.variable as Action).nextSchedule)
 			}
 			
 		}	
 		var i = 0
 		for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
-			sv.currentValue = res.get(i++) 
+			sv.currentStateValue = res.get(i++) as Integer 
 		}
 
 		

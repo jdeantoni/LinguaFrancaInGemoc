@@ -7,5 +7,6 @@ k3 = fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect,\
      fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ConnectionAspect,\
      fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ReactionAspect,\
      fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect,\
-     fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VarRefAspect
+     fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VarRefAspect,\
+     fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect
 ecl = /fr.univcotedazur.kairos.linguafranca.semantics.dse/ecl/LinguaFranca.ecl

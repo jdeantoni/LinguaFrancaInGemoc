@@ -24,9 +24,6 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 		}
 
 		AutomataRelationDefinition TimerConstraintDef [ TimerConstraint ] {
-			variables {
-				Integer i = 0
-			}
 
 			init:  TCD_S1
 
@@ -34,9 +31,7 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( )
 
 			from TCD_S2 to TCD_S4 : TCD_S2ToTCD_S3
-			-> ( when TimerConstraint_starts if ( i < TimerConstraint_nbStarts .value )
-			do i = (i + one)
-			)
+			-> ( when TimerConstraint_starts )
  
 			from TCD_S3 to TCD_S2 : TCD_S3ToTCD_S2
 			-> ( when TimerConstraint_release )
@@ -48,7 +43,7 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( when TimerConstraint_canTick )
 
 			from TCD_S4 to TCD_S5 : TCD_S4ToTCD_S5
-			-> ( when TimerConstraint_timeJump do i = zero )
+			-> ( when TimerConstraint_timeJump)
 
 			from TCD_S2 to TCD_S2 : TCD_S2ToTCD_S2
 			-> ( when TimerConstraint_timeJump )
@@ -56,23 +51,33 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			from TCD_S6 to TCD_S5 : TCD_S6ToTCD_S3
 			-> ( when TimerConstraint_timeJump )
 
+			from TCD_S2 to TCD_S2 : TCD_S2ToTCD_S22
+			-> ( when TimerConstraint_wait )
+
 			from TCD_S4 to TCD_S4 : TCD_S4ToTCD_S4
-			-> ( when TimerConstraint_starts if ( i < TimerConstraint_nbStarts .value )
-			do i = (i + one) )
+			-> ( when TimerConstraint_wait )
+
+			from TCD_S4 to TCD_S4 : TCD_S4ToTCD_S42
+			-> ( when TimerConstraint_starts )
+
+			from TCD_S6 to TCD_S6 : TCD_S6ToTCD_S6
+			-> ( when TimerConstraint_starts )
 
 			State TCD_S1 ( out : TCD_S1ToTCD_S2 )
 
-			State TCD_S2 ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2, TCD_S2ToTCD_S2 out : TCD_S2ToTCD_S3, TCD_S2ToTCD_S2 )
+			State TCD_S2 ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2, TCD_S2ToTCD_S2,
+			TCD_S2ToTCD_S22 out : TCD_S2ToTCD_S3, TCD_S2ToTCD_S2, TCD_S2ToTCD_S22 )
 
 			State TCD_S3 ( in : TCD_S4ToTCD_S3 out : TCD_S3ToTCD_S2,
 			TCD_S3ToTCD_S32 )
 
-			State TCD_S4 ( in : TCD_S2ToTCD_S3, TCD_S4ToTCD_S4 out : TCD_S4ToTCD_S5,
-			TCD_S4ToTCD_S4 )
+			State TCD_S4 ( in : TCD_S2ToTCD_S3, TCD_S4ToTCD_S4, TCD_S4ToTCD_S42 out : TCD_S4ToTCD_S5,
+			TCD_S4ToTCD_S4, TCD_S4ToTCD_S42 )
 
 			State TCD_S5 ( in : TCD_S4ToTCD_S5, TCD_S6ToTCD_S3 out : TCD_S4ToTCD_S3 )
 
-			State TCD_S6 ( in : TCD_S3ToTCD_S32 out : TCD_S6ToTCD_S3 )
+			State TCD_S6 ( in : TCD_S3ToTCD_S32, TCD_S6ToTCD_S6 out : TCD_S6ToTCD_S3,
+			TCD_S6ToTCD_S6 )
 		}
 
 		AutomataRelationDefinition neverTickDef [ NeverTick ] {
@@ -90,39 +95,143 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			State TD_S2 ( in : TD_S1ToTD_S2, TD_S2ToTD_S2 out : TD_S2ToTD_S2 )
 		}
 
-		AutomataRelationDefinition MultipleInputsReactionDef [ MultipleInputsReaction
-		] {
-			variables {
-				Integer nb_t = 0
-			}
-			init:  MIRD_S1
+		AutomataRelationDefinition ReactionDef [ Reaction] {
+			init:  R_S1
 
-			from MIRD_S1 to MIRD_S2 : MIRD_S1ToMIRD_S2
+			from R_S1 to R_S2 : R_S1ToR_S2
 			-> ( )
 
-			from MIRD_S2 to MIRD_S3 : MIRD_S2ToMIRD_S3
-			-> ( when MultipleInputsReaction_trigger do nb_t = ( nb_t + one ) )
+			from R_S2 to R_S3 : R_S2ToR_S3
+			-> ( when Reaction_present)
 
-			from MIRD_S3 to MIRD_S3 : MIRD_S3ToMIRD_S3
-			-> ( when MultipleInputsReaction_trigger if ( nb_t <
-			MultipleInputsReaction_nbInputs .value ) do nb_t = ( nb_t + one ) )
+			from R_S5 to R_S4 : R_S3ToR_S3
+			-> ( when Reaction_startExecutes )
 
-			from MIRD_S3 to MIRD_S2 : MIRD_S3ToMIRD_S2
-			-> ( when MultipleInputsReaction_executes do nb_t = zero )
+			from R_S4 to R_S6 : R_S3ToR_S2
+			-> ( when Reaction_finishExecutes )
 
-			State MIRD_S1 ( out : MIRD_S1ToMIRD_S2 )
+			from R_S3 to R_S3 : R_S3ToR_S32
+			-> ( when Reaction_present )
 
-			State MIRD_S2 ( in : MIRD_S1ToMIRD_S2, MIRD_S3ToMIRD_S2 out :
-			MIRD_S2ToMIRD_S3 )
+			from R_S3 to R_S5 : R_S3ToR_S5
+			-> ( when Reaction_lasInputUpdate )
 
-			State MIRD_S3 ( in : MIRD_S2ToMIRD_S3, MIRD_S3ToMIRD_S3 out :
-			MIRD_S3ToMIRD_S3, MIRD_S3ToMIRD_S2 )
+			from R_S2 to R_S5 : R_S2ToR_S5
+			-> ( when Reaction_lasInputUpdate,
+			Reaction_present )
+
+			from R_S3 to R_S5 : R_S3ToR_S52
+			-> ( when Reaction_lasInputUpdate,
+			Reaction_present )
+
+			from R_S2 to R_S7 : R_S2ToR_S2
+			-> ( when Reaction_lasInputUpdate )
+
+			from R_S6 to R_S2 : R_S6ToR_S2
+			-> ( when Reaction_oneOutputUpdate )
+
+			from R_S3 to R_S5 : R_S3ToR_S53
+			-> ( when Reaction_timeJump )
+
+			from R_S7 to R_S2 : R_S7ToR_S2
+			-> ( when Reaction_allOutputAbsent, Reaction_oneOutputUpdate )
+
+			from R_S2 to R_S2 : R_S2ToR_S22
+			-> ( when Reaction_timeJump )
+
+			State R_S1 ( out : R_S1ToR_S2 )
+
+			State R_S2 ( in : R_S1ToR_S2, R_S6ToR_S2, R_S7ToR_S2, R_S2ToR_S22 out :
+			R_S2ToR_S3, R_S2ToR_S5, R_S2ToR_S2, R_S2ToR_S22 )
+
+			State R_S3 ( in : R_S2ToR_S3, R_S3ToR_S32 out :
+			R_S3ToR_S32, R_S3ToR_S5, R_S3ToR_S52, R_S3ToR_S53 )
+
+			State R_S4 ( in : R_S3ToR_S3 out : R_S3ToR_S2 )
+
+			State R_S5 ( in : R_S3ToR_S5, R_S2ToR_S5, R_S3ToR_S52, R_S3ToR_S53 
+						 out :R_S3ToR_S3
+			)
+
+			State R_S6 ( in : R_S3ToR_S2 out :
+			R_S6ToR_S2 )
+
+			State R_S7 ( in : R_S2ToR_S2 out : R_S7ToR_S2 )
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+			AutomataRelationDefinition ReactionNoOutputDef [ ReactionNoOutput] {
+			init:  RNO_S1
+
+			from RNO_S1 to RNO_S2 : RNO_S1ToRNO_S2
+			-> ( )
+
+			from RNO_S2 to RNO_S3 : RNO_S2ToRNO_S3
+			-> ( when ReactionNoOutput_present)
+
+			from RNO_S5 to RNO_S4 : RNO_S3ToRNO_S3
+			-> ( when ReactionNoOutput_startExecutes )
+
+			from RNO_S4 to RNO_S2 : RNO_S3ToRNO_S2
+			-> ( when ReactionNoOutput_finishExecutes )
+
+			from RNO_S3 to RNO_S3 : RNO_S3ToRNO_S32
+			-> ( when ReactionNoOutput_present )
+
+			from RNO_S3 to RNO_S5 : RNO_S3ToRNO_S5
+			-> ( when ReactionNoOutput_lasInputUpdate )
+
+			from RNO_S2 to RNO_S5 : RNO_S2ToRNO_S5
+			-> ( when ReactionNoOutput_lasInputUpdate,
+			ReactionNoOutput_present )
+
+			from RNO_S3 to RNO_S5 : RNO_S3ToRNO_S52
+			-> ( when ReactionNoOutput_lasInputUpdate,
+			ReactionNoOutput_present )
+
+			from RNO_S2 to RNO_S2 : RNO_S2ToRNO_S2
+			-> ( when ReactionNoOutput_lasInputUpdate )
+
+			from RNO_S3 to RNO_S5 : RNO_S3ToRNO_S53
+			-> ( when ReactionNoOutput_timeJump )
+
+			from RNO_S2 to RNO_S2 : RNO_S2ToRNO_S22
+			-> ( when ReactionNoOutput_timeJump )
+
+			State RNO_S1 ( out : RNO_S1ToRNO_S2 )
+ 
+			State RNO_S2 ( in : RNO_S1ToRNO_S2, RNO_S2ToRNO_S2, RNO_S3ToRNO_S2,
+			RNO_S2ToRNO_S22 out :
+			RNO_S2ToRNO_S3, RNO_S2ToRNO_S5, RNO_S2ToRNO_S2, RNO_S2ToRNO_S22 )	
+
+			State RNO_S3 ( in : RNO_S2ToRNO_S3, RNO_S3ToRNO_S32 out :
+			RNO_S3ToRNO_S32, RNO_S3ToRNO_S5, RNO_S3ToRNO_S52, RNO_S3ToRNO_S53 )
+
+			State RNO_S4 ( in : RNO_S3ToRNO_S3 out : RNO_S3ToRNO_S2 )
+
+			State RNO_S5 ( in : RNO_S3ToRNO_S5, RNO_S2ToRNO_S5, RNO_S3ToRNO_S52,
+			RNO_S3ToRNO_S53 out :
+			RNO_S3ToRNO_S3 )
+		}
+				
+		
+		
 		RelationDeclaration AlternatesFSM(AlternatesFSM_left:clock , AlternatesFSM_right: clock)
-		RelationDeclaration TimerConstraint(TimerConstraint_starts:clock , TimerConstraint_canTick: clock, TimerConstraint_wait: clock, TimerConstraint_release:clock, TimerConstraint_timeJump:clock, TimerConstraint_nbStarts:int)
-		RelationDeclaration MultipleInputsReaction(MultipleInputsReaction_trigger:clock , MultipleInputsReaction_executes: clock, MultipleInputsReaction_nbInputs:int)
+		RelationDeclaration TimerConstraint(TimerConstraint_starts:clock , TimerConstraint_canTick: clock, TimerConstraint_wait: clock, TimerConstraint_release:clock, TimerConstraint_timeJump:clock)
+		RelationDeclaration Reaction(Reaction_present:clock, Reaction_lasInputUpdate:clock, Reaction_startExecutes: clock, Reaction_finishExecutes: clock,
+			 Reaction_oneOutputUpdate:clock,  Reaction_allOutputAbsent:clock, Reaction_timeJump : clock )
+		
+		RelationDeclaration ReactionNoOutput(ReactionNoOutput_present:clock, ReactionNoOutput_lasInputUpdate:clock, ReactionNoOutput_startExecutes: clock, ReactionNoOutput_finishExecutes: clock, ReactionNoOutput_timeJump : clock )
 		
 		RelationDeclaration NeverTick(nevertCickingClock : clock)
+		
+//		RelationDeclaration ResetableSup
 		
 	}
 

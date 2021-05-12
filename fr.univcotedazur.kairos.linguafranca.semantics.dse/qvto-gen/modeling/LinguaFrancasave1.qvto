@@ -4116,11 +4116,11 @@ main() {
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-							bindable := self -> map releaseSampledOnUntimed2Expression()->asSequence()->first();
+					bindable := theMainBlock.elements[name = getNameOrUID(self.rightPorts.variable->first().oclAsType(EObject))+'_present']->first();
 					_abstract := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(self.rightPorts->first().oclAsType(EObject))+'_present']->first();
+							bindable := self -> map releaseSampledOnUntimed2Expression()->asSequence()->first();
 					_abstract := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
 				};
 		

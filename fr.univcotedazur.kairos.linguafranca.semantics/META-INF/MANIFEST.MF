@@ -14,14 +14,14 @@ Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.21.0";visibility:="priva
  fr.inria.diverse.k3.al.annotationprocessor.plugin;bundle-version="0.0.0";visibility:="reexport",
  org.eclipse.gemoc.xdsmlframework.api;bundle-version="4.0.0";visibility:="reexport",
  org.eclipse.gemoc.executionframework.engine;bundle-version="4.0.0";visibility:="reexport",
- org.icyphy.linguafranca;bundle-version="0.0.0";visibility:="private",
  org.eclipse.gemoc.executionframework.extensions.sirius;bundle-version="0.0.0";visibility:=reexport,
  org.eclipse.gemoc.execution.concurrent.ccsljavaxdsml.api;bundle-version="0.0.0";visibility:="reexport",
  org.eclipse.gemoc.execution.concurrent.ccsljavaengine;bundle-version="0.0.0";visibility:="reexport",
  org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.k3;bundle-version="0.0.0";visibility:="reexport",
  org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.timesquare;bundle-version="0.0.0";visibility:="reexport",
  org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.k3.rtd.modelstate;bundle-version="0.0.0";visibility:="reexport",
- fr.univcotedazur.kairos.linguafranca.semantics.k3dsa;bundle-version="1.0.0"
+ fr.univcotedazur.kairos.linguafranca.semantics.k3dsa;bundle-version="1.0.0",
+ org.lflang;bundle-version="1.0.0"
 Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy

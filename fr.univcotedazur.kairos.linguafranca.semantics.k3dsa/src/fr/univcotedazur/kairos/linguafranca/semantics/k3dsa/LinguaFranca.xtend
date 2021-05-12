@@ -2,19 +2,33 @@ package fr.univcotedazur.kairos.linguafranca.semantics.k3dsa;
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
 import org.eclipse.gemoc.execution.concurrent.ccsljavaxdsml.api.extensions.languages.NotInStateSpace
-import org.icyphy.linguaFranca.Model
-import org.icyphy.linguaFranca.Action
 
 
 import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect.*;
-import org.icyphy.linguaFranca.Timer
-import org.icyphy.linguaFranca.Variable
-import org.icyphy.linguaFranca.Reactor
-import java.util.ArrayList
-import org.icyphy.linguaFranca.Connection
-import org.icyphy.linguaFranca.Reaction
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect.*;
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect.*;
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect.*;
+
+import org.lflang.lf.Model
+import org.lflang.lf.Reaction
+import org.lflang.lf.Reactor
+import org.lflang.lf.Variable
+import org.lflang.lf.Timer
+
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.colors.Colors
+import java.util.ArrayList
+import org.lflang.lf.Action
+import org.lflang.lf.Connection
+import groovy.lang.GroovyShell
+import groovy.lang.Binding
+import org.lflang.lf.VarRef
+import java.util.Map
+import java.util.HashMap
+import org.lflang.lf.StateVar
+import org.lflang.lf.TriggerRef
+import org.lflang.lf.Output
+import org.lflang.lf.Port
 
 class DebugLevel{
 	public static int level =  1  //0 -> no log //1 -> normal log //2 all logs
@@ -108,6 +122,12 @@ class ModelAspect {
 	@InitializeModel
 	def void init(String[] s){
 		if (DebugLevel.level > 0) println(Colors.RED+"currentTime: "+_self.currentTime+" micro seconds"+Colors.RESET+"   ---   "+Colors.GREEN+_self.currentMicroStep+" micro steps"+Colors.RESET)
+		for(Reactor r : _self.reactors){
+			for(StateVar sv : r.stateVars){
+				sv.currentValue = Integer.valueOf(sv.init.get(0).literal)
+				//println ("init "+sv.name+"="+sv.currentValue)
+			}
+		}
 	}
 	
 	def void timeJump(){
@@ -250,6 +270,9 @@ class TimerAspect{
 
 @Aspect(className=Action)
 class ActionAspect{
+	
+	public Integer nextSchedule = -1
+	
 	def void release(){
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
@@ -268,9 +291,20 @@ class ActionAspect{
 		
 		if(_self.minDelay === null || _self.minDelay.time === null){ //micro step !
 			if(indexOfSelf == -1){ //the same action is not already armed
-				if (DebugLevel.level > 1) println("enter micro step schedule of "+_self.name)
-				model.schedule(_self, 0, model.currentMicroStep+1)
-				if (DebugLevel.level > 1) println("exit micro step schedule of "+_self.name)
+				if (_self.nextSchedule == -1){
+					if (DebugLevel.level > 1) println("enter micro step schedule of "+_self.name)
+					model.schedule(_self, 0, model.currentMicroStep+1)
+					if (DebugLevel.level > 1) println("exit micro step schedule of "+_self.name)
+				}else{
+					if (DebugLevel.level > 1) println("enter action scheduled from code "+_self.name)
+					if (_self.nextSchedule == 0){
+						model.schedule(_self, 0, model.currentMicroStep+1)	
+					}else{
+						model.schedule(_self, _self.nextSchedule, 0)
+					}
+					_self.nextSchedule = -1
+					if (DebugLevel.level > 1) println("exit action scheduled from code "+_self.name)
+				}
 			}
 			if (DebugLevel.level > 0) println(Colors.BLUE+"\t\t"+_self.name+" starts: "+Colors.RESET+model.startedTimers)
 			return
@@ -327,7 +361,7 @@ class ConnectionAspect{
 			model.schedule(_self, period*1000, 0) //TODO: use unit
 		}
 		if (DebugLevel.level > 1) println("exit schedule of "+_self)
-		if (DebugLevel.level > 0) println(Colors.BLUE+"\t "+_self.rightPorts.get(0).variable.name+"_to_"+_self.leftPorts.get(0).variable.name+" starts: "+Colors.RESET+model.startedTimers)
+		if (DebugLevel.level > 0) println(Colors.BLUE+"\t "+_self.leftPorts.get(0).variable.name+"_to_"+_self.rightPorts.get(0).variable.name+" starts: "+Colors.RESET+model.startedTimers)
 	}
 	
 	def boolean canTick(){
@@ -342,10 +376,142 @@ class ConnectionAspect{
 	
 }
 
+@Aspect(className=Variable)
+class VariableAspect{
+	public Integer currentValue
+	
+	def Boolean isPresent(){
+		return _self.currentValue !== null
+	}
+	
+	def void updates(){
+		if (_self instanceof Output){
+			//TODO
+			//retrieved the connected input and update its (next) currentValue
+		}
+	}
+}
+
+@Aspect(className=VarRef)
+class VarRefAspect{
+	
+	def Boolean getTrue(){
+		return true
+	}
+	
+	def Boolean isPresent(){
+		if (_self.variable instanceof Port){
+			return _self.variable.currentValue !== null
+		}
+		if (_self.variable instanceof Action){
+			return (_self.variable as Action).nextSchedule !== null
+		}
+		return null
+	}
+}
+
+@Aspect(className=StateVar)
+class StateVarAspect{
+	public Object currentValue
+}
+
+class ReactionExecutionContext{
+    /**
+     * first object, the actual port, second Object, the value to be assigned 
+     **/
+    public Map<Object, Integer> outAssignements = new HashMap<Object,Integer>()
+    /**
+     * first object, the actual action to schedule, second Object, the value to be scheduled (May be more precise than the Object type) 
+     **/
+    public Map<Object, Object> newSchedules = new HashMap<Object,Object>()
+    
+    public Map<VarRef, Object> varRefToValue = new HashMap<VarRef,Object>()
+}
+
+
 @Aspect(className=Reaction)
 class ReactionAspect{
+	public static final String lfGroovyFunctions = '''	
+	void SET(Object port, Object val){
+	    //println 'SET ' + val +' on ' + port.variable.name 
+	    context.outAssignements.put(port.variable, val)
+	}
+	
+	void schedule(Object action, Object val){
+	    //println 'Schedule ' + action.variable +' in ' + val 
+	    context.newSchedules.put(action.variable, val)
+	}
+	
+	org.lflang.lf.VarRef.metaClass.isPresent =  {delegate.variable != null}
+	org.lflang.lf.VarRef.metaClass.propertyMissing = {String name -> if(name=='value'){return context.varRefToValue.get(delegate)}else{throw new RuntimeException("on "+delegate.class+", property not valid: "+name)} }
+	
+	'''	
+	
 	def void exec(){
-		if (DebugLevel.level > 0) println(Colors.BLUE+"\t\tReaction "+_self.name+" executed"+Colors.RESET)
+		if (DebugLevel.level > 0) {
+			print(Colors.BLUE+"\t\tReaction "+_self.name+" executed (")
+			var sep=""
+			for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
+				print(sep+sv.name+'='+sv.currentValue)
+				sep=', '
+			}
+			println(")"+Colors.RESET)
+		}
+		var Binding binding = new Binding()
+		binding.setVariable("self", _self )
+		var ReactionExecutionContext context = new ReactionExecutionContext()
+		binding.setVariable("context", context )
+		
+		for(VarRef vRef : _self.sources + _self.effects) { 
+			binding.setVariable(vRef.variable.name, vRef)
+		}
+		for(TriggerRef tRef : _self.triggers) { 
+			if (tRef instanceof VarRef){
+				binding.setVariable((tRef as VarRef).variable.name, (tRef as VarRef))
+				context.varRefToValue.put((tRef as VarRef), (tRef as VarRef).variable.currentValue)
+//				println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable)
+			}
+		}
+		
+		var String returnStatement = '\n return ['
+		var String sep = ""	
+		for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
+			binding.setVariable(sv.name, sv.currentValue)
+			returnStatement = returnStatement + sep + sv.name
+		}
+		returnStatement = returnStatement + ']'
+			
+//		println("return Statement -> "+returnStatement)
+				
+		val ucl = ReactionAspect.classLoader
+		val shell = new GroovyShell(ucl,binding)
+		var res = shell.evaluate(lfGroovyFunctions+ 
+								_self.code.body +
+								returnStatement)
+				as ArrayList<Object>
+		
+		println("context from RW= "+ context.outAssignements)
+		println("context from RW= "+ context.newSchedules)
+		
+		for(VarRef vRef : _self.sources + _self.effects) {
+			if (context.outAssignements.containsKey(vRef.variable)){
+				vRef.variable.currentValue = context.outAssignements.get(vRef.variable)
+//				println("#########    "+vRef.variable.name+" = "+ vRef.variable.currentValue)
+			}else{
+				vRef.variable.currentValue = null
+			}
+			if (context.newSchedules.containsKey(vRef.variable)){
+				(vRef.variable as Action).nextSchedule = context.newSchedules.get(vRef.variable) as Integer *1000 //TODO: use unit
+				println("#########    sched "+vRef.variable.name+" in "+ (vRef.variable as Action).nextSchedule)
+			}
+			
+		}	
+		var i = 0
+		for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
+			sv.currentValue = res.get(i++) 
+		}
+
+		
 	}
 	
 }

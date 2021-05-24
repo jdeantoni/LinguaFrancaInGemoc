@@ -11,7 +11,6 @@ ECLimport "platform:/resource/fr.univcotedazur.kairos.linguafranca.semantics.moc
 
 /**
  * TODO: 
- *    add support for systems with no timed elements
  *    add support for link between logical and physical time
  */
 
@@ -33,7 +32,7 @@ package lf
  * Domain Specific Event definitions
  */
 context Model
-	def : timeJump : Event(StartEvent) = self.timeJump()
+	def : timeJump : Event = self.timeJump()
 	def : untimedAction : Event = self
 	
 	def : allRelease : Event = self
@@ -55,11 +54,7 @@ context Variable
 context TriggerRef  --mother class of VarRef
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 
-	def if (true): updates : Event = self
-	
---	.getTrue()[res] --fake stuff to remove force from isPresent
---									switch 
---		       						case (res = true) force absent;			
+	def : updates : Event = self
 	def : present : Event(produceEvent) = self
 	def : absent : Event(FinishEvent) = self 
 	def if (self.oclIsKindOf(VarRef) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).effects->exists(t | t = self)
@@ -70,32 +65,16 @@ context TriggerRef  --mother class of VarRef
 
 context TimedConcept
 	def 
-	if(	(self.oclIsKindOf(Timer))
-		or  
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+	if(not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	  ): starts : Event(produceEvent) = self.schedule() --coincides with update since Action is a Variable
 	def
-	if( (self.oclIsKindOf(Timer))
-		or 
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+	if( not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	  ): releases : Event(StartEvent) = self.release()	  
 	def 
-	if((self.oclIsKindOf(Timer))
-		or
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+	if(not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	): wait : Event(FinishEvent) = self
 	def 
-	if((self.oclIsKindOf(Timer)) 
-		or
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+	if(not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	): canRelease : Event(FinishEvent) = self.canTick()
 										[res] 
 			       						switch 
@@ -163,6 +142,9 @@ context VarRef
 	inv absentVarRefToPort:
 		(self.variable.oclIsKindOf(Port)) implies
 		Relation Coincides(self.absent, self.variable.oclAsType(Port).absent)
+--	inv updatesVarRefToPort:
+--		(self.variable.oclIsKindOf(Port)) implies
+--		Relation Coincides(self.updates, self.variable.oclAsType(Port).updates)
  
  	--ACTIONS (depends if in triggers or effects)
  	inv trigPresentVarRefToAction:
@@ -257,28 +239,15 @@ context Model
 context Timer
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 
-	--	inv timerStartsWhenUpdates:
-	--		Relation Coincides(self.updates, self.starts)
-	--		 
-	--	inv timerWaitOrRelease:
-	--	    Relation Exclusion(self.wait, self.releases)
-
 	inv timerSetActionLifeCycle:
 		Relation TimerConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 		
 context Action
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
- 
 
---	inv actionStartsWhenUpdates:
---		Relation Coincides(self.present, self.starts)
-
---	inv actionWaitOrRelease:
---	(self.minDelay <> null and self.minDelay.time <> null) implies
---		Relation Exclusion(self.wait, self.releases) 
 
 	inv setActionLifeCycle: 
-		Relation TimerConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+		Relation ConnectionConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 		
 
 context Connection
@@ -302,9 +271,9 @@ context Connection
 		
 	inv ConnectorSourceBeforeTargetTimed:
 		(self.delay <> null) implies
-		Relation TimerConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+		Relation ConnectionConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 		
-	inv TimedConnectorStartsWithSource:		--does not coincides since it can be activated several times while waiting (see "Anomaly.lf" example)
+	inv TimedConnectorStartsWithSource:
 		(self.delay <> null) implies	
 		Relation Coincides(self.leftPorts.variable->first().present, self.starts)
 		
@@ -335,7 +304,6 @@ context Reaction
 		let theInputsPresenceNO : Event = Expression Union(allInputsNO.present) in
 		let theLastUpdateNO : Event = Expression Sup(allInputsNO.updates) in
 		Relation ReactionNoOutput(theInputsPresenceNO, theLastUpdateNO, self.startExecution, self.finishExecution, theModel.timeJump)
-		
 	
 	inv UpdatesOutVarAllTogether:
 		(self.effects->size() > 1) implies

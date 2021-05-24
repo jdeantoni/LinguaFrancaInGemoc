@@ -39,6 +39,7 @@ import de.cau.cs.kieler.klighd.IViewer;
 import de.cau.cs.kieler.klighd.ViewContext;
 import de.cau.cs.kieler.klighd.ui.view.DiagramView;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.Clock;
+import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.EventKind;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.CCSLModel.ClockExpressionAndRelation.ConcreteEntity;
 import fr.inria.aoste.timesquare.launcher.core.inter.CCSLInfo;
 import fr.inria.aoste.trace.ModelElementReference;
@@ -68,8 +69,10 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 				for ( AnimateTicksBehaviour b : behaviorList){
 					ConcreteEntity ce = ((GemocClockEntity)b.getClock())._ce;
 					if (ce.getName().compareTo(c.getName()) == 0){ //TODO: Fix this ugly comparison
-						b.start();
-						break;
+						if(c.getTickingEvent().getKind() != EventKind.UNDEFINED) {
+							b.start();
+							break;
+						}
 					}
 				}
 			}

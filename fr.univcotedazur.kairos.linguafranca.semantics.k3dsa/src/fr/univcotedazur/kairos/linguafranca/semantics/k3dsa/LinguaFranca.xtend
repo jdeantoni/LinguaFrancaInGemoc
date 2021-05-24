@@ -8,6 +8,7 @@ import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.Mod
 import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect.*;
 import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect.*;
 import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect.*;
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ConnectionAspect.*;
 
 import org.lflang.lf.Model
 import org.lflang.lf.Reaction
@@ -29,11 +30,13 @@ import org.lflang.lf.StateVar
 import org.lflang.lf.TriggerRef
 import org.lflang.lf.Output
 import org.lflang.lf.Port
+import java.util.List
+import java.util.LinkedList
 
 class DebugLevel{
-	public static int level =  1  //0 -> no log //1 -> normal log //2 all logs
+	public static int level =  0  //0 -> no log //1 -> normal log //2 all logs
 } 
-
+ 
 class ScheduledAction{
 	public var Integer releaseDate
 	public var Integer microStep
@@ -114,9 +117,9 @@ class ModelAspect {
 	public var Integer currentMicroStep = 0; 
 	
 	/**
-	 * This list contains the scheduled action, the time to wait from the previous timer released and the microStep
+	 * This list contains the scheduled timed action, the time to wait from the previous timer released and the microStep
 	 */
-	public var EventList startedTimers = new EventList(); //super dense time priority FIFO
+	public var EventList startedTimers = new EventList(); //super dense time priority queue
 	
 	
 	@InitializeModel
@@ -185,7 +188,7 @@ class ModelAspect {
 		if (DebugLevel.level > 0) println("\t\t scheduled actions: "+_self.startedTimers)
 	}
 	/**
-	 *  @Parameters: The parameter element is of the type Action. It specifies the element whose occurrence is needed to be checked in the startedTimer LinkedList.
+	 *  @Parameters: The parameter element is of the type TimedConcept. It specifies the element whose occurrence is needed to be checked in the startedTimers LinkedList.
 	 *
 	 *	@Return Value: The method returns the index or position of the first occurrence of the element in the list else -1 if the element is not present in the list. The returned value is of integer type.
 	 */
@@ -197,6 +200,22 @@ class ModelAspect {
 		}
 		return -1 ; //not found
 	}
+	
+	
+		/**
+	 *  @Parameters: The parameter element is of the type TimedConcept. It specifies the element whose occurrence is needed to be checked in the startedTimers LinkedList.
+	 *
+	 *	@Return Value: The method returns the index or position of the last occurrence of the element in the list else -1 if the element is not present in the list. The returned value is of integer type.
+	 */
+	def int getLastIndexOfTimer(Object v, int duration){
+		for(var int i = _self.startedTimers.size-1; i >= 0  ; i--){
+			if (_self.startedTimers.get(i).variable == v && _self.startedTimers.get(i).releaseDate == duration){
+				return i;
+			}
+		}
+		return -1 ; //not found
+	}
+	
 }
 
 @Aspect(className=Timer)
@@ -337,11 +356,16 @@ class ActionAspect{
 
 @Aspect(className=Connection)
 class ConnectionAspect{
+	
+	public LinkedList<Object> bufferedValues = new LinkedList<Object>()
+	
+	
 	def void release(){
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		if (indexOfSelf != -1) {
 			model.startedTimers.remove(indexOfSelf)
+			_self.rightPorts.get(0).variable.currentValue = _self.bufferedValues.removeFirst() as Integer
 			if (DebugLevel.level > 0) println(Colors.RED+"\t\t connection released "+Colors.RESET)
 		}else{
 			if (DebugLevel.level > 0) println("####################################   error ? Connection already released ("+model.startedTimers+")")
@@ -351,14 +375,17 @@ class ConnectionAspect{
 	def void schedule(){
 		if (DebugLevel.level > 1) println("enter schedule of a connection"+_self)
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
-		val indexOfSelf = model.getIndexOfTimer(_self)
-		
-		var period = 0
+				
+		var delay = 0
 		if (_self.delay !== null){
-			period = _self.delay.interval
+			delay = _self.delay.interval
 		}
+		
+		val indexOfSelf = model.getLastIndexOfTimer(_self,delay*1000)
 		if(indexOfSelf == -1){ //the connection is not already armed
-			model.schedule(_self, period*1000, 0) //TODO: use unit
+			model.schedule(_self, delay*1000, 0) //TODO: use unit
+		}else{
+			model.schedule(_self, delay*1000, model.startedTimers.get(indexOfSelf).microStep+1) //TODO: use unit
 		}
 		if (DebugLevel.level > 1) println("exit schedule of "+_self)
 		if (DebugLevel.level > 0) println(Colors.BLUE+"\t "+_self.leftPorts.get(0).variable.name+"_to_"+_self.rightPorts.get(0).variable.name+" starts: "+Colors.RESET+model.startedTimers)
@@ -368,6 +395,9 @@ class ConnectionAspect{
 		if (DebugLevel.level > 0) print(Colors.PURPLE+"\t\tConnection "+_self+".canRelease() ->")
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
+		if (indexOfSelf == -1){
+			return false
+		}
 		val list = model.startedTimers
 		var result = (list.get(indexOfSelf).releaseDate == 0)
 		if (DebugLevel.level > 0) println(result+Colors.RESET)
@@ -386,8 +416,18 @@ class VariableAspect{
 	
 	def void updates(){
 		if (_self instanceof Output){
-			//TODO
-			//retrieved the connected input and update its (next) currentValue
+			var List<Connection> allConnections = _self.eResource.contents.get(0).eAllContents.filter[eo | eo instanceof Connection].map[eo | eo as Connection].toList
+			for(Connection c : allConnections){
+				if (c.delay === null && c.leftPorts.get(0).variable == _self){
+					c.rightPorts.get(0).variable.currentValue= _self.currentValue
+				}
+				if (c.delay !== null && c.leftPorts.get(0).variable == _self && _self.currentValue !== null){
+					c.bufferedValues.add(_self.currentValue)
+					//if (DebugLevel.level > 1) 
+					println('bufferedValues of '+c.leftPorts.get(0).variable+'->'+c.rightPorts.get(0).variable+'='+c.bufferedValues)
+				}
+			}
+		_self.currentValue = null
 		}
 	}
 }
@@ -425,12 +465,13 @@ class ReactionExecutionContext{
      **/
     public Map<Object, Object> newSchedules = new HashMap<Object,Object>()
     
-    public Map<VarRef, Object> varRefToValue = new HashMap<VarRef,Object>()
+    public Map<Object, Object> varToValue = new HashMap<Object,Object>()
 }
 
 
 @Aspect(className=Reaction)
 class ReactionAspect{
+	@NotInStateSpace
 	public static final String lfGroovyFunctions = '''	
 	void SET(Object port, Object val){
 	    //println 'SET ' + val +' on ' + port.variable.name 
@@ -442,8 +483,24 @@ class ReactionAspect{
 	    context.newSchedules.put(action.variable, val)
 	}
 	
-	org.lflang.lf.VarRef.metaClass.isPresent =  {delegate.variable != null}
-	org.lflang.lf.VarRef.metaClass.propertyMissing = {String name -> if(name=='value'){return context.varRefToValue.get(delegate)}else{throw new RuntimeException("on "+delegate.class+", property not valid: "+name)} }
+	Boolean isPresent(Object v){
+	    //println 'isPresent ' + v +' is ' + context.varToValue+'\n\tisPresent '+context.varToValue.get(v.variable)
+	    return context.varToValue.get(v.variable) != null
+	}
+	
+	Object valueOf(Object v){
+	    //println 'isPresent ' + v +' is ' + context.varToValue+'\n\tisPresent '+context.varToValue.get(v.variable)
+	    return context.varToValue.get(v.variable)
+	}
+	
+	def getLogicalTime(){
+		return [currentTime, currentMicroStep]
+	}
+	
+	org.lflang.lf.VarRef.metaClass.isPresent =  {println('-------'+context.varToValue+'\n\tisPresent '+delegate.variable+'      '+context.varToValue.get(delegate.variable)); return context.varToValue.get(delegate.variable) != null}
+	org.lflang.lf.Input.metaClass.isPresent =  {println('+++++++'+context.varToValue+'\n\tisPresent '+delegate+'      '+context.varToValue.get(delegate)); return context.varToValue.get(delegate) != null}
+	org.lflang.lf.VarRef.metaClass.propertyMissing = {String name -> if(name=='value'){return context.varToValue.get(delegate.variable)}else{throw new RuntimeException("on "+delegate.class+", property not valid: "+name)} }
+	org.lflang.lf.Input.metaClass.propertyMissing = {String name -> if(name=='value'){return context.varToValue.get(delegate)}else{throw new RuntimeException("on "+delegate.class+", property not valid: "+name)} }
 	
 	'''	
 	
@@ -461,15 +518,25 @@ class ReactionAspect{
 		binding.setVariable("self", _self )
 		var ReactionExecutionContext context = new ReactionExecutionContext()
 		binding.setVariable("context", context )
+		var Model theModel = _self.eResource.contents.get(0) as Model
+		binding.setVariable("currentTime", theModel.currentTime)
+		binding.setVariable("currentMicroStep", theModel.currentMicroStep)
 		
-		for(VarRef vRef : _self.sources + _self.effects) { 
+//		for(VarRef vRef :  _self.effects) { //WARNING: should not be necessary !
+//			if (vRef.variable instanceof Port){
+//				vRef.variable.currentValue = null
+//			}
+//		}
+		
+		
+		for(VarRef vRef :  _self.sources +_self.effects) { 
 			binding.setVariable(vRef.variable.name, vRef)
 		}
 		for(TriggerRef tRef : _self.triggers) { 
-			if (tRef instanceof VarRef){
+			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Port){
 				binding.setVariable((tRef as VarRef).variable.name, (tRef as VarRef))
-				context.varRefToValue.put((tRef as VarRef), (tRef as VarRef).variable.currentValue)
-//				println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable)
+				context.varToValue.put((tRef as VarRef).variable, (tRef as VarRef).variable.currentValue)
+//				println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
 			}
 		}
 		
@@ -485,11 +552,12 @@ class ReactionAspect{
 				
 		val ucl = ReactionAspect.classLoader
 		val shell = new GroovyShell(ucl,binding)
+		println(Colors.BG_YELLOW)
 		var res = shell.evaluate(lfGroovyFunctions+ 
 								_self.code.body +
 								returnStatement)
 				as ArrayList<Object>
-		
+		println(Colors.RESET)
 //		println("context from RW= "+ context.outAssignements)
 //		println("context from RW= "+ context.newSchedules)
 		
@@ -511,6 +579,11 @@ class ReactionAspect{
 			sv.currentStateValue = res.get(i++) as Integer 
 		}
 
+		for(TriggerRef tRef : _self.triggers) { 
+			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Port){
+				(tRef as VarRef).variable.currentValue == null
+			}
+		}
 		
 	}
 	

@@ -45,39 +45,72 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			from TCD_S4 to TCD_S5 : TCD_S4ToTCD_S5
 			-> ( when TimerConstraint_timeJump)
 
-			from TCD_S2 to TCD_S2 : TCD_S2ToTCD_S2
-			-> ( when TimerConstraint_timeJump )
-
 			from TCD_S6 to TCD_S5 : TCD_S6ToTCD_S3
 			-> ( when TimerConstraint_timeJump )
-
-			from TCD_S2 to TCD_S2 : TCD_S2ToTCD_S22
-			-> ( when TimerConstraint_wait )
 
 			from TCD_S4 to TCD_S4 : TCD_S4ToTCD_S4
 			-> ( when TimerConstraint_wait )
 
-			from TCD_S4 to TCD_S4 : TCD_S4ToTCD_S42
-			-> ( when TimerConstraint_starts )
-
-			from TCD_S6 to TCD_S6 : TCD_S6ToTCD_S6
-			-> ( when TimerConstraint_starts )
-
 			State TCD_S1 ( out : TCD_S1ToTCD_S2 )
 
-			State TCD_S2 ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2, TCD_S2ToTCD_S2,
-			TCD_S2ToTCD_S22 out : TCD_S2ToTCD_S3, TCD_S2ToTCD_S2, TCD_S2ToTCD_S22 )
+			State TCD_S2 ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2 out : TCD_S2ToTCD_S3)
 
 			State TCD_S3 ( in : TCD_S4ToTCD_S3 out : TCD_S3ToTCD_S2,
 			TCD_S3ToTCD_S32 )
 
-			State TCD_S4 ( in : TCD_S2ToTCD_S3, TCD_S4ToTCD_S4, TCD_S4ToTCD_S42 out : TCD_S4ToTCD_S5,
-			TCD_S4ToTCD_S4, TCD_S4ToTCD_S42 )
+			State TCD_S4 ( in : TCD_S2ToTCD_S3, TCD_S4ToTCD_S4 out : TCD_S4ToTCD_S5,
+			TCD_S4ToTCD_S4 )
 
 			State TCD_S5 ( in : TCD_S4ToTCD_S5, TCD_S6ToTCD_S3 out : TCD_S4ToTCD_S3 )
 
-			State TCD_S6 ( in : TCD_S3ToTCD_S32, TCD_S6ToTCD_S6 out : TCD_S6ToTCD_S3,
-			TCD_S6ToTCD_S6 )
+			State TCD_S6 ( in : TCD_S3ToTCD_S32 out : TCD_S6ToTCD_S3 )
+		}
+		
+		
+		AutomataRelationDefinition ConnectionConstraintDef [ ConnectionConstraint ] {
+
+			init:  CCD_S1
+
+			from CCD_S1 to CCD_S4 : CCD_S1ToCCD_S2
+			-> ( )
+ 
+			from CCD_S3 to CCD_S4 : CCD_S3ToCCD_S2
+			-> ( when ConnectionConstraint_release )
+
+			from CCD_S3 to CCD_S6 : CCD_S3ToCCD_S32
+			-> ( when ConnectionConstraint_wait )
+
+			from CCD_S5 to CCD_S3 : CCD_S4ToCCD_S3
+			-> ( when ConnectionConstraint_canTick )
+
+			from CCD_S4 to CCD_S5 : CCD_S4ToCCD_S5
+			-> ( when ConnectionConstraint_timeJump)
+
+			from CCD_S6 to CCD_S5 : CCD_S6ToCCD_S3
+			-> ( when ConnectionConstraint_timeJump )
+
+			from CCD_S4 to CCD_S4 : CCD_S4ToCCD_S4
+			-> ( when ConnectionConstraint_wait )
+
+			from CCD_S4 to CCD_S4 : CCD_S4ToCCD_S42
+			-> ( when ConnectionConstraint_starts )
+
+			from CCD_S6 to CCD_S6 : CCD_S6ToCCD_S6
+			-> ( when ConnectionConstraint_starts )
+
+			State CCD_S1 ( out : CCD_S1ToCCD_S2 )
+
+			State CCD_S3 ( in : CCD_S4ToCCD_S3 out : CCD_S3ToCCD_S2,
+			CCD_S3ToCCD_S32 )
+
+			State CCD_S4 ( in : CCD_S4ToCCD_S4, CCD_S4ToCCD_S42,
+			CCD_S3ToCCD_S2, CCD_S1ToCCD_S2 out : CCD_S4ToCCD_S5,
+			CCD_S4ToCCD_S4, CCD_S4ToCCD_S42 )
+
+			State CCD_S5 ( in : CCD_S4ToCCD_S5, CCD_S6ToCCD_S3 out : CCD_S4ToCCD_S3 )
+
+			State CCD_S6 ( in : CCD_S3ToCCD_S32, CCD_S6ToCCD_S6 out : CCD_S6ToCCD_S3,
+			CCD_S6ToCCD_S6 )
 		}
 
 		AutomataRelationDefinition neverTickDef [ NeverTick ] {
@@ -224,6 +257,8 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 		
 		RelationDeclaration AlternatesFSM(AlternatesFSM_left:clock , AlternatesFSM_right: clock)
 		RelationDeclaration TimerConstraint(TimerConstraint_starts:clock , TimerConstraint_canTick: clock, TimerConstraint_wait: clock, TimerConstraint_release:clock, TimerConstraint_timeJump:clock)
+		RelationDeclaration ConnectionConstraint(ConnectionConstraint_starts:clock , ConnectionConstraint_canTick: clock, ConnectionConstraint_wait: clock, ConnectionConstraint_release:clock, ConnectionConstraint_timeJump:clock)
+		
 		RelationDeclaration Reaction(Reaction_present:clock, Reaction_lasInputUpdate:clock, Reaction_startExecutes: clock, Reaction_finishExecutes: clock,
 			 Reaction_oneOutputUpdate:clock,  Reaction_allOutputAbsent:clock, Reaction_timeJump : clock )
 		

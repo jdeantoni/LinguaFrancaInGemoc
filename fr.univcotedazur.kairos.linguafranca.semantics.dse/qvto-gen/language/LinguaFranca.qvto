@@ -3050,7 +3050,7 @@ main() {
 				referencedObjectRefs += self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "timeJump")->first().oclAsType(EObject);
 			
 				name := 'evt_'+getNameOrUID(self.oclAsType(EObject))+'_timeJump';
-			kind :=TimeModel::EventKind::start;
+			kind :=TimeModel::EventKind::undefined;
 						
 			};
 			type:= Kernel_Clock_Type;
@@ -3234,7 +3234,6 @@ main() {
 
 //relation stuff		
 	 	mapping inMM2::TriggerRef::updates2Clock() :TimeModel::Clock 
-			when { (true) }
 		{
 			name:= getNameOrUID(self.oclAsType(EObject))+'_updates';
 			tickingEvent := object TimeModel::Event{
@@ -3305,11 +3304,7 @@ main() {
 
 //relation stuff		
 	 	mapping inMM2::TimedConcept::starts2Clock() :TimeModel::Clock 
-			when { (	(self.oclIsKindOf(Timer))
-		or  
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+			when { (not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	  ) }
 		{
 			name:= getNameOrUID(self.oclAsType(EObject))+'_starts';
@@ -3329,11 +3324,7 @@ main() {
 			}
 		}
 	 	mapping inMM2::TimedConcept::releases2Clock() :TimeModel::Clock 
-			when { ( (self.oclIsKindOf(Timer))
-		or 
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+			when { ( not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	  ) }
 		{
 			name:= getNameOrUID(self.oclAsType(EObject))+'_releases';
@@ -3353,11 +3344,7 @@ main() {
 			}
 		}
 	 	mapping inMM2::TimedConcept::wait2Clock() :TimeModel::Clock 
-			when { ((self.oclIsKindOf(Timer))
-		or
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+			when { (not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	) }
 		{
 			name:= getNameOrUID(self.oclAsType(EObject))+'_wait';
@@ -3375,11 +3362,7 @@ main() {
 			}
 		}
 	 	mapping inMM2::TimedConcept::canRelease2Clock() :TimeModel::Clock 
-			when { ((self.oclIsKindOf(Timer)) 
-		or
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+			when { (not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	) }
 		{
 			name:= getNameOrUID(self.oclAsType(EObject))+'_canRelease';
@@ -3927,30 +3910,30 @@ main() {
 	
 		mapping inMM2::Action::setActionLifeCycle12setActionLifeCycle(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 		{
-		 	name := getNameOrUID(self.oclAsType(EObject))+"TimerConstraint_setActionLifeCycle";
-			type := seqOfRelationDeclaration->select(rd | rd.name = "TimerConstraint")->first();
+		 	name := getNameOrUID(self.oclAsType(EObject))+"ConnectionConstraint_setActionLifeCycle";
+			type := seqOfRelationDeclaration->select(rd | rd.name = "ConnectionConstraint")->first();
 					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_starts']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_starts']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionConstraint_starts']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_canRelease']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_canTick']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionConstraint_canTick']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_wait']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_wait']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionConstraint_wait']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_releases']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_release']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionConstraint_release']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_timeJump']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionConstraint_timeJump']->first();
 				};
 		
 		theMainBlock.relations += result;
@@ -4045,30 +4028,30 @@ main() {
 				
 }
 		{
-		 	name := getNameOrUID(self.oclAsType(EObject))+"TimerConstraint_ConnectorSourceBeforeTargetTimed";
-			type := seqOfRelationDeclaration->select(rd | rd.name = "TimerConstraint")->first();
+		 	name := getNameOrUID(self.oclAsType(EObject))+"ConnectionConstraint_ConnectorSourceBeforeTargetTimed";
+			type := seqOfRelationDeclaration->select(rd | rd.name = "ConnectionConstraint")->first();
 					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_starts']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_starts']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionConstraint_starts']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_canRelease']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_canTick']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionConstraint_canTick']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_wait']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_wait']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionConstraint_wait']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_releases']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_release']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionConstraint_release']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_timeJump']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionConstraint_timeJump']->first();
 				};
 		
 		theMainBlock.relations += result;
@@ -4079,8 +4062,7 @@ main() {
 			when { 
 						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
-				--does not coincides since it can be activated several times while waiting (see "Anomaly.lf" example)
-		(self.delay <> null) 
+				(self.delay <> null) 
 				
 }
 		{
@@ -5102,7 +5084,6 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 			}
 		}
 	 	mapping inMM2::TriggerRef::updates2MSE() :FeedBack::ModelSpecificEvent 
-			when { (true) }
 		{
 			name:= 'MSE_'+getNameOrUID(self.oclAsType(EObject))+'_updates';
 
@@ -5151,11 +5132,7 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 			}
 		}
 	 	mapping inMM2::TimedConcept::starts2MSE() :FeedBack::ModelSpecificEvent 
-			when { (	(self.oclIsKindOf(Timer))
-		or  
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+			when { (not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	  ) }
 		{
 			name:= 'MSE_'+getNameOrUID(self.oclAsType(EObject))+'_starts';
@@ -5170,11 +5147,7 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 			}
 		}
 	 	mapping inMM2::TimedConcept::releases2MSE() :FeedBack::ModelSpecificEvent 
-			when { ( (self.oclIsKindOf(Timer))
-		or 
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+			when { ( not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	  ) }
 		{
 			name:= 'MSE_'+getNameOrUID(self.oclAsType(EObject))+'_releases';
@@ -5189,11 +5162,7 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 			}
 		}
 	 	mapping inMM2::TimedConcept::wait2MSE() :FeedBack::ModelSpecificEvent 
-			when { ((self.oclIsKindOf(Timer))
-		or
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+			when { (not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	) }
 		{
 			name:= 'MSE_'+getNameOrUID(self.oclAsType(EObject))+'_wait';
@@ -5206,11 +5175,7 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 			}
 		}
 	 	mapping inMM2::TimedConcept::canRelease2MSE() :FeedBack::ModelSpecificEvent 
-			when { ((self.oclIsKindOf(Timer)) 
-		or
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+			when { (not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	) }
 		{
 			name:= 'MSE_'+getNameOrUID(self.oclAsType(EObject))+'_canRelease';
@@ -5271,11 +5236,7 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 
 		}
 		mapping inMM2::TimedConcept::canRelease12ActionFeedBack() :FeedBack::When 
-			when { ((self.oclIsKindOf(Timer)) 
-		or
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+			when { (not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	) }
 		{
 			action := object FeedBack::Force{
@@ -5296,11 +5257,7 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 
 		}
 		mapping inMM2::TimedConcept::canRelease22ActionFeedBack() :FeedBack::When 
-			when { ((self.oclIsKindOf(Timer)) 
-		or
-		(self.oclIsKindOf(Action))
-		or
-		(self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay <> null)
+			when { (not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	) }
 		{
 			action := object FeedBack::Force{

@@ -104,7 +104,7 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 			}
 			if (allRTDs) {  //property not in state space:currentMicroStep
 			}
-				AttributeNameToValue n2v0 = new AttributeNameToValue("startedTimers", LinguaFrancaRTDAccessor.getstartedTimers(model));
+				AttributeNameToValue n2v0 = new AttributeNameToValue("eventQueue", LinguaFrancaRTDAccessor.geteventQueue(model));
 				elemState.getSavedRTDs().add(n2v0);
 		}
 		TreeIterator<EObject> allContentIt = model.eAllContents();
@@ -165,7 +165,7 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 				AttributeNameToValue n2v1 = new AttributeNameToValue("currentMicroStep", LinguaFrancaRTDAccessor.getcurrentMicroStep(elem));
 				elemState.getSavedRTDs().add(n2v1);
 				}
-				AttributeNameToValue n2v2 = new AttributeNameToValue("startedTimers", LinguaFrancaRTDAccessor.getstartedTimers(elem));
+				AttributeNameToValue n2v2 = new AttributeNameToValue("eventQueue", LinguaFrancaRTDAccessor.geteventQueue(elem));
 				elemState.getSavedRTDs().add(n2v2);
 			}
 		}

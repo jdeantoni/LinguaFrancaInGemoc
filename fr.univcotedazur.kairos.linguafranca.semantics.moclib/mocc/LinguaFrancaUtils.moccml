@@ -1,7 +1,12 @@
-AutomataConstraintLibrary LinguaFrancaUtils{ 
-	import "platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/kernel.ccslLib" as ccsl;
-	import "platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/CCSL.ccslLib" as ccsl;
-	RelationLibrary LinguaFrancaLib{
+AutomataConstraintLibrary LinguaFrancaUtils {
+	import
+	"platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/kernel.ccslLib"
+	as ccsl ;
+	import
+	"platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/CCSL.ccslLib"
+	as ccsl ;
+
+	RelationLibrary LinguaFrancaLib {
 
 		AutomataRelationDefinition AlternatesFSMDef [ AlternatesFSM ] {
 
@@ -32,7 +37,7 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 
 			from TCD_S2 to TCD_S4 : TCD_S2ToTCD_S3
 			-> ( when TimerConstraint_starts )
- 
+
 			from TCD_S3 to TCD_S2 : TCD_S3ToTCD_S2
 			-> ( when TimerConstraint_release )
 
@@ -43,7 +48,7 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( when TimerConstraint_canTick )
 
 			from TCD_S4 to TCD_S5 : TCD_S4ToTCD_S5
-			-> ( when TimerConstraint_timeJump)
+			-> ( when TimerConstraint_timeJump )
 
 			from TCD_S6 to TCD_S5 : TCD_S6ToTCD_S3
 			-> ( when TimerConstraint_timeJump )
@@ -53,10 +58,9 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 
 			State TCD_S1 ( out : TCD_S1ToTCD_S2 )
 
-			State TCD_S2 ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2 out : TCD_S2ToTCD_S3)
+			State TCD_S2 ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2 out : TCD_S2ToTCD_S3 )
 
-			State TCD_S3 ( in : TCD_S4ToTCD_S3 out : TCD_S3ToTCD_S2,
-			TCD_S3ToTCD_S32 )
+			State TCD_S3 ( in : TCD_S4ToTCD_S3 out : TCD_S3ToTCD_S2, TCD_S3ToTCD_S32 )
 
 			State TCD_S4 ( in : TCD_S2ToTCD_S3, TCD_S4ToTCD_S4 out : TCD_S4ToTCD_S5,
 			TCD_S4ToTCD_S4 )
@@ -65,52 +69,87 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 
 			State TCD_S6 ( in : TCD_S3ToTCD_S32 out : TCD_S6ToTCD_S3 )
 		}
-		
-		
-		AutomataRelationDefinition ConnectionConstraintDef [ ConnectionConstraint ] {
 
-			init:  CCD_S1
+		AutomataRelationDefinition ConnectionActionSelfLoopDef [
+		ConnectionActionSelfLoop ] {
 
-			from CCD_S1 to CCD_S4 : CCD_S1ToCCD_S2
+			init:  CASL_S1
+
+			from CASL_S1 to CASLD_S6 : CASL_S1ToCASL_S2
 			-> ( )
- 
-			from CCD_S3 to CCD_S4 : CCD_S3ToCCD_S2
-			-> ( when ConnectionConstraint_release )
 
-			from CCD_S3 to CCD_S6 : CCD_S3ToCCD_S32
-			-> ( when ConnectionConstraint_wait )
+			from CASL_S3 to CASL_S4 : CASL_S3ToCASL_S2
+			-> ( when ConnectionActionSelfLoop_release )
 
-			from CCD_S5 to CCD_S3 : CCD_S4ToCCD_S3
-			-> ( when ConnectionConstraint_canTick )
+			from CASL_S3 to CASL_S4 : CASL_S3ToCASL_S32
+			-> ( when ConnectionActionSelfLoop_wait )
 
-			from CCD_S4 to CCD_S5 : CCD_S4ToCCD_S5
-			-> ( when ConnectionConstraint_timeJump)
+			from CASL_S5 to CASL_S3 : CASL_S4ToCASL_S3
+			-> ( when ConnectionActionSelfLoop_canTick )
 
-			from CCD_S6 to CCD_S5 : CCD_S6ToCCD_S3
-			-> ( when ConnectionConstraint_timeJump )
+			from CASL_S4 to CASL_S5 : CASL_S4ToCASL_S5
+			-> ( when ConnectionActionSelfLoop_timeJump )
 
-			from CCD_S4 to CCD_S4 : CCD_S4ToCCD_S4
-			-> ( when ConnectionConstraint_wait )
+			from CASLD_S6 to CASL_S4 : CASL_S4ToCASL_S4
+			-> ( when ConnectionActionSelfLoop_wait )
 
-			from CCD_S4 to CCD_S4 : CCD_S4ToCCD_S42
-			-> ( when ConnectionConstraint_starts )
+			from CASL_S4 to CASL_S4 : CASL_S4ToCASL_S42
+			-> ( when ConnectionActionSelfLoop_starts )
 
-			from CCD_S6 to CCD_S6 : CCD_S6ToCCD_S6
-			-> ( when ConnectionConstraint_starts )
+			State CASL_S1 ( out : CASL_S1ToCASL_S2 )
 
-			State CCD_S1 ( out : CCD_S1ToCCD_S2 )
+			State CASL_S3 ( in : CASL_S4ToCASL_S3 out : CASL_S3ToCASL_S2,
+			CASL_S3ToCASL_S32 )
 
-			State CCD_S3 ( in : CCD_S4ToCCD_S3 out : CCD_S3ToCCD_S2,
-			CCD_S3ToCCD_S32 )
+			State CASL_S4 ( in : CASL_S4ToCASL_S4, CASL_S4ToCASL_S42, CASL_S3ToCASL_S2,
+			CASL_S3ToCASL_S32 out : CASL_S4ToCASL_S5, CASL_S4ToCASL_S42
+			)
 
-			State CCD_S4 ( in : CCD_S4ToCCD_S4, CCD_S4ToCCD_S42,
-			CCD_S3ToCCD_S2, CCD_S1ToCCD_S2 out : CCD_S4ToCCD_S5,
-			CCD_S4ToCCD_S4, CCD_S4ToCCD_S42 )
+			State CASL_S5 ( in : CASL_S4ToCASL_S5 out :
+			CASL_S4ToCASL_S3 )
 
-			State CCD_S5 ( in : CCD_S4ToCCD_S5, CCD_S6ToCCD_S3 out : CCD_S4ToCCD_S3 )
+			State CASLD_S6 ( in : CASL_S1ToCASL_S2 out : CASL_S4ToCASL_S4 )
+		}
 
-			State CCD_S6 ( in : CCD_S3ToCCD_S32, CCD_S6ToCCD_S6 out : CCD_S6ToCCD_S3,
-			CCD_S6ToCCD_S6 )
+		AutomataRelationDefinition ConnectionActionDef [ ConnectionAction ] {
+
+			init:  CA_S1
+
+			from CA_S1 to CA_S4 : CA_S1ToCA_S2
+			-> ( )
+
+			from CA_S3 to CA_S4 : CA_S3ToCA_S2
+			-> ( when ConnectionAction_release )
+
+			from CA_S3 to CA_S6 : CA_S3ToCA_S32
+			-> ( when ConnectionAction_wait )
+
+			from CA_S5 to CA_S3 : CA_S4ToCA_S3
+			-> ( when ConnectionAction_canTick )
+
+			from CA_S4 to CA_S5 : CA_S4ToCA_S5
+			-> ( when ConnectionAction_timeJump )
+
+			from CA_S6 to CA_S5 : CA_S6ToCA_S3
+			-> ( when ConnectionAction_timeJump )
+
+			from CA_S4 to CA_S4 : CA_S4ToCA_S42
+			-> ( when ConnectionAction_starts )
+
+			from CA_S6 to CA_S6 : CA_S6ToCA_S6
+			-> ( when ConnectionAction_starts )
+
+			State CA_S1 ( out : CA_S1ToCA_S2 )
+
+			State CA_S3 ( in : CA_S4ToCA_S3 out : CA_S3ToCA_S2, CA_S3ToCA_S32 )
+
+			State CA_S4 ( in : CA_S4ToCA_S42, CA_S3ToCA_S2, CA_S1ToCA_S2
+			out : CA_S4ToCA_S5, CA_S4ToCA_S42 )
+
+			State CA_S5 ( in : CA_S4ToCA_S5, CA_S6ToCA_S3 out : CA_S4ToCA_S3 )
+
+			State CA_S6 ( in : CA_S3ToCA_S32, CA_S6ToCA_S6 out : CA_S6ToCA_S3,
+			CA_S6ToCA_S6 )
 		}
 
 		AutomataRelationDefinition neverTickDef [ NeverTick ] {
@@ -121,21 +160,22 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( )
 
 			from TD_S2 to TD_S2 : TD_S2ToTD_S2
-			-> ( when not (nevertCickingClock))
+			-> ( when not ( nevertCickingClock ) )
 
 			State TD_S1 ( out : TD_S1ToTD_S2 )
 
 			State TD_S2 ( in : TD_S1ToTD_S2, TD_S2ToTD_S2 out : TD_S2ToTD_S2 )
 		}
 
-		AutomataRelationDefinition ReactionDef [ Reaction] {
+		AutomataRelationDefinition ReactionDef [ Reaction ] {
+
 			init:  R_S1
 
 			from R_S1 to R_S2 : R_S1ToR_S2
 			-> ( )
 
 			from R_S2 to R_S3 : R_S2ToR_S3
-			-> ( when Reaction_present)
+			-> ( when Reaction_present )
 
 			from R_S5 to R_S4 : R_S3ToR_S3
 			-> ( when Reaction_startExecutes )
@@ -150,12 +190,10 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( when Reaction_lasInputUpdate )
 
 			from R_S2 to R_S5 : R_S2ToR_S5
-			-> ( when Reaction_lasInputUpdate,
-			Reaction_present )
+			-> ( when Reaction_lasInputUpdate, Reaction_present )
 
 			from R_S3 to R_S5 : R_S3ToR_S52
-			-> ( when Reaction_lasInputUpdate,
-			Reaction_present )
+			-> ( when Reaction_lasInputUpdate, Reaction_present )
 
 			from R_S2 to R_S7 : R_S2ToR_S2
 			-> ( when Reaction_lasInputUpdate )
@@ -177,36 +215,28 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			State R_S2 ( in : R_S1ToR_S2, R_S6ToR_S2, R_S7ToR_S2, R_S2ToR_S22 out :
 			R_S2ToR_S3, R_S2ToR_S5, R_S2ToR_S2, R_S2ToR_S22 )
 
-			State R_S3 ( in : R_S2ToR_S3, R_S3ToR_S32 out :
-			R_S3ToR_S32, R_S3ToR_S5, R_S3ToR_S52, R_S3ToR_S53 )
+			State R_S3 ( in : R_S2ToR_S3, R_S3ToR_S32 out : R_S3ToR_S32, R_S3ToR_S5,
+			R_S3ToR_S52, R_S3ToR_S53 )
 
 			State R_S4 ( in : R_S3ToR_S3 out : R_S3ToR_S2 )
 
-			State R_S5 ( in : R_S3ToR_S5, R_S2ToR_S5, R_S3ToR_S52, R_S3ToR_S53 
-						 out :R_S3ToR_S3
-			)
+			State R_S5 ( in : R_S3ToR_S5, R_S2ToR_S5, R_S3ToR_S52, R_S3ToR_S53 out :
+			R_S3ToR_S3 )
 
-			State R_S6 ( in : R_S3ToR_S2 out :
-			R_S6ToR_S2 )
+			State R_S6 ( in : R_S3ToR_S2 out : R_S6ToR_S2 )
 
 			State R_S7 ( in : R_S2ToR_S2 out : R_S7ToR_S2 )
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-			AutomataRelationDefinition ReactionNoOutputDef [ ReactionNoOutput] {
+
+		AutomataRelationDefinition ReactionNoOutputDef [ ReactionNoOutput ] {
+
 			init:  RNO_S1
 
 			from RNO_S1 to RNO_S2 : RNO_S1ToRNO_S2
 			-> ( )
 
 			from RNO_S2 to RNO_S3 : RNO_S2ToRNO_S3
-			-> ( when ReactionNoOutput_present)
+			-> ( when ReactionNoOutput_present )
 
 			from RNO_S5 to RNO_S4 : RNO_S3ToRNO_S3
 			-> ( when ReactionNoOutput_startExecutes )
@@ -221,12 +251,10 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( when ReactionNoOutput_lasInputUpdate )
 
 			from RNO_S2 to RNO_S5 : RNO_S2ToRNO_S5
-			-> ( when ReactionNoOutput_lasInputUpdate,
-			ReactionNoOutput_present )
+			-> ( when ReactionNoOutput_lasInputUpdate, ReactionNoOutput_present )
 
 			from RNO_S3 to RNO_S5 : RNO_S3ToRNO_S52
-			-> ( when ReactionNoOutput_lasInputUpdate,
-			ReactionNoOutput_present )
+			-> ( when ReactionNoOutput_lasInputUpdate, ReactionNoOutput_present )
 
 			from RNO_S2 to RNO_S2 : RNO_S2ToRNO_S2
 			-> ( when ReactionNoOutput_lasInputUpdate )
@@ -238,36 +266,40 @@ AutomataConstraintLibrary LinguaFrancaUtils{
 			-> ( when ReactionNoOutput_timeJump )
 
 			State RNO_S1 ( out : RNO_S1ToRNO_S2 )
- 
-			State RNO_S2 ( in : RNO_S1ToRNO_S2, RNO_S2ToRNO_S2, RNO_S3ToRNO_S2,
-			RNO_S2ToRNO_S22 out :
-			RNO_S2ToRNO_S3, RNO_S2ToRNO_S5, RNO_S2ToRNO_S2, RNO_S2ToRNO_S22 )	
 
-			State RNO_S3 ( in : RNO_S2ToRNO_S3, RNO_S3ToRNO_S32 out :
-			RNO_S3ToRNO_S32, RNO_S3ToRNO_S5, RNO_S3ToRNO_S52, RNO_S3ToRNO_S53 )
+			State RNO_S2 ( in : RNO_S1ToRNO_S2, RNO_S2ToRNO_S2, RNO_S3ToRNO_S2,
+			RNO_S2ToRNO_S22 out : RNO_S2ToRNO_S3, RNO_S2ToRNO_S5, RNO_S2ToRNO_S2,
+			RNO_S2ToRNO_S22 )
+
+			State RNO_S3 ( in : RNO_S2ToRNO_S3, RNO_S3ToRNO_S32 out : RNO_S3ToRNO_S32,
+			RNO_S3ToRNO_S5, RNO_S3ToRNO_S52, RNO_S3ToRNO_S53 )
 
 			State RNO_S4 ( in : RNO_S3ToRNO_S3 out : RNO_S3ToRNO_S2 )
 
 			State RNO_S5 ( in : RNO_S3ToRNO_S5, RNO_S2ToRNO_S5, RNO_S3ToRNO_S52,
-			RNO_S3ToRNO_S53 out :
-			RNO_S3ToRNO_S3 )
+			RNO_S3ToRNO_S53 out : RNO_S3ToRNO_S3 )
 		}
-				
-		
-		
-		RelationDeclaration AlternatesFSM(AlternatesFSM_left:clock , AlternatesFSM_right: clock)
-		RelationDeclaration TimerConstraint(TimerConstraint_starts:clock , TimerConstraint_canTick: clock, TimerConstraint_wait: clock, TimerConstraint_release:clock, TimerConstraint_timeJump:clock)
-		RelationDeclaration ConnectionConstraint(ConnectionConstraint_starts:clock , ConnectionConstraint_canTick: clock, ConnectionConstraint_wait: clock, ConnectionConstraint_release:clock, ConnectionConstraint_timeJump:clock)
-		
-		RelationDeclaration Reaction(Reaction_present:clock, Reaction_lasInputUpdate:clock, Reaction_startExecutes: clock, Reaction_finishExecutes: clock,
-			 Reaction_oneOutputUpdate:clock,  Reaction_allOutputAbsent:clock, Reaction_timeJump : clock )
-		
-		RelationDeclaration ReactionNoOutput(ReactionNoOutput_present:clock, ReactionNoOutput_lasInputUpdate:clock, ReactionNoOutput_startExecutes: clock, ReactionNoOutput_finishExecutes: clock, ReactionNoOutput_timeJump : clock )
-		
-		RelationDeclaration NeverTick(nevertCickingClock : clock)
-		
-//		RelationDeclaration ResetableSup
-		
+		RelationDeclaration AlternatesFSM ( AlternatesFSM_left : clock,
+		AlternatesFSM_right : clock )
+		RelationDeclaration TimerConstraint ( TimerConstraint_starts : clock,
+		TimerConstraint_canTick : clock, TimerConstraint_wait : clock,
+		TimerConstraint_release : clock, TimerConstraint_timeJump : clock )
+		RelationDeclaration ConnectionActionSelfLoop (
+		ConnectionActionSelfLoop_starts : clock, ConnectionActionSelfLoop_canTick :
+		clock, ConnectionActionSelfLoop_wait : clock,
+		ConnectionActionSelfLoop_release : clock, ConnectionActionSelfLoop_timeJump :
+		clock )
+		RelationDeclaration ConnectionAction ( ConnectionAction_starts : clock,
+		ConnectionAction_canTick : clock, ConnectionAction_wait : clock,
+		ConnectionAction_release : clock, ConnectionAction_timeJump : clock )
+		RelationDeclaration Reaction ( Reaction_present : clock,
+		Reaction_lasInputUpdate : clock, Reaction_startExecutes : clock,
+		Reaction_finishExecutes : clock, Reaction_oneOutputUpdate : clock,
+		Reaction_allOutputAbsent : clock, Reaction_timeJump : clock )
+		RelationDeclaration ReactionNoOutput ( ReactionNoOutput_present : clock,
+		ReactionNoOutput_lasInputUpdate : clock, ReactionNoOutput_startExecutes :
+		clock, ReactionNoOutput_finishExecutes : clock, ReactionNoOutput_timeJump :
+		clock )
+		RelationDeclaration NeverTick ( nevertCickingClock : clock )
 	}
-
 }

@@ -11,52 +11,60 @@ import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
 
 public class LinguaFrancaRTDAccessor {
   public static java.lang.Integer getcurrentTime(EObject eObject) {
-		return new java.lang.Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "currentTime"));
-	}
+     java.lang.Integer theProperty = (java.lang.Integer)getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "currentTime");
+		return (theProperty == null) ? null : new java.lang.Integer((java.lang.Integer)  theProperty);
+}
 	public static boolean setcurrentTime(EObject eObject, java.lang.Integer newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "currentTime", new java.lang.Integer(newValue));
+     java.lang.Integer theValue = newValue == null ? null: new java.lang.Integer(newValue);		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "currentTime", theValue);
 	}
   public static java.lang.Integer getcurrentMicroStep(EObject eObject) {
-		return new java.lang.Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "currentMicroStep"));
-	}
+     java.lang.Integer theProperty = (java.lang.Integer)getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "currentMicroStep");
+		return (theProperty == null) ? null : new java.lang.Integer((java.lang.Integer)  theProperty);
+}
 	public static boolean setcurrentMicroStep(EObject eObject, java.lang.Integer newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "currentMicroStep", new java.lang.Integer(newValue));
+     java.lang.Integer theValue = newValue == null ? null: new java.lang.Integer(newValue);		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "currentMicroStep", theValue);
 	}
-  public static fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventList getstartedTimers(EObject eObject) {
-		return new fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventList((fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventList)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "startedTimers"));
-	}
-	public static boolean setstartedTimers(EObject eObject, fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventList newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "startedTimers", new fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventList(newValue));
+  public static fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue geteventQueue(EObject eObject) {
+     fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue theProperty = (fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue)getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "eventQueue");
+		return (theProperty == null) ? null : new fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue((fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue)  theProperty);
+}
+	public static boolean seteventQueue(EObject eObject, fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue newValue) {
+     fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue theValue = newValue == null ? null: new fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue(newValue);		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "eventQueue", theValue);
 	}
   public static java.lang.Integer getnextSchedule(EObject eObject) {
-		return new java.lang.Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect", "nextSchedule"));
-	}
+     java.lang.Integer theProperty = (java.lang.Integer)getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect", "nextSchedule");
+		return (theProperty == null) ? null : new java.lang.Integer((java.lang.Integer)  theProperty);
+}
 	public static boolean setnextSchedule(EObject eObject, java.lang.Integer newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect", "nextSchedule", new java.lang.Integer(newValue));
+     java.lang.Integer theValue = newValue == null ? null: new java.lang.Integer(newValue);		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect", "nextSchedule", theValue);
 	}
   public static java.lang.Boolean getoffsetToDo(EObject eObject) {
-		return new java.lang.Boolean((java.lang.Boolean)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.TimerAspect", "offsetToDo"));
-	}
+     java.lang.Boolean theProperty = (java.lang.Boolean)getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.TimerAspect", "offsetToDo");
+		return (theProperty == null) ? null : new java.lang.Boolean((java.lang.Boolean)  theProperty);
+}
 	public static boolean setoffsetToDo(EObject eObject, java.lang.Boolean newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.TimerAspect", "offsetToDo", new java.lang.Boolean(newValue));
+     java.lang.Boolean theValue = newValue == null ? null: new java.lang.Boolean(newValue);		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.TimerAspect", "offsetToDo", theValue);
 	}
   public static java.util.LinkedList getbufferedValues(EObject eObject) {
-		return new java.util.LinkedList((java.util.LinkedList)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ConnectionAspect", "bufferedValues"));
-	}
+     java.util.LinkedList theProperty = (java.util.LinkedList)getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ConnectionAspect", "bufferedValues");
+		return (theProperty == null) ? null : new java.util.LinkedList((java.util.LinkedList)  theProperty);
+}
 	public static boolean setbufferedValues(EObject eObject, java.util.LinkedList newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ConnectionAspect", "bufferedValues", new java.util.LinkedList(newValue));
+     java.util.LinkedList theValue = newValue == null ? null: new java.util.LinkedList(newValue);		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ConnectionAspect", "bufferedValues", theValue);
 	}
   public static java.lang.Integer getcurrentValue(EObject eObject) {
-		return new java.lang.Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect", "currentValue"));
-	}
+     java.lang.Integer theProperty = (java.lang.Integer)getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect", "currentValue");
+		return (theProperty == null) ? null : new java.lang.Integer((java.lang.Integer)  theProperty);
+}
 	public static boolean setcurrentValue(EObject eObject, java.lang.Integer newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect", "currentValue", new java.lang.Integer(newValue));
+     java.lang.Integer theValue = newValue == null ? null: new java.lang.Integer(newValue);		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect", "currentValue", theValue);
 	}
   public static java.lang.Integer getcurrentStateValue(EObject eObject) {
-		return new java.lang.Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect", "currentStateValue"));
-	}
+     java.lang.Integer theProperty = (java.lang.Integer)getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect", "currentStateValue");
+		return (theProperty == null) ? null : new java.lang.Integer((java.lang.Integer)  theProperty);
+}
 	public static boolean setcurrentStateValue(EObject eObject, java.lang.Integer newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect", "currentStateValue", new java.lang.Integer(newValue));
+     java.lang.Integer theValue = newValue == null ? null: new java.lang.Integer(newValue);		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect", "currentStateValue", theValue);
 	}
 
 	public static Object getAspectProperty(EObject eObject, String languageName, String aspectName, String propertyName) {

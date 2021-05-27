@@ -32,47 +32,49 @@ import org.lflang.lf.Output
 import org.lflang.lf.Port
 import java.util.List
 import java.util.LinkedList
+import org.lflang.lf.TimedConcept
+import org.lflang.lf.Parameter
 
 class DebugLevel{
 	public static int level =  0  //0 -> no log //1 -> normal log //2 all logs
 } 
  
-class ScheduledAction{
+class ScheduledTimeAdvancement{
 	public var Integer releaseDate
 	public var Integer microStep
 	
-	public val Object variable
+	public val Object timedConcept
 	
-	new(Object v, int d, int s){
+	new(Object v, int d, int s){ 
 		releaseDate = d
 		microStep = s
-		variable = v
+		timedConcept =  v
 	}
 
 	override String toString(){
-		if (variable instanceof Variable){
-			return variable.name+"@("+releaseDate+","+microStep+")"
+		if (timedConcept instanceof Variable){
+			return timedConcept.name+"@("+releaseDate+","+microStep+")"
 		}else{
 			return "aConnection@("+releaseDate+","+microStep+")"
 		}
 	}
 	
 	override boolean equals(Object v){
-		if(v instanceof ScheduledAction){
+		if(v instanceof ScheduledTimeAdvancement){
 			return 
-				(releaseDate == (v as ScheduledAction).releaseDate)
+				(releaseDate == (v as ScheduledTimeAdvancement).releaseDate)
 				&&
-				(microStep == (v as ScheduledAction).microStep)
+				(microStep == (v as ScheduledTimeAdvancement).microStep)
 				&& 
-				variable == (v as ScheduledAction).variable
+				timedConcept == (v as ScheduledTimeAdvancement).timedConcept
 		}
 		return false
 	}
 }
 
-class EventList extends ArrayList<ScheduledAction>{
+class EventQueue extends LinkedList<ScheduledTimeAdvancement>{
 	
-	new(EventList el) {
+	new(EventQueue el) {
 		super(el);	
 	}
 	new() {
@@ -80,13 +82,13 @@ class EventList extends ArrayList<ScheduledAction>{
 	}
 	
 	override boolean equals(Object o){
-		if(o instanceof EventList){
-			return this.equals(o as EventList)
+		if(o instanceof EventQueue){
+			return this.equals(o as EventQueue)
 		}
 		return false
 	}
 	
-	def boolean equals(EventList o){
+	def boolean equals(EventQueue o){
 		return this.size() == o.size() && this.containsAll(o) && o.containsAll(this);
 	}
 	
@@ -119,7 +121,7 @@ class ModelAspect {
 	/**
 	 * This list contains the scheduled timed action, the time to wait from the previous timer released and the microStep
 	 */
-	public var EventList startedTimers = new EventList(); //super dense time priority queue
+	public var EventQueue eventQueue = new EventQueue(); //super dense time priority queue
 	
 	
 	@InitializeModel
@@ -127,6 +129,9 @@ class ModelAspect {
 		if (DebugLevel.level > 0) println(Colors.RED+"currentTime: "+_self.currentTime+" micro seconds"+Colors.RESET+"   ---   "+Colors.GREEN+_self.currentMicroStep+" micro steps"+Colors.RESET)
 		for(Reactor r : _self.reactors){
 			for(StateVar sv : r.stateVars){
+				if (sv.init.size() == 0 || sv.init.get(0).literal === null){
+					return
+				}
 				sv.currentStateValue = Integer.valueOf(sv.init.get(0).literal)
 				//println ("init "+sv.name+"="+sv.currentValue)
 			}
@@ -136,56 +141,55 @@ class ModelAspect {
 	def void timeJump(){
 		if (DebugLevel.level > 1){
 			var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model	
-			println("\u001B[34m startedTimer: "+model.startedTimers)
+			println("\u001B[34m startedTimer: "+model.eventQueue)
 		}
-		if (_self.startedTimers.size() == 0){
+		if (_self.eventQueue.size() == 0){
 			println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ERROR ! no time Jump to do (no timer armed)")
 			return
 		}
-		var jumpSize = _self.startedTimers.get(0).releaseDate
+		var jumpSize = _self.eventQueue.get(0).releaseDate
 		_self.currentTime = jumpSize + _self.currentTime
-		_self.currentMicroStep = _self.startedTimers.get(0).microStep
-		var EventList newEl = new EventList()
-		for(ScheduledAction sa : _self.startedTimers){
+		_self.currentMicroStep = _self.eventQueue.get(0).microStep
+		var EventQueue newEl = new EventQueue()
+		for(ScheduledTimeAdvancement sa : _self.eventQueue){
 			if(sa.releaseDate == jumpSize){
-				newEl.add(new ScheduledAction(sa.variable, sa.releaseDate - jumpSize, sa.microStep - _self.currentMicroStep))
+				newEl.add(new ScheduledTimeAdvancement(sa.timedConcept, sa.releaseDate - jumpSize, sa.microStep - _self.currentMicroStep))
 			}else{
-				newEl.add(new ScheduledAction(sa.variable, sa.releaseDate - jumpSize, sa.microStep))
+				newEl.add(new ScheduledTimeAdvancement(sa.timedConcept, sa.releaseDate - jumpSize, sa.microStep))
 			}			
 		}
-		_self.startedTimers = newEl
+		_self.eventQueue = newEl
 		if (DebugLevel.level > 0) println(Colors.RED+"currentTime: "+_self.currentTime+" micro seconds"+Colors.RESET+"   ---   "+Colors.GREEN+_self.currentMicroStep+" micro steps"+Colors.RESET)
 		if (DebugLevel.level > 1){
 			var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model	
-			println("startedTimer: "+model.startedTimers)
+			println("startedTimer: "+model.eventQueue)
 		}
 	}
 	
-	def void schedule(Object a, int duration, int s){
-		if (DebugLevel.level > 1) println("beforeSchedule: of "+a+" for "+duration+" --> "+_self.startedTimers)
-		if(_self.startedTimers.isEmpty){
-			_self.startedTimers.add(new ScheduledAction(a, duration, s))
-			if (DebugLevel.level > 1) println("afterSchedule: "+_self.startedTimers)
+	def void schedule(TimedConcept tc, int rlt){
+		if (DebugLevel.level > 1) println("beforeSchedule: of "+tc+" for "+rlt+" --> "+_self.eventQueue)
+		if(_self.eventQueue.isEmpty){
+			_self.eventQueue.add(new ScheduledTimeAdvancement(tc, rlt, 0))
+			if (DebugLevel.level > 1) println("afterSchedule: "+_self.eventQueue)
 			return
-		}//else
-		for(var int i = 0; i < _self.startedTimers.size; i++){
-			if(_self.startedTimers.get(i).releaseDate == duration && _self.startedTimers.get(i).microStep > s){ //micro steps ordering
-				_self.startedTimers.add(java.lang.Math.max(0, i-1), new ScheduledAction(a, duration, s)) //Max in case i == 0 (add before)
-				if (DebugLevel.level > 1) println("afterSchedule (0): "+_self.startedTimers)
-				return
+		}
+		var int lastMS = -1;
+		for(var int i = 0; i < _self.eventQueue.size; i++){
+			var staAtI= _self.eventQueue.get(i);
+			if(staAtI.timedConcept == tc && staAtI.releaseDate == rlt){ //micro steps ordering since already exists
+				lastMS = staAtI.microStep
+				if (DebugLevel.level > 1) println("same ta founded with microStep: "+lastMS)
 			}
-			if(_self.startedTimers.get(i).releaseDate > duration){
-				_self.startedTimers.add(java.lang.Math.max(0, i-1), new ScheduledAction(a, duration, s)) //Max in case i == 0 (add before)
-				if (DebugLevel.level > 1) println("afterSchedule (1): "+_self.startedTimers)
-				return
-			}
-			if (i == (_self.startedTimers.size -1)){
-				_self.startedTimers.add(new ScheduledAction(a, duration, s))//push to the end
-				if (DebugLevel.level > 1) println("afterSchedule: (3)"+_self.startedTimers)
+			if(staAtI.releaseDate > rlt){
+				_self.eventQueue.add(java.lang.Math.max(0, i-1), new ScheduledTimeAdvancement(tc, rlt, lastMS+1)) //Max in case i == 0 (add before)
+				if (DebugLevel.level > 1) println("afterSchedule middle of list (1): "+_self.eventQueue)
 				return
 			}
 		}
-		if (DebugLevel.level > 0) println("\t\t scheduled actions: "+_self.startedTimers)
+		_self.eventQueue.add(new ScheduledTimeAdvancement(tc, rlt, 0))//add to the end
+		if (DebugLevel.level > 1) println("afterSchedule end of list: (2)"+_self.eventQueue)
+		if (DebugLevel.level > 0) println("\t\t scheduled time advancements: "+_self.eventQueue)
+		return
 	}
 	/**
 	 *  @Parameters: The parameter element is of the type TimedConcept. It specifies the element whose occurrence is needed to be checked in the startedTimers LinkedList.
@@ -193,8 +197,8 @@ class ModelAspect {
 	 *	@Return Value: The method returns the index or position of the first occurrence of the element in the list else -1 if the element is not present in the list. The returned value is of integer type.
 	 */
 	def int getIndexOfTimer(Object v){
-		for(var int i = 0; i < _self.startedTimers.size ; i++){
-			if (_self.startedTimers.get(i).variable == v){
+		for(var int i = 0; i < _self.eventQueue.size ; i++){
+			if (_self.eventQueue.get(i).timedConcept == v){
 				return i;
 			}
 		}
@@ -208,8 +212,8 @@ class ModelAspect {
 	 *	@Return Value: The method returns the index or position of the last occurrence of the element in the list else -1 if the element is not present in the list. The returned value is of integer type.
 	 */
 	def int getLastIndexOfTimer(Object v, int duration){
-		for(var int i = _self.startedTimers.size-1; i >= 0  ; i--){
-			if (_self.startedTimers.get(i).variable == v && _self.startedTimers.get(i).releaseDate == duration){
+		for(var int i = _self.eventQueue.size-1; i >= 0  ; i--){
+			if (_self.eventQueue.get(i).timedConcept == v && _self.eventQueue.get(i).releaseDate == duration){
 				return i;
 			}
 		}
@@ -226,18 +230,16 @@ class TimerAspect{
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		if (indexOfSelf != -1) {
-			model.startedTimers.remove(indexOfSelf)
+			model.eventQueue.remove(indexOfSelf)
 			if (DebugLevel.level > 0) println(Colors.RED+"\t\t"+_self.name+ " released "+Colors.RESET)
 		}else{
-			if (DebugLevel.level > 0) println("####################################   error ? Timer already released ("+model.startedTimers+")")
+			if (DebugLevel.level > 0) println("####################################   error ? Timer already released ("+model.eventQueue+")")
 		}
 	}
 	
 	def void schedule(){
 		if (DebugLevel.level > 1) println("enter schedule of "+_self.name)
-		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
-		val indexOfSelf = model.getIndexOfTimer(_self)
-		
+		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model		
 		var nextTimeHop = -1
 		if(_self.offsetToDo){
 			if (DebugLevel.level > 1) println("deal with offset of "+_self.name)
@@ -263,23 +265,21 @@ class TimerAspect{
 			nextTimeHop = period
 		}
 		
-		if(indexOfSelf == -1){ //the same timer is not already armed
-					model.schedule(_self, nextTimeHop, 0)
-		}
+		model.schedule(_self, nextTimeHop)
 		if (DebugLevel.level > 1) println("exit schedule of "+_self.name)
-		if (DebugLevel.level > 0) println(Colors.BLUE+"\t\t"+_self.name+" starts: "+Colors.RESET+model.startedTimers)
+		if (DebugLevel.level > 0) println(Colors.BLUE+"\t\t"+_self.name+" starts: "+Colors.RESET+model.eventQueue)
 	}
 	
 	def boolean canTick(){
 		if (DebugLevel.level > 1){
 			var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model	
-			println("startedTimer: "+model.startedTimers)
+			println("startedTimer: "+model.eventQueue)
 		}
 		if (DebugLevel.level > 0) print(Colors.PURPLE+"\t\tTimer "+_self.name+".canRelease() ->")
 		
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
-		val list = model.startedTimers
+		val list = model.eventQueue
 		var result = (list.get(indexOfSelf).releaseDate == 0)
 		if (DebugLevel.level > 0) println(result+Colors.RESET)
 		return result
@@ -296,56 +296,41 @@ class ActionAspect{
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		if (indexOfSelf != -1) {
-			model.startedTimers.remove(indexOfSelf)
+			model.eventQueue.remove(indexOfSelf)
 			if (DebugLevel.level > 0) println(((_self.minDelay === null || _self.minDelay.time === null)? Colors.GREEN : Colors.RED)+"\t\t"+_self.name+ " released "+Colors.RESET)
 		}else{
-			if (DebugLevel.level > 0) println("##########################  error ? Action already released ("+model.startedTimers+")")
+			if (DebugLevel.level > 0) println("##########################  error ? Action already released ("+model.eventQueue+")")
 		}
 	}
 	
 	
 	def void schedule(){
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
-		val indexOfSelf = model.getIndexOfTimer(_self)
+//		val indexOfSelf = model.getIndexOfTimer(_self)
 		
-		if(_self.minDelay === null || _self.minDelay.time === null){ //micro step !
-			if(indexOfSelf == -1){ //the same action is not already armed
-				if (_self.nextSchedule == -1){
-					if (DebugLevel.level > 1) println("enter micro step schedule of "+_self.name)
-					model.schedule(_self, 0, model.currentMicroStep+1)
-					if (DebugLevel.level > 1) println("exit micro step schedule of "+_self.name)
-				}else{
-					if (DebugLevel.level > 1) println("enter action scheduled from code "+_self.name)
-					if (_self.nextSchedule == 0){
-						model.schedule(_self, 0, model.currentMicroStep+1)	
-					}else{
-						model.schedule(_self, _self.nextSchedule, 0)
-					}
-					_self.nextSchedule = -1
-					if (DebugLevel.level > 1) println("exit action scheduled from code "+_self.name)
-				}
+		var int rlt = 0
+		if (_self.nextSchedule != -1){
+			rlt = _self.nextSchedule
+		}else{
+			if(_self.minDelay !== null && _self.minDelay.time !== null){ //not a micro step required
+				rlt = _self.minDelay.time.interval * 1000 //TODO use the unit
 			}
-			if (DebugLevel.level > 0) println(Colors.BLUE+"\t\t"+_self.name+" starts: "+Colors.RESET+model.startedTimers)
-			return
-			
-		};
-		
-		if (DebugLevel.level > 1) println("enter schedule of "+_self.name)
-		
-		
-		if(indexOfSelf == -1){ //the same action is not already armed
-			model.schedule(_self, _self.minDelay.time.interval * 1000, 0) //TODO use the unit
 		}
-		
-		if (DebugLevel.level > 1) println("exit schedule of "+_self.name)
-		if (DebugLevel.level > 0) println(Colors.BLUE+"\t\t"+_self.name+" starts: "+Colors.RESET+model.startedTimers)
+		model.schedule(_self, rlt)
+		_self.nextSchedule = -1
+				
+		if (DebugLevel.level > 0) println(Colors.BLUE+"\t\t"+_self.name+" starts: "+Colors.RESET+model.eventQueue)
+		return
 	}
 	
 	def boolean canTick(){
 		if (DebugLevel.level > 0) print(Colors.PURPLE+"\t\tAction "+_self.name+".canRelease() ->")
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
-		val list = model.startedTimers
+		val list = model.eventQueue
+		if (indexOfSelf == -1){
+			return false
+		}
 		var result = (list.get(indexOfSelf).releaseDate == 0)
 		if (DebugLevel.level > 0) println(result+Colors.RESET)
 		return result
@@ -364,11 +349,11 @@ class ConnectionAspect{
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		if (indexOfSelf != -1) {
-			model.startedTimers.remove(indexOfSelf)
+			model.eventQueue.remove(indexOfSelf)
 			_self.rightPorts.get(0).variable.currentValue = _self.bufferedValues.removeFirst() as Integer
 			if (DebugLevel.level > 0) println(Colors.RED+"\t\t connection released "+Colors.RESET)
 		}else{
-			if (DebugLevel.level > 0) println("####################################   error ? Connection already released ("+model.startedTimers+")")
+			if (DebugLevel.level > 0) println("####################################   error ? Connection already released ("+model.eventQueue+")")
 		}
 	}
 	
@@ -380,15 +365,9 @@ class ConnectionAspect{
 		if (_self.delay !== null){
 			delay = _self.delay.interval
 		}
-		
-		val indexOfSelf = model.getLastIndexOfTimer(_self,delay*1000)
-		if(indexOfSelf == -1){ //the connection is not already armed
-			model.schedule(_self, delay*1000, 0) //TODO: use unit
-		}else{
-			model.schedule(_self, delay*1000, model.startedTimers.get(indexOfSelf).microStep+1) //TODO: use unit
-		}
+		model.schedule(_self, delay*1000) //TODO: use unit
 		if (DebugLevel.level > 1) println("exit schedule of "+_self)
-		if (DebugLevel.level > 0) println(Colors.BLUE+"\t "+_self.leftPorts.get(0).variable.name+"_to_"+_self.rightPorts.get(0).variable.name+" starts: "+Colors.RESET+model.startedTimers)
+		if (DebugLevel.level > 0) println(Colors.BLUE+"\t "+_self.leftPorts.get(0).variable.name+"_to_"+_self.rightPorts.get(0).variable.name+" starts: "+Colors.RESET+model.eventQueue)
 	}
 	
 	def boolean canTick(){
@@ -398,7 +377,7 @@ class ConnectionAspect{
 		if (indexOfSelf == -1){
 			return false
 		}
-		val list = model.startedTimers
+		val list = model.eventQueue
 		var result = (list.get(indexOfSelf).releaseDate == 0)
 		if (DebugLevel.level > 0) println(result+Colors.RESET)
 		return result
@@ -423,7 +402,7 @@ class VariableAspect{
 				}
 				if (c.delay !== null && c.leftPorts.get(0).variable == _self && _self.currentValue !== null){
 					c.bufferedValues.add(_self.currentValue)
-					//if (DebugLevel.level > 1) 
+					if (DebugLevel.level > 1) 
 					println('bufferedValues of '+c.leftPorts.get(0).variable+'->'+c.rightPorts.get(0).variable+'='+c.bufferedValues)
 				}
 			}
@@ -502,6 +481,8 @@ class ReactionAspect{
 	org.lflang.lf.VarRef.metaClass.propertyMissing = {String name -> if(name=='value'){return context.varToValue.get(delegate.variable)}else{throw new RuntimeException("on "+delegate.class+", property not valid: "+name)} }
 	org.lflang.lf.Input.metaClass.propertyMissing = {String name -> if(name=='value'){return context.varToValue.get(delegate)}else{throw new RuntimeException("on "+delegate.class+", property not valid: "+name)} }
 	
+	org.lflang.lf.Reaction.metaClass.propertyMissing = {String name -> if(name=='id'){return delegate.eContainer().name} }
+	
 	'''	
 	
 	def void exec(){
@@ -515,12 +496,16 @@ class ReactionAspect{
 			println(")"+Colors.RESET)
 		}
 		var Binding binding = new Binding()
-		binding.setVariable("self", _self )
+		binding.setVariable("self", _self.eContainer() )
 		var ReactionExecutionContext context = new ReactionExecutionContext()
 		binding.setVariable("context", context )
 		var Model theModel = _self.eResource.contents.get(0) as Model
 		binding.setVariable("currentTime", theModel.currentTime)
 		binding.setVariable("currentMicroStep", theModel.currentMicroStep)
+		
+		for(Parameter p : (_self.eContainer() as Reactor).parameters){
+			binding.setVariable(p.name, p.init.get(0).literal ) //no links to instances :-(
+		}
 		
 //		for(VarRef vRef :  _self.effects) { //WARNING: should not be necessary !
 //			if (vRef.variable instanceof Port){
@@ -581,7 +566,7 @@ class ReactionAspect{
 
 		for(TriggerRef tRef : _self.triggers) { 
 			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Port){
-				(tRef as VarRef).variable.currentValue == null
+				(tRef as VarRef).variable.currentValue = null
 			}
 		}
 		

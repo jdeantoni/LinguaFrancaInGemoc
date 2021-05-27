@@ -22,11 +22,11 @@ public class LinguaFrancaRTDAccessor {
 	public static boolean setcurrentMicroStep(EObject eObject, java.lang.Integer newValue) {
 		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "currentMicroStep", new java.lang.Integer(newValue));
 	}
-  public static fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventList getstartedTimers(EObject eObject) {
-		return new fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventList((fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventList)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "startedTimers"));
+  public static fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue getstartedTimers(EObject eObject) {
+		return new fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue((fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "startedTimers"));
 	}
-	public static boolean setstartedTimers(EObject eObject, fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventList newValue) {
-		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "startedTimers", new fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventList(newValue));
+	public static boolean setstartedTimers(EObject eObject, fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue newValue) {
+		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect", "startedTimers", new fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue(newValue));
 	}
   public static java.lang.Integer getnextSchedule(EObject eObject) {
 		return new java.lang.Integer((java.lang.Integer)  getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect", "nextSchedule"));

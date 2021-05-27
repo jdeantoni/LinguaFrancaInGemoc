@@ -24,7 +24,7 @@ endpackage
 
 
 
- 
+
 
 package lf
 
@@ -100,17 +100,23 @@ context TriggerRef
 	
 	--constrains the startup
 		
+--	inv startupPresentOnlyOnce:
+--		(not self.oclIsKindOf(VarRef) and self.startup) implies
+--		let firstTick : Event = Expression OneTickAndNoMore(self.present) in 
+--		Relation Coincides(firstTick, self.present)
+		
 	inv startupPresentOnlyOnce:
 		(not self.oclIsKindOf(VarRef) and self.startup) implies
-		let firstTick : Event = Expression OneTickAndNoMore(self.present) in 
-		Relation Coincides(firstTick, self.present)
+--		let firstTick : Event = Expression OneTickAndNoMore(self.present) in 
+		let firstUntimed : Event = Expression OneTickAndNoMore(theModel.untimedAction) in 
+		Relation Coincides(self.present, firstUntimed)
 		
 	inv startupPresentBeforeAbsent:
 		(not self.oclIsKindOf(VarRef) and self.startup) implies
 		let firstAbsentTick : Event = Expression OneTickAndNoMore(self.absent) in 
-		Relation Precedes(self.present, firstAbsentTick)
+		Relation AlternatesFSM(self.present, firstAbsentTick)
 		
-		
+	
 		
 		
 		
@@ -121,7 +127,7 @@ context TriggerRef
 		
 	--for all triggers 
 	inv AbsentOnlyOnceByCycle:
-		(self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).triggers->exists(t | t = self)) implies
+		(self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).triggers->exists(t | t = self) and self.startup) implies
 		--let execOrTJ : Event = Expression Union(theModel.timeJump, self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).finishExecution) in
 		Relation AlternatesFSM(self.updates, theModel.timeJump) -- self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).finishExecution)
  
@@ -246,20 +252,24 @@ context Action
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 
 
-	inv setActionLifeCycle: 
-		Relation ConnectionConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+	inv setActionLifeCycleSelfLoop: 
+		(self.oclAsType(ecore::EObject).eContainer().oclIsKindOf(Reactor) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reactor).reactions->exists(r |r.triggers->exists(t | t.oclIsKindOf(VarRef) and t.oclAsType(VarRef).variable = self) and r.effects->exists(e | e.oclIsKindOf(VarRef) and e.oclAsType(VarRef).variable = self))) implies
+		Relation ConnectionActionSelfLoop(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 		
+	inv setActionLifeCycleNOSelfLoop: 
+		(not (self.oclAsType(ecore::EObject).eContainer().oclIsKindOf(Reactor) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reactor).reactions->exists(r |r.triggers->exists(t | t.oclIsKindOf(VarRef) and t.oclAsType(VarRef).variable = self) and r.effects->exists(e | e.oclIsKindOf(VarRef) and e.oclAsType(VarRef).variable = self)))) implies
+		Relation ConnectionActionSelfLoop(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 
 context Connection
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	
 	inv ConnectorSourceBeforeTargetForPresent:
 		(self.delay = null) implies
-		Relation Precedes(self.leftPorts.variable->first().present, self.rightPorts.variable->first().present)
+		Relation Coincides(self.leftPorts.variable->first().present, self.rightPorts.variable->first().present)
 		
 	inv ConnectorSourceBeforeTargetForAbsent:
 		(self.delay = null) implies
-		Relation Precedes(self.leftPorts.variable->first().absent, self.rightPorts.variable->first().absent)
+		Relation Coincides(self.leftPorts.variable->first().absent, self.rightPorts.variable->first().absent)
 		
 --	inv ConnectorSourceAbsentPrecedesWait:
 --		(self.delay <> null) implies
@@ -267,11 +277,21 @@ context Connection
 		
 	inv ConnectorSourceWaitCoincidesTargetAbsent:
 		(self.delay <> null) implies
-		Relation Coincides(self.wait, self.rightPorts.variable->first().absent)
+		let waitOrAbsent : Event = Expression Union(self.wait, self.leftPorts.variable->first().absent) in
+		Relation Coincides(waitOrAbsent, self.rightPorts.variable->first().absent)
 		
-	inv ConnectorSourceBeforeTargetTimed:
-		(self.delay <> null) implies
-		Relation ConnectionConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+	inv test:
+	(self.delay <> null) implies
+	Relation Exclusion(self.wait, self.leftPorts.variable->first().absent)
+		
+		
+	inv ConnectorConstraintsNoSelfLoop:
+		(self.delay <> null and self.rightPorts->first().variable.oclAsType(ecore::EObject).eContainer() <> self.leftPorts->first().variable.oclAsType(ecore::EObject).eContainer()) implies
+		Relation ConnectionAction(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+		
+	inv ConnectorConstraintsSelfLoop:
+		(self.delay <> null and self.rightPorts->first().variable.oclAsType(ecore::EObject).eContainer() = self.leftPorts->first().variable.oclAsType(ecore::EObject).eContainer()) implies
+		Relation ConnectionActionSelfLoop(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 		
 	inv TimedConnectorStartsWithSource:
 		(self.delay <> null) implies	
@@ -282,7 +302,7 @@ context Connection
 		let releaseSampledOnUntimed : Event = Expression SampledOn(self.releases, theModel.untimedAction) in
 		Relation Coincides(releaseSampledOnUntimed, self.rightPorts->first().present)   
 
-context Reaction  		
+context Reaction	
 	def : inputStartups : Sequence(TriggerRef) = self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef) 
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	
@@ -318,7 +338,9 @@ context Reaction
 		Relation Coincides(self.finishExecution, self.effects->first().isPresent)
 	
 
-
+context Reactor
+	inv followPriorityFromModel:
+		Relation Precedes(self.reactions.startExecution)
 
 /**
  * PRIORITY

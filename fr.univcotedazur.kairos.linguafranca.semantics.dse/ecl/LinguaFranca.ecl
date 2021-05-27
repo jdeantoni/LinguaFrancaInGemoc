@@ -256,10 +256,10 @@ context Action
 		(self.oclAsType(ecore::EObject).eContainer().oclIsKindOf(Reactor) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reactor).reactions->exists(r |r.triggers->exists(t | t.oclIsKindOf(VarRef) and t.oclAsType(VarRef).variable = self) and r.effects->exists(e | e.oclIsKindOf(VarRef) and e.oclAsType(VarRef).variable = self))) implies
 		Relation ConnectionActionSelfLoop(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 		
-	inv setActionLifeCycleNOSelfLoop: 
+	inv setActionLifeCycleNOSelfLoop: --not powerfull enough... should check with a closure
 		(not (self.oclAsType(ecore::EObject).eContainer().oclIsKindOf(Reactor) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reactor).reactions->exists(r |r.triggers->exists(t | t.oclIsKindOf(VarRef) and t.oclAsType(VarRef).variable = self) and r.effects->exists(e | e.oclIsKindOf(VarRef) and e.oclAsType(VarRef).variable = self)))) implies
-		Relation ConnectionActionSelfLoop(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
-
+		Relation ConnectionAction(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+ 
 context Connection
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	

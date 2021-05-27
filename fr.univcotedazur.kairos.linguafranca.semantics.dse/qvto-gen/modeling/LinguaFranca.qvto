@@ -3996,34 +3996,35 @@ main() {
 			when { 
 						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
-				(not (self.oclAsType(ecore::EObject).eContainer().oclIsKindOf(Reactor) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reactor).reactions->exists(r |r.triggers->exists(t | t.oclIsKindOf(VarRef) and t.oclAsType(VarRef).variable = self) and r.effects->exists(e | e.oclIsKindOf(VarRef) and e.oclAsType(VarRef).variable = self)))) 
+				--not powerfull enough... should check with a closure
+		(not (self.oclAsType(ecore::EObject).eContainer().oclIsKindOf(Reactor) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reactor).reactions->exists(r |r.triggers->exists(t | t.oclIsKindOf(VarRef) and t.oclAsType(VarRef).variable = self) and r.effects->exists(e | e.oclIsKindOf(VarRef) and e.oclAsType(VarRef).variable = self)))) 
 				
 }
 		{
-		 	name := getNameOrUID(self.oclAsType(EObject))+"ConnectionActionSelfLoop_setActionLifeCycleNOSelfLoop";
-			type := seqOfRelationDeclaration->select(rd | rd.name = "ConnectionActionSelfLoop")->first();
+		 	name := getNameOrUID(self.oclAsType(EObject))+"ConnectionAction_setActionLifeCycleNOSelfLoop";
+			type := seqOfRelationDeclaration->select(rd | rd.name = "ConnectionAction")->first();
 					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_starts']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionActionSelfLoop_starts']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_starts']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_canRelease']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionActionSelfLoop_canTick']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_canTick']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_wait']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionActionSelfLoop_wait']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_wait']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_releases']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionActionSelfLoop_release']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_release']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionActionSelfLoop_timeJump']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_timeJump']->first();
 				};
 		
 		theMainBlock.relations += result;

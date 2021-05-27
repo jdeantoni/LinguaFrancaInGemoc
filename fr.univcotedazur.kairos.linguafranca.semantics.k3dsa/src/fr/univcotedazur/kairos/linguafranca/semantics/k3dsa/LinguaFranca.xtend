@@ -141,7 +141,7 @@ class ModelAspect {
 	def void timeJump(){
 		if (DebugLevel.level > 1){
 			var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model	
-			println("\u001B[34m startedTimer: "+model.eventQueue)
+			println("startedTimer: "+model.eventQueue)
 		}
 		if (_self.eventQueue.size() == 0){
 			println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ERROR ! no time Jump to do (no timer armed)")
@@ -537,12 +537,12 @@ class ReactionAspect{
 				
 		val ucl = ReactionAspect.classLoader
 		val shell = new GroovyShell(ucl,binding)
-		println(Colors.BG_YELLOW)
+		print(Colors.BG_YELLOW)
 		var res = shell.evaluate(lfGroovyFunctions+ 
 								_self.code.body +
 								returnStatement)
 				as ArrayList<Object>
-		println(Colors.RESET)
+		print(Colors.RESET)
 //		println("context from RW= "+ context.outAssignements)
 //		println("context from RW= "+ context.newSchedules)
 		

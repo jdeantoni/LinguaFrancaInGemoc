@@ -1,0 +1,5 @@
+CHANGELOG:
+Fixed a bug where generic node attributes were not being handled correctly.
+
+Fixed a bug where strings with escaped newline characters (i.e, C-styled multiline strings) were not handled
+correctly by the parser.

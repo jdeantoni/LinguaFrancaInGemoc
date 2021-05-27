@@ -1,0 +1,282 @@
+<html>
+ <head>
+  <title>JPGD-Documentation</title>
+ </head>
+ <body>
+  <h1>JPGD Manual</h1>
+  <p>
+   <i>Alexander Merz</i><br>
+   $Id: doc.html,v 1.3 2006/03/27 00:39:04 Alexander Exp $
+  </p>
+  <h2>TOC</h2>
+  <p>
+   <ol>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#install">Installation</a></li>
+    <li><a href="#invoke">Invoking the parser</a></li>
+    <li>
+        <a href="#data">The data structure</a>
+        <ol>
+            <li><a href="#data_graph">Graph/Cluster objects</a></li>
+            <li><a href="#data_node">Node objects</a></li>
+            <li><a href="#data_edge">Edge objects</a></li>
+        </ol>
+    </li>
+    <li><a href="#id">The Id object</a></li>
+    <li><a href="#cli">The CLI program</a></li>
+   </ol>
+  </p>
+  <a name="intro">
+  <h2>Introduction</h2>
+  <p>
+   The <i>Java-based Parser for Graphviz Documents</i> was created to read definitions of
+   graph structures and their attributes stored in the file format used by the
+   <a href="http://graphviz.org/">Graphviz Tool collection</a>.
+  </p>
+  <p>
+   The parser reads a graphviz document from a reader object and created an
+   easy-to-use data structure containing the definition of graphs, their nodes,
+   cluster/sub graphs and edges, all including any given render attributes.
+  </p>
+  <p>
+   The parser is pure Java and build using JavaCC. All necessary Java class files are
+   included in the Jar file, that is shipped with the JPGD distribution.
+  </p>
+  <p>
+   JPGD is licensed under the LGPL.
+  </p>
+  <a name="install">
+  <h2>Installation</h2>
+  <p>
+   You can obtain the last release of JPGD from
+   <a href="http://www.alexander-merz.com/graphviz/">http://www.alexander-merz.com/graphviz/</a>.
+  </p>
+  <p>
+   After downloading the archive, unpack it. The binaries are are packed in a Jar file.
+   Add this Jar file to a location, where it can be found by the Java interpreter.
+  </p>
+  <p>
+   The rest of the files in the archive are the source code of the library and documentation.
+  </p>
+  <a name="invoke">
+  <h2>Invoking the parser</h2>
+  <p>
+   There are only two relevant methods in the class
+   <a href="http://www.alexander-merz.com/graphviz/doc/com/alexmerz/graphviz/Parser.html">
+   <i>com.alexmerz.graphviz.Parser</i></a> to parse a Graphviz document: <i>parse()</i>
+   to parse the document and <i>getGraphs</i> to get list of <i>Graph</i> objects
+   holding the graph data.
+  </p>
+  <p>
+   <i>parse()</i> expects a <i>java.io.Reader</i> or <i>StringBuffer</i> object
+   to read from. Please note: In the beta version of JPGD you can provide an <i>InputStream</i> or
+   a <i>Reader</i> object to the constructor of the Parser class. But this will not work!
+  </p>
+  <p>
+   Because a Graphviz document may contain more then one graph definition, you will get
+   an <i>java.util.ArrayList</i> from <i>getGraphs()</i>. Each entry in the list
+   stores a <i>com.alexmerz.graphviz.objects.Graph</i> object. This class is described
+   in the next section.
+  </p>
+  <p>
+   A simple example:
+   <pre style="background-color:silver">
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+
+import com.alexmerz.graphviz.ParseException;
+import com.alexmerz.graphviz.Parser;
+import com.alexmerz.graphviz.objects.Edge;
+import com.alexmerz.graphviz.objects.Graph;
+import com.alexmerz.graphviz.objects.Id;
+import com.alexmerz.graphviz.objects.Node;
+
+public class Example1 {
+    public static void main(String[] args) {
+        FileReader in=null;
+        File f = new File( file );
+
+        try {
+            in = new FileReader(f);
+            Parser p = new Parser();
+            p.parse(in);
+        } catch (FileNotFoundException e) {
+            // do something if the file couldn't be found
+        } catch (ParseException e) {
+            // do something if the parser caused a parser error
+        }
+
+        // everything ok
+        ArrayList&lt;Graph&gt; gl = p.getGraphs();
+
+        // do something with the Graph objects
+    }
+}
+   </pre>
+  </p>
+  <p>
+   A parser exception is thrown if the document does not match the grammar. The
+   exception message includes the line number and position in the line.
+  </p>
+  <a name="data">
+  <h2>The data structure</h2>
+  <p>
+   A Graph objects holds the nodes, edges and clusters of a graph. These
+   elements are also represented by objects:
+   <ul>
+    <li>Graph - <a href="http://www.alexander-merz.com/graphviz/doc/com/alexmerz/graphviz/objects/Graph.html">com.alexmerz.graphviz.objects.Graph</a></li>
+    <li>Node - <a href="http://www.alexander-merz.com/graphviz/doc/com/alexmerz/graphviz/objects/Node.html">com.alexmerz.graphviz.objects.Node</a></li>
+    <li>Edge - <a href="http://www.alexander-merz.com/graphviz/doc/com/alexmerz/graphviz/objects/Edge.html">com.alexmerz.graphviz.objects.Edge</a></li>
+    <li>Cluster - <a href="http://www.alexander-merz.com/graphviz/doc/com/alexmerz/graphviz/objects/Graph.html">com.alexmerz.graphviz.objects.Graph</a></li>
+   </ul>
+  </p>
+  <p>
+   Two additional classes exist:
+   <ul>
+    <li>
+     <a href="http://www.alexander-merz.com/graphviz/doc/com/alexmerz/graphviz/objects/PortNode.html"><i>com.alexmerz.graphviz.objects.PortNode</i></a> is a special
+     decorator to Node objects containing a port attribute. A PortNode
+     always refers to an existing Node object. PortNode objects
+     are only used in Edge objects.
+    </li>
+    <li>
+     Objects of <a href="http://www.alexander-merz.com/graphviz/doc/com/alexmerz/graphviz/objects/Id.html"><i>com.alexmerz.graphviz.objects.Id</i></a> are used
+     to identify Graphs and Nodes. Because the Graphviz format
+     allows labels as identifier, Graphs and Nodes object
+     do not use a scalar value as identifier, instead they use
+     Id objects. See also the section about Id objects.
+    </li>
+   </ul>
+  </p>
+  <p>
+   Each of this object can hold attributes like render information
+   or formating hints. You can access them using <i>getAttribute()</i>
+   present in each of the classes. In the current version JPGD has
+   no restrictions regarded to attribute names or values. It depends
+   on you to check keywords and values. In future versions the checks
+   will be an additional part of the parser.
+  </p>
+  <a name="data_graph">
+  <h3>Graph/Cluster objects</h3>
+  <p>
+   A Graph object is a container for all objects in the graph.
+  </p>
+  <p>
+   If a Graph object represents a cluster, the Graph object has also
+   a corresponding Node object in the Node list of the parent Graph
+   object. The Graph object and the Node object have the same Id in such
+   a case and the <i>isSubgraph()</i> method of the Node object returns true.
+  </p>
+  <p>
+   A Graph object can hold generic attributes, which should apply to all
+   nodes, edges or clusters. The values can be fetched via the
+   <i>getGeneric*Attribute()</i> methods.
+   Although the generic attributes should applied to all elements, they are not
+   set by the parser, it depends on the application to do this. This allows to
+   save memory and makes parsing faster.
+  </p>
+  <p>
+   Every Graph object contains a list of Node objects, which are defined in the
+   graph. If a Graph contains clusters, and in these clusters are defined additional nodes,
+   they are not part of the node list in the parent graph. For example:
+   <pre>
+graph MyGraph {
+    node1 [label="Node 1"];
+    node2 [label="Node 2"];
+    subgraph MyCluster {
+        node3 [label="Node 3"];
+        node4 [label="Node 4"];
+   }
+}
+   </pre>
+   The Node list of the Graph object for <i>MyGraph</i> will only include
+   <i>node1</i> and <i>node2</i>. The Graph object for <i>MyCluster</i>
+   holds <i>node3</i> and <i>node4</i>. You must take care how to call
+   <i>getNodes()</i>. If you call the method for <i>MyGraph</i> with <i>true</i> as parameter,
+   then you get a list including all nodes, also from <i>MyCluster</i>. If you set the
+   parameter to <i>false</i>, you will only get a list containing <i>node1</i> and <i>node2</i>.
+  </p>
+  <a name="data_node">
+  <h3>Node objects</h3>
+  <p>
+   A node has an unique <i>Id</i> object to identify the node and can also
+   holds attributes.
+  </p>
+  <p>
+   A Node object is also generated to represent a cluster in an Edge object.
+  </p>
+  <a name="data_edge">  
+  <h3>Edge objects</h3>
+  <p>
+   An Edge object contains a source node and a target node. Nodes in edge statements
+   are not represented by Node objects, instead a PortNode object is used.
+   The cause is that a port information for rendering can be added to the node in
+   the statement.
+  </p>
+  <p>
+   If the source or the target is a cluster, the method <i>isSubgraph()</i> of the
+   underlying Node object of the PortNode object returns true.
+  </p>
+  <p>
+   List assignments like <i>{node1 node2} --> node3</i> are resolved into single
+   edge statements, so the example will be resolved to <i>node1 --> node3</i> and
+   <i>node2 --> node3</i>.
+  </p>
+  <a name="id">
+  <h2>The Id object</h2>
+  <p>
+   The Graphviz format allows to use labels as identifier for graphs, clusters and
+   nodes, for example:
+   <pre style="background-color:silver">
+"node1" -- "node2";
+subgraph "cluster1" {...};
+   </pre>
+   To get a better handling, the parser creates an Id object holding the identifier
+   and/or a label.
+  </p>
+  <p>
+   To find out if two Node objects or clusters are the same, you can use the
+   <i>isSame()</i> method
+  </p>
+  <p>
+   You should take care about the label handling. Compare this two statements:
+   <pre>
+node1 [label="Test"];
+"Node2";
+   </pre>
+   In the first statement the Id object of the Node object for <i>node1</i> contains
+   the value <i>"node1"</i> for the identifier, but an empty string for the
+   label value. Instead the label attribute is set and can be fetched via
+   <i>getAttribute()</i>
+  </p>
+  <p>
+   In the second statement the Id object will have an empty value for the
+   identifier and <i>"Node2"</i> for the label value.
+  </p>
+  <p>
+   Short: if a label is used as identifier, then you must fetch it via <i>getLabel()</i>
+   of the Id object. If the label is set in an attribute list, then you must
+   use <i>getAttribute()</i> of the Node or Graph object.
+  </p>
+  <a name="cli">
+  <h2>The CLI program</h2>
+  <p>
+   The Jar file contains an executable Java class which expects an filename as parameter.
+   <pre>
+java -jar graphviz.jar MyFile.viz
+   </pre>
+   It prints the content of the Graph structure to the standard output. The format
+   of the output was designed to allow an further processing using Unix standard tools
+   like grep. In case of errors the exception message is printed to the standard error console
+   and the program exits with a specif error message:
+   <ul>
+    <li>11 - No file name given</li>
+    <li>12 - File could not be opened</li>
+    <li>13 - Parser error</li>
+   </ul>
+  </p>
+ </body>
+</html>

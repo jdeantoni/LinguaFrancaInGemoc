@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dotimporter
+Bundle-SymbolicName: org.eclipse.gemoc.moccml.constraint.dotimporter;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: org.eclipse.gemoc.moccml.constraint.dotimporter
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.eclipse.core.resources,
+ fr.inria.aoste.utils.grph,
+ org.eclipse.core.runtime;bundle-version="3.20.0",
+ fr.inria.aoste.timesquare.ccslkernel.model,
+ org.eclipse.core.commands;bundle-version="3.9.800",
+ org.eclipse.jface,
+ org.eclipse.ui.workbench,
+ fr.inria.aoste.timesquare.ccslkernel.solver,
+ fr.inria.aoste.timesquare.ccslkernel.modelunfolding,
+ fr.inria.aoste.timesquare.ccslkernel.runtime

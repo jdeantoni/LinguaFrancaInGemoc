@@ -1,0 +1,24 @@
+digraph "TestGraph" {
+	rank=same
+	node1 [center, bla="b la"]
+	"node2"
+	node1 -> "node2" [left, foo=foo]
+	node1 -> "node097432" [saljkjsa, foo=bar]
+	edge [doof=du] 
+	node1 -> "node2" -> node3;
+	{node1} -> node4  [ get=get]	
+	graph [geh=weg];
+	node5 -> {node6}   [ gotcha = gotcha];
+	subgraph subi {
+	 {
+	 z0p; }
+	 ger = go;
+	 ret->bet [hallo=noe, hum=bold]
+	}	
+	{node7} -> {node8}	
+	bla=bluub;
+	{node9 node10} -> {node11 node12}[right , go=go ]
+    {node913 node10} -> {node96 node986}[right , go=go ]
+    {node13} -> { node14 node15 node16}
+    graph [hz=hsa]    
+}

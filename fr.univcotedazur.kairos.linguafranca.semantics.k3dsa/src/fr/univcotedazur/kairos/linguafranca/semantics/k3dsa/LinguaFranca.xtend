@@ -136,6 +136,8 @@ class ModelAspect {
 				//println ("init "+sv.name+"="+sv.currentValue)
 			}
 		}
+		
+//		TODO: add timers with 0 offset in the event queue.
 	}
 	
 	def void timeJump(){
@@ -171,6 +173,7 @@ class ModelAspect {
 		if(_self.eventQueue.isEmpty){
 			_self.eventQueue.add(new ScheduledTimeAdvancement(tc, rlt, 0))
 			if (DebugLevel.level > 1) println("afterSchedule: "+_self.eventQueue)
+			if (DebugLevel.level > 0) println("\t\t scheduled time advancements: "+_self.eventQueue)
 			return
 		}
 		var int lastMS = -1;
@@ -181,12 +184,16 @@ class ModelAspect {
 				if (DebugLevel.level > 1) println("same ta founded with microStep: "+lastMS)
 			}
 			if(staAtI.releaseDate > rlt){
-				_self.eventQueue.add(java.lang.Math.max(0, i-1), new ScheduledTimeAdvancement(tc, rlt, lastMS+1)) //Max in case i == 0 (add before)
+				if (rlt == 0 && lastMS == -1){
+					lastMS = _self.currentMicroStep
+				}
+				_self.eventQueue.add(i, new ScheduledTimeAdvancement(tc, rlt, (lastMS == -1) ? 0 : lastMS+1)) 
 				if (DebugLevel.level > 1) println("afterSchedule middle of list (1): "+_self.eventQueue)
+				if (DebugLevel.level > 0) println("\t\t scheduled time advancements: "+_self.eventQueue)
 				return
 			}
 		}
-		_self.eventQueue.add(new ScheduledTimeAdvancement(tc, rlt, 0))//add to the end
+		_self.eventQueue.addLast(new ScheduledTimeAdvancement(tc, rlt, 0))//add to the end
 		if (DebugLevel.level > 1) println("afterSchedule end of list: (2)"+_self.eventQueue)
 		if (DebugLevel.level > 0) println("\t\t scheduled time advancements: "+_self.eventQueue)
 		return
@@ -246,22 +253,29 @@ class TimerAspect{
 			var offset = 0
 			if (_self.offset.time !== null){
 				offset = _self.offset.time.interval * 1000 //TODO use the unit
-			}else{
-			//look for the parameter in the instance
-				var theInstance = model.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (_self.eContainer as Reactor).name]
-				offset = theInstance.parameters.findFirst[p | p.lhs.name == _self.offset.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
-			}
+			}else
+				if (_self.offset.literal !== null){
+					offset = Integer.parseInt(_self.offset.literal) * 1000 //TODO use the unit
+				}else
+					{
+					//look for the parameter in the instance
+						var theInstance = model.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (_self.eContainer as Reactor).name]
+						offset = theInstance.parameters.findFirst[p | p.lhs.name == _self.offset.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
+					}
 			_self.offsetToDo = false
 			nextTimeHop = offset
 		}else{
 			var period = 0
 			if (_self.period.time !== null){
 				period = _self.period.time.interval * 1000 //TODO use the unit
-			}else{
-			//look for the parameter in the instance
-				var theInstance = model.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (_self.eContainer as Reactor).name]
-				period = theInstance.parameters.findFirst[p | p.lhs.name == _self.period.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
-			}
+			}else
+				if (_self.offset.literal !== null){
+					period = Integer.parseInt(_self.period.literal) * 1000 //TODO use the unit
+				}else{
+					//look for the parameter in the instance
+						var theInstance = model.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (_self.eContainer as Reactor).name]
+						period = theInstance.parameters.findFirst[p | p.lhs.name == _self.period.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
+					}
 			nextTimeHop = period
 		}
 		
@@ -291,12 +305,19 @@ class TimerAspect{
 class ActionAspect{
 	
 	public Integer nextSchedule = -1
+	public LinkedList<Object> bufferedValues = new LinkedList<Object>()
 	
 	def void release(){
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		if (indexOfSelf != -1) {
 			model.eventQueue.remove(indexOfSelf)
+//			var List<Variable> allVarToSet = _self.eResource.contents.get(0).eAllContents.filter[eo | eo instanceof VarRef && (eo as VarRef).eContainer instanceof Reaction].map[eo | eo as VarRef]
+//																						 .filter[vr | (vr.eContainer as Reaction).triggers.exists[t | t instanceof VarRef && (t as VarRef).variable == _self]].map[vr | vr.variable].toList
+//			var valToSet = _self.bufferedValues.removeFirst() as Integer
+//			for(v : allVarToSet){
+//				v.currentValue = valToSet
+//			}
 			if (DebugLevel.level > 0) println(((_self.minDelay === null || _self.minDelay.time === null)? Colors.GREEN : Colors.RED)+"\t\t"+_self.name+ " released "+Colors.RESET)
 		}else{
 			if (DebugLevel.level > 0) println("##########################  error ? Action already released ("+model.eventQueue+")")
@@ -329,6 +350,7 @@ class ActionAspect{
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		val list = model.eventQueue
 		if (indexOfSelf == -1){
+			if (DebugLevel.level > 0) println("false"+Colors.RESET)
 			return false
 		}
 		var result = (list.get(indexOfSelf).releaseDate == 0)
@@ -393,9 +415,14 @@ class VariableAspect{
 		return _self.currentValue !== null
 	}
 	
-	def void updates(){
+	def void absent(){
+		_self.currentValue = null
+	}
+	
+	def void present(){
 		if (_self instanceof Output){
 			var List<Connection> allConnections = _self.eResource.contents.get(0).eAllContents.filter[eo | eo instanceof Connection].map[eo | eo as Connection].toList
+			
 			for(Connection c : allConnections){
 				if (c.delay === null && c.leftPorts.get(0).variable == _self){
 					c.rightPorts.get(0).variable.currentValue= _self.currentValue
@@ -406,8 +433,15 @@ class VariableAspect{
 					println('bufferedValues of '+c.leftPorts.get(0).variable+'->'+c.rightPorts.get(0).variable+'='+c.bufferedValues)
 				}
 			}
-		_self.currentValue = null
 		}
+		if (_self instanceof Action){
+			if (_self.currentValue !== null){
+				_self.bufferedValues.add(_self.currentValue)
+				if (DebugLevel.level > 1) 
+				println('bufferedValues of '+_self.name+'='+_self.bufferedValues)
+			}
+		}
+			
 	}
 }
 
@@ -443,6 +477,7 @@ class ReactionExecutionContext{
      * first object, the actual action to schedule, second Object, the value to be scheduled (May be more precise than the Object type) 
      **/
     public Map<Object, Object> newSchedules = new HashMap<Object,Object>()
+    public Map<Object, Object> newValuedSchedules = new HashMap<Object,Object>()
     
     public Map<Object, Object> varToValue = new HashMap<Object,Object>()
 }
@@ -462,8 +497,14 @@ class ReactionAspect{
 	    context.newSchedules.put(action.variable, val)
 	}
 	
+	void schedule(Object action, Object timeVal, Object val){
+	    //println 'Schedule ' + action.variable +' in ' + timeVal 
+	    schedule(action, timeVal)
+	    SET(action,val)
+	}
+	
 	Boolean isPresent(Object v){
-	    //println 'isPresent ' + v +' is ' + context.varToValue+'\n\tisPresent '+context.varToValue.get(v.variable)
+	  //  println 'isPresent ' + v +' is ' + context.varToValue+'\n\tisPresent '+context.varToValue.get(v.variable)
 	    return context.varToValue.get(v.variable) != null
 	}
 	
@@ -476,18 +517,18 @@ class ReactionAspect{
 		return [currentTime, currentMicroStep]
 	}
 	
-	org.lflang.lf.VarRef.metaClass.isPresent =  {println('-------'+context.varToValue+'\n\tisPresent '+delegate.variable+'      '+context.varToValue.get(delegate.variable)); return context.varToValue.get(delegate.variable) != null}
-	org.lflang.lf.Input.metaClass.isPresent =  {println('+++++++'+context.varToValue+'\n\tisPresent '+delegate+'      '+context.varToValue.get(delegate)); return context.varToValue.get(delegate) != null}
-	org.lflang.lf.VarRef.metaClass.propertyMissing = {String name -> if(name=='value'){return context.varToValue.get(delegate.variable)}else{throw new RuntimeException("on "+delegate.class+", property not valid: "+name)} }
-	org.lflang.lf.Input.metaClass.propertyMissing = {String name -> if(name=='value'){return context.varToValue.get(delegate)}else{throw new RuntimeException("on "+delegate.class+", property not valid: "+name)} }
+	//org.lflang.lf.VarRef.metaClass.isPresent =  {println('-------'+context.varToValue+'\n\tisPresent '+delegate.variable+'      '+context.varToValue.get(delegate.variable)); return context.varToValue.get(delegate.variable) != null}
+	//org.lflang.lf.Input.metaClass.isPresent =  {println('+++++++'+context.varToValue+'\n\tisPresent '+delegate+'      '+context.varToValue.get(delegate)); return context.varToValue.get(delegate) != null}
+	//org.lflang.lf.VarRef.metaClass.propertyMissing = {String name -> if(name=='value'){return context.varToValue.get(delegate.variable)}else{throw new RuntimeException("on "+delegate.class+", property not valid: "+name)} }
+	//org.lflang.lf.Input.metaClass.propertyMissing = {String name -> if(name=='value'){return context.varToValue.get(delegate)}else{throw new RuntimeException("on "+delegate.class+", property not valid: "+name)} }
 	
-	org.lflang.lf.Reaction.metaClass.propertyMissing = {String name -> if(name=='id'){return delegate.eContainer().name} }
+	//org.lflang.lf.Reaction.metaClass.propertyMissing = {String name -> if(name=='id'){return delegate.eContainer().name} }
 	
 	'''	
 	
 	def void exec(){
 		if (DebugLevel.level > 0) {
-			print(Colors.BLUE+"\t\tReaction "+_self.name+" executed (")
+			print(Colors.BLUE+"\t\tReaction "+(_self.eContainer() as Reactor).name+"."+((_self.name !== null) ? _self.name : (_self.eContainer as Reactor).reactions.indexOf(_self)) +" executed (")
 			var sep=""
 			for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
 				print(sep+sv.name+'='+sv.currentStateValue)
@@ -523,6 +564,11 @@ class ReactionAspect{
 				context.varToValue.put((tRef as VarRef).variable, (tRef as VarRef).variable.currentValue)
 //				println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
 			}
+			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Action){
+				binding.setVariable((tRef as VarRef).variable.name, (tRef as VarRef))
+				context.varToValue.put((tRef as VarRef).variable, ((tRef as VarRef).variable as Action).bufferedValues.removeFirst() as Integer)
+//				println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
+			}
 		}
 		
 		var String returnStatement = '\n return ['
@@ -530,6 +576,7 @@ class ReactionAspect{
 		for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
 			binding.setVariable(sv.name, sv.currentStateValue)
 			returnStatement = returnStatement + sep + sv.name
+			sep=","
 		}
 		returnStatement = returnStatement + ']'
 			

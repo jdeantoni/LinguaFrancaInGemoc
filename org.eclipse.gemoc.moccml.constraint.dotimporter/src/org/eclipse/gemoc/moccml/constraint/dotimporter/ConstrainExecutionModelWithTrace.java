@@ -32,10 +32,17 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.lflang.lf.Instantiation;
+import org.lflang.lf.Model;
+import org.lflang.lf.Reaction;
+import org.lflang.lf.Reactor;
 
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.Parser;
@@ -52,6 +59,7 @@ import fr.inria.aoste.timesquare.ccslkernel.model.utils.ResourceLoader;
 public class ConstrainExecutionModelWithTrace extends AbstractHandler {
 	
 
+	private static final boolean LFTrace = true;//crappy way to deal with different traces, need to use an extension point
 	private IFile ccslFile;
 	private String ccslFilePath;
 	private IFile dotFile;
@@ -173,7 +181,11 @@ public Resource handleCreationOfCCSLFromTrace() {
 		observedClockNames = getObservedClockNames(dotGraph);
 		ResultsHolder.observedClockNames = observedClockNames;
 				
-		clockNameToClock = computeClockMatchings(allCCSLClocks, observedClockNames);
+		if(LFTrace) { //crappy way to deal with different traces, need to use an extension point
+			feedLFTraceNamesToClock(allCCSLClocks);
+		}else {
+			clockNameToClock = computeClockMatchings(allCCSLClocks, observedClockNames);
+		}
 		ResultsHolder.clockNameToClock = clockNameToClock;
 		
 		String traceSpecificConstraintDefinitionPath="";
@@ -217,7 +229,7 @@ public Resource handleCreationOfCCSLFromTrace() {
 		traceCCSLFile.append(("\t Relation theUltimateRelation[TraceSpecificConstraint](\n").getBytes());
 		String sep="";
 		for(String observedClockName : observedClockNames ){
-			traceCCSLFile.append(("\t\t"+sep+"TraceSpecificConstraint_"+observedClockName+"-> "+clockNameToClock.get(observedClockName).getName()+" \n").getBytes());
+			traceCCSLFile.append(("\t\t"+sep+"TraceSpecificConstraint_"+observedClockName+"-> "+clockNameToClock.get(observedClockName).getName().replaceAll("\\.",  "_")+" \n").getBytes());
 			sep=",";
 		}
 		traceCCSLFile.append("\t)\n".getBytes());
@@ -263,7 +275,7 @@ public Resource handleCreationOfCCSLFromTrace() {
 		constraintDefFile.append("RelationDeclaration	TraceSpecificConstraint(".getBytes());
 		String sep = "";
 		for(String aClock : observedClockNames){
-			constraintDefFile.append((sep+"TraceSpecificConstraint_"+aClock+":clock").getBytes());
+			constraintDefFile.append((sep+"TraceSpecificConstraint_"+aClock.replaceAll("\\.",  "_")+":clock").getBytes());
 			sep=",";
 		}
 		constraintDefFile.append(")\n".getBytes());
@@ -312,8 +324,8 @@ public Resource handleCreationOfCCSLFromTrace() {
 				String[] splittedLine = outgoingEdge.getAttributes().get("label").split(":");
 				sep = "";
 				String allClocks = "";
-				for (int j = 1; j < splittedLine.length; j++){
-					allClocks+=sep+" TraceSpecificConstraint_"+splittedLine[j];
+				for (int j = 0; j < splittedLine.length; j++){
+					allClocks+=sep+" TraceSpecificConstraint_"+splittedLine[j].replaceAll("\\.",  "_");
 					sep = ",";
 				}
 				constraintDefFile.append(("				from "+sourceName+" to "+targetName+" : "+sourceName+targetName+" -> ( when "+ allClocks +")").getBytes());
@@ -354,6 +366,85 @@ public Resource handleCreationOfCCSLFromTrace() {
 		return clockNameToClock;
 	}
 
+	private void feedLFTraceNamesToClock(ArrayList<Clock> allCCSLClocks) {
+		clockNameToClock = new  HashMap<String,Clock>(observedClockNames.length); 
+		for(Clock aClock : allCCSLClocks) {
+			EObject associatedObject = getClockAssociatedObject(aClock);
+			if(! ((associatedObject instanceof Reaction) || (associatedObject instanceof Model))) {
+				continue;
+			}
+			if(associatedObject instanceof Reaction) {
+				feedWithReactionName(aClock, associatedObject);
+			}else {
+				feedWithModelName(aClock, associatedObject);
+			}
+		}
+		return;
+	}
+	private void feedWithReactionName(Clock aClock, EObject associatedObject) {
+		Reaction r = (Reaction) associatedObject;
+		Reactor rReactor = ((Reactor)r.eContainer());
+		Model m = (Model) r.eResource().getContents().get(0);
+		TreeIterator<EObject> it = m.eAllContents();
+		List<Instantiation> allInstances = new ArrayList<>();
+		while(it.hasNext()) {
+			EObject eo = it.next();
+			if (eo instanceof Instantiation) {
+				allInstances.add((Instantiation) eo);
+			}
+		}
+		List<Instantiation> instancesOfrReactor = allInstances.stream().filter(i -> i.getReactorClass().getName().compareTo(rReactor.getName()) == 0).toList();
+		if (instancesOfrReactor.size() > 1) {
+			System.err.println("models with multiple instantiations of the same reactor are not supported yet.\n trying to continue but without guarantee");
+		}
+		String instanceName = instancesOfrReactor.get(0).getName();
+		int indexOfReactionInReactor = rReactor.getReactions().indexOf(r);
+		clockNameToClock.put(instanceName+"."+indexOfReactionInReactor, aClock);
+	}
+	
+	private void feedWithModelName(Clock aClock, EObject associatedObject) {
+		if(aClock.getName().contains("timeJump")) {		
+			clockNameToClock.put("Model.TimeAdvancement", aClock);
+		}
+
+	}
+	
+	private EObject getClockAssociatedObject(Clock aClock) {
+		if (aClock.getTickingEvent() == null) {
+			return null;
+		}
+		EList<EObject> elemRef = aClock.getTickingEvent().getReferencedObjectRefs();
+		if(elemRef.size() == 0) {
+			return null;
+		}
+		EObject theEObject = elemRef.get(elemRef.size()-1);
+		if (theEObject instanceof EOperation) {
+			theEObject = elemRef.get(elemRef.size()-2);
+		}
+		return theEObject;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private List<String> getTraceLines() {
 		RegularFile theTraceFile = new RegularFile(dotFilePath);
 		List<String> traceLines =null;

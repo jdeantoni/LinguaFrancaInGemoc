@@ -1,0 +1,13 @@
+- fix handling of generic node attributes
+0.8.6beta
+- change toString() implementation, now you can use
+  the output to generate a graphviz document by calling 
+  Graph.toString()
+- fix a bug with not setting the direction type
+  in edges
+0.8.5beta
+- add small manual
+- fix handling of generic graph attributes
+0.8.4beta
+- add documentation in several files
+- jar contains binaries only, use tgz for distribution

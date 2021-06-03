@@ -14,4 +14,5 @@ Require-Bundle: org.eclipse.core.resources,
  org.eclipse.ui.workbench,
  fr.inria.aoste.timesquare.ccslkernel.solver,
  fr.inria.aoste.timesquare.ccslkernel.modelunfolding,
- fr.inria.aoste.timesquare.ccslkernel.runtime
+ fr.inria.aoste.timesquare.ccslkernel.runtime,
+ org.lflang

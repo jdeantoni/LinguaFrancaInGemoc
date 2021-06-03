@@ -46,9 +46,9 @@ context Reaction
 
 context Variable
 	--or self.oclIsKindOf(Action)
-	def if (not self.oclIsKindOf(TimedConcept)) : updates : Event = self.updates() 
-	def if (not self.oclIsKindOf(TimedConcept)) : present : Event(produceEvent) = self
-	def if (not self.oclIsKindOf(TimedConcept)) : absent : Event(FinishEvent) = self
+	def if (not self.oclIsKindOf(TimedConcept)) : updates : Event = self
+	def if (not self.oclIsKindOf(TimedConcept) or self.oclIsKindOf(Action)) : present : Event(produceEvent) = self.present()
+	def if (not self.oclIsKindOf(TimedConcept)or self.oclIsKindOf(Action)) : absent : Event(FinishEvent) = self.absent()
 
 	
 context TriggerRef  --mother class of VarRef
@@ -166,6 +166,14 @@ context VarRef
 		(self.variable.oclIsKindOf(Action) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).effects->exists(t | t = self)) implies
 		Relation Coincides(self.present, self.variable.oclAsType(Action).starts)
 		
+	inv effectUpdateVarRefToAction1:
+		(self.variable.oclIsKindOf(Action) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).effects->exists(t | t = self)) implies
+		Relation Coincides(self.present, self.variable.oclAsType(Action).present)
+		
+	inv effectUpdateVarRefToAction2:
+		(self.variable.oclIsKindOf(Action) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).effects->exists(t | t = self)) implies
+		Relation Coincides(self.absent, self.variable.oclAsType(Action).absent)
+		
  	--TIMERS
  	inv presentVarRefToTimer:
 		(self.variable.oclIsKindOf(Timer)) implies
@@ -267,20 +275,20 @@ context Connection
 		(self.delay = null) implies
 		Relation Coincides(self.leftPorts.variable->first().present, self.rightPorts.variable->first().present)
 		
+	inv ConnectorSourcePresenceCausesConnectorTargetPresence:
+		(self.delay = null) implies
+		Relation Causes(self.leftPorts->first().present, self.rightPorts->first().present)
+		
 	inv ConnectorSourceBeforeTargetForAbsent:
 		(self.delay = null) implies
 		Relation Coincides(self.leftPorts.variable->first().absent, self.rightPorts.variable->first().absent)
-		
---	inv ConnectorSourceAbsentPrecedesWait:
---		(self.delay <> null) implies
---		Relation Precedes(self.leftPorts.variable->first().absent, self.wait)
 		
 	inv ConnectorSourceWaitCoincidesTargetAbsent:
 		(self.delay <> null) implies
 		let waitOrAbsent : Event = Expression Union(self.wait, self.leftPorts.variable->first().absent) in
 		Relation Coincides(waitOrAbsent, self.rightPorts.variable->first().absent)
 		
-	inv test:
+	inv eitherAbsentOrWait:
 	(self.delay <> null) implies
 	Relation Exclusion(self.wait, self.leftPorts.variable->first().absent)
 		
@@ -304,26 +312,26 @@ context Connection
 
 context Reaction	
 	def : inputStartups : Sequence(TriggerRef) = self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef) 
-	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
+--	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	
-		inv allAbsentDef:
-			(self.effects->size() > 0) implies
-			let allAbsentTogether : Event = Expression Intersection(self.effects.absent) in
-			Relation Coincides(self.allOutputAbsent, allAbsentTogether)
+	inv allAbsentDef:
+		(self.effects->size() > 0) implies
+		let allAbsentTogether : Event = Expression Intersection(self.effects.absent) in
+		Relation Coincides(self.allOutputAbsent, allAbsentTogether)
 	
 	inv reactionLifeCycle:
 		(self.effects->size() > 0) implies
 		let allInputs: OrderedSet(TriggerRef) = self.triggers in 
 		let theInputsPresence : Event = Expression Union(allInputs.present) in
 		let theLastUpdate : Event = Expression Sup(allInputs.updates) in
-		Relation Reaction(theInputsPresence, theLastUpdate, self.startExecution, self.finishExecution, self.effects->first().updates, self.allOutputAbsent, theModel.timeJump)
+		Relation Reaction(theInputsPresence, theLastUpdate, self.startExecution, self.finishExecution, self.effects->first().updates, self.allOutputAbsent)
 		
 	inv reactionLifeCycleNoOutput:
 		(self.effects->size() = 0) implies
 		let allInputsNO: Sequence(VarRef) = self.triggers.oclAsType(VarRef) in
 		let theInputsPresenceNO : Event = Expression Union(allInputsNO.present) in
 		let theLastUpdateNO : Event = Expression Sup(allInputsNO.updates) in
-		Relation ReactionNoOutput(theInputsPresenceNO, theLastUpdateNO, self.startExecution, self.finishExecution, theModel.timeJump)
+		Relation ReactionNoOutput(theInputsPresenceNO, theLastUpdateNO, self.startExecution, self.finishExecution)
 	
 	inv UpdatesOutVarAllTogether:
 		(self.effects->size() > 1) implies
@@ -337,10 +345,10 @@ context Reaction
 		(self.effects->size()  > 0) implies
 		Relation Coincides(self.finishExecution, self.effects->first().isPresent)
 	
-
-context Reactor
-	inv followPriorityFromModel:
-		Relation Precedes(self.reactions.startExecution)
+--TODO: add prior here !
+--context Reactor
+--	inv followPriorityFromModel:
+--		Relation Precedes(self.reactions.startExecution)
 
 /**
  * PRIORITY
@@ -442,36 +450,37 @@ context TriggerRef
 
 
 
+
  /**
   * begin state space shrinking:
 	  * remove irrelevant internal interleaving
 	  */
---context Model
---	
---	 def : allTimedConcepts : Collection(TimedConcept) =
---	  self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
---				->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
---			    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection))
---
---	
---	inv onlyOneCanTickAtATime1:
---		Relation Exclusion(allTimedConcepts.canRelease)	
---	
---	inv onlyOneReleaseAtATime1:
---		Relation Exclusion(allTimedConcepts.releases)	
---		
---	inv onlyOneWaitAtATime1:
---		Relation Exclusion(allTimedConcepts.wait)	
---
+context Model
+	
+	 def : allTimedConcepts : Collection(TimedConcept) =
+	  self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
+				->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
+			    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection))
+
+	
+	inv onlyOneCanTickAtATime1:
+		Relation Exclusion(allTimedConcepts.canRelease)	
+	
+	inv onlyOneReleaseAtATime1:
+		Relation Exclusion(allTimedConcepts.releases)	
+		
+	inv onlyOneWaitAtATime1:
+		Relation Exclusion(allTimedConcepts.wait)	
+
 --	inv canReleasePriorRelease:
 --		Prior : self.allCanRelease prevails on self.allRelease					
---	inv canReleasePriorReleaseExclusion:
---		Relation Exclusion(self.allCanRelease, self.allRelease)
---	
+	inv canReleasePriorReleaseExclusion:
+		Relation Exclusion(self.allCanRelease, self.allRelease)
+	
 --	inv canReleasePriorWait:
 --		Prior : self.allCanRelease prevails on self.allWait						
---	inv canReleasePriorWaitExclusion:
---		Relation Exclusion(self.allCanRelease, self.allWait)
+	inv canReleasePriorWaitExclusion:
+		Relation Exclusion(self.allCanRelease, self.allWait)
 	
 	 /** 
 	  * end state space shrinking

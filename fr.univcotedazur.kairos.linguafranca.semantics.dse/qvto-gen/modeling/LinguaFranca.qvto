@@ -212,6 +212,12 @@ main() {
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), VarRef.oclAsType(EClass)).oclAsType(VarRef)->map effectPresentVarRefToAction22effectPresentVarRefToAction();
 		
 		
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), VarRef.oclAsType(EClass)).oclAsType(VarRef)->map effectUpdateVarRefToAction122effectUpdateVarRefToAction1();
+		
+		
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), VarRef.oclAsType(EClass)).oclAsType(VarRef)->map effectUpdateVarRefToAction222effectUpdateVarRefToAction2();
+		
+		
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), VarRef.oclAsType(EClass)).oclAsType(VarRef)->map presentVarRefToTimer32presentVarRefToTimer();
 		
 		
@@ -276,13 +282,16 @@ main() {
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map ConnectorSourceBeforeTargetForPresent22ConnectorSourceBeforeTargetForPresent();
 		
 		
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map ConnectorSourcePresenceCausesConnectorTargetPresence22ConnectorSourcePresenceCausesConnectorTargetPresence();
+		
+		
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map ConnectorSourceBeforeTargetForAbsent22ConnectorSourceBeforeTargetForAbsent();
 		
 		
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map ConnectorSourceWaitCoincidesTargetAbsent32ConnectorSourceWaitCoincidesTargetAbsent();
 		
 		
-		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map test22test();
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map eitherAbsentOrWait22eitherAbsentOrWait();
 		
 		
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map ConnectorConstraintsNoSelfLoop22ConnectorConstraintsNoSelfLoop();
@@ -318,14 +327,6 @@ main() {
 		
 		
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Reaction.oclAsType(EClass)).oclAsType(Reaction)->map StartUpdateProcessOutVarOnFinishExecute22StartUpdateProcessOutVarOnFinishExecute();
-		
-		
-
-		
-
-
-		
-		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Reactor.oclAsType(EClass)).oclAsType(Reactor)->map followPriorityFromModel12followPriorityFromModel();
 		
 		
 
@@ -435,6 +436,26 @@ main() {
 		
 		
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), TriggerRef.oclAsType(EClass)).oclAsType(TriggerRef)->map propagatesPrio1612propagatesPrio16();
+		
+		
+
+		
+
+
+		
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map onlyOneCanTickAtATime112onlyOneCanTickAtATime1();
+		
+		
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map onlyOneReleaseAtATime112onlyOneReleaseAtATime1();
+		
+		
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map onlyOneWaitAtATime112onlyOneWaitAtATime1();
+		
+		
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map canReleasePriorReleaseExclusion12canReleasePriorReleaseExclusion();
+		
+		
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Model.oclAsType(EClass)).oclAsType(Model)->map canReleasePriorWaitExclusion12canReleasePriorWaitExclusion();
 		
 	}
 
@@ -2606,7 +2627,6 @@ main() {
 		type := seqOfExpressionDeclaration->select(rd | rd.name = "Intersection")->first();
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 		
@@ -2634,7 +2654,6 @@ main() {
 		type := seqOfExpressionDeclaration->select(rd | rd.name = "Intersection")->first();
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 		
@@ -2661,7 +2680,6 @@ main() {
 		init{
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 		
@@ -2701,7 +2719,6 @@ main() {
 		type := seqOfExpressionDeclaration->select(rd | rd.name = "Sup")->first();
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputs : OrderedSet(TriggerRef) := self.triggers;
@@ -2730,7 +2747,6 @@ main() {
 		type := seqOfExpressionDeclaration->select(rd | rd.name = "Sup")->first();
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputs : OrderedSet(TriggerRef) := self.triggers;
@@ -2758,7 +2774,6 @@ main() {
 		init{
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputs : OrderedSet(TriggerRef) := self.triggers;
@@ -2799,7 +2814,6 @@ main() {
 		type := seqOfExpressionDeclaration->select(rd | rd.name = "Union")->first();
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputs : OrderedSet(TriggerRef) := self.triggers;
@@ -2828,7 +2842,6 @@ main() {
 		type := seqOfExpressionDeclaration->select(rd | rd.name = "Union")->first();
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputs : OrderedSet(TriggerRef) := self.triggers;
@@ -2856,7 +2869,6 @@ main() {
 		init{
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputs : OrderedSet(TriggerRef) := self.triggers;
@@ -2897,7 +2909,6 @@ main() {
 		type := seqOfExpressionDeclaration->select(rd | rd.name = "Sup")->first();
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputsNO : Sequence(VarRef) := self.triggers.oclAsType(VarRef);
@@ -2926,7 +2937,6 @@ main() {
 		type := seqOfExpressionDeclaration->select(rd | rd.name = "Sup")->first();
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputsNO : Sequence(VarRef) := self.triggers.oclAsType(VarRef);
@@ -2954,7 +2964,6 @@ main() {
 		init{
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputsNO : Sequence(VarRef) := self.triggers.oclAsType(VarRef);
@@ -2995,7 +3004,6 @@ main() {
 		type := seqOfExpressionDeclaration->select(rd | rd.name = "Union")->first();
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputsNO : Sequence(VarRef) := self.triggers.oclAsType(VarRef);
@@ -3024,7 +3032,6 @@ main() {
 		type := seqOfExpressionDeclaration->select(rd | rd.name = "Union")->first();
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputsNO : Sequence(VarRef) := self.triggers.oclAsType(VarRef);
@@ -3052,7 +3059,6 @@ main() {
 		init{
 		//from defs
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		//from lets
 				var allInputsNO : Sequence(VarRef) := self.triggers.oclAsType(VarRef);
@@ -3230,8 +3236,6 @@ main() {
 			name:= getNameOrUID(self.oclAsType(EObject))+'_updates';
 			tickingEvent := object TimeModel::Event{
  				referencedObjectRefs += self.oclAsType(EObject);
-				//referencedObjectRefs += self.oclAsType(EObject);
-				referencedObjectRefs += self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "updates")->first().oclAsType(EObject);
 			
 				name := 'evt_'+getNameOrUID(self.oclAsType(EObject))+'_updates';
 			kind :=TimeModel::EventKind::undefined;
@@ -3244,11 +3248,13 @@ main() {
 			}
 		}
 	 	mapping inMM2::Variable::present2Clock() :TimeModel::Clock 
-			when { (not self.oclIsKindOf(TimedConcept)) }
+			when { (not self.oclIsKindOf(TimedConcept) or self.oclIsKindOf(Action)) }
 		{
 			name:= getNameOrUID(self.oclAsType(EObject))+'_present';
 			tickingEvent := object TimeModel::Event{
  				referencedObjectRefs += self.oclAsType(EObject);
+				//referencedObjectRefs += self.oclAsType(EObject);
+				referencedObjectRefs += self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "present")->first().oclAsType(EObject);
 			
 				name := 'evt_'+getNameOrUID(self.oclAsType(EObject))+'_present';
 			kind :=TimeModel::EventKind::produce;
@@ -3261,11 +3267,13 @@ main() {
 			}
 		}
 	 	mapping inMM2::Variable::absent2Clock() :TimeModel::Clock 
-			when { (not self.oclIsKindOf(TimedConcept)) }
+			when { (not self.oclIsKindOf(TimedConcept)or self.oclIsKindOf(Action)) }
 		{
 			name:= getNameOrUID(self.oclAsType(EObject))+'_absent';
 			tickingEvent := object TimeModel::Event{
  				referencedObjectRefs += self.oclAsType(EObject);
+				//referencedObjectRefs += self.oclAsType(EObject);
+				referencedObjectRefs += self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "absent")->first().oclAsType(EObject);
 			
 				name := 'evt_'+getNameOrUID(self.oclAsType(EObject))+'_absent';
 			kind :=TimeModel::EventKind::finish;
@@ -3682,6 +3690,58 @@ main() {
 		}
 		
 	
+		mapping inMM2::VarRef::effectUpdateVarRefToAction122effectUpdateVarRefToAction1(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
+			when { 
+						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
+				
+				(self.variable.oclIsKindOf(Action) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).effects->exists(t | t = self)) 
+				
+}
+		{
+		 	name := getNameOrUID(self.oclAsType(EObject))+"Coincides_effectUpdateVarRefToAction1";
+			type := seqOfRelationDeclaration->select(rd | rd.name = "Coincides")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
+			
+			
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_present']->first();
+					_abstract := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
+				};
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(self.variable.oclAsType(Action).oclAsType(EObject))+'_present']->first();
+					_abstract := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
+				};
+		
+		theMainBlock.relations += result;
+		}
+		
+	
+		mapping inMM2::VarRef::effectUpdateVarRefToAction222effectUpdateVarRefToAction2(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
+			when { 
+						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
+				
+				(self.variable.oclIsKindOf(Action) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).effects->exists(t | t = self)) 
+				
+}
+		{
+		 	name := getNameOrUID(self.oclAsType(EObject))+"Coincides_effectUpdateVarRefToAction2";
+			type := seqOfRelationDeclaration->select(rd | rd.name = "Coincides")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
+			
+			
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_absent']->first();
+					_abstract := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
+				};
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(self.variable.oclAsType(Action).oclAsType(EObject))+'_absent']->first();
+					_abstract := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
+				};
+		
+		theMainBlock.relations += result;
+		}
+		
+	
 		mapping inMM2::VarRef::presentVarRefToTimer32presentVarRefToTimer(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
 						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
@@ -3945,7 +4005,7 @@ main() {
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_timeJump']->first();
+					_abstract := seqOfAbstractEntity[name = 'TimerConstraint_timeAdvancement']->first();
 				};
 		
 		theMainBlock.relations += result;
@@ -3985,7 +4045,7 @@ main() {
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionActionSelfLoop_timeJump']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionActionSelfLoop_timeAdvancement']->first();
 				};
 		
 		theMainBlock.relations += result;
@@ -4024,7 +4084,7 @@ main() {
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_timeJump']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_timeAdvancement']->first();
 				};
 		
 		theMainBlock.relations += result;
@@ -4053,6 +4113,32 @@ main() {
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.rightPorts.variable->first().oclAsType(EObject))+'_present']->first();
 					_abstract := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
+				};
+		
+		theMainBlock.relations += result;
+		}
+		
+	
+		mapping inMM2::Connection::ConnectorSourcePresenceCausesConnectorTargetPresence22ConnectorSourcePresenceCausesConnectorTargetPresence(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
+			when { 
+						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
+				
+				(self.delay = null) 
+				
+}
+		{
+		 	name := getNameOrUID(self.oclAsType(EObject))+"Causes_ConnectorSourcePresenceCausesConnectorTargetPresence";
+			type := seqOfRelationDeclaration->select(rd | rd.name = "Causes")->first();
+					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
+			
+			
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(self.leftPorts->first().oclAsType(EObject))+'_present']->first();
+					_abstract := seqOfRelationDeclaration[name = 'Causes']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
+				};
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(self.rightPorts->first().oclAsType(EObject))+'_present']->first();
+					_abstract := seqOfRelationDeclaration[name = 'Causes']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
 				};
 		
 		theMainBlock.relations += result;
@@ -4111,7 +4197,7 @@ main() {
 		}
 		
 	
-		mapping inMM2::Connection::test22test(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
+		mapping inMM2::Connection::eitherAbsentOrWait22eitherAbsentOrWait(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
 						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
@@ -4119,7 +4205,7 @@ main() {
 				
 }
 		{
-		 	name := getNameOrUID(self.oclAsType(EObject))+"Exclusion_test";
+		 	name := getNameOrUID(self.oclAsType(EObject))+"Exclusion_eitherAbsentOrWait";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Exclusion")->first();
 					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
@@ -4168,7 +4254,7 @@ main() {
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_timeJump']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_timeAdvancement']->first();
 				};
 		
 		theMainBlock.relations += result;
@@ -4206,7 +4292,7 @@ main() {
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionActionSelfLoop_timeJump']->first();
+					_abstract := seqOfAbstractEntity[name = 'ConnectionActionSelfLoop_timeAdvancement']->first();
 				};
 		
 		theMainBlock.relations += result;
@@ -4270,7 +4356,6 @@ main() {
 		mapping inMM2::Reaction::allAbsentDef32allAbsentDef(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
 						let inputStartups : Sequence(TriggerRef) = self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef) in
-						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.effects->size() > 0) 
 				
@@ -4279,7 +4364,6 @@ main() {
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Coincides_allAbsentDef";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Coincides")->first();
 					var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
@@ -4298,7 +4382,6 @@ main() {
 		mapping inMM2::Reaction::reactionLifeCycle52reactionLifeCycle(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
 						let inputStartups : Sequence(TriggerRef) = self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef) in
-						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.effects->size() > 0) 
 				
@@ -4307,17 +4390,16 @@ main() {
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Reaction_reactionLifeCycle";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Reaction")->first();
 					var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 					var allInputs : OrderedSet(TriggerRef) := self.triggers;
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 							bindable := self -> map theInputsPresence2Expression()->asSequence()->first();
-					_abstract := seqOfAbstractEntity[name = 'Reaction_present']->first();
+					_abstract := seqOfAbstractEntity[name = 'Reaction_TrigPresent']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 							bindable := self -> map theLastUpdate2Expression()->asSequence()->first();
-					_abstract := seqOfAbstractEntity[name = 'Reaction_lasInputUpdate']->first();
+					_abstract := seqOfAbstractEntity[name = 'Reaction_lasTrigUpdate']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_startExecution']->first();
@@ -4329,15 +4411,11 @@ main() {
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.effects->first().oclAsType(EObject))+'_updates']->first();
-					_abstract := seqOfAbstractEntity[name = 'Reaction_oneOutputUpdate']->first();
+					_abstract := seqOfAbstractEntity[name = 'Reaction_outputsUpdate']->first();
 				};
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allOutputAbsent']->first();
 					_abstract := seqOfAbstractEntity[name = 'Reaction_allOutputAbsent']->first();
-				};
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'Reaction_timeJump']->first();
 				};
 		
 		theMainBlock.relations += result;
@@ -4347,7 +4425,6 @@ main() {
 		mapping inMM2::Reaction::reactionLifeCycleNoOutput52reactionLifeCycleNoOutput(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
 						let inputStartups : Sequence(TriggerRef) = self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef) in
-						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.effects->size() = 0) 
 				
@@ -4356,7 +4433,6 @@ main() {
 		 	name := getNameOrUID(self.oclAsType(EObject))+"ReactionNoOutput_reactionLifeCycleNoOutput";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "ReactionNoOutput")->first();
 					var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 					var allInputsNO : Sequence(VarRef) := self.triggers.oclAsType(VarRef);
 			
@@ -4376,10 +4452,6 @@ main() {
 					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_finishExecution']->first();
 					_abstract := seqOfAbstractEntity[name = 'ReactionNoOutput_finishExecutes']->first();
 				};
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'ReactionNoOutput_timeJump']->first();
-				};
 		
 		theMainBlock.relations += result;
 		}
@@ -4393,7 +4465,6 @@ main() {
 		var seqAbstract : Sequence(Stdlib::Element) := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::Coincidence).allSubobjectsOfKind(TimeModel::CCSLModel::ClockExpressionAndRelation::AbstractEntity)->asSequence();
 		type := seqOfRelationDeclaration->select(rd | rd.name = "Coincides")->first();
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		
 
@@ -4415,14 +4486,12 @@ main() {
 	mapping inMM2::Reaction::UpdatesOutVarAllTogether22UpdatesOutVarAllTogether()
 			when { 
 						let inputStartups : Sequence(TriggerRef) = self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef) in
-						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.effects->size() > 1) 
 			}
 	{
 		init{
 					var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 			var sources : Sequence(VarRef) := self.effects->asSequence();
@@ -4450,7 +4519,6 @@ main() {
 		var seqAbstract : Sequence(Stdlib::Element) := seqOfRelationDeclaration[name = 'Coincides']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::Coincidence).allSubobjectsOfKind(TimeModel::CCSLModel::ClockExpressionAndRelation::AbstractEntity)->asSequence();
 		type := seqOfRelationDeclaration->select(rd | rd.name = "Coincides")->first();
 				var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-				var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 		
 		
 
@@ -4472,14 +4540,12 @@ main() {
 	mapping inMM2::Reaction::IsPresentOutVarAllTogether22IsPresentOutVarAllTogether()
 			when { 
 						let inputStartups : Sequence(TriggerRef) = self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef) in
-						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.effects->size() > 1) 
 			}
 	{
 		init{
 					var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 			var sources : Sequence(VarRef) := self.effects->asSequence();
@@ -4502,7 +4568,6 @@ main() {
 		mapping inMM2::Reaction::StartUpdateProcessOutVarOnFinishExecute22StartUpdateProcessOutVarOnFinishExecute(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
 						let inputStartups : Sequence(TriggerRef) = self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef) in
-						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
 				(self.effects->size()  > 0) 
 				
@@ -4511,7 +4576,6 @@ main() {
 		 	name := getNameOrUID(self.oclAsType(EObject))+"Coincides_StartUpdateProcessOutVarOnFinishExecute";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "Coincides")->first();
 					var inputStartups : Sequence(TriggerRef) := self.triggers->select(t|t.oclIsKindOf(TriggerRef) and t.oclAsType(TriggerRef).startup).oclAsType(TriggerRef);
-					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			
 			
 				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
@@ -4525,55 +4589,6 @@ main() {
 		
 		theMainBlock.relations += result;
 		}
-		
-
-//relation stuff		
-	
-
-//Create an intermediate relation
-	mapping inMM2::Reactor::intermediate_followPriorityFromModel12followPriorityFromModel(an1 : Reaction, an2 : Reaction, nbi : Integer, nbj : Integer):TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
-	{
-		name := getNameOrUID(self.oclAsType(EObject))+'intermediate_followPriorityFromModel'+nbi.toString()+"_"+nbj.toString();
-		var seqAbstract : Sequence(Stdlib::Element) := seqOfRelationDeclaration[name = 'Precedes']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::Precedence).allSubobjectsOfKind(TimeModel::CCSLModel::ClockExpressionAndRelation::AbstractEntity)->asSequence();
-		type := seqOfRelationDeclaration->select(rd | rd.name = "Precedes")->first();
-		
-		
-
-					bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(an1.oclAsType(EObject))+'_startExecution']->first();
-						_abstract := seqOfRelationDeclaration[name = 'Precedes']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
-
-				};
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(an2.oclAsType(EObject))+'_startExecution']->first();
-						_abstract := seqOfRelationDeclaration[name = 'Precedes']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
-
-				};
-		end{
-			theMainBlock.relations += result;
-		}
-	}
-	
-	mapping inMM2::Reactor::followPriorityFromModel12followPriorityFromModel()
-	{
-		init{
-			
-			
-			var sources : Sequence(Reaction) := self.reactions->asSequence();
-			var i : Integer := 1;
-			var j : Integer := 1;
-			var size : Integer = sources->size(); 
-			while (i <= size){
-				j := i+1;
-				while (j <= size){
-					theMainBlock.relations +=  self.map intermediate_followPriorityFromModel12followPriorityFromModel(sources->at(i),sources->at(j), i, j);
-					j := j + 1;
-				};
-				i := i + 1;
-			};
-		}
-	}
-
 		
 
 //relation stuff		
@@ -5105,6 +5120,211 @@ main() {
 		}
 		
 
+//relation stuff		
+	
+
+//Create an intermediate relation
+	mapping inMM2::Model::intermediate_onlyOneCanTickAtATime112onlyOneCanTickAtATime1(an1 : TimedConcept, an2 : TimedConcept, nbi : Integer, nbj : Integer):TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
+	{
+		name := getNameOrUID(self.oclAsType(EObject))+'intermediate_onlyOneCanTickAtATime1'+nbi.toString()+"_"+nbj.toString();
+		var seqAbstract : Sequence(Stdlib::Element) := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::Exclusion).allSubobjectsOfKind(TimeModel::CCSLModel::ClockExpressionAndRelation::AbstractEntity)->asSequence();
+		type := seqOfRelationDeclaration->select(rd | rd.name = "Exclusion")->first();
+				var allTimedConcepts : Collection(TimedConcept) := self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
+						->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
+					    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection));
+		
+		
+
+					bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(an1.oclAsType(EObject))+'_canRelease']->first();
+						_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
+
+				};
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(an2.oclAsType(EObject))+'_canRelease']->first();
+						_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
+
+				};
+		end{
+			theMainBlock.relations += result;
+		}
+	}
+	
+	mapping inMM2::Model::onlyOneCanTickAtATime112onlyOneCanTickAtATime1()
+	{
+		init{
+					var allTimedConcepts : Collection(TimedConcept) := self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
+							->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
+						    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection));
+			
+			
+			var sources : Sequence(TimedConcept) := allTimedConcepts->asSequence();
+			var i : Integer := 1;
+			var j : Integer := 1;
+			var size : Integer = sources->size(); 
+			while (i <= size){
+				j := i+1;
+				while (j <= size){
+					theMainBlock.relations +=  self.map intermediate_onlyOneCanTickAtATime112onlyOneCanTickAtATime1(sources->at(i),sources->at(j), i, j);
+					j := j + 1;
+				};
+				i := i + 1;
+			};
+		}
+	}
+
+		
+	
+
+//Create an intermediate relation
+	mapping inMM2::Model::intermediate_onlyOneReleaseAtATime112onlyOneReleaseAtATime1(an1 : TimedConcept, an2 : TimedConcept, nbi : Integer, nbj : Integer):TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
+	{
+		name := getNameOrUID(self.oclAsType(EObject))+'intermediate_onlyOneReleaseAtATime1'+nbi.toString()+"_"+nbj.toString();
+		var seqAbstract : Sequence(Stdlib::Element) := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::Exclusion).allSubobjectsOfKind(TimeModel::CCSLModel::ClockExpressionAndRelation::AbstractEntity)->asSequence();
+		type := seqOfRelationDeclaration->select(rd | rd.name = "Exclusion")->first();
+				var allTimedConcepts : Collection(TimedConcept) := self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
+						->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
+					    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection));
+		
+		
+
+					bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(an1.oclAsType(EObject))+'_releases']->first();
+						_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
+
+				};
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(an2.oclAsType(EObject))+'_releases']->first();
+						_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
+
+				};
+		end{
+			theMainBlock.relations += result;
+		}
+	}
+	
+	mapping inMM2::Model::onlyOneReleaseAtATime112onlyOneReleaseAtATime1()
+	{
+		init{
+					var allTimedConcepts : Collection(TimedConcept) := self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
+							->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
+						    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection));
+			
+			
+			var sources : Sequence(TimedConcept) := allTimedConcepts->asSequence();
+			var i : Integer := 1;
+			var j : Integer := 1;
+			var size : Integer = sources->size(); 
+			while (i <= size){
+				j := i+1;
+				while (j <= size){
+					theMainBlock.relations +=  self.map intermediate_onlyOneReleaseAtATime112onlyOneReleaseAtATime1(sources->at(i),sources->at(j), i, j);
+					j := j + 1;
+				};
+				i := i + 1;
+			};
+		}
+	}
+
+		
+	
+
+//Create an intermediate relation
+	mapping inMM2::Model::intermediate_onlyOneWaitAtATime112onlyOneWaitAtATime1(an1 : TimedConcept, an2 : TimedConcept, nbi : Integer, nbj : Integer):TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
+	{
+		name := getNameOrUID(self.oclAsType(EObject))+'intermediate_onlyOneWaitAtATime1'+nbi.toString()+"_"+nbj.toString();
+		var seqAbstract : Sequence(Stdlib::Element) := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::Exclusion).allSubobjectsOfKind(TimeModel::CCSLModel::ClockExpressionAndRelation::AbstractEntity)->asSequence();
+		type := seqOfRelationDeclaration->select(rd | rd.name = "Exclusion")->first();
+				var allTimedConcepts : Collection(TimedConcept) := self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
+						->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
+					    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection));
+		
+		
+
+					bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(an1.oclAsType(EObject))+'_wait']->first();
+						_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
+
+				};
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(an2.oclAsType(EObject))+'_wait']->first();
+						_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
+
+				};
+		end{
+			theMainBlock.relations += result;
+		}
+	}
+	
+	mapping inMM2::Model::onlyOneWaitAtATime112onlyOneWaitAtATime1()
+	{
+		init{
+					var allTimedConcepts : Collection(TimedConcept) := self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
+							->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
+						    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection));
+			
+			
+			var sources : Sequence(TimedConcept) := allTimedConcepts->asSequence();
+			var i : Integer := 1;
+			var j : Integer := 1;
+			var size : Integer = sources->size(); 
+			while (i <= size){
+				j := i+1;
+				while (j <= size){
+					theMainBlock.relations +=  self.map intermediate_onlyOneWaitAtATime112onlyOneWaitAtATime1(sources->at(i),sources->at(j), i, j);
+					j := j + 1;
+				};
+				i := i + 1;
+			};
+		}
+	}
+
+		
+	
+		mapping inMM2::Model::canReleasePriorReleaseExclusion12canReleasePriorReleaseExclusion(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
+		{
+		 	name := getNameOrUID(self.oclAsType(EObject))+"Exclusion_canReleasePriorReleaseExclusion";
+			type := seqOfRelationDeclaration->select(rd | rd.name = "Exclusion")->first();
+					var allTimedConcepts : Collection(TimedConcept) := self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
+							->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
+						    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection));
+			
+			
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allCanRelease']->first();
+					_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
+				};
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allRelease']->first();
+					_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
+				};
+		
+		theMainBlock.relations += result;
+		}
+		
+	
+		mapping inMM2::Model::canReleasePriorWaitExclusion12canReleasePriorWaitExclusion(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
+		{
+		 	name := getNameOrUID(self.oclAsType(EObject))+"Exclusion_canReleasePriorWaitExclusion";
+			type := seqOfRelationDeclaration->select(rd | rd.name = "Exclusion")->first();
+					var allTimedConcepts : Collection(TimedConcept) := self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Timer)).oclAsType(TimedConcept)
+							->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Action)).oclAsType(Action)) 
+						    ->union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Connection) and eo.oclAsType(Connection).delay <> null).oclAsType(Connection));
+			
+			
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allCanRelease']->first();
+					_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).leftEntity;
+				};
+				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
+					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_allWait']->first();
+					_abstract := seqOfRelationDeclaration[name = 'Exclusion']->first().oclAsType(TimeModel::CCSLModel::ClockExpressionAndRelation::KernelRelation::KernelRelationDeclaration).rightEntity;
+				};
+		
+		theMainBlock.relations += result;
+		}
+		
+
 
 
 
@@ -5254,8 +5474,6 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 		{
 			name:= 'MSE_'+getNameOrUID(self.oclAsType(EObject))+'_updates';
 
-				caller := self.oclAsType(EObject);
-				action := self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "updates")->first();
 				solverEvent := theMainBlock.elements[TimeModel::Clock]->select(c|c.name=getNameOrUID(self.oclAsType(EObject))+'_updates')->first().oclAsType(EObject);
 				
 			end{
@@ -5264,10 +5482,12 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 			}
 		}
 	 	mapping inMM2::Variable::present2MSE() :FeedBack::ModelSpecificEvent 
-			when { (not self.oclIsKindOf(TimedConcept)) }
+			when { (not self.oclIsKindOf(TimedConcept) or self.oclIsKindOf(Action)) }
 		{
 			name:= 'MSE_'+getNameOrUID(self.oclAsType(EObject))+'_present';
 
+				caller := self.oclAsType(EObject);
+				action := self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "present")->first();
 				solverEvent := theMainBlock.elements[TimeModel::Clock]->select(c|c.name=getNameOrUID(self.oclAsType(EObject))+'_present')->first().oclAsType(EObject);
 				
 			end{
@@ -5276,10 +5496,12 @@ mapping inMM2::Model::ecore2FeedBack() : FeedBack::ActionModel {
 			}
 		}
 	 	mapping inMM2::Variable::absent2MSE() :FeedBack::ModelSpecificEvent 
-			when { (not self.oclIsKindOf(TimedConcept)) }
+			when { (not self.oclIsKindOf(TimedConcept)or self.oclIsKindOf(Action)) }
 		{
 			name:= 'MSE_'+getNameOrUID(self.oclAsType(EObject))+'_absent';
 
+				caller := self.oclAsType(EObject);
+				action := self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "absent")->first();
 				solverEvent := theMainBlock.elements[TimeModel::Clock]->select(c|c.name=getNameOrUID(self.oclAsType(EObject))+'_absent')->first().oclAsType(EObject);
 				
 			end{

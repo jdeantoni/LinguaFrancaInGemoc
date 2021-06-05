@@ -160,7 +160,7 @@ public class AnimateTicksBehaviour {
 				
 				
 				if (sourceTask != null) {
-					System.out.println("checked !");
+//					System.out.println("checked !");
 					XYPlot plot = (XYPlot) theChart.chart.getPlot();
 //					if(sourceTask.getYLowValue() == tmp.getYLowValue()) {
 //						tmp.setYValue(tmp.getYLowValue()+taskSize);

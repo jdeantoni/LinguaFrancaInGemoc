@@ -32,7 +32,7 @@ AutomataConstraintLibrary LinguaFrancaUtils {
 
 			init:  TCD_S1
 
-			from TCD_S1 to T_idle : TCD_S1ToTCD_S2
+			from TCD_S1 to T_checkIfOfsset0 : TCD_S1ToTCD_S2
 			-> ( )
 
 			from T_idle to T_armed : TCD_S2ToTCD_S3
@@ -50,10 +50,19 @@ AutomataConstraintLibrary LinguaFrancaUtils {
 			from T_armed to T_toCheck : TCD_S4ToTCD_S5
 			-> ( when TimerConstraint_timeAdvancement )
 
+			from T_checkIfOfsset0 to T_offsetChecked : T_checkIfOfsset0ToT_offsetChecked
+			-> ( when TimerConstraint_canTick )
+
+			from T_offsetChecked to T_idle : T_offsetCheckedToT_idle
+			-> ( when TimerConstraint_release )
+
+			from T_offsetChecked to T_idle : T_offsetCheckedToT_idle2
+			-> ( when TimerConstraint_wait )
 
 			State TCD_S1 ( out : TCD_S1ToTCD_S2 )
 
-			State T_idle ( in : TCD_S1ToTCD_S2, TCD_S3ToTCD_S2 out : TCD_S2ToTCD_S3 )
+			State T_idle ( in : TCD_S3ToTCD_S2, T_offsetCheckedToT_idle,
+			T_offsetCheckedToT_idle2 out : TCD_S2ToTCD_S3 )
 
 			State T_checked ( in : TCD_S4ToTCD_S3 out : TCD_S3ToTCD_S2, TCD_S3ToTCD_S32 )
 
@@ -61,6 +70,11 @@ AutomataConstraintLibrary LinguaFrancaUtils {
 
 			State T_toCheck ( in : TCD_S4ToTCD_S5 out : TCD_S4ToTCD_S3 )
 
+			State T_checkIfOfsset0 ( in : TCD_S1ToTCD_S2 out :
+			T_checkIfOfsset0ToT_offsetChecked )
+
+			State T_offsetChecked ( in : T_checkIfOfsset0ToT_offsetChecked out :
+			T_offsetCheckedToT_idle, T_offsetCheckedToT_idle2 )
 		}
 
 		AutomataRelationDefinition ConnectionActionSelfLoopDef [
@@ -108,7 +122,7 @@ AutomataConstraintLibrary LinguaFrancaUtils {
 
 			init:  CA_S1
 
-			from CA_S1 to CA_idle : CA_S1ToCA_S2
+			from CA_S1 to CA_init : CA_S1ToCA_S2
 			-> ( )
 
 			from CA_checked to CA_idle : CA_S3ToCA_S2
@@ -126,14 +140,24 @@ AutomataConstraintLibrary LinguaFrancaUtils {
 			from CA_idle to CA_idle : CA_S4ToCA_S42
 			-> ( when ConnectionAction_starts )
 
+			from CA_init to CA_initOK : CA_initToCA_initOK
+			-> ( when ConnectionAction_canTick )
+
+			from CA_initOK to CA_idle : CA_initOKToCA_idle
+			-> ( when ConnectionAction_wait )
+
 			State CA_S1 ( out : CA_S1ToCA_S2 )
 
 			State CA_checked ( in : CA_S4ToCA_S3 out : CA_S3ToCA_S2, CA_S3ToCA_S32 )
 
-			State CA_idle ( in : CA_S4ToCA_S42, CA_S3ToCA_S2, CA_S1ToCA_S2, CA_S3ToCA_S32
-			out : CA_S4ToCA_S5, CA_S4ToCA_S42 )
+			State CA_idle ( in : CA_S4ToCA_S42, CA_S3ToCA_S2, CA_S3ToCA_S32,
+			CA_initOKToCA_idle out : CA_S4ToCA_S5, CA_S4ToCA_S42 )
 
 			State CA_toCheck ( in : CA_S4ToCA_S5 out : CA_S4ToCA_S3 )
+
+			State CA_init ( in : CA_S1ToCA_S2 out : CA_initToCA_initOK )
+
+			State CA_initOK ( in : CA_initToCA_initOK out : CA_initOKToCA_idle )
 		}
 
 		AutomataRelationDefinition neverTickDef [ NeverTick ] {
@@ -188,9 +212,13 @@ AutomataConstraintLibrary LinguaFrancaUtils {
 			from R_notTriggered to R_idle : R_S7ToR_S2
 			-> ( when Reaction_allOutputAbsent, Reaction_outputsUpdate )
 
+			from R_finished to R_idle : R_finishedToR_idle
+			-> ( when Reaction_allOutputAbsent, Reaction_outputsUpdate )
+
 			State R_S1 ( out : R_S1ToR_S2 )
 
-			State R_idle ( in : R_S1ToR_S2, R_S6ToR_S2, R_S7ToR_S2 out :
+			State R_idle ( in : R_S1ToR_S2, R_S6ToR_S2, R_S7ToR_S2, R_finishedToR_idle
+			out :
 			R_S2ToR_S3, R_S2ToR_S5, R_S2ToR_S2 )
 
 			State R_triggered ( in : R_S2ToR_S3, R_S3ToR_S32 out : R_S3ToR_S32, R_S3ToR_S5,
@@ -201,7 +229,7 @@ AutomataConstraintLibrary LinguaFrancaUtils {
 			State R_ready ( in : R_S3ToR_S5, R_S2ToR_S5, R_S3ToR_S52 out :
 			R_S3ToR_S3 )
 
-			State R_finished ( in : R_S3ToR_S2 out : R_S6ToR_S2 )
+			State R_finished ( in : R_S3ToR_S2 out : R_S6ToR_S2, R_finishedToR_idle )
 
 			State R_notTriggered ( in : R_S2ToR_S2 out : R_S7ToR_S2 )
 		}

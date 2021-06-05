@@ -74,7 +74,7 @@ public class GanttChartBehaviorManager implements IEngineAddon {
 					) {
 				interestingRelations.add(or);
 			}
-			System.out.println(p);
+//			System.out.println(p);
 		}
 //		relations.removeIf(or -> ! ((Precedence)or).));
 		for(MSEOccurrence occ : StepHelper.collectAllMSEOccurrences(logicalStepExecuted)){

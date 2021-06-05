@@ -9,6 +9,7 @@ import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.Var
 import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect.*;
 import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect.*;
 import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ConnectionAspect.*;
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.TimerAspect.*;
 
 import org.lflang.lf.Model
 import org.lflang.lf.Reaction
@@ -36,7 +37,7 @@ import org.lflang.lf.TimedConcept
 import org.lflang.lf.Parameter
 
 class DebugLevel{
-	public static int level =  0  //0 -> no log //1 -> normal log //2 all logs
+	public static int level =  1  //0 -> no log //1 -> normal log //2 all logs
 } 
  
 class ScheduledTimeAdvancement{
@@ -137,7 +138,31 @@ class ModelAspect {
 			}
 		}
 		
-//		TODO: add timers with 0 offset in the event queue.
+		var it = _self.eAllContents
+		while(it.hasNext()){
+			val elem = it.next
+			if(elem instanceof Timer){
+				if (DebugLevel.level > 1) println("deal with offset of "+elem.name)
+				var offset = 0
+				if (elem.offset.time !== null){
+					offset = elem.offset.time.interval * 1000 //TODO use the unit
+				}else
+					if (elem.offset.literal !== null){
+						offset = Integer.parseInt(elem.offset.literal) * 1000 //TODO use the unit
+					}else
+						{
+						//look for the parameter in the instance
+							var theInstance = _self.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (elem.eContainer as Reactor).name]
+							offset = theInstance.parameters.findFirst[p | p.lhs.name == elem.offset.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
+						}
+				
+				if(offset == 0){
+					_self.schedule(elem, offset)
+					elem.offsetToDo = false
+				}
+			}
+		}
+		
 	}
 	
 	def void timeJump(){
@@ -187,7 +212,7 @@ class ModelAspect {
 				if (rlt == 0 && lastMS == -1){
 					lastMS = _self.currentMicroStep
 				}
-				_self.eventQueue.add(i, new ScheduledTimeAdvancement(tc, rlt, (lastMS == -1) ? 0 : lastMS+1)) 
+				_self.eventQueue.add(i, new ScheduledTimeAdvancement(tc, rlt, (lastMS == -1) ? 0 : lastMS+1))
 				if (DebugLevel.level > 1) println("afterSchedule middle of list (1): "+_self.eventQueue)
 				if (DebugLevel.level > 0) println("\t\t scheduled time advancements: "+_self.eventQueue)
 				return
@@ -294,6 +319,9 @@ class TimerAspect{
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		val list = model.eventQueue
+		if(indexOfSelf == -1){
+			return false;
+		}
 		var result = (list.get(indexOfSelf).releaseDate == 0)
 		if (DebugLevel.level > 0) println(result+Colors.RESET)
 		return result
@@ -457,9 +485,9 @@ class VarRefAspect{
 			return _self.variable.currentValue !== null
 		}
 		if (_self.variable instanceof Action){
-			return (_self.variable as Action).nextSchedule !== null
+			return (_self.variable as Action).nextSchedule != -1 
 		}
-		return null
+		return false
 	}
 }
 
@@ -594,16 +622,21 @@ class ReactionAspect{
 //		println("context from RW= "+ context.newSchedules)
 		
 		for(VarRef vRef : _self.sources + _self.effects) {
+			if (context.newSchedules.containsKey(vRef.variable)){
+				(vRef.variable as Action).nextSchedule = context.newSchedules.get(vRef.variable) as Integer *1000 //TODO: use unit
+//				println("#########    sched "+vRef.variable.name+" in "+ (vRef.variable as Action).nextSchedule)
+			}else{
+				if (vRef.variable instanceof Action) {
+					vRef.variable.currentValue = null
+				}
+			}
 			if (context.outAssignements.containsKey(vRef.variable)){
 				vRef.variable.currentValue = context.outAssignements.get(vRef.variable)
 //				println("#########    "+vRef.variable.name+" = "+ vRef.variable.currentValue)
 			}else{
 				vRef.variable.currentValue = null
 			}
-			if (context.newSchedules.containsKey(vRef.variable)){
-				(vRef.variable as Action).nextSchedule = context.newSchedules.get(vRef.variable) as Integer *1000 //TODO: use unit
-//				println("#########    sched "+vRef.variable.name+" in "+ (vRef.variable as Action).nextSchedule)
-			}
+			
 			
 		}	
 		var i = 0

@@ -17,8 +17,10 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.concurrentmse.FeedbackMSE;
 import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.engine.AbstractSolverCodeExecutorConcurrentEngine;
+import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.engine.MoccmlExecutionEngine;
 import org.eclipse.gemoc.execution.concurrent.ccsljavaxdsml.api.moc.ICCSLSolver;
 import org.eclipse.gemoc.execution.concurrent.ccsljavaxdsml.api.moc.ISolver;
 import org.eclipse.gemoc.trace.commons.model.helper.StepHelper;
@@ -151,7 +153,7 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 	@Override
 	public void engineAboutToStart(final IExecutionEngine<?> engine) {
 		_solver = ((AbstractSolverCodeExecutorConcurrentEngine)engine).getSolver();
-		
+		Resource resInEngine = ((MoccmlExecutionEngine)engine).getExecutionContext().getResourceModel();
 		Display.getDefault().syncExec(new Runnable() {
 		    @Override
 		    public void run() {
@@ -189,7 +191,7 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 					if (b._ce == ced)
 						continue loop1;
 				}
-				AnimateTicksBehaviour atb = new AnimateTicksBehaviour(ced, _viewContext);
+				AnimateTicksBehaviour atb = new AnimateTicksBehaviour(ced, _viewContext, resInEngine);
 				behaviorList.add(atb);
 			}
 	}

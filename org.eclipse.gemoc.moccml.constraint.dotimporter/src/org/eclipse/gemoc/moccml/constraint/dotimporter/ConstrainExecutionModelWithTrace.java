@@ -52,6 +52,7 @@ import com.alexmerz.graphviz.objects.Node;
 
 import toools.io.file.RegularFile;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.Clock;
+import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.EventKind;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.BasicType.Element;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.CCSLModel.ClockConstraintSystem;
 import fr.inria.aoste.timesquare.ccslkernel.model.utils.ResourceLoader;
@@ -229,7 +230,9 @@ public Resource handleCreationOfCCSLFromTrace() {
 		traceCCSLFile.append(("\t Relation theUltimateRelation[TraceSpecificConstraint](\n").getBytes());
 		String sep="";
 		for(String observedClockName : observedClockNames ){
-			traceCCSLFile.append(("\t\t"+sep+"TraceSpecificConstraint_"+observedClockName+"-> "+clockNameToClock.get(observedClockName).getName().replaceAll("\\.",  "_")+" \n").getBytes());
+			if (!observedClockName.contains(",") ) {
+				traceCCSLFile.append(("\t\t"+sep+"TraceSpecificConstraint_"+observedClockName.replaceAll("\\.",  "_")+"-> "+clockNameToClock.get(observedClockName).getName().replaceAll("\\.",  "_")+" \n").getBytes());
+			}
 			sep=",";
 		}
 		traceCCSLFile.append("\t)\n".getBytes());
@@ -275,8 +278,10 @@ public Resource handleCreationOfCCSLFromTrace() {
 		constraintDefFile.append("RelationDeclaration	TraceSpecificConstraint(".getBytes());
 		String sep = "";
 		for(String aClock : observedClockNames){
-			constraintDefFile.append((sep+"TraceSpecificConstraint_"+aClock.replaceAll("\\.",  "_")+":clock").getBytes());
-			sep=",";
+			if (!aClock.contains(",") ) {
+				constraintDefFile.append((sep+"TraceSpecificConstraint_"+aClock.replaceAll("\\.",  "_")+":clock").getBytes());
+				sep=",";
+			}
 		}
 		constraintDefFile.append(")\n".getBytes());
 		constraintDefFile.append("	           }\n".getBytes());
@@ -321,7 +326,7 @@ public Resource handleCreationOfCCSLFromTrace() {
 			for(Edge outgoingEdge : dotGraph.getEdges().stream().filter(e -> e.getSource().getNode().getId().getId() == node.getId().getId()).map(o -> (Edge)o).collect(Collectors.toList())) {
 				String sourceName = "s"+outgoingEdge.getSource().getNode().getId().getId();
 				String targetName = "s"+outgoingEdge.getTarget().getNode().getId().getId();
-				String[] splittedLine = outgoingEdge.getAttributes().get("label").split(":");
+				String[] splittedLine = outgoingEdge.getAttributes().get("label").split(",");
 				sep = "";
 				String allClocks = "";
 				for (int j = 0; j < splittedLine.length; j++){
@@ -374,7 +379,9 @@ public Resource handleCreationOfCCSLFromTrace() {
 				continue;
 			}
 			if(associatedObject instanceof Reaction) {
-				feedWithReactionName(aClock, associatedObject);
+				if(aClock.getTickingEvent().getKind() == EventKind.PRODUCE) {
+					feedWithReactionName(aClock, associatedObject);
+				}
 			}else {
 				feedWithModelName(aClock, associatedObject);
 			}
@@ -382,6 +389,7 @@ public Resource handleCreationOfCCSLFromTrace() {
 		return;
 	}
 	private void feedWithReactionName(Clock aClock, EObject associatedObject) {
+		
 		Reaction r = (Reaction) associatedObject;
 		Reactor rReactor = ((Reactor)r.eContainer());
 		Model m = (Model) r.eResource().getContents().get(0);
@@ -471,7 +479,7 @@ public Resource handleCreationOfCCSLFromTrace() {
 	private String[] getObservedClockNames(Graph dotGraph) {
 		Set<String> res = new HashSet<>();
 		for(Edge e : dotGraph.getEdges()) {
-			String[] splittedLine = e.getAttributes().get("label").split(":");
+			String[] splittedLine = e.getAttributes().get("label").split(",");
 			for(String clockName : splittedLine) {
 				if(clockName.compareTo("LS !") == 0) {
 					continue;

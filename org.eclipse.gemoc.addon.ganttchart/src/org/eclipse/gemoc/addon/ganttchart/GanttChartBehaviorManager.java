@@ -133,18 +133,6 @@ public class GanttChartBehaviorManager implements IEngineAddon {
 		}
 		
 	}
-//	private final class RunnableStart implements Runnable {
-//		public void run() {			
-//							
-//			for (AnimateTicksBehaviour behavior : behaviorList) {
-//				behavior.start();
-//			}
-////			for (AnimateAssertBehaviour assertBehavior : assertBehaviorList) {
-////				assertBehavior.setEditPart(_diagramEditPart);	 	
-////				assertBehavior.start();
-////			}
-//		}
-//	}
 
 
 

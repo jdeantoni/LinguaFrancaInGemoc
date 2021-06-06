@@ -632,8 +632,6 @@ class ReactionAspect{
 			}else{
 				vRef.variable.currentValue = null
 			}
-			
-			
 		}	
 		var i = 0
 		for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
@@ -647,5 +645,4 @@ class ReactionAspect{
 		}
 		
 	}
-	
 }

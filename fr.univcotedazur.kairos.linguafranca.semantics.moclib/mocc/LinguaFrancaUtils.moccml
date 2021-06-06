@@ -1,301 +1,123 @@
 AutomataConstraintLibrary LinguaFrancaUtils {
-	import
-	"platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/kernel.ccslLib"
-	as ccsl ;
-	import
-	"platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/CCSL.ccslLib"
-	as ccsl ;
+	import	"platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/kernel.ccslLib" as ccsl ;
+	import	"platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/CCSL.ccslLib" as ccsl ;
 
 	RelationLibrary LinguaFrancaLib {
 
 		AutomataRelationDefinition AlternatesFSMDef [ AlternatesFSM ] {
-
 			init:  S1
-
-			from S1 to even : S1Toeven
-			-> ( )
-
-			from even to odd : evenToodd
-			-> ( when AlternatesFSM_left )
-
-			from odd to even : oddToeven
-			-> ( when AlternatesFSM_right )
+			from S1 to even : S1Toeven -> ( )
+			from even to odd : evenToodd -> ( when AlternatesFSM_left )
+			from odd to even : oddToeven -> ( when AlternatesFSM_right )
 
 			State S1 ( out : S1Toeven )
-
 			State even ( in : S1Toeven, oddToeven out : evenToodd )
-
 			State odd ( in : evenToodd out : oddToeven )
 		}
 
 		AutomataRelationDefinition TimerConstraintDef [ TimerConstraint ] {
 
 			init:  TCD_S1
-
-			from TCD_S1 to T_checkIfOfsset0 : TCD_S1ToTCD_S2
-			-> ( )
-
-			from T_idle to T_armed : TCD_S2ToTCD_S3
-			-> ( when TimerConstraint_starts )
-
-			from T_checked to T_idle : TCD_S3ToTCD_S2
-			-> ( when TimerConstraint_release )
-
-			from T_checked to T_armed : TCD_S3ToTCD_S32
-			-> ( when TimerConstraint_wait )
-
-			from T_toCheck to T_checked : TCD_S4ToTCD_S3
-			-> ( when TimerConstraint_canTick )
-
-			from T_armed to T_toCheck : TCD_S4ToTCD_S5
-			-> ( when TimerConstraint_timeAdvancement )
-
-			from T_checkIfOfsset0 to T_offsetChecked : T_checkIfOfsset0ToT_offsetChecked
-			-> ( when TimerConstraint_canTick )
-
-			from T_offsetChecked to T_idle : T_offsetCheckedToT_idle
-			-> ( when TimerConstraint_release )
-
-			from T_offsetChecked to T_idle : T_offsetCheckedToT_idle2
-			-> ( when TimerConstraint_wait )
+			from TCD_S1 to T_checkIfOfsset0 : TCD_S1ToTCD_S2 -> ( )
+			from T_idle to T_armed : TCD_S2ToTCD_S3 -> ( when TimerConstraint_starts )
+			from T_checked to T_idle : TCD_S3ToTCD_S2 -> ( when TimerConstraint_release )
+			from T_checked to T_armed : TCD_S3ToTCD_S32 -> ( when TimerConstraint_wait )
+			from T_toCheck to T_checked : TCD_S4ToTCD_S3 -> ( when TimerConstraint_canTick )
+			from T_armed to T_toCheck : TCD_S4ToTCD_S5 -> ( when TimerConstraint_timeAdvancement )
+			from T_checkIfOfsset0 to T_offsetChecked : T_checkIfOfsset0ToT_offsetChecked -> ( when TimerConstraint_canTick )
+			from T_offsetChecked to T_idle : T_offsetCheckedToT_idle -> ( when TimerConstraint_release )
+			from T_offsetChecked to T_idle : T_offsetCheckedToT_idle2 -> ( when TimerConstraint_wait )
 
 			State TCD_S1 ( out : TCD_S1ToTCD_S2 )
-
-			State T_idle ( in : TCD_S3ToTCD_S2, T_offsetCheckedToT_idle,
-			T_offsetCheckedToT_idle2 out : TCD_S2ToTCD_S3 )
-
+			State T_idle ( in : TCD_S3ToTCD_S2, T_offsetCheckedToT_idle, T_offsetCheckedToT_idle2 out : TCD_S2ToTCD_S3 )
 			State T_checked ( in : TCD_S4ToTCD_S3 out : TCD_S3ToTCD_S2, TCD_S3ToTCD_S32 )
-
 			State T_armed ( in : TCD_S2ToTCD_S3, TCD_S3ToTCD_S32 out : TCD_S4ToTCD_S5 )
-
 			State T_toCheck ( in : TCD_S4ToTCD_S5 out : TCD_S4ToTCD_S3 )
-
-			State T_checkIfOfsset0 ( in : TCD_S1ToTCD_S2 out :
-			T_checkIfOfsset0ToT_offsetChecked )
-
-			State T_offsetChecked ( in : T_checkIfOfsset0ToT_offsetChecked out :
-			T_offsetCheckedToT_idle, T_offsetCheckedToT_idle2 )
-		}
-
-		AutomataRelationDefinition ConnectionActionSelfLoopDef [
-		ConnectionActionSelfLoop ] {
-
-			init:  CASL_S1
-
-			from CASL_S1 to CASLD_S6 : CASL_S1ToCASL_S2
-			-> ( )
-
-			from CASL_S3 to CASL_S4 : CASL_S3ToCASL_S2
-			-> ( when ConnectionActionSelfLoop_release )
-
-			from CASL_S3 to CASL_S4 : CASL_S3ToCASL_S32
-			-> ( when ConnectionActionSelfLoop_wait )
-
-			from CASL_S5 to CASL_S3 : CASL_S4ToCASL_S3
-			-> ( when ConnectionActionSelfLoop_canTick )
-
-			from CASL_S4 to CASL_S5 : CASL_S4ToCASL_S5
-			-> ( when ConnectionActionSelfLoop_timeAdvancement )
-
-			from CASLD_S6 to CASL_S4 : CASL_S4ToCASL_S4
-			-> ( when ConnectionActionSelfLoop_wait )
-
-			from CASL_S4 to CASL_S4 : CASL_S4ToCASL_S42
-			-> ( when ConnectionActionSelfLoop_starts )
-
-			State CASL_S1 ( out : CASL_S1ToCASL_S2 )
-
-			State CASL_S3 ( in : CASL_S4ToCASL_S3 out : CASL_S3ToCASL_S2,
-			CASL_S3ToCASL_S32 )
-
-			State CASL_S4 ( in : CASL_S4ToCASL_S4, CASL_S4ToCASL_S42, CASL_S3ToCASL_S2,
-			CASL_S3ToCASL_S32 out : CASL_S4ToCASL_S5, CASL_S4ToCASL_S42
-			)
-
-			State CASL_S5 ( in : CASL_S4ToCASL_S5 out :
-			CASL_S4ToCASL_S3 )
-
-			State CASLD_S6 ( in : CASL_S1ToCASL_S2 out : CASL_S4ToCASL_S4 )
+			State T_checkIfOfsset0 ( in : TCD_S1ToTCD_S2 out : T_checkIfOfsset0ToT_offsetChecked )
+			State T_offsetChecked ( in : T_checkIfOfsset0ToT_offsetChecked out : T_offsetCheckedToT_idle, T_offsetCheckedToT_idle2 )
 		}
 
 		AutomataRelationDefinition ConnectionActionDef [ ConnectionAction ] {
 
 			init:  CA_S1
+			from CA_S1 to CA_init : CA_S1ToCA_S2 -> ( )
 
-			from CA_S1 to CA_init : CA_S1ToCA_S2
-			-> ( )
-
-			from CA_checked to CA_idle : CA_S3ToCA_S2
-			-> ( when ConnectionAction_release )
-
-			from CA_checked to CA_idle : CA_S3ToCA_S32
-			-> ( when ConnectionAction_wait )
-
-			from CA_toCheck to CA_checked : CA_S4ToCA_S3
-			-> ( when ConnectionAction_canTick )
-
-			from CA_idle to CA_toCheck : CA_S4ToCA_S5
-			-> ( when ConnectionAction_timeAdvancement )
-
-			from CA_idle to CA_idle : CA_S4ToCA_S42
-			-> ( when ConnectionAction_starts )
-
-			from CA_init to CA_initOK : CA_initToCA_initOK
-			-> ( when ConnectionAction_canTick )
-
-			from CA_initOK to CA_idle : CA_initOKToCA_idle
-			-> ( when ConnectionAction_wait )
-
+			from CA_checked to CA_idle : CA_S3ToCA_S2 -> ( when ConnectionAction_release )
+			from CA_checked to CA_idle : CA_S3ToCA_S32 -> ( when ConnectionAction_wait )
+			from CA_toCheck to CA_checked : CA_S4ToCA_S3 -> ( when ConnectionAction_canTick )
+			from CA_idle to CA_toCheck : CA_S4ToCA_S5 -> ( when ConnectionAction_timeAdvancement )
+			from CA_idle to CA_idle : CA_S4ToCA_S42 -> ( when ConnectionAction_starts )
+			from CA_init to CA_initOK : CA_initToCA_initOK -> ( when ConnectionAction_canTick )
+			from CA_initOK to CA_idle : CA_initOKToCA_idle -> ( when ConnectionAction_wait )
+			
 			State CA_S1 ( out : CA_S1ToCA_S2 )
-
 			State CA_checked ( in : CA_S4ToCA_S3 out : CA_S3ToCA_S2, CA_S3ToCA_S32 )
-
-			State CA_idle ( in : CA_S4ToCA_S42, CA_S3ToCA_S2, CA_S3ToCA_S32,
-			CA_initOKToCA_idle out : CA_S4ToCA_S5, CA_S4ToCA_S42 )
-
+			State CA_idle ( in : CA_S4ToCA_S42, CA_S3ToCA_S2, CA_S3ToCA_S32, CA_initOKToCA_idle out : CA_S4ToCA_S5, CA_S4ToCA_S42 )
 			State CA_toCheck ( in : CA_S4ToCA_S5 out : CA_S4ToCA_S3 )
-
 			State CA_init ( in : CA_S1ToCA_S2 out : CA_initToCA_initOK )
-
 			State CA_initOK ( in : CA_initToCA_initOK out : CA_initOKToCA_idle )
 		}
 
 		AutomataRelationDefinition neverTickDef [ NeverTick ] {
 
 			init:  TD_S1
-
-			from TD_S1 to TD_S2 : TD_S1ToTD_S2
-			-> ( )
-
-			from TD_S2 to TD_S2 : TD_S2ToTD_S2
-			-> ( when not ( nevertCickingClock ) )
-
+			from TD_S1 to TD_S2 : TD_S1ToTD_S2 -> ( )
+			from TD_S2 to TD_S2 : TD_S2ToTD_S2 -> ( when not ( nevertCickingClock ) )
+			
 			State TD_S1 ( out : TD_S1ToTD_S2 )
-
 			State TD_S2 ( in : TD_S1ToTD_S2, TD_S2ToTD_S2 out : TD_S2ToTD_S2 )
 		}
 
 		AutomataRelationDefinition ReactionDef [ Reaction ] {
 
 			init:  R_S1
-
-			from R_S1 to R_idle : R_S1ToR_S2
-			-> ( )
-
-			from R_idle to R_triggered : R_S2ToR_S3
-			-> ( when Reaction_TrigPresent )
-
-			from R_ready to R_executing : R_S3ToR_S3
-			-> ( when Reaction_startExecutes )
-
-			from R_executing to R_finished : R_S3ToR_S2
-			-> ( when Reaction_finishExecutes )
-
-			from R_triggered to R_triggered : R_S3ToR_S32
-			-> ( when Reaction_TrigPresent )
-
-			from R_triggered to R_ready : R_S3ToR_S5
-			-> ( when Reaction_lasTrigUpdate )
-
-			from R_idle to R_ready : R_S2ToR_S5
-			-> ( when Reaction_lasTrigUpdate, Reaction_TrigPresent )
-
-			from R_triggered to R_ready : R_S3ToR_S52
-			-> ( when Reaction_lasTrigUpdate, Reaction_TrigPresent )
-
-			from R_idle to R_notTriggered : R_S2ToR_S2
-			-> ( when Reaction_lasTrigUpdate )
-
-			from R_finished to R_idle : R_S6ToR_S2
-			-> ( when Reaction_outputsUpdate )
-
-			from R_notTriggered to R_idle : R_S7ToR_S2
-			-> ( when Reaction_allOutputAbsent, Reaction_outputsUpdate )
-
-			from R_finished to R_idle : R_finishedToR_idle
-			-> ( when Reaction_allOutputAbsent, Reaction_outputsUpdate )
-
+			from R_S1 to R_idle : R_S1ToR_S2-> ( )
+			from R_idle to R_triggered : R_S2ToR_S3 -> ( when Reaction_TrigPresent )
+			from R_ready to R_executing : R_S3ToR_S3 -> ( when Reaction_startExecutes )
+			from R_executing to R_finished : R_S3ToR_S2 -> ( when Reaction_finishExecutes )
+			from R_triggered to R_triggered : R_S3ToR_S32 -> ( when Reaction_TrigPresent )
+			from R_triggered to R_ready : R_S3ToR_S5 -> ( when Reaction_lasTrigUpdate )
+			from R_idle to R_ready : R_S2ToR_S5 -> ( when Reaction_lasTrigUpdate, Reaction_TrigPresent )
+			from R_triggered to R_ready : R_S3ToR_S52 -> ( when Reaction_lasTrigUpdate, Reaction_TrigPresent )
+			from R_idle to R_notTriggered : R_S2ToR_S2 -> ( when Reaction_lasTrigUpdate )
+			from R_finished to R_idle : R_S6ToR_S2-> ( when Reaction_outputsUpdate )
+			from R_notTriggered to R_idle : R_S7ToR_S2 -> ( when Reaction_allOutputAbsent, Reaction_outputsUpdate )
+			from R_finished to R_idle : R_finishedToR_idle -> ( when Reaction_allOutputAbsent, Reaction_outputsUpdate )
+			
 			State R_S1 ( out : R_S1ToR_S2 )
-
-			State R_idle ( in : R_S1ToR_S2, R_S6ToR_S2, R_S7ToR_S2, R_finishedToR_idle
-			out :
-			R_S2ToR_S3, R_S2ToR_S5, R_S2ToR_S2 )
-
-			State R_triggered ( in : R_S2ToR_S3, R_S3ToR_S32 out : R_S3ToR_S32, R_S3ToR_S5,
-			R_S3ToR_S52 )
-
+			State R_idle ( in : R_S1ToR_S2, R_S6ToR_S2, R_S7ToR_S2, R_finishedToR_idle out : R_S2ToR_S3, R_S2ToR_S5, R_S2ToR_S2 )
+			State R_triggered ( in : R_S2ToR_S3, R_S3ToR_S32 out : R_S3ToR_S32, R_S3ToR_S5,R_S3ToR_S52 )
 			State R_executing ( in : R_S3ToR_S3 out : R_S3ToR_S2 )
-
-			State R_ready ( in : R_S3ToR_S5, R_S2ToR_S5, R_S3ToR_S52 out :
-			R_S3ToR_S3 )
-
+			State R_ready ( in : R_S3ToR_S5, R_S2ToR_S5, R_S3ToR_S52 out :R_S3ToR_S3 )
 			State R_finished ( in : R_S3ToR_S2 out : R_S6ToR_S2, R_finishedToR_idle )
-
 			State R_notTriggered ( in : R_S2ToR_S2 out : R_S7ToR_S2 )
 		}
 
 		AutomataRelationDefinition ReactionNoOutputDef [ ReactionNoOutput ] {
 
 			init:  RNO_S1
-
-			from RNO_S1 to RNO_S2 : RNO_S1ToRNO_S2
-			-> ( )
-
-			from RNO_S2 to RNO_S3 : RNO_S2ToRNO_S3
-			-> ( when ReactionNoOutput_present )
-
-			from RNO_S5 to RNO_S4 : RNO_S3ToRNO_S3
-			-> ( when ReactionNoOutput_startExecutes )
-
-			from RNO_S4 to RNO_S2 : RNO_S3ToRNO_S2
-			-> ( when ReactionNoOutput_finishExecutes )
-
-			from RNO_S3 to RNO_S3 : RNO_S3ToRNO_S32
-			-> ( when ReactionNoOutput_present )
-
-			from RNO_S3 to RNO_S5 : RNO_S3ToRNO_S5
-			-> ( when ReactionNoOutput_lasInputUpdate )
-
-			from RNO_S2 to RNO_S5 : RNO_S2ToRNO_S5
-			-> ( when ReactionNoOutput_lasInputUpdate, ReactionNoOutput_present )
-
-			from RNO_S3 to RNO_S5 : RNO_S3ToRNO_S52
-			-> ( when ReactionNoOutput_lasInputUpdate, ReactionNoOutput_present )
-
-			from RNO_S2 to RNO_S2 : RNO_S2ToRNO_S2
-			-> ( when ReactionNoOutput_lasInputUpdate )
-
+			from RNO_S1 to RNO_S2 : RNO_S1ToRNO_S2 -> ( )
+			from RNO_S2 to RNO_S3 : RNO_S2ToRNO_S3 -> ( when ReactionNoOutput_present )
+			from RNO_S5 to RNO_S4 : RNO_S3ToRNO_S3 -> ( when ReactionNoOutput_startExecutes )
+			from RNO_S4 to RNO_S2 : RNO_S3ToRNO_S2 -> ( when ReactionNoOutput_finishExecutes )
+			from RNO_S3 to RNO_S3 : RNO_S3ToRNO_S32 -> ( when ReactionNoOutput_present )
+			from RNO_S3 to RNO_S5 : RNO_S3ToRNO_S5 -> ( when ReactionNoOutput_lasInputUpdate )
+			from RNO_S2 to RNO_S5 : RNO_S2ToRNO_S5 -> ( when ReactionNoOutput_lasInputUpdate, ReactionNoOutput_present )
+			from RNO_S3 to RNO_S5 : RNO_S3ToRNO_S52 -> ( when ReactionNoOutput_lasInputUpdate, ReactionNoOutput_present )
+			from RNO_S2 to RNO_S2 : RNO_S2ToRNO_S2 -> ( when ReactionNoOutput_lasInputUpdate )
+			
 			State RNO_S1 ( out : RNO_S1ToRNO_S2 )
-
 			State RNO_S2 ( in : RNO_S1ToRNO_S2, RNO_S2ToRNO_S2, RNO_S3ToRNO_S2 out : RNO_S2ToRNO_S3, RNO_S2ToRNO_S5, RNO_S2ToRNO_S2 )
-
-			State RNO_S3 ( in : RNO_S2ToRNO_S3, RNO_S3ToRNO_S32 out : RNO_S3ToRNO_S32,
-			RNO_S3ToRNO_S5, RNO_S3ToRNO_S52 )
-
+			State RNO_S3 ( in : RNO_S2ToRNO_S3, RNO_S3ToRNO_S32 out : RNO_S3ToRNO_S32, RNO_S3ToRNO_S5, RNO_S3ToRNO_S52 )
 			State RNO_S4 ( in : RNO_S3ToRNO_S3 out : RNO_S3ToRNO_S2 )
-
 			State RNO_S5 ( in : RNO_S3ToRNO_S5, RNO_S2ToRNO_S5, RNO_S3ToRNO_S52 out : RNO_S3ToRNO_S3 )
 		}
-		RelationDeclaration AlternatesFSM ( AlternatesFSM_left : clock,
-		AlternatesFSM_right : clock )
-		RelationDeclaration TimerConstraint ( TimerConstraint_starts : clock,
-		TimerConstraint_canTick : clock, TimerConstraint_wait : clock,
-		TimerConstraint_release : clock, TimerConstraint_timeAdvancement : clock )
-		RelationDeclaration ConnectionActionSelfLoop (
-		ConnectionActionSelfLoop_starts : clock, ConnectionActionSelfLoop_canTick :
-		clock, ConnectionActionSelfLoop_wait : clock,
-		ConnectionActionSelfLoop_release : clock, ConnectionActionSelfLoop_timeAdvancement :
-		clock )
-		RelationDeclaration ConnectionAction ( ConnectionAction_starts : clock,
-		ConnectionAction_canTick : clock, ConnectionAction_wait : clock,
-		ConnectionAction_release : clock, ConnectionAction_timeAdvancement : clock )
-		RelationDeclaration Reaction ( Reaction_TrigPresent : clock,
-		Reaction_lasTrigUpdate : clock, Reaction_startExecutes : clock,
-		Reaction_finishExecutes : clock, Reaction_outputsUpdate : clock,
-		Reaction_allOutputAbsent : clock)
-		RelationDeclaration ReactionNoOutput ( ReactionNoOutput_present : clock,
-		ReactionNoOutput_lasInputUpdate : clock, ReactionNoOutput_startExecutes :
-		clock, ReactionNoOutput_finishExecutes : clock )
+		
+		RelationDeclaration AlternatesFSM ( AlternatesFSM_left : clock, AlternatesFSM_right : clock )
+		RelationDeclaration TimerConstraint ( TimerConstraint_starts : clock, TimerConstraint_canTick : clock, TimerConstraint_wait : clock, TimerConstraint_release : clock, TimerConstraint_timeAdvancement : clock )
+		RelationDeclaration ConnectionAction ( ConnectionAction_starts : clock, ConnectionAction_canTick : clock, ConnectionAction_wait : clock, ConnectionAction_release : clock, ConnectionAction_timeAdvancement : clock )
+		RelationDeclaration Reaction ( Reaction_TrigPresent : clock, Reaction_lasTrigUpdate : clock, Reaction_startExecutes : clock, Reaction_finishExecutes : clock, Reaction_outputsUpdate : clock, Reaction_allOutputAbsent : clock)
+		RelationDeclaration ReactionNoOutput ( ReactionNoOutput_present : clock, ReactionNoOutput_lasInputUpdate : clock, ReactionNoOutput_startExecutes : clock, ReactionNoOutput_finishExecutes : clock )
 		RelationDeclaration NeverTick ( nevertCickingClock : clock )
 	}
 }

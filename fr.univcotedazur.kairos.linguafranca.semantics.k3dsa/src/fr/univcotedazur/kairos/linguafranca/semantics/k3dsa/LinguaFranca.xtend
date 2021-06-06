@@ -127,13 +127,18 @@ class ModelAspect {
 	
 	@InitializeModel
 	def void init(String[] s){
-		
+		DebugLevel.level = 0;
 		for(KeyValuePair p : _self.target.config.pairs){
 			if (p.name == "logging"){
-				DebugLevel.level = Integer.parseInt(p.value.literal);
+				switch (p.value.id){
+					case 'info':DebugLevel.level = 1
+					case 'warn' :DebugLevel.level = 1
+					case 'log' : DebugLevel.level = 1
+					case 'debug' :DebugLevel.level = 2
+					default :DebugLevel.level = 0
+				}
 			}
 		}
-		
 		
 		if (DebugLevel.level > 0) println(Colors.RED+"currentTime: "+_self.currentTime+" micro seconds"+Colors.RESET+"   ---   "+Colors.GREEN+_self.currentMicroStep+" micro steps"+Colors.RESET)
 		for(Reactor r : _self.reactors){

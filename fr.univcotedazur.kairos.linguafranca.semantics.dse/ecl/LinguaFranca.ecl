@@ -356,9 +356,9 @@ context Model
 		Relation Exclusion(self.timeJump, self.untimedAction)
 
 
-context Reactor --TODO generalize
-	inv reactionPriorityAccordingToModel:
-		Prior : self.reactions->at(1).startExecution prevails on self.reactions->at(2).startExecution
+--context Reactor --TODO generalize
+--	inv reactionPriorityAccordingToModel:
+--		Prior : self.reactions->at(1).startExecution prevails on self.reactions->at(2).startExecution
  
 /**BEGIN For priority propagation (see paper@RIVF019 */
 
@@ -394,8 +394,8 @@ context Timer
 		Relation SubClock(self.starts, theModel.untimedAction)
 	inv propagatesPrio7:
 		Relation SubClock(self.canRelease, theModel.allCanRelease)
---	inv propagatesPrio9:
---		Relation SubClock(self.wait, theModel.allWait)
+	inv propagatesPrio9:
+		Relation SubClock(self.wait, theModel.allWait)
 	inv propagatesPrio9a:
 		Relation SubClock(self.wait, theModel.untimedAction)
 
@@ -403,24 +403,24 @@ context Action
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	inv propagatesPrio6:
 		Relation SubClock(self.starts, theModel.untimedAction)
--- 	inv propagatesPrio8:
--- 	(self.minDelay <> null and self.minDelay.time <> null) implies
---		Relation SubClock(self.canRelease, theModel.allCanRelease)
---	inv propagatesPrio10:
---	(self.minDelay <> null and self.minDelay.time <> null) implies
---		Relation SubClock(self.wait, theModel.allWait)
+ 	inv propagatesPrio8:
+ 	(self.minDelay <> null and self.minDelay.time <> null) implies
+		Relation SubClock(self.canRelease, theModel.allCanRelease)
+	inv propagatesPrio10:
+	(self.minDelay <> null and self.minDelay.time <> null) implies
+		Relation SubClock(self.wait, theModel.allWait)
 		
 context Connection --only timed ones
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	inv propagatesPrio11:
 	(self.delay <> null ) implies
 		Relation SubClock(self.starts, theModel.untimedAction)
--- 	inv propagatesPrio12:
--- 	(self.delay <> null ) implies
---		Relation SubClock(self.canRelease, theModel.allCanRelease)
---	inv propagatesPrio13:
---	(self.delay <> null) implies
---		Relation SubClock(self.wait, theModel.allWait)
+ 	inv propagatesPrio12:
+ 	(self.delay <> null ) implies
+		Relation SubClock(self.canRelease, theModel.allCanRelease)
+	inv propagatesPrio13:
+	(self.delay <> null) implies
+		Relation SubClock(self.wait, theModel.allWait)
 		
 context TriggerRef
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)

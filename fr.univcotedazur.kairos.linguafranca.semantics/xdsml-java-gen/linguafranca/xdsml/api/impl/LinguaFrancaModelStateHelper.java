@@ -78,6 +78,8 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 			res.getOwnedElementstates().add(elemState);
 				AttributeNameToValue n2v0 = new AttributeNameToValue("nextSchedule", LinguaFrancaRTDAccessor.getnextSchedule(model));
 				elemState.getSavedRTDs().add(n2v0);
+				AttributeNameToValue n2v1 = new AttributeNameToValue("actionBufferedValues", LinguaFrancaRTDAccessor.getactionBufferedValues(model));
+				elemState.getSavedRTDs().add(n2v1);
 		}
 		clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect.class);
 		if (clazz.isInstance(model)) {
@@ -101,11 +103,15 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 			elemState.setModelElement(model);
 			res.getOwnedElementstates().add(elemState);
 			if (allRTDs) {  //property not in state space:currentTime
+				AttributeNameToValue n2v0 = new AttributeNameToValue("currentTime", LinguaFrancaRTDAccessor.getcurrentTime(model));
+				elemState.getSavedRTDs().add(n2v0);
 			}
 			if (allRTDs) {  //property not in state space:currentMicroStep
+				AttributeNameToValue n2v1 = new AttributeNameToValue("currentMicroStep", LinguaFrancaRTDAccessor.getcurrentMicroStep(model));
+				elemState.getSavedRTDs().add(n2v1);
 			}
-				AttributeNameToValue n2v0 = new AttributeNameToValue("eventQueue", LinguaFrancaRTDAccessor.geteventQueue(model));
-				elemState.getSavedRTDs().add(n2v0);
+				AttributeNameToValue n2v2 = new AttributeNameToValue("eventQueue", LinguaFrancaRTDAccessor.geteventQueue(model));
+				elemState.getSavedRTDs().add(n2v2);
 		}
 		TreeIterator<EObject> allContentIt = model.eAllContents();
 		while (allContentIt.hasNext()) {
@@ -135,6 +141,8 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 				res.getOwnedElementstates().add(elemState);
 				AttributeNameToValue n2v0 = new AttributeNameToValue("nextSchedule", LinguaFrancaRTDAccessor.getnextSchedule(elem));
 				elemState.getSavedRTDs().add(n2v0);
+				AttributeNameToValue n2v1 = new AttributeNameToValue("actionBufferedValues", LinguaFrancaRTDAccessor.getactionBufferedValues(elem));
+				elemState.getSavedRTDs().add(n2v1);
 			}
 			clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect.class);
 			if (clazz.isInstance(elem)) {

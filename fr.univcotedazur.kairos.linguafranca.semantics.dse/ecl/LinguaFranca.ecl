@@ -12,6 +12,8 @@ ECLimport "platform:/resource/fr.univcotedazur.kairos.linguafranca.semantics.moc
 /**
  * TODO: 
  *    add support for link between logical and physical time
+ *    add mindelay
+ *    add shutdown
  */
 
 

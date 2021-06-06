@@ -38,6 +38,13 @@ public class LinguaFrancaRTDAccessor {
 	public static boolean setnextSchedule(EObject eObject, java.lang.Integer newValue) {
      java.lang.Integer theValue = newValue == null ? null: new java.lang.Integer(newValue);		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect", "nextSchedule", theValue);
 	}
+  public static java.util.LinkedList getactionBufferedValues(EObject eObject) {
+     java.util.LinkedList theProperty = (java.util.LinkedList)getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect", "actionBufferedValues");
+		return (theProperty == null) ? null : new java.util.LinkedList((java.util.LinkedList)  theProperty);
+}
+	public static boolean setactionBufferedValues(EObject eObject, java.util.LinkedList newValue) {
+     java.util.LinkedList theValue = newValue == null ? null: new java.util.LinkedList(newValue);		return setAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect", "actionBufferedValues", theValue);
+	}
   public static java.lang.Boolean getoffsetToDo(EObject eObject) {
      java.lang.Boolean theProperty = (java.lang.Boolean)getAspectProperty(eObject, "fr.univcotedazur.kairos.linguafranca.semantics.LinguaFranca", "fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.TimerAspect", "offsetToDo");
 		return (theProperty == null) ? null : new java.lang.Boolean((java.lang.Boolean)  theProperty);

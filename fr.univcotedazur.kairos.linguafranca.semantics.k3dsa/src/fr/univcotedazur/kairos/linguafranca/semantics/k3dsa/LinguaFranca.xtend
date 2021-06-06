@@ -1,43 +1,41 @@
 package fr.univcotedazur.kairos.linguafranca.semantics.k3dsa;
 
 import fr.inria.diverse.k3.al.annotationprocessor.Aspect
-import org.eclipse.gemoc.execution.concurrent.ccsljavaxdsml.api.extensions.languages.NotInStateSpace
-
-
-import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect.*;
-import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect.*;
-import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect.*;
-import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect.*;
-import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ConnectionAspect.*;
-import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.TimerAspect.*;
-
-import org.lflang.lf.Model
-import org.lflang.lf.Reaction
-import org.lflang.lf.Reactor
-import org.lflang.lf.Variable
-import org.lflang.lf.Timer
-
 import fr.inria.diverse.k3.al.annotationprocessor.InitializeModel
 import fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.colors.Colors
+import groovy.lang.Binding
+import groovy.lang.GroovyShell
 import java.util.ArrayList
+import java.util.HashMap
+import java.util.LinkedList
+import java.util.List
+import java.util.Map
+import org.eclipse.gemoc.execution.concurrent.ccsljavaxdsml.api.extensions.languages.NotInStateSpace
 import org.lflang.lf.Action
 import org.lflang.lf.Connection
-import groovy.lang.GroovyShell
-import groovy.lang.Binding
-import org.lflang.lf.VarRef
-import java.util.Map
-import java.util.HashMap
-import org.lflang.lf.StateVar
-import org.lflang.lf.TriggerRef
+import org.lflang.lf.KeyValuePair
+import org.lflang.lf.Model
 import org.lflang.lf.Output
-import org.lflang.lf.Port
-import java.util.List
-import java.util.LinkedList
-import org.lflang.lf.TimedConcept
 import org.lflang.lf.Parameter
+import org.lflang.lf.Port
+import org.lflang.lf.Reaction
+import org.lflang.lf.Reactor
+import org.lflang.lf.StateVar
+import org.lflang.lf.TimedConcept
+import org.lflang.lf.Timer
+import org.lflang.lf.TriggerRef
+import org.lflang.lf.VarRef
+import org.lflang.lf.Variable
+
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect.*
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ConnectionAspect.*
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect.*
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect.*
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.TimerAspect.*
+import static extension fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect.*
 
 class DebugLevel{
-	public static int level =  1  //0 -> no log //1 -> normal log //2 all logs
+	public static int level =  0  //0 -> no log //1 -> normal log //2 all logs
 } 
  
 class ScheduledTimeAdvancement{
@@ -129,6 +127,14 @@ class ModelAspect {
 	
 	@InitializeModel
 	def void init(String[] s){
+		
+		for(KeyValuePair p : _self.target.config.pairs){
+			if (p.name == "logging"){
+				DebugLevel.level = Integer.parseInt(p.value.literal);
+			}
+		}
+		
+		
 		if (DebugLevel.level > 0) println(Colors.RED+"currentTime: "+_self.currentTime+" micro seconds"+Colors.RESET+"   ---   "+Colors.GREEN+_self.currentMicroStep+" micro steps"+Colors.RESET)
 		for(Reactor r : _self.reactors){
 			for(StateVar sv : r.stateVars){
@@ -136,7 +142,6 @@ class ModelAspect {
 					return
 				}
 				sv.currentStateValue = Integer.valueOf(sv.init.get(0).literal)
-				//println ("init "+sv.name+"="+sv.currentValue)
 			}
 		}
 		
@@ -145,19 +150,7 @@ class ModelAspect {
 			val elem = it.next
 			if(elem instanceof Timer){
 				if (DebugLevel.level > 1) println("deal with offset of "+elem.name)
-				var offset = 0
-				if (elem.offset.time !== null){
-					offset = elem.offset.time.interval * 1000 //TODO use the unit
-				}else
-					if (elem.offset.literal !== null){
-						offset = Integer.parseInt(elem.offset.literal) * 1000 //TODO use the unit
-					}else
-						{
-						//look for the parameter in the instance
-							var theInstance = _self.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (elem.eContainer as Reactor).name]
-							offset = theInstance.parameters.findFirst[p | p.lhs.name == elem.offset.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
-						}
-				
+				var offset = elem.getOffset(_self)
 				if(offset == 0){
 					_self.schedule(elem, offset)
 					elem.offsetToDo = false
@@ -166,6 +159,20 @@ class ModelAspect {
 		}
 		
 	}
+	
+//	def int getOffset(Timer elem) {
+//		if (elem.offset.time !== null){
+//			return elem.offset.time.interval * 1000 //TODO use the unit
+//		}else
+//			if (elem.offset.literal !== null){
+//				return Integer.parseInt(elem.offset.literal) * 1000 //TODO use the unit
+//			}else
+//				{
+//				//look for the parameter in the instance
+//					var theInstance = _self.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (elem.eContainer as Reactor).name]
+//					return theInstance.parameters.findFirst[p | p.lhs.name == elem.offset.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
+//				}
+//	}
 	
 	def void timeJump(){
 		if (DebugLevel.level > 1){
@@ -277,38 +284,44 @@ class TimerAspect{
 		var nextTimeHop = -1
 		if(_self.offsetToDo){
 			if (DebugLevel.level > 1) println("deal with offset of "+_self.name)
-			var offset = 0
-			if (_self.offset.time !== null){
-				offset = _self.offset.time.interval * 1000 //TODO use the unit
-			}else
-				if (_self.offset.literal !== null){
-					offset = Integer.parseInt(_self.offset.literal) * 1000 //TODO use the unit
-				}else
-					{
-					//look for the parameter in the instance
-						var theInstance = model.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (_self.eContainer as Reactor).name]
-						offset = theInstance.parameters.findFirst[p | p.lhs.name == _self.offset.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
-					}
+			var offset = _self.getOffset(model)
 			_self.offsetToDo = false
 			nextTimeHop = offset
 		}else{
-			var period = 0
-			if (_self.period.time !== null){
-				period = _self.period.time.interval * 1000 //TODO use the unit
-			}else
-				if (_self.offset.literal !== null){
-					period = Integer.parseInt(_self.period.literal) * 1000 //TODO use the unit
-				}else{
-					//look for the parameter in the instance
-						var theInstance = model.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (_self.eContainer as Reactor).name]
-						period = theInstance.parameters.findFirst[p | p.lhs.name == _self.period.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
-					}
+			var period = _self.getPeriod(model)
 			nextTimeHop = period
 		}
 		
 		model.schedule(_self, nextTimeHop)
 		if (DebugLevel.level > 1) println("exit schedule of "+_self.name)
 		if (DebugLevel.level > 0) println(Colors.BLUE+"\t\t"+_self.name+" starts: "+Colors.RESET+model.eventQueue)
+	}
+	
+	protected def int getPeriod(Timer _self, Model model) {
+		if (_self.period.time !== null){
+			return _self.period.time.interval * 1000 //TODO use the unit
+		}else
+			if (_self.offset.literal !== null){
+				return  Integer.parseInt(_self.period.literal) * 1000 //TODO use the unit
+			}else{
+				//look for the parameter in the instance
+					var theInstance = model.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (_self.eContainer as Reactor).name]
+					return  theInstance.parameters.findFirst[p | p.lhs.name == _self.period.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
+				}
+	}
+	
+	protected def int getOffset(Timer _self, Model model) {
+		if (_self.offset.time !== null){
+			return _self.offset.time.interval * 1000 //TODO use the unit
+		}else
+			if (_self.offset.literal !== null){
+				return Integer.parseInt(_self.offset.literal) * 1000 //TODO use the unit
+			}else
+				{
+				//look for the parameter in the instance
+					var theInstance = model.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (_self.eContainer as Reactor).name]
+					return theInstance.parameters.findFirst[p | p.lhs.name == _self.offset.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
+				}
 	}
 	
 	def boolean canTick(){
@@ -320,11 +333,11 @@ class TimerAspect{
 		
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
-		val list = model.eventQueue
+		
 		if(indexOfSelf == -1){
 			return false;
 		}
-		var result = (list.get(indexOfSelf).releaseDate == 0)
+		var result = (model.eventQueue.get(indexOfSelf).releaseDate == 0)
 		if (DebugLevel.level > 0) println(result+Colors.RESET)
 		return result
 	}
@@ -335,19 +348,13 @@ class TimerAspect{
 class ActionAspect{
 	
 	public Integer nextSchedule = -1
-	public LinkedList<Object> bufferedValues = new LinkedList<Object>()
+	public LinkedList<Object> actionBufferedValues = new LinkedList<Object>()
 	
 	def void release(){
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
 		if (indexOfSelf != -1) {
 			model.eventQueue.remove(indexOfSelf)
-//			var List<Variable> allVarToSet = _self.eResource.contents.get(0).eAllContents.filter[eo | eo instanceof VarRef && (eo as VarRef).eContainer instanceof Reaction].map[eo | eo as VarRef]
-//																						 .filter[vr | (vr.eContainer as Reaction).triggers.exists[t | t instanceof VarRef && (t as VarRef).variable == _self]].map[vr | vr.variable].toList
-//			var valToSet = _self.bufferedValues.removeFirst() as Integer
-//			for(v : allVarToSet){
-//				v.currentValue = valToSet
-//			}
 			if (DebugLevel.level > 0) println(((_self.minDelay === null || _self.minDelay.time === null)? Colors.GREEN : Colors.RED)+"\t\t"+_self.name+ " released "+Colors.RESET)
 		}else{
 			if (DebugLevel.level > 0) println("##########################  error ? Action already released ("+model.eventQueue+")")
@@ -357,8 +364,6 @@ class ActionAspect{
 	
 	def void schedule(){
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
-//		val indexOfSelf = model.getIndexOfTimer(_self)
-		
 		var int rlt = 0
 		if (_self.nextSchedule != -1){
 			rlt = _self.nextSchedule
@@ -378,12 +383,12 @@ class ActionAspect{
 		if (DebugLevel.level > 0) print(Colors.PURPLE+"\t\tAction "+_self.name+".canRelease() ->")
 		var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model
 		val indexOfSelf = model.getIndexOfTimer(_self)
-		val list = model.eventQueue
+		
 		if (indexOfSelf == -1){
 			if (DebugLevel.level > 0) println("false"+Colors.RESET)
 			return false
 		}
-		var result = (list.get(indexOfSelf).releaseDate == 0)
+		var result = (model.eventQueue.get(indexOfSelf).releaseDate == 0)
 		if (DebugLevel.level > 0) println(result+Colors.RESET)
 		return result
 	}
@@ -429,8 +434,7 @@ class ConnectionAspect{
 		if (indexOfSelf == -1){
 			return false
 		}
-		val list = model.eventQueue
-		var result = (list.get(indexOfSelf).releaseDate == 0)
+		var result = (model.eventQueue.get(indexOfSelf).releaseDate == 0)
 		if (DebugLevel.level > 0) println(result+Colors.RESET)
 		return result
 	}
@@ -459,17 +463,15 @@ class VariableAspect{
 				}
 				if (c.delay !== null && c.leftPorts.get(0).variable == _self && _self.currentValue !== null){
 					c.bufferedValues.add(_self.currentValue)
-					if (DebugLevel.level > 1) 
-					println('bufferedValues of '+c.leftPorts.get(0).variable+'->'+c.rightPorts.get(0).variable+'='+c.bufferedValues)
+					if (DebugLevel.level > 1) println('bufferedValues of '+c.leftPorts.get(0).variable+'->'+c.rightPorts.get(0).variable+'='+c.bufferedValues)
 				}
 			}
 			_self.currentValue = null	
 		}
 		if (_self instanceof Action){
 			if (_self.currentValue !== null){
-				_self.bufferedValues.add(_self.currentValue)
-				if (DebugLevel.level > 1) 
-				println('bufferedValues of '+_self.name+'='+_self.bufferedValues)
+				_self.actionBufferedValues.add(_self.currentValue)
+				if (DebugLevel.level > 1) println('bufferedValues of '+_self.name+'='+_self.actionBufferedValues)
 			}
 		}
 		
@@ -579,13 +581,6 @@ class ReactionAspect{
 			binding.setVariable(p.name, p.init.get(0).literal ) //no links to instances :-(
 		}
 		
-//		for(VarRef vRef :  _self.effects) { //WARNING: should not be necessary !
-//			if (vRef.variable instanceof Port){
-//				vRef.variable.currentValue = null
-//			}
-//		}
-		
-		
 		for(VarRef vRef :  _self.sources +_self.effects) { 
 			binding.setVariable(vRef.variable.name, vRef)
 		}
@@ -593,14 +588,14 @@ class ReactionAspect{
 			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Port){
 				binding.setVariable((tRef as VarRef).variable.name, (tRef as VarRef))
 				context.varToValue.put((tRef as VarRef).variable, (tRef as VarRef).variable.currentValue)
-//				println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
+				if (DebugLevel.level > 1) println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
 			}
 			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Action){
 				binding.setVariable((tRef as VarRef).variable.name, (tRef as VarRef))
-				if (! ((tRef as VarRef).variable as Action).bufferedValues.empty){ //not always a valued action
-					context.varToValue.put((tRef as VarRef).variable, ((tRef as VarRef).variable as Action).bufferedValues.removeFirst() as Integer)
+				if (! ((tRef as VarRef).variable as Action).actionBufferedValues.empty){ //not always a valued action
+					context.varToValue.put((tRef as VarRef).variable, ((tRef as VarRef).variable as Action).actionBufferedValues.removeFirst() as Integer)
 				}
-//				println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
+				if (DebugLevel.level > 1) println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
 			}
 		}
 		
@@ -612,9 +607,7 @@ class ReactionAspect{
 			sep=","
 		}
 		returnStatement = returnStatement + ']'
-			
-//		println("return Statement -> "+returnStatement)
-				
+							
 		val ucl = ReactionAspect.classLoader
 		val shell = new GroovyShell(ucl,binding)
 		print(Colors.BG_YELLOW)
@@ -623,13 +616,11 @@ class ReactionAspect{
 								returnStatement)
 				as ArrayList<Object>
 		print(Colors.RESET)
-//		println("context from RW= "+ context.outAssignements)
-//		println("context from RW= "+ context.newSchedules)
-		
+
 		for(VarRef vRef : _self.sources + _self.effects) {
 			if (context.newSchedules.containsKey(vRef.variable)){
 				(vRef.variable as Action).nextSchedule = context.newSchedules.get(vRef.variable) as Integer *1000 //TODO: use unit
-//				println("#########    sched "+vRef.variable.name+" in "+ (vRef.variable as Action).nextSchedule)
+				if (DebugLevel.level > 1) println("#########  scheduled in reaction :"+vRef.variable.name+" in "+ (vRef.variable as Action).nextSchedule)
 			}else{
 				if (vRef.variable instanceof Action) {
 					vRef.variable.currentValue = null
@@ -637,7 +628,7 @@ class ReactionAspect{
 			}
 			if (context.outAssignements.containsKey(vRef.variable)){
 				vRef.variable.currentValue = context.outAssignements.get(vRef.variable)
-//				println("#########    "+vRef.variable.name+" = "+ vRef.variable.currentValue)
+				if (DebugLevel.level > 1) println("#########  assigned in reaction  "+vRef.variable.name+" = "+ vRef.variable.currentValue)
 			}else{
 				vRef.variable.currentValue = null
 			}

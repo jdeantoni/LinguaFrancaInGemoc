@@ -307,10 +307,7 @@ main() {
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map eitherAbsentOrWait22eitherAbsentOrWait();
 		
 		
-		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map ConnectorConstraintsNoSelfLoop22ConnectorConstraintsNoSelfLoop();
-		
-		
-		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map ConnectorConstraints12ConnectorConstraints();
+		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map ConnectionLifeCycle22ConnectionLifeCycle();
 		
 		
 		getVeryAllElementsFromResourceSetOf(self.oclAsType(EObject), Connection.oclAsType(EClass)).oclAsType(Connection)->map TimedConnectorStartsWithSource22TimedConnectorStartsWithSource();
@@ -4371,47 +4368,15 @@ main() {
 		}
 		
 	
-		mapping inMM2::Connection::ConnectorConstraintsNoSelfLoop22ConnectorConstraintsNoSelfLoop(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
+		mapping inMM2::Connection::ConnectionLifeCycle22ConnectionLifeCycle(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
 			when { 
 						let theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model) in
 				
-				(self.delay <> null and self.rightPorts->first().variable.oclAsType(ecore::EObject).eContainer() <> self.leftPorts->first().variable.oclAsType(ecore::EObject).eContainer()) 
+				(self.delay <> null) 
 				
 }
 		{
-		 	name := getNameOrUID(self.oclAsType(EObject))+"ConnectionAction_ConnectorConstraintsNoSelfLoop";
-			type := seqOfRelationDeclaration->select(rd | rd.name = "ConnectionAction")->first();
-					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
-			
-			
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_starts']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_starts']->first();
-				};
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_canRelease']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_canTick']->first();
-				};
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_wait']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_wait']->first();
-				};
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(self.oclAsType(EObject))+'_releases']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_release']->first();
-				};
-				bindings += object TimeModel::CCSLModel::ClockExpressionAndRelation::Binding{
-					bindable := theMainBlock.elements[name = getNameOrUID(theModel.oclAsType(EObject))+'_timeJump']->first();
-					_abstract := seqOfAbstractEntity[name = 'ConnectionAction_timeAdvancement']->first();
-				};
-		
-		theMainBlock.relations += result;
-		}
-		
-	
-		mapping inMM2::Connection::ConnectorConstraints12ConnectorConstraints(): TimeModel::CCSLModel::ClockExpressionAndRelation::Relation
-		{
-		 	name := getNameOrUID(self.oclAsType(EObject))+"ConnectionAction_ConnectorConstraints";
+		 	name := getNameOrUID(self.oclAsType(EObject))+"ConnectionAction_ConnectionLifeCycle";
 			type := seqOfRelationDeclaration->select(rd | rd.name = "ConnectionAction")->first();
 					var theModel : Model := self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model);
 			

@@ -286,14 +286,14 @@ context Connection
 	(self.delay <> null) implies
 	Relation Exclusion(self.wait, self.leftPorts.variable->first().absent)
 		
-		
-	inv ConnectorConstraintsNoSelfLoop:
-		(self.delay <> null and self.rightPorts->first().variable.oclAsType(ecore::EObject).eContainer() <> self.leftPorts->first().variable.oclAsType(ecore::EObject).eContainer()) implies
+--		
+--	inv ConnectorConstraintsNoSelfLoop:
+--		(self.delay <> null and self.rightPorts->first().variable.oclAsType(ecore::EObject).eContainer() <> self.leftPorts->first().variable.oclAsType(ecore::EObject).eContainer()) implies
+--		Relation ConnectionAction(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+--		
+	inv ConnectionLifeCycle:
+		(self.delay <> null) implies
 		Relation ConnectionAction(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
-		
-	inv ConnectorConstraints:
-		Relation ConnectionAction(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
-		
 		
 	inv TimedConnectorStartsWithSource:
 		(self.delay <> null) implies	

@@ -112,8 +112,8 @@ AutomataConstraintLibrary LinguaFrancaUtils {
 			State RNO_S4 ( in : RNO_S3ToRNO_S3 out : RNO_S3ToRNO_S2 )
 			State RNO_S5 ( in : RNO_S3ToRNO_S5, RNO_S2ToRNO_S5, RNO_S3ToRNO_S52 out : RNO_S3ToRNO_S3 )
 		}
-		
-		RelationDeclaration AlternatesFSM ( AlternatesFSM_left : clock, AlternatesFSM_right : clock )
+		 
+		RelationDeclaration AlternatesFSM ( AlternatesFSM_left : clock, AlternatesFSM_right : clock ) 
 		RelationDeclaration TimerConstraint ( TimerConstraint_starts : clock, TimerConstraint_canTick : clock, TimerConstraint_wait : clock, TimerConstraint_release : clock, TimerConstraint_timeAdvancement : clock )
 		RelationDeclaration ConnectionAction ( ConnectionAction_starts : clock, ConnectionAction_canTick : clock, ConnectionAction_wait : clock, ConnectionAction_release : clock, ConnectionAction_timeAdvancement : clock )
 		RelationDeclaration Reaction ( Reaction_TrigPresent : clock, Reaction_lasTrigUpdate : clock, Reaction_startExecutes : clock, Reaction_finishExecutes : clock, Reaction_outputsUpdate : clock, Reaction_allOutputAbsent : clock)

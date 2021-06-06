@@ -160,20 +160,6 @@ class ModelAspect {
 		
 	}
 	
-//	def int getOffset(Timer elem) {
-//		if (elem.offset.time !== null){
-//			return elem.offset.time.interval * 1000 //TODO use the unit
-//		}else
-//			if (elem.offset.literal !== null){
-//				return Integer.parseInt(elem.offset.literal) * 1000 //TODO use the unit
-//			}else
-//				{
-//				//look for the parameter in the instance
-//					var theInstance = _self.reactors.findFirst[r | r.main == true].instantiations.findFirst[i | i.reactorClass.name == (elem.eContainer as Reactor).name]
-//					return theInstance.parameters.findFirst[p | p.lhs.name == elem.offset.parameter.name].rhs.get(0).time.interval * 1000 //TODO use the unit
-//				}
-//	}
-	
 	def void timeJump(){
 		if (DebugLevel.level > 1){
 			var Model model = _self.eResource.allContents.findFirst[eo | eo instanceof Model] as Model	

@@ -66,15 +66,6 @@ public class DataRepresentationBehaviour {
 		if(associatedObject instanceof EOperation){
 			associatedObject = _ce.getReferencedElement().get(_ce.getReferencedElement().size()-2);
 		}
-		EObject associatedObjectInKlighRes = null;
-		try {
-			associatedObjectInKlighRes = ((EObject)vc.getInputModel()).eResource().getEObject(EcoreUtil.getURI(associatedObject).fragment());
-		}
-		catch (java.lang.IllegalArgumentException e) {
-			System.err.println(e);
-			return;
-		}
-		Collection<EObject> diagramElements = vc.getTargetElements(associatedObjectInKlighRes);
 		
 		if (associatedObject.eClass().getName().contains("VarRef")) { //crappy but useful
 			VarRef vRef = (VarRef)associatedObject;
@@ -84,7 +75,6 @@ public class DataRepresentationBehaviour {
 			if (ek == EventEnumerator.PRODUCE || ek == EventEnumerator.FINISH)
 				for(EObject de : vRefDiagramElements ) {
 					if (de instanceof KLabel) {
-						Integer value = LinguaFrancaRTDAccessor.getcurrentValue(vRefInEngine.getVariable());
 						label = ((KLabel)de);
 						initialLabel  = label.getText();
 						break;

@@ -3149,7 +3149,7 @@ main() {
 				referencedObjectRefs += self.oclAsType(EObject).eClass().eAllOperations->select(op |op.name = "timeJump")->first().oclAsType(EObject);
 			
 				name := 'evt_'+getNameOrUID(self.oclAsType(EObject))+'_timeJump';
-			kind :=TimeModel::EventKind::undefined;
+			kind :=TimeModel::EventKind::start;
 						
 			};
 			type:= Kernel_Clock_Type;
@@ -3165,7 +3165,7 @@ main() {
  				referencedObjectRefs += self.oclAsType(EObject);
 			
 				name := 'evt_'+getNameOrUID(self.oclAsType(EObject))+'_untimedAction';
-			kind :=TimeModel::EventKind::undefined;
+			kind :=TimeModel::EventKind::start;
 						
 			};
 			type:= Kernel_Clock_Type;
@@ -3357,7 +3357,7 @@ main() {
  				referencedObjectRefs += self.oclAsType(EObject);
 			
 				name := 'evt_'+getNameOrUID(self.oclAsType(EObject))+'_present';
-			kind :=TimeModel::EventKind::undefined;
+			kind :=TimeModel::EventKind::produce;
 						
 			};
 			type:= Kernel_Clock_Type;
@@ -3373,7 +3373,7 @@ main() {
  				referencedObjectRefs += self.oclAsType(EObject);
 			
 				name := 'evt_'+getNameOrUID(self.oclAsType(EObject))+'_absent';
-			kind :=TimeModel::EventKind::undefined;
+			kind :=TimeModel::EventKind::finish;
 						
 			};
 			type:= Kernel_Clock_Type;

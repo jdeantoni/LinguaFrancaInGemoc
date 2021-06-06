@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.concurrentmse.FeedbackMSE;
 import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.engine.AbstractSolverCodeExecutorConcurrentEngine;
@@ -50,6 +51,7 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 
 	private ViewContext _viewContext = null;
 	final private List<AnimateTicksBehaviour> behaviorList = new ArrayList<AnimateTicksBehaviour>();
+	final private List<DataRepresentationBehaviour> dataBehaviourList = new ArrayList<DataRepresentationBehaviour>();
 //	final private List<AnimateAssertBehaviour> assertBehaviorList = new ArrayList<AnimateAssertBehaviour>();
 //	private CCSLInfo ccslhelper = null;	
 	private ISolver _solver;
@@ -60,6 +62,10 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 
 	@Override
 	public void stepExecuted(IExecutionEngine<?> engine, Step<?> logicalStepExecuted){
+		for ( DataRepresentationBehaviour b : dataBehaviourList){
+			b.start();
+		}
+		
 		for ( AnimateTicksBehaviour b : behaviorList){
 			b.finish();
 		}
@@ -96,6 +102,7 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 	public void engineStopped(IExecutionEngine<?> engine) {
 	//public void clear() {
 		behaviorList.clear();
+		_viewContext.notifyAll();
 		_viewContext = null;
 	}
 
@@ -187,13 +194,37 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 				//TODO: fix this ugly comparison !!!
 				if (mer.getElementRef().size() != 3)
 					continue loop1;
+				if (!(mer.getElementRef().get(2) instanceof Clock))
+					continue loop1;
 				for (AnimateTicksBehaviour b : behaviorList) {
 					if (b._ce == ced)
 						continue loop1;
 				}
-				AnimateTicksBehaviour atb = new AnimateTicksBehaviour(ced, _viewContext, resInEngine);
+				AnimateTicksBehaviour atb = new AnimateTicksBehaviour(ced, _viewContext);
 				behaviorList.add(atb);
 			}
+		
+		loop1: for(ModelElementReference mer : ((ICCSLSolver)_solver).getAllDiscreteClocks()){
+			GemocClockEntity ced = new GemocClockEntity(mer);
+			//TODO: fix this ugly comparison !!!
+			if (mer.getElementRef().size() != 3)
+				continue loop1;
+			if (!(mer.getElementRef().get(2) instanceof Clock))
+				continue loop1;
+			for (DataRepresentationBehaviour b : dataBehaviourList) {
+				if (b._ce == ced)
+					continue loop1;
+			}
+			EObject associatedObject = ced.getReferencedElement().get(ced.getReferencedElement().size()-1);
+			
+			if (associatedObject.eClass().getName().contains("VarRef")
+					||
+				associatedObject.eClass().getName().contains("Model")) {
+				DataRepresentationBehaviour drb = new DataRepresentationBehaviour(ced, _viewContext, resInEngine);
+				dataBehaviourList.add(drb);
+			}
+		}
+		
 	}
 
 	

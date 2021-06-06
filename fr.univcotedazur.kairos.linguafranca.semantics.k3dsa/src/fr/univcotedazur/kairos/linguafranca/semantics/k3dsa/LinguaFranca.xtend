@@ -97,14 +97,16 @@ class EventQueue extends LinkedList<ScheduledTimeAdvancement>{
 		var StringBuilder sb = new StringBuilder("[")
 		var String sep = ""
 		for(sa : this){
-			if(sa.microStep == 0){
-				sb.append(sep+Colors.RED+sa+Colors.RESET)
-			}else{
-				sb.append(sep+Colors.GREEN+sa+Colors.RESET)
-			}
+//			if(sa.microStep == 0){
+//				sb.append(sep+Colors.RED+sa+Colors.RESET)
+//			}else{
+//				sb.append(sep+Colors.GREEN+sa+Colors.RESET)
+//			}
+			sb.append(sep+sa)
 			sep=", "
 		}
-		sb.append(Colors.RESET+"]")
+//		sb.append(Colors.RESET+"]")
+		sb.append("]")
 		return sb.toString()
 	}
 	
@@ -461,6 +463,7 @@ class VariableAspect{
 					println('bufferedValues of '+c.leftPorts.get(0).variable+'->'+c.rightPorts.get(0).variable+'='+c.bufferedValues)
 				}
 			}
+			_self.currentValue = null	
 		}
 		if (_self instanceof Action){
 			if (_self.currentValue !== null){
@@ -469,7 +472,7 @@ class VariableAspect{
 				println('bufferedValues of '+_self.name+'='+_self.bufferedValues)
 			}
 		}
-			
+		
 	}
 }
 
@@ -594,7 +597,9 @@ class ReactionAspect{
 			}
 			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Action){
 				binding.setVariable((tRef as VarRef).variable.name, (tRef as VarRef))
-				context.varToValue.put((tRef as VarRef).variable, ((tRef as VarRef).variable as Action).bufferedValues.removeFirst() as Integer)
+				if (! ((tRef as VarRef).variable as Action).bufferedValues.empty){ //not always a valued action
+					context.varToValue.put((tRef as VarRef).variable, ((tRef as VarRef).variable as Action).bufferedValues.removeFirst() as Integer)
+				}
 //				println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
 			}
 		}

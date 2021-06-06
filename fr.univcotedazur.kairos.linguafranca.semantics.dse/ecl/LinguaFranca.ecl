@@ -32,8 +32,8 @@ package lf
  * Domain Specific Event definitions
  */
 context Model
-	def : timeJump : Event = self.timeJump()
-	def : untimedAction : Event = self
+	def : timeJump : Event(StartEvent) = self.timeJump()
+	def : untimedAction : Event(StartEvent) = self
 	
 	def : allRelease : Event = self
 	def : allCanRelease : Event = self
@@ -55,8 +55,8 @@ context TriggerRef  --mother class of VarRef
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 
 	def : updates : Event = self
-	def : present : Event = self
-	def : absent : Event = self 
+	def : present : Event(produceEvent) = self
+	def : absent : Event(FinishEvent) = self 
 	def if (self.oclIsKindOf(VarRef) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).effects->exists(t | t = self)
 		): isPresent : Event = self.isPresent()[result] 
 		       						switch 

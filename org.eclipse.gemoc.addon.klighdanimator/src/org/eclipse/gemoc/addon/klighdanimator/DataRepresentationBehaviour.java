@@ -12,37 +12,26 @@ package org.eclipse.gemoc.addon.klighdanimator;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import linguafranca.xdsml.api.impl.LinguaFrancaRTDAccessor;
 
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.swt.widgets.Display;
 import org.lflang.lf.Model;
 import org.lflang.lf.Reactor;
 import org.lflang.lf.VarRef;
-import org.lflang.lf.Variable;
 
 import de.cau.cs.kieler.klighd.ViewContext;
-import de.cau.cs.kieler.klighd.kgraph.KGraphElement;
 import de.cau.cs.kieler.klighd.kgraph.KLabel;
-import de.cau.cs.kieler.klighd.kgraph.KLabeledGraphElement;
 import de.cau.cs.kieler.klighd.kgraph.KNode;
-import de.cau.cs.kieler.klighd.kgraph.KPort;
-import de.cau.cs.kieler.klighd.kgraph.util.KGraphUtil;
 import de.cau.cs.kieler.klighd.krendering.Colors;
-import de.cau.cs.kieler.klighd.krendering.KForeground;
-import de.cau.cs.kieler.klighd.krendering.KRenderingFactory;
-import de.cau.cs.kieler.klighd.krendering.KRoundedRectangle;
 import de.cau.cs.kieler.klighd.krendering.KText;
 import fr.inria.aoste.timesquare.backend.manager.visible.ClockEntity;
-import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.EventKind;
 import fr.inria.aoste.timesquare.trace.util.adapter.AdapterRegistry;
 import fr.inria.aoste.timesquare.trace.util.adapter.IModelAdapter.EventEnumerator;
 import fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.EventQueue;
+import linguafranca.xdsml.api.impl.LinguaFrancaRTDAccessor;
 
 public class DataRepresentationBehaviour {
 	
@@ -60,27 +49,6 @@ public class DataRepresentationBehaviour {
 	
 	public ClockEntity getClock() {
 		return _ce;
-	}
-	
-	
-	private Colors getEKColor(EventEnumerator ek) {
-		switch (ek) {
-		case START:
-			return Colors.RED;
-		case SEND:
-			return Colors.GREEN;
-		case PRODUCE:
-			return Colors.BLUE;
-		case FINISH:
-			return Colors.GRAY;
-		case CONSUME:
-			return Colors.BLUE_VIOLET;
-		case RECEIVE:
-			return Colors.GREEN_4;
-		case UNDEFINED:
-			return Colors.RED;
-		}
-		return Colors.RED;
 	}
 	
 		
@@ -119,9 +87,6 @@ public class DataRepresentationBehaviour {
 						Integer value = LinguaFrancaRTDAccessor.getcurrentValue(vRefInEngine.getVariable());
 						label = ((KLabel)de);
 						initialLabel  = label.getText();
-//						if (ce.getName().contains("present") && ! initialLabel.contains("(")) {
-//							label.setText(initialLabel+"("+((value == null) ? "null" : value.toString())+")");
-//						}
 						break;
 					}
 				}
@@ -186,7 +151,5 @@ public class DataRepresentationBehaviour {
 	void finish() {
 		
 	}
-
-	
 
 }

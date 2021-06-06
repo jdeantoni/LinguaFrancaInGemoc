@@ -44,7 +44,6 @@ import de.cau.cs.kieler.klighd.ui.view.DiagramView;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.Clock;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.EventKind;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.CCSLModel.ClockExpressionAndRelation.ConcreteEntity;
-import fr.inria.aoste.timesquare.launcher.core.inter.CCSLInfo;
 import fr.inria.aoste.trace.ModelElementReference;
 
 public class KLighDAnimatorBehaviorManager implements IEngineAddon {
@@ -52,13 +51,7 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 	private ViewContext _viewContext = null;
 	final private List<AnimateTicksBehaviour> behaviorList = new ArrayList<AnimateTicksBehaviour>();
 	final private List<DataRepresentationBehaviour> dataBehaviourList = new ArrayList<DataRepresentationBehaviour>();
-//	final private List<AnimateAssertBehaviour> assertBehaviorList = new ArrayList<AnimateAssertBehaviour>();
-//	private CCSLInfo ccslhelper = null;	
 	private ISolver _solver;
-
-	
-
-
 
 	@Override
 	public void stepExecuted(IExecutionEngine<?> engine, Step<?> logicalStepExecuted){
@@ -89,7 +82,6 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 	
 	@Override
 	public void engineAboutToStop(IExecutionEngine<?> engine) {
-	//public void end(ConfigurationHelper helper) {
 		try {
 			Display.getDefault().syncExec(new RunnableEnd());						
 		} catch (Throwable e) {
@@ -100,7 +92,6 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 
 	@Override
 	public void engineStopped(IExecutionEngine<?> engine) {
-	//public void clear() {
 		behaviorList.clear();
 		_viewContext.notifyAll();
 		_viewContext = null;
@@ -109,12 +100,7 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 
 	@Override
 	public void engineStarted(IExecutionEngine<?> executionEngine) {
-	//public void beforeExecution(ConfigurationHelper helper, IPath folderin, String namefilein, ISolverForBackend solver) {
-//		try {
-//			Display.getDefault().syncExec(new RunnableStart());						
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		}
+
 	}	
 	
 	private class RunnableEnd implements Runnable {
@@ -127,18 +113,6 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 		}
 		
 	}
-//	private final class RunnableStart implements Runnable {
-//		public void run() {			
-//							
-//			for (AnimateTicksBehaviour behavior : behaviorList) {
-//				behavior.start();
-//			}
-////			for (AnimateAssertBehaviour assertBehavior : assertBehaviorList) {
-////				assertBehavior.setEditPart(_diagramEditPart);	 	
-////				assertBehavior.start();
-////			}
-//		}
-//	}
 
 	/**
      * Returns the diagram view context.
@@ -184,9 +158,6 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 		    }
 		});
 		
-		
-		
-		
 		_viewContext = getDiagramViewContext();
 		
 		loop1: for(ModelElementReference mer : ((ICCSLSolver)_solver).getAllDiscreteClocks()){
@@ -226,10 +197,4 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 		}
 		
 	}
-
-	
-	
-	
-
-	
 }

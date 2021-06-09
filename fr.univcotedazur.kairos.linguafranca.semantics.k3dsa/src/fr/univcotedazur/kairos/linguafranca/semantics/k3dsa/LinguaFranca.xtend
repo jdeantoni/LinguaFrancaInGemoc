@@ -69,6 +69,12 @@ class ScheduledTimeAdvancement{
 		}
 		return false
 	}
+	
+	
+	override ScheduledTimeAdvancement clone(){ 
+		var cloned = new ScheduledTimeAdvancement(timedConcept, releaseDate, microStep)
+		return cloned
+	}
 }
 
 class EventQueue extends LinkedList<ScheduledTimeAdvancement>{
@@ -107,6 +113,8 @@ class EventQueue extends LinkedList<ScheduledTimeAdvancement>{
 		sb.append("]")
 		return sb.toString()
 	}
+	
+	
 	
 }
 
@@ -211,6 +219,7 @@ class ModelAspect {
 			if(staAtI.releaseDate > rlt){
 				if (rlt == 0 && lastMS == -1){
 					lastMS = _self.currentMicroStep
+					if (_self.currentMicroStep == 0) System.err.println("old stuff not used isn't it ?")
 				}
 				_self.eventQueue.add(i, new ScheduledTimeAdvancement(tc, rlt, (lastMS == -1) ? 0 : lastMS+1))
 				if (DebugLevel.level > 1) println("afterSchedule middle of list (1): "+_self.eventQueue)
@@ -434,7 +443,7 @@ class ConnectionAspect{
 
 @Aspect(className=Variable)
 class VariableAspect{
-	public Integer currentValue
+	public Object currentValue
 	
 	def Boolean isPresent(){
 		return _self.currentValue !== null
@@ -471,11 +480,7 @@ class VariableAspect{
 
 @Aspect(className=VarRef)
 class VarRefAspect{
-	
-	def Boolean getTrue(){
-		return true
-	}
-	
+		
 	def Boolean isPresent(){
 		if (_self.variable instanceof Port){
 			return _self.variable.currentValue !== null
@@ -489,7 +494,7 @@ class VarRefAspect{
 
 @Aspect(className=StateVar)
 class StateVarAspect{
-	public Integer currentStateValue
+	public Object currentStateValue
 }
 
 class ReactionExecutionContext{
@@ -549,6 +554,8 @@ class ReactionAspect{
 	//org.lflang.lf.Reaction.metaClass.propertyMissing = {String name -> if(name=='id'){return delegate.eContainer().name} }
 	
 	'''	
+	@NotInStateSpace
+	var String returnStatement= "";
 	
 	def void exec(){
 		if (DebugLevel.level > 0) {
@@ -561,50 +568,14 @@ class ReactionAspect{
 			println(")"+Colors.RESET)
 		}
 		var Binding binding = new Binding()
-		binding.setVariable("self", _self.eContainer() )
-		var ReactionExecutionContext context = new ReactionExecutionContext()
-		binding.setVariable("context", context )
-		var Model theModel = _self.eResource.contents.get(0) as Model
-		binding.setVariable("currentTime", theModel.currentTime)
-		binding.setVariable("currentMicroStep", theModel.currentMicroStep)
-		
-		for(Parameter p : (_self.eContainer() as Reactor).parameters){
-			binding.setVariable(p.name, p.init.get(0).literal ) //no links to instances :-(
-		}
-		
-		for(VarRef vRef :  _self.sources +_self.effects) { 
-			binding.setVariable(vRef.variable.name, vRef)
-		}
-		for(TriggerRef tRef : _self.triggers) { 
-			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Port){
-				binding.setVariable((tRef as VarRef).variable.name, (tRef as VarRef))
-				context.varToValue.put((tRef as VarRef).variable, (tRef as VarRef).variable.currentValue)
-				if (DebugLevel.level > 1) println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
-			}
-			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Action){
-				binding.setVariable((tRef as VarRef).variable.name, (tRef as VarRef))
-				if (! ((tRef as VarRef).variable as Action).actionBufferedValues.empty){ //not always a valued action
-					context.varToValue.put((tRef as VarRef).variable, ((tRef as VarRef).variable as Action).actionBufferedValues.removeFirst() as Integer)
-				}
-				if (DebugLevel.level > 1) println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
-			}
-		}
-		
-		var String returnStatement = '\n return ['
-		var String sep = ""	
-		for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
-			binding.setVariable(sv.name, sv.currentStateValue)
-			returnStatement = returnStatement + sep + sv.name
-			sep=","
-		}
-		returnStatement = returnStatement + ']'
+		var context = _self.bindReactionContext(binding)
 							
 		val ucl = ReactionAspect.classLoader
 		val shell = new GroovyShell(ucl,binding)
-		print(Colors.BG_YELLOW)
+		print(Colors.BG_YELLOW) //reaction code is highlighted in yellow
 		var res = shell.evaluate(lfGroovyFunctions+ 
 								_self.code.body +
-								returnStatement)
+								_self.returnStatement)
 				as ArrayList<Object>
 		print(Colors.RESET)
 
@@ -636,4 +607,47 @@ class ReactionAspect{
 		}
 		
 	}
+	
+	def ReactionExecutionContext bindReactionContext(Binding binding){
+		binding.setVariable("self", _self.eContainer() )
+		var ReactionExecutionContext context = new ReactionExecutionContext()
+		binding.setVariable("context", context )
+		var Model theModel = _self.eResource.contents.get(0) as Model
+		binding.setVariable("currentTime", theModel.currentTime)
+		binding.setVariable("currentMicroStep", theModel.currentMicroStep)
+		
+		for(Parameter p : (_self.eContainer() as Reactor).parameters){
+			binding.setVariable(p.name, p.init.get(0).literal ) //no links to instances :-(
+		}
+		
+		for(VarRef vRef :  _self.sources +_self.effects) { 
+			binding.setVariable(vRef.variable.name, vRef)
+		}
+		for(TriggerRef tRef : _self.triggers) { 
+			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Port){
+				binding.setVariable((tRef as VarRef).variable.name, (tRef as VarRef))
+				context.varToValue.put((tRef as VarRef).variable, (tRef as VarRef).variable.currentValue)
+				if (DebugLevel.level > 1) println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
+			}
+			if (tRef instanceof VarRef && (tRef as VarRef).variable instanceof Action){
+				binding.setVariable((tRef as VarRef).variable.name, (tRef as VarRef))
+				if (! ((tRef as VarRef).variable as Action).actionBufferedValues.empty){ //not always a valued action
+					context.varToValue.put((tRef as VarRef).variable, ((tRef as VarRef).variable as Action).actionBufferedValues.removeFirst() as Integer)
+				}
+				if (DebugLevel.level > 1) println(' in reaction, '+(tRef as VarRef).variable.name+ '=' +(tRef as VarRef).variable.currentValue)
+			}
+		}
+		
+		_self.returnStatement = '\n return ['
+		var String sep = ""	
+		for(StateVar sv : (_self.eContainer as Reactor).stateVars) {
+			binding.setVariable(sv.name, sv.currentStateValue)
+			_self.returnStatement = _self.returnStatement + sep + sv.name
+			sep=","
+		}
+		_self.returnStatement = _self.returnStatement + ']'
+		return context
+	}
+	
+	
 }

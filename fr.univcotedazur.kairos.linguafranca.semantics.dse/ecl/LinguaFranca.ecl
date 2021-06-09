@@ -37,9 +37,9 @@ context Model
 	def : timeJump : Event(StartEvent) = self.timeJump()
 	def : untimedAction : Event(StartEvent) = self
 	
-	def : allRelease : Event = self
-	def : allCanRelease : Event = self
-	def : allWait : Event = self
+--	def : allRelease : Event = self
+--	def : allCanRelease : Event = self
+--	def : allWait : Event = self
 
 context Reaction
 	def: startExecution: Event(produceEvent) = self.exec()
@@ -225,23 +225,23 @@ context Model
 		Relation Coincides(self.untimedAction, union1_2_3c)
 	 
 		
-	inv defAllCanRelease:
-		let allTimedConceptCanRelease1 : Event = Expression Union(allTimedConcepts.canRelease) in
-		Relation Coincides(allTimedConceptCanRelease1,allCanRelease)
+--	inv defAllCanRelease:
+--		let allTimedConceptCanRelease1 : Event = Expression Union(allTimedConcepts.canRelease) in
+--		Relation Coincides(allTimedConceptCanRelease1,allCanRelease)
 	
 	inv allCanReleaseTogether:
 		Relation Coincides(allTimedConcepts.canRelease)
 		
-	inv defallRelease:
-		let allTimedConceptRelease1 : Event = Expression Union(allTimedConcepts.releases) in
-		Relation Coincides(allTimedConceptRelease1,allRelease)
+--	inv defallRelease:
+--		let allTimedConceptRelease1 : Event = Expression Union(allTimedConcepts.releases) in
+--		Relation Coincides(allTimedConceptRelease1,allRelease)
 		
 	inv allResultsTogether:
 		Relation Coincides(allTimedConcepts.canTickResult)
 
- 	inv defAllWait:
- 		let allTimedConceptsWait2 : Event = Expression Union(allTimedConcepts.wait) in
-		Relation Coincides(self.allWait, allTimedConceptsWait2)	
+-- 	inv defAllWait:
+-- 		let allTimedConceptsWait2 : Event = Expression Union(allTimedConcepts.wait) in
+--		Relation Coincides(self.allWait, allTimedConceptsWait2)	
 	
 context Timer
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
@@ -362,9 +362,11 @@ context Model
  
 /**BEGIN For priority propagation (see paper@RIVF019 */
 
-context Model
-	inv propagatesPrio:
-		Relation SubClock(self.allWait, self.untimedAction)
+--context TimedConcept
+--	def : theModel2 : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
+--
+--	inv propagatesPrio:
+--		Relation SubClock(self.wait, theModel2.untimedAction)
 
 context Reaction
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
@@ -384,7 +386,7 @@ context Variable
 	inv propagatesPrio2a:
 		(not self.oclIsKindOf(TimedConcept)) implies
 		Relation SubClock(self.present, theModel.untimedAction)
-	inv propagatesPrio2b:
+	inv propagatesPrio2b: 
 		(not self.oclIsKindOf(TimedConcept)) implies
 		Relation SubClock(self.absent, theModel.untimedAction)
 
@@ -392,10 +394,10 @@ context Timer
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	inv propagatesPrio5:
 		Relation SubClock(self.starts, theModel.untimedAction)
-	inv propagatesPrio7:
-		Relation SubClock(self.canRelease, theModel.allCanRelease)
+--	inv propagatesPrio7:
+--		Relation SubClock(self.canRelease, theModel.allCanRelease)
 	inv propagatesPrio9:
-		Relation SubClock(self.wait, theModel.allWait)
+		Relation SubClock(self.wait, theModel.untimedAction)
 	inv propagatesPrio9a:
 		Relation SubClock(self.wait, theModel.untimedAction)
 
@@ -403,24 +405,24 @@ context Action
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	inv propagatesPrio6:
 		Relation SubClock(self.starts, theModel.untimedAction)
- 	inv propagatesPrio8:
- 	(self.minDelay <> null and self.minDelay.time <> null) implies
-		Relation SubClock(self.canRelease, theModel.allCanRelease)
+-- 	inv propagatesPrio8:
+-- 	(self.minDelay <> null and self.minDelay.time <> null) implies
+--		Relation SubClock(self.canRelease, theModel.allCanRelease)
 	inv propagatesPrio10:
 	(self.minDelay <> null and self.minDelay.time <> null) implies
-		Relation SubClock(self.wait, theModel.allWait)
+		Relation SubClock(self.wait, theModel.untimedAction)
 		
 context Connection --only timed ones
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	inv propagatesPrio11:
 	(self.delay <> null ) implies
 		Relation SubClock(self.starts, theModel.untimedAction)
- 	inv propagatesPrio12:
- 	(self.delay <> null ) implies
-		Relation SubClock(self.canRelease, theModel.allCanRelease)
+-- 	inv propagatesPrio12:
+-- 	(self.delay <> null ) implies
+--		Relation SubClock(self.canRelease, theModel.allCanRelease)
 	inv propagatesPrio13:
 	(self.delay <> null) implies
-		Relation SubClock(self.wait, theModel.allWait)
+		Relation SubClock(self.wait, theModel.untimedAction)
 		
 context TriggerRef
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)

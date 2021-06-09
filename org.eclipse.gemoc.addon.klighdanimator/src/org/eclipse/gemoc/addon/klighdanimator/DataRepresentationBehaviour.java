@@ -119,7 +119,7 @@ public class DataRepresentationBehaviour {
 		 * crappy way to specify the animation
 		 */
 		if (associatedObject.eClass().getName().contains("VarRef")) { //crappy but useful
-			Integer value = LinguaFrancaRTDAccessor.getcurrentValue(vRefInEngine.getVariable());
+			Object value = LinguaFrancaRTDAccessor.getcurrentValue(vRefInEngine.getVariable());
 			if (initialLabel == null) {
 				return;
 			}

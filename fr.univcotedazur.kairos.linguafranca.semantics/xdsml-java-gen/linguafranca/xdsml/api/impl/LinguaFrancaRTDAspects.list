@@ -3,4 +3,5 @@ fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect
 fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ActionAspect
 fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VariableAspect
 fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.TimerAspect
+fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ReactionAspect
 fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect

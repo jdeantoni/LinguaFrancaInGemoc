@@ -10,6 +10,9 @@ import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.k3.rtd.m
 import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.k3.rtd.modelstate.k3ModelState.K3ModelState;
 import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.k3.rtd.modelstate.k3ModelState.K3ModelStateFactory;
 import org.eclipse.gemoc.execution.concurrent.ccsljavaengine.extensions.k3.dsa.helper.IK3ModelStateHelper;import org.eclipse.gemoc.executionframework.engine.commons.K3DslHelper;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
@@ -97,6 +100,16 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 				AttributeNameToValue n2v0 = new AttributeNameToValue("offsetToDo", LinguaFrancaRTDAccessor.getoffsetToDo(model));
 				elemState.getSavedRTDs().add(n2v0);
 		}
+		clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ReactionAspect.class);
+		if (clazz.isInstance(model)) {
+			ElementState elemState = theFactory.createElementState();
+			elemState.setModelElement(model);
+			res.getOwnedElementstates().add(elemState);
+			if (allRTDs) {  //property not in state space:returnStatement
+				AttributeNameToValue n2v0 = new AttributeNameToValue("returnStatement", LinguaFrancaRTDAccessor.getreturnStatement(model));
+				elemState.getSavedRTDs().add(n2v0);
+			}
+		}
 		clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect.class);
 		if (clazz.isInstance(model)) {
 			ElementState elemState = theFactory.createElementState();
@@ -160,6 +173,16 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 				AttributeNameToValue n2v0 = new AttributeNameToValue("offsetToDo", LinguaFrancaRTDAccessor.getoffsetToDo(elem));
 				elemState.getSavedRTDs().add(n2v0);
 			}
+			clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ReactionAspect.class);
+			if (clazz.isInstance(elem)) {
+				ElementState elemState = theFactory.createElementState();
+				elemState.setModelElement(elem);
+				res.getOwnedElementstates().add(elemState);
+				if (allRTDs) {  //property not in state space:returnStatement
+				AttributeNameToValue n2v0 = new AttributeNameToValue("returnStatement", LinguaFrancaRTDAccessor.getreturnStatement(elem));
+				elemState.getSavedRTDs().add(n2v0);
+				}
+			}
 			clazz = K3DslHelper.getTarget(fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect.class);
 			if (clazz.isInstance(elem)) {
 				ElementState elemState = theFactory.createElementState();
@@ -213,18 +236,37 @@ public class LinguaFrancaModelStateHelper implements IK3ModelStateHelper{
 			return setter;
 		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException e) {
 			if(n2v.value != null) {
-					for(Class<?> c : n2v.value.getClass().getInterfaces()) {
-					try {
-						setter = LinguaFrancaRTDAccessor.class.getMethod("set"+n2v.name, EObject.class, n2v.value.getClass().getInterfaces()[0]);
-						return setter;
-					} catch (NoSuchMethodException | SecurityException | IllegalArgumentException e1) {
+					List<Class> allTypes = getSuperClasses(n2v.value.getClass());
+					allTypes.addAll(Arrays.asList(n2v.value.getClass().getInterfaces()));
+					for(Class<?> c : allTypes) {
+						try {
+							setter = LinguaFrancaRTDAccessor.class.getMethod("set"+n2v.name, EObject.class, c);
+							return setter;
+						} catch (NoSuchMethodException | SecurityException | IllegalArgumentException e1) {
+						}
 					}
 					if (setter == null) {
-						throw new RuntimeException("not method found for "+n2v.value.getClass().getName()+"::set"+n2v.name);
+						throw new RuntimeException("no method found for "+n2v.value.getClass().getName()+"::set"+n2v.name);
 					}
 				}
 			}
+			return setter;
+	}
+	
+	public static List<Class> getSuperClasses(Class c) {
+		List<Class> r = new ArrayList<>();
+		List<Class> q = new ArrayList<>();
+		q.add(c);
+		while (!q.isEmpty()) {
+			c = q.remove(0);
+			r.add(c);
+			if (c.getSuperclass() != null) {
+				q.add(c.getSuperclass());
+			}
+			for (Class i : c.getInterfaces()) {
+				q.add(i);
+			}
 		}
-		return setter;
+		return r;
 	}
 };

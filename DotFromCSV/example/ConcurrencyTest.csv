@@ -1,0 +1,74 @@
+Event, Reactor, Reaction, Worker, Elapsed Logical Time, Microstep, Elapsed Physical Time, Trigger, Extra Delay, Triggered By, Effects
+Schedule called, s1, 0, 0, 0, 0, 208900, s1.t, 0, <>, <>
+Schedule called, s1, 0, 0, 0, 0, 209800, s1.t, 0, <>, <>
+Schedule called, s2, 0, 0, 0, 0, 210100, s2.t, 0, <>, <>
+Schedule called, s2, 0, 0, 0, 0, 210300, s2.t, 0, <>, <>
+Reaction starts, s1, 0, 0, 0, 0, 210800, NO TRIGGER, 0, <>, <>
+Reaction ends, s1, 0, 0, 0, 0, 211400, NO TRIGGER, 0, <>, <fusion.p1:>
+Reaction starts, s2, 0, 0, 0, 0, 211800, NO TRIGGER, 0, <>, <>
+Reaction ends, s2, 0, 0, 0, 0, 212000, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 0, 0, 212200, NO TRIGGER, 0, <fusion.p1:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 0, 0, 212400, NO TRIGGER, 0, <>, <>
+Schedule called, s2, 0, 0, 10000000, 0, 10162500, s2.t, 0, <>, <>
+Reaction starts, s2, 0, 0, 10000000, 0, 10162900, NO TRIGGER, 0, <s2.t:>, <>
+Reaction ends, s2, 0, 0, 10000000, 0, 10163700, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 10000000, 0, 10164100, NO TRIGGER, 0, <fusion.p2:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 10000000, 0, 10164300, NO TRIGGER, 0, <>, <>
+Schedule called, s1, 0, 0, 20000000, 0, 20145000, s1.t, 0, <>, <>
+Schedule called, s2, 0, 0, 20000000, 0, 20145500, s2.t, 0, <>, <>
+Reaction starts, s1, 0, 0, 20000000, 0, 20145900, NO TRIGGER, 0, <s1.t:>, <>
+Reaction ends, s1, 0, 0, 20000000, 0, 20147000, NO TRIGGER, 0, <>, <fusion.p1:>
+Reaction starts, s2, 0, 0, 20000000, 0, 20156200, NO TRIGGER, 0, <s2.t:>, <>
+Reaction ends, s2, 0, 0, 20000000, 0, 20156400, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 20000000, 0, 20156600, NO TRIGGER, 0, <fusion.p1:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 20000000, 0, 20156800, NO TRIGGER, 0, <>, <>
+Schedule called, s2, 0, 0, 30000000, 0, 30221000, s2.t, 0, <>, <>
+Reaction starts, s2, 0, 0, 30000000, 0, 30221400, NO TRIGGER, 0, <s2.t:>, <>
+Reaction ends, s2, 0, 0, 30000000, 0, 30222600, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 30000000, 0, 30223100, NO TRIGGER, 0, <fusion.p2:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 30000000, 0, 30223400, NO TRIGGER, 0, <>, <>
+Schedule called, s1, 0, 0, 40000000, 0, 40236200, s1.t, 0, <>, <>
+Schedule called, s2, 0, 0, 40000000, 0, 40236700, s2.t, 0, <>, <>
+Reaction starts, s1, 0, 0, 40000000, 0, 40237000, NO TRIGGER, 0, <s1.t:>, <>
+Reaction ends, s1, 0, 0, 40000000, 0, 40238300, NO TRIGGER, 0, <>, <fusion.p1:>
+Reaction starts, s2, 0, 0, 40000000, 0, 40238900, NO TRIGGER, 0, <s2.t:>, <>
+Reaction ends, s2, 0, 0, 40000000, 0, 40239100, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 40000000, 0, 40239400, NO TRIGGER, 0, <fusion.p1:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 40000000, 0, 40239600, NO TRIGGER, 0, <>, <>
+Schedule called, s2, 0, 0, 50000000, 0, 50232600, s2.t, 0, <>, <>
+Reaction starts, s2, 0, 0, 50000000, 0, 50290400, NO TRIGGER, 0, <s2.t:>, <>
+Reaction ends, s2, 0, 0, 50000000, 0, 50291300, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 50000000, 0, 50291600, NO TRIGGER, 0, <fusion.p2:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 50000000, 0, 50291700, NO TRIGGER, 0, <>, <>
+Schedule called, s1, 0, 0, 60000000, 0, 60236400, s1.t, 0, <>, <>
+Schedule called, s2, 0, 0, 60000000, 0, 60237700, s2.t, 0, <>, <>
+Reaction starts, s1, 0, 0, 60000000, 0, 60238300, NO TRIGGER, 0, <s1.t:>, <>
+Reaction ends, s1, 0, 0, 60000000, 0, 60240500, NO TRIGGER, 0, <>, <fusion.p1:>
+Reaction starts, s2, 0, 0, 60000000, 0, 60241400, NO TRIGGER, 0, <s2.t:>, <>
+Reaction ends, s2, 0, 0, 60000000, 0, 60242000, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 60000000, 0, 60242500, NO TRIGGER, 0, <fusion.p1:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 60000000, 0, 60243000, NO TRIGGER, 0, <>, <>
+Schedule called, s2, 0, 0, 70000000, 0, 70152200, s2.t, 0, <>, <>
+Reaction starts, s2, 0, 0, 70000000, 0, 70152300, NO TRIGGER, 0, <s2.t:>, <>
+Reaction ends, s2, 0, 0, 70000000, 0, 70152700, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 70000000, 0, 70152900, NO TRIGGER, 0, <fusion.p2:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 70000000, 0, 70153100, NO TRIGGER, 0, <>, <>
+Schedule called, s1, 0, 0, 80000000, 0, 80255100, s1.t, 0, <>, <>
+Schedule called, s2, 0, 0, 80000000, 0, 80259300, s2.t, 0, <>, <>
+Reaction starts, s1, 0, 0, 80000000, 0, 80259500, NO TRIGGER, 0, <s1.t:>, <>
+Reaction ends, s1, 0, 0, 80000000, 0, 80259900, NO TRIGGER, 0, <>, <fusion.p1:>
+Reaction starts, s2, 0, 0, 80000000, 0, 80260100, NO TRIGGER, 0, <s2.t:>, <>
+Reaction ends, s2, 0, 0, 80000000, 0, 80260300, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 80000000, 0, 80260400, NO TRIGGER, 0, <fusion.p1:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 80000000, 0, 80260800, NO TRIGGER, 0, <>, <>
+Schedule called, s2, 0, 0, 90000000, 0, 90240200, s2.t, 0, <>, <>
+Reaction starts, s2, 0, 0, 90000000, 0, 90240500, NO TRIGGER, 0, <s2.t:>, <>
+Reaction ends, s2, 0, 0, 90000000, 0, 90241200, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 90000000, 0, 90241400, NO TRIGGER, 0, <fusion.p2:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 90000000, 0, 90241600, NO TRIGGER, 0, <>, <>
+Reaction starts, s1, 0, 0, 100000000, 0, 100200700, NO TRIGGER, 0, <s1.t:>, <>
+Reaction ends, s1, 0, 0, 100000000, 0, 100201500, NO TRIGGER, 0, <>, <fusion.p1:>
+Reaction starts, s2, 0, 0, 100000000, 0, 100201900, NO TRIGGER, 0, <s2.t:>, <>
+Reaction ends, s2, 0, 0, 100000000, 0, 100202000, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 0, 100000000, 0, 100202300, NO TRIGGER, 0, <fusion.p1:fusion.p2:>, <>
+Reaction ends, fusion, 0, 0, 100000000, 0, 100202500, NO TRIGGER, 0, <>, <>

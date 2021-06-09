@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DotFromCSV:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DotFromCSV_jar</output-path>
+    <root id="archive" name="DotFromCSV.jar">
+      <element id="module-output" name="DotFromCSV" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,130 @@
+Event, Reactor, Reaction, Worker, Elapsed Logical Time, Microstep, Elapsed Physical Time, Trigger, Extra Delay, Triggered By, Effects
+Schedule called, s1, 0, 0, 0, 0, 2851400, s1.t, 0, <>, <>
+Schedule called, s1, 0, 0, 0, 0, 2851900, s1.t, 0, <>, <>
+Schedule called, s2, 0, 0, 0, 0, 2852200, s2.t, 0, <>, <>
+Schedule called, s2, 0, 0, 0, 0, 2852300, s2.t, 0, <>, <>
+Reaction starts, s1, 0, 1, 0, 0, 3035800, NO TRIGGER, 0, <>, <>
+Reaction ends, s1, 0, 1, 0, 0, 3036100, NO TRIGGER, 0, <>, <fusion.p1:>
+Reaction starts, s2, 0, 1, 0, 0, 3062600, NO TRIGGER, 0, <>, <>
+Reaction ends, s2, 0, 1, 0, 0, 3062700, NO TRIGGER, 0, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 0, 0, 3062900, NO TRIGGER, 0, <fusion.p1:fusion.p2:>, <>
+Schedule called, fusion, 0, 0, 0, 0, 3063700, fusion.la1, 0, <>, <>
+Reaction ends, fusion, 0, 1, 0, 0, 3063800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 0, 0, 3064000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 0, 1, 3064800, NO TRIGGER, 0, <>, <>
+Reaction starts, fusion, 1, 1, 0, 1, 3064900, NO TRIGGER, 0, <fusion.la1:>, <>
+Reaction ends, fusion, 1, 1, 0, 1, 3065000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 0, 1, 3065100, NO TRIGGER, 0, <>, <>
+Worker wait starts, NO REACTOR, none, 2, 0, 1, 3116400, NO TRIGGER, 0, <>, <>
+Schedule called, s2, 0, 0, 10000000, 0, 10072900, s2.t, 10000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 10000000, 0, 10073000, NO TRIGGER, 10000000, <>, <>
+Reaction starts, s2, 0, 1, 10000000, 0, 10074000, NO TRIGGER, 10000000, <s2.t:>, <>
+Reaction ends, s2, 0, 1, 10000000, 0, 10074300, NO TRIGGER, 10000000, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 10000000, 0, 10074800, NO TRIGGER, 10000000, <fusion.p2:fusion.p2:>, <>
+Reaction ends, fusion, 0, 1, 10000000, 0, 10074900, NO TRIGGER, 10000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 10000000, 0, 10075000, NO TRIGGER, 10000000, <>, <>
+Schedule called, s1, 0, 0, 20000000, 0, 20182500, s1.t, 20000000, <>, <>
+Schedule called, s2, 0, 0, 20000000, 0, 20183000, s2.t, 20000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 20000000, 0, 20183600, NO TRIGGER, 20000000, <>, <>
+Reaction starts, s1, 0, 1, 20000000, 0, 20218000, NO TRIGGER, 20000000, <s1.t:>, <>
+Reaction ends, s1, 0, 1, 20000000, 0, 20229800, NO TRIGGER, 20000000, <>, <fusion.p1:>
+Reaction starts, s2, 0, 1, 20000000, 0, 20232100, NO TRIGGER, 20000000, <s2.t:>, <>
+Reaction ends, s2, 0, 1, 20000000, 0, 20232300, NO TRIGGER, 20000000, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 20000000, 0, 20232800, NO TRIGGER, 20000000, <fusion.p1:fusion.p2:>, <>
+Schedule called, fusion, 0, 0, 20000000, 0, 20233700, fusion.la1, 20000000, <>, <>
+Reaction ends, fusion, 0, 1, 20000000, 0, 20233900, NO TRIGGER, 20000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 20000000, 0, 20234200, NO TRIGGER, 20000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 20000000, 1, 20235000, NO TRIGGER, 20000000, <>, <>
+Reaction starts, fusion, 1, 1, 20000000, 1, 20235200, NO TRIGGER, 20000000, <fusion.la1:>, <>
+Reaction ends, fusion, 1, 1, 20000000, 1, 20235400, NO TRIGGER, 20000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 20000000, 1, 20235500, NO TRIGGER, 20000000, <>, <>
+Worker wait ends, NO REACTOR, none, 2, 20000000, 1, 20273200, NO TRIGGER, 20000000, <>, <>
+Worker wait starts, NO REACTOR, none, 2, 20000000, 1, 20273700, NO TRIGGER, 20000000, <>, <>
+Schedule called, s2, 0, 0, 30000000, 0, 30156100, s2.t, 30000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 30000000, 0, 30156400, NO TRIGGER, 30000000, <>, <>
+Reaction starts, s2, 0, 1, 30000000, 0, 30157500, NO TRIGGER, 30000000, <s2.t:>, <>
+Reaction ends, s2, 0, 1, 30000000, 0, 30162900, NO TRIGGER, 30000000, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 30000000, 0, 30163900, NO TRIGGER, 30000000, <fusion.p2:fusion.p2:>, <>
+Reaction ends, fusion, 0, 1, 30000000, 0, 30164200, NO TRIGGER, 30000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 30000000, 0, 30164500, NO TRIGGER, 30000000, <>, <>
+Schedule called, s1, 0, 0, 40000000, 0, 40223000, s1.t, 40000000, <>, <>
+Schedule called, s2, 0, 0, 40000000, 0, 40223700, s2.t, 40000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 40000000, 0, 40224000, NO TRIGGER, 40000000, <>, <>
+Reaction starts, s1, 0, 1, 40000000, 0, 40266900, NO TRIGGER, 40000000, <s1.t:>, <>
+Reaction ends, s1, 0, 1, 40000000, 0, 40277200, NO TRIGGER, 40000000, <>, <fusion.p1:>
+Reaction starts, s2, 0, 1, 40000000, 0, 40279800, NO TRIGGER, 40000000, <s2.t:>, <>
+Reaction ends, s2, 0, 1, 40000000, 0, 40280100, NO TRIGGER, 40000000, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 40000000, 0, 40280900, NO TRIGGER, 40000000, <fusion.p1:fusion.p2:>, <>
+Schedule called, fusion, 0, 0, 40000000, 0, 40282000, fusion.la1, 40000000, <>, <>
+Reaction ends, fusion, 0, 1, 40000000, 0, 40282400, NO TRIGGER, 40000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 40000000, 0, 40282800, NO TRIGGER, 40000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 40000000, 1, 40284000, NO TRIGGER, 40000000, <>, <>
+Reaction starts, fusion, 1, 1, 40000000, 1, 40284300, NO TRIGGER, 40000000, <fusion.la1:>, <>
+Reaction ends, fusion, 1, 1, 40000000, 1, 40284600, NO TRIGGER, 40000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 40000000, 1, 40284800, NO TRIGGER, 40000000, <>, <>
+Worker wait ends, NO REACTOR, none, 2, 40000000, 1, 40338600, NO TRIGGER, 40000000, <>, <>
+Worker wait starts, NO REACTOR, none, 2, 40000000, 1, 40339200, NO TRIGGER, 40000000, <>, <>
+Schedule called, s2, 0, 0, 50000000, 0, 50179800, s2.t, 50000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 50000000, 0, 50180600, NO TRIGGER, 50000000, <>, <>
+Reaction starts, s2, 0, 1, 50000000, 0, 50183600, NO TRIGGER, 50000000, <s2.t:>, <>
+Reaction ends, s2, 0, 1, 50000000, 0, 50185300, NO TRIGGER, 50000000, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 50000000, 0, 50187600, NO TRIGGER, 50000000, <fusion.p2:fusion.p2:>, <>
+Reaction ends, fusion, 0, 1, 50000000, 0, 50188300, NO TRIGGER, 50000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 50000000, 0, 50188900, NO TRIGGER, 50000000, <>, <>
+Schedule called, s1, 0, 0, 60000000, 0, 60272600, s1.t, 60000000, <>, <>
+Schedule called, s2, 0, 0, 60000000, 0, 60273700, s2.t, 60000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 60000000, 0, 60274400, NO TRIGGER, 60000000, <>, <>
+Reaction starts, s1, 0, 1, 60000000, 0, 60371500, NO TRIGGER, 60000000, <s1.t:>, <>
+Reaction ends, s1, 0, 1, 60000000, 0, 60391000, NO TRIGGER, 60000000, <>, <fusion.p1:>
+Reaction starts, s2, 0, 1, 60000000, 0, 60395500, NO TRIGGER, 60000000, <s2.t:>, <>
+Reaction ends, s2, 0, 1, 60000000, 0, 60396200, NO TRIGGER, 60000000, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 60000000, 0, 60397300, NO TRIGGER, 60000000, <fusion.p1:fusion.p2:>, <>
+Schedule called, fusion, 0, 0, 60000000, 0, 60399100, fusion.la1, 60000000, <>, <>
+Reaction ends, fusion, 0, 1, 60000000, 0, 60399800, NO TRIGGER, 60000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 60000000, 0, 60400400, NO TRIGGER, 60000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 60000000, 1, 60402200, NO TRIGGER, 60000000, <>, <>
+Reaction starts, fusion, 1, 1, 60000000, 1, 60402600, NO TRIGGER, 60000000, <fusion.la1:>, <>
+Reaction ends, fusion, 1, 1, 60000000, 1, 60403000, NO TRIGGER, 60000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 60000000, 1, 60403400, NO TRIGGER, 60000000, <>, <>
+Worker wait ends, NO REACTOR, none, 2, 60000000, 1, 60434500, NO TRIGGER, 60000000, <>, <>
+Worker wait starts, NO REACTOR, none, 2, 60000000, 1, 60435800, NO TRIGGER, 60000000, <>, <>
+Schedule called, s2, 0, 0, 70000000, 0, 70197300, s2.t, 70000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 70000000, 0, 70198000, NO TRIGGER, 70000000, <>, <>
+Reaction starts, s2, 0, 1, 70000000, 0, 70200300, NO TRIGGER, 70000000, <s2.t:>, <>
+Reaction ends, s2, 0, 1, 70000000, 0, 70202100, NO TRIGGER, 70000000, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 70000000, 0, 70204200, NO TRIGGER, 70000000, <fusion.p2:fusion.p2:>, <>
+Reaction ends, fusion, 0, 1, 70000000, 0, 70204900, NO TRIGGER, 70000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 70000000, 0, 70205600, NO TRIGGER, 70000000, <>, <>
+Schedule called, s1, 0, 0, 80000000, 0, 80189200, s1.t, 80000000, <>, <>
+Schedule called, s2, 0, 0, 80000000, 0, 80200100, s2.t, 80000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 80000000, 0, 80200600, NO TRIGGER, 80000000, <>, <>
+Reaction starts, s1, 0, 1, 80000000, 0, 80260800, NO TRIGGER, 80000000, <s1.t:>, <>
+Reaction ends, s1, 0, 1, 80000000, 0, 80269800, NO TRIGGER, 80000000, <>, <fusion.p1:>
+Reaction starts, s2, 0, 1, 80000000, 0, 80273400, NO TRIGGER, 80000000, <s2.t:>, <>
+Reaction ends, s2, 0, 1, 80000000, 0, 80274000, NO TRIGGER, 80000000, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 80000000, 0, 80275100, NO TRIGGER, 80000000, <fusion.p1:fusion.p2:>, <>
+Schedule called, fusion, 0, 0, 80000000, 0, 80276600, fusion.la1, 80000000, <>, <>
+Reaction ends, fusion, 0, 1, 80000000, 0, 80277300, NO TRIGGER, 80000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 80000000, 0, 80277900, NO TRIGGER, 80000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 80000000, 1, 80279500, NO TRIGGER, 80000000, <>, <>
+Reaction starts, fusion, 1, 1, 80000000, 1, 80280000, NO TRIGGER, 80000000, <fusion.la1:>, <>
+Reaction ends, fusion, 1, 1, 80000000, 1, 80280400, NO TRIGGER, 80000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 80000000, 1, 80280700, NO TRIGGER, 80000000, <>, <>
+Worker wait ends, NO REACTOR, none, 2, 80000000, 1, 80351300, NO TRIGGER, 80000000, <>, <>
+Worker wait starts, NO REACTOR, none, 2, 80000000, 1, 80352800, NO TRIGGER, 80000000, <>, <>
+Schedule called, s2, 0, 0, 90000000, 0, 90187800, s2.t, 90000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 90000000, 0, 90188500, NO TRIGGER, 90000000, <>, <>
+Reaction starts, s2, 0, 1, 90000000, 0, 90190800, NO TRIGGER, 90000000, <s2.t:>, <>
+Reaction ends, s2, 0, 1, 90000000, 0, 90192500, NO TRIGGER, 90000000, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 90000000, 0, 90194500, NO TRIGGER, 90000000, <fusion.p2:fusion.p2:>, <>
+Reaction ends, fusion, 0, 1, 90000000, 0, 90195200, NO TRIGGER, 90000000, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 90000000, 0, 90196000, NO TRIGGER, 90000000, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 100000000, 0, 100198600, NO TRIGGER, 100000000, <>, <>
+Reaction starts, s1, 0, 1, 100000000, 0, 100257200, NO TRIGGER, 100000000, <s1.t:>, <>
+Reaction ends, s1, 0, 1, 100000000, 0, 100259900, NO TRIGGER, 100000000, <>, <fusion.p1:>
+Reaction starts, s2, 0, 1, 100000000, 0, 100274300, NO TRIGGER, 100000000, <s2.t:>, <>
+Reaction ends, s2, 0, 1, 100000000, 0, 100274900, NO TRIGGER, 100000000, <>, <fusion.p2:>
+Reaction starts, fusion, 0, 1, 100000000, 0, 100276000, NO TRIGGER, 100000000, <fusion.p1:fusion.p2:>, <>
+Schedule called, fusion, 0, 0, 100000000, 0, 100277500, fusion.la1, 100000000, <>, <>
+Reaction ends, fusion, 0, 1, 100000000, 0, 100278100, NO TRIGGER, 100000000, <>, <>
+Worker wait ends, NO REACTOR, none, 2, 100000000, 0, 100349200, NO TRIGGER, 100000000, <>, <>

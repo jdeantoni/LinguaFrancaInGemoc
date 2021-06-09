@@ -1,0 +1,233 @@
+Event, Reactor, Reaction, Worker, Elapsed Logical Time, Microstep, Elapsed Physical Time, Trigger, Extra Delay, Triggered By, Effects
+Reaction starts, s, 0, 0, 0, 0, 94900, NO TRIGGER, 0, <>, <>
+Schedule called, s, 0, 0, 0, 0, 95500, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 0, 0, 95700, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 0, 0, 96100, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 0, 0, 110400, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 0, 0, 110600, NO TRIGGER, 0, <delay.inp:>, <>
+Schedule called, delay, 0, 0, 0, 0, 111000, delay.act, 0, <>, <>
+Reaction ends, delay, 1, 0, 0, 0, 111100, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 0, 1, 111700, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 0, 1, 111800, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 0, 1, 111900, NO TRIGGER, 0, <>, <d1.in2:delay_0.inp:>
+Reaction starts, d1, 0, 0, 0, 1, 112200, NO TRIGGER, 0, <d1.in2:>, <>
+Reaction ends, d1, 0, 0, 0, 1, 113900, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 1, 0, 0, 1, 114000, NO TRIGGER, 0, <delay_0.inp:>, <>
+Schedule called, delay_0, 0, 0, 0, 1, 114200, delay_0.act, 0, <>, <>
+Reaction ends, delay_0, 1, 0, 0, 1, 114300, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 0, 2, 114500, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 0, 2, 114600, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 0, 2, 114700, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 0, 2, 116200, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 0, 2, 117000, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 0, 2, 117100, NO TRIGGER, 0, <delay.inp:>, <>
+Reaction ends, delay, 1, 0, 0, 2, 117300, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 0, 3, 117400, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 0, 3, 117500, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 0, 3, 117600, NO TRIGGER, 0, <>, <d1.in2:delay_0.inp:>
+Reaction starts, d1, 0, 0, 0, 3, 117700, NO TRIGGER, 0, <d1.in2:>, <>
+Reaction ends, d1, 0, 0, 0, 3, 118400, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 1, 0, 0, 3, 118500, NO TRIGGER, 0, <delay_0.inp:>, <>
+Reaction ends, delay_0, 1, 0, 0, 3, 118700, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 0, 4, 118900, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 0, 4, 119000, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 0, 4, 119100, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 0, 0, 5000000, 0, 5174900, NO TRIGGER, 0, <delay_0.act:>, <>
+Reaction ends, delay_0, 0, 0, 5000000, 0, 5176100, NO TRIGGER, 0, <>, <d2.in2:>
+Reaction starts, delay, 0, 0, 5000000, 0, 5176900, NO TRIGGER, 0, <delay.act:>, <>
+Reaction ends, delay, 0, 0, 5000000, 0, 5177100, NO TRIGGER, 0, <>, <d2.in1:>
+Reaction starts, d2, 0, 0, 5000000, 0, 5210200, NO TRIGGER, 0, <d2.in2:d2.in1:>, <>
+Reaction ends, d2, 0, 0, 5000000, 0, 5253400, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 0, 0, 5000000, 1, 5255500, NO TRIGGER, 0, <delay_0.act:>, <>
+Reaction ends, delay_0, 0, 0, 5000000, 1, 5255800, NO TRIGGER, 0, <>, <d2.in2:>
+Reaction starts, delay, 0, 0, 5000000, 1, 5256100, NO TRIGGER, 0, <delay.act:>, <>
+Reaction ends, delay, 0, 0, 5000000, 1, 5256300, NO TRIGGER, 0, <>, <d2.in1:>
+Reaction starts, d2, 0, 0, 5000000, 1, 5256400, NO TRIGGER, 0, <d2.in2:d2.in1:>, <>
+Reaction ends, d2, 0, 0, 5000000, 1, 5259300, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 10000000, 0, 10199400, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 10000000, 0, 10200900, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 10000000, 0, 10204500, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 10000000, 0, 10206400, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 10000000, 0, 10318800, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 10000000, 0, 10319100, NO TRIGGER, 0, <delay.inp:>, <>
+Schedule called, delay, 0, 0, 10000000, 0, 10320000, delay.act, 0, <>, <>
+Reaction ends, delay, 1, 0, 10000000, 0, 10320100, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 10000000, 1, 10320800, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 10000000, 1, 10321000, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 10000000, 1, 10326500, NO TRIGGER, 0, <>, <d1.in2:delay_0.inp:>
+Reaction starts, d1, 0, 0, 10000000, 1, 10326900, NO TRIGGER, 0, <d1.in2:>, <>
+Reaction ends, d1, 0, 0, 10000000, 1, 10329400, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 1, 0, 10000000, 1, 10329400, NO TRIGGER, 0, <delay_0.inp:>, <>
+Schedule called, delay_0, 0, 0, 10000000, 1, 10329700, delay_0.act, 0, <>, <>
+Reaction ends, delay_0, 1, 0, 10000000, 1, 10329700, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 10000000, 2, 10330000, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 10000000, 2, 10330100, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 10000000, 2, 10330200, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 10000000, 2, 10330400, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 10000000, 2, 10331600, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 10000000, 2, 10331700, NO TRIGGER, 0, <delay.inp:>, <>
+Reaction ends, delay, 1, 0, 10000000, 2, 10331900, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 10000000, 3, 10332000, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 10000000, 3, 10332200, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 10000000, 3, 10333700, NO TRIGGER, 0, <>, <d1.in2:delay_0.inp:>
+Reaction starts, d1, 0, 0, 10000000, 3, 10333800, NO TRIGGER, 0, <d1.in2:>, <>
+Reaction ends, d1, 0, 0, 10000000, 3, 10334500, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 1, 0, 10000000, 3, 10336200, NO TRIGGER, 0, <delay_0.inp:>, <>
+Reaction ends, delay_0, 1, 0, 10000000, 3, 10336400, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 10000000, 4, 10336600, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 10000000, 4, 10336700, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 10000000, 4, 10336800, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 0, 0, 15000000, 0, 15138300, NO TRIGGER, 0, <delay_0.act:>, <>
+Reaction ends, delay_0, 0, 0, 15000000, 0, 15139300, NO TRIGGER, 0, <>, <d2.in2:>
+Reaction starts, delay, 0, 0, 15000000, 0, 15139700, NO TRIGGER, 0, <delay.act:>, <>
+Reaction ends, delay, 0, 0, 15000000, 0, 15139800, NO TRIGGER, 0, <>, <d2.in1:>
+Reaction starts, d2, 0, 0, 15000000, 0, 15140000, NO TRIGGER, 0, <d2.in2:d2.in1:>, <>
+Reaction ends, d2, 0, 0, 15000000, 0, 15179300, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 0, 0, 15000000, 1, 15180400, NO TRIGGER, 0, <delay_0.act:>, <>
+Reaction ends, delay_0, 0, 0, 15000000, 1, 15180500, NO TRIGGER, 0, <>, <d2.in2:>
+Reaction starts, delay, 0, 0, 15000000, 1, 15180700, NO TRIGGER, 0, <delay.act:>, <>
+Reaction ends, delay, 0, 0, 15000000, 1, 15180700, NO TRIGGER, 0, <>, <d2.in1:>
+Reaction starts, d2, 0, 0, 15000000, 1, 15180900, NO TRIGGER, 0, <d2.in2:d2.in1:>, <>
+Reaction ends, d2, 0, 0, 15000000, 1, 15182300, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 20000000, 0, 20199600, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 20000000, 0, 20200800, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 20000000, 0, 20219500, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 20000000, 0, 20221300, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 20000000, 0, 20277700, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 20000000, 0, 20277900, NO TRIGGER, 0, <delay.inp:>, <>
+Schedule called, delay, 0, 0, 20000000, 0, 20278400, delay.act, 0, <>, <>
+Reaction ends, delay, 1, 0, 20000000, 0, 20278500, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 20000000, 1, 20279000, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 20000000, 1, 20279200, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 20000000, 1, 20279300, NO TRIGGER, 0, <>, <d1.in2:delay_0.inp:>
+Reaction starts, d1, 0, 0, 20000000, 1, 20279500, NO TRIGGER, 0, <d1.in2:>, <>
+Reaction ends, d1, 0, 0, 20000000, 1, 20281300, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 1, 0, 20000000, 1, 20281300, NO TRIGGER, 0, <delay_0.inp:>, <>
+Schedule called, delay_0, 0, 0, 20000000, 1, 20281600, delay_0.act, 0, <>, <>
+Reaction ends, delay_0, 1, 0, 20000000, 1, 20281600, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 20000000, 2, 20281900, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 20000000, 2, 20282000, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 20000000, 2, 20282100, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 20000000, 2, 20282200, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 20000000, 2, 20284200, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 20000000, 2, 20284200, NO TRIGGER, 0, <delay.inp:>, <>
+Reaction ends, delay, 1, 0, 20000000, 2, 20284500, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 20000000, 3, 20284600, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 20000000, 3, 20284700, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 20000000, 3, 20284800, NO TRIGGER, 0, <>, <d1.in2:delay_0.inp:>
+Reaction starts, d1, 0, 0, 20000000, 3, 20284900, NO TRIGGER, 0, <d1.in2:>, <>
+Reaction ends, d1, 0, 0, 20000000, 3, 20285700, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 1, 0, 20000000, 3, 20285700, NO TRIGGER, 0, <delay_0.inp:>, <>
+Reaction ends, delay_0, 1, 0, 20000000, 3, 20285900, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 20000000, 4, 20286000, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 20000000, 4, 20286200, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 20000000, 4, 20286200, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 0, 0, 25000000, 0, 25226800, NO TRIGGER, 0, <delay_0.act:>, <>
+Reaction ends, delay_0, 0, 0, 25000000, 0, 25228500, NO TRIGGER, 0, <>, <d2.in2:>
+Reaction starts, delay, 0, 0, 25000000, 0, 25229200, NO TRIGGER, 0, <delay.act:>, <>
+Reaction ends, delay, 0, 0, 25000000, 0, 25229400, NO TRIGGER, 0, <>, <d2.in1:>
+Reaction starts, d2, 0, 0, 25000000, 0, 25229700, NO TRIGGER, 0, <d2.in2:d2.in1:>, <>
+Reaction ends, d2, 0, 0, 25000000, 0, 25281100, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 0, 0, 25000000, 1, 25283400, NO TRIGGER, 0, <delay_0.act:>, <>
+Reaction ends, delay_0, 0, 0, 25000000, 1, 25283800, NO TRIGGER, 0, <>, <d2.in2:>
+Reaction starts, delay, 0, 0, 25000000, 1, 25284100, NO TRIGGER, 0, <delay.act:>, <>
+Reaction ends, delay, 0, 0, 25000000, 1, 25284300, NO TRIGGER, 0, <>, <d2.in1:>
+Reaction starts, d2, 0, 0, 25000000, 1, 25284500, NO TRIGGER, 0, <d2.in2:d2.in1:>, <>
+Reaction ends, d2, 0, 0, 25000000, 1, 25288000, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 30000000, 0, 30196100, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 30000000, 0, 30196600, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 30000000, 0, 30198100, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 30000000, 0, 30198700, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 30000000, 0, 30244100, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 30000000, 0, 30244700, NO TRIGGER, 0, <delay.inp:>, <>
+Schedule called, delay, 0, 0, 30000000, 0, 30245900, delay.act, 0, <>, <>
+Reaction ends, delay, 1, 0, 30000000, 0, 30246100, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 30000000, 1, 30247200, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 30000000, 1, 30247600, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 30000000, 1, 30247900, NO TRIGGER, 0, <>, <d1.in2:delay_0.inp:>
+Reaction starts, d1, 0, 0, 30000000, 1, 30248400, NO TRIGGER, 0, <d1.in2:>, <>
+Reaction ends, d1, 0, 0, 30000000, 1, 30260000, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 1, 0, 30000000, 1, 30260200, NO TRIGGER, 0, <delay_0.inp:>, <>
+Schedule called, delay_0, 0, 0, 30000000, 1, 30260600, delay_0.act, 0, <>, <>
+Reaction ends, delay_0, 1, 0, 30000000, 1, 30260700, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 30000000, 2, 30261200, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 30000000, 2, 30261400, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 30000000, 2, 30261600, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 30000000, 2, 30261900, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 30000000, 2, 30263600, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 30000000, 2, 30263700, NO TRIGGER, 0, <delay.inp:>, <>
+Reaction ends, delay, 1, 0, 30000000, 2, 30264100, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 30000000, 3, 30264400, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 30000000, 3, 30264600, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 30000000, 3, 30264700, NO TRIGGER, 0, <>, <d1.in2:delay_0.inp:>
+Reaction starts, d1, 0, 0, 30000000, 3, 30265000, NO TRIGGER, 0, <d1.in2:>, <>
+Reaction ends, d1, 0, 0, 30000000, 3, 30266400, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 1, 0, 30000000, 3, 30266600, NO TRIGGER, 0, <delay_0.inp:>, <>
+Reaction ends, delay_0, 1, 0, 30000000, 3, 30266900, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 30000000, 4, 30269000, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 30000000, 4, 30269300, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 30000000, 4, 30269400, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 0, 0, 35000000, 0, 35200300, NO TRIGGER, 0, <delay_0.act:>, <>
+Reaction ends, delay_0, 0, 0, 35000000, 0, 35203100, NO TRIGGER, 0, <>, <d2.in2:>
+Reaction starts, delay, 0, 0, 35000000, 0, 35204800, NO TRIGGER, 0, <delay.act:>, <>
+Reaction ends, delay, 0, 0, 35000000, 0, 35214000, NO TRIGGER, 0, <>, <d2.in1:>
+Reaction starts, d2, 0, 0, 35000000, 0, 35215000, NO TRIGGER, 0, <d2.in2:d2.in1:>, <>
+Reaction ends, d2, 0, 0, 35000000, 0, 35277300, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 0, 0, 35000000, 1, 35278300, NO TRIGGER, 0, <delay_0.act:>, <>
+Reaction ends, delay_0, 0, 0, 35000000, 1, 35278400, NO TRIGGER, 0, <>, <d2.in2:>
+Reaction starts, delay, 0, 0, 35000000, 1, 35278600, NO TRIGGER, 0, <delay.act:>, <>
+Reaction ends, delay, 0, 0, 35000000, 1, 35278600, NO TRIGGER, 0, <>, <d2.in1:>
+Reaction starts, d2, 0, 0, 35000000, 1, 35278700, NO TRIGGER, 0, <d2.in2:d2.in1:>, <>
+Reaction ends, d2, 0, 0, 35000000, 1, 35280200, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 40000000, 0, 40340900, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 40000000, 0, 40342100, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 40000000, 0, 40344400, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 40000000, 0, 40355700, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 40000000, 0, 40416300, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 40000000, 0, 40416500, NO TRIGGER, 0, <delay.inp:>, <>
+Schedule called, delay, 0, 0, 40000000, 0, 40417000, delay.act, 0, <>, <>
+Reaction ends, delay, 1, 0, 40000000, 0, 40417100, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 40000000, 1, 40417600, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 40000000, 1, 40417700, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 40000000, 1, 40417900, NO TRIGGER, 0, <>, <d1.in2:delay_0.inp:>
+Reaction starts, d1, 0, 0, 40000000, 1, 40418100, NO TRIGGER, 0, <d1.in2:>, <>
+Reaction ends, d1, 0, 0, 40000000, 1, 40419900, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 1, 0, 40000000, 1, 40420000, NO TRIGGER, 0, <delay_0.inp:>, <>
+Schedule called, delay_0, 0, 0, 40000000, 1, 40420200, delay_0.act, 0, <>, <>
+Reaction ends, delay_0, 1, 0, 40000000, 1, 40420200, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 40000000, 2, 40420400, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 40000000, 2, 40420600, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 40000000, 2, 40420600, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 40000000, 2, 40420800, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 40000000, 2, 40421600, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 40000000, 2, 40422900, NO TRIGGER, 0, <delay.inp:>, <>
+Reaction ends, delay, 1, 0, 40000000, 2, 40423100, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 40000000, 3, 40423300, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 40000000, 3, 40423400, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 40000000, 3, 40423400, NO TRIGGER, 0, <>, <d1.in2:delay_0.inp:>
+Reaction starts, d1, 0, 0, 40000000, 3, 40423600, NO TRIGGER, 0, <d1.in2:>, <>
+Reaction ends, d1, 0, 0, 40000000, 3, 40424400, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 1, 0, 40000000, 3, 40424400, NO TRIGGER, 0, <delay_0.inp:>, <>
+Reaction ends, delay_0, 1, 0, 40000000, 3, 40424600, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 40000000, 4, 40424700, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 40000000, 4, 40424900, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 40000000, 4, 40424900, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 0, 0, 45000000, 0, 45150700, NO TRIGGER, 0, <delay_0.act:>, <>
+Reaction ends, delay_0, 0, 0, 45000000, 0, 45151800, NO TRIGGER, 0, <>, <d2.in2:>
+Reaction starts, delay, 0, 0, 45000000, 0, 45152200, NO TRIGGER, 0, <delay.act:>, <>
+Reaction ends, delay, 0, 0, 45000000, 0, 45152300, NO TRIGGER, 0, <>, <d2.in1:>
+Reaction starts, d2, 0, 0, 45000000, 0, 45152500, NO TRIGGER, 0, <d2.in2:d2.in1:>, <>
+Reaction ends, d2, 0, 0, 45000000, 0, 45180400, NO TRIGGER, 0, <>, <>
+Reaction starts, delay_0, 0, 0, 45000000, 1, 45181500, NO TRIGGER, 0, <delay_0.act:>, <>
+Reaction ends, delay_0, 0, 0, 45000000, 1, 45186400, NO TRIGGER, 0, <>, <d2.in2:>
+Reaction starts, delay, 0, 0, 45000000, 1, 45186600, NO TRIGGER, 0, <delay.act:>, <>
+Reaction ends, delay, 0, 0, 45000000, 1, 45186700, NO TRIGGER, 0, <>, <d2.in1:>
+Reaction starts, d2, 0, 0, 45000000, 1, 45186800, NO TRIGGER, 0, <d2.in2:d2.in1:>, <>
+Reaction ends, d2, 0, 0, 45000000, 1, 45188300, NO TRIGGER, 0, <>, <>
+Reaction starts, s, 0, 0, 50000000, 0, 50150900, NO TRIGGER, 0, <s.redo:>, <>
+Schedule called, s, 0, 0, 50000000, 0, 50151200, s.redo, 0, <>, <>
+Reaction ends, s, 0, 0, 50000000, 0, 50151800, NO TRIGGER, 0, <>, <d1.in1:delay.inp:>
+Reaction starts, d1, 0, 0, 50000000, 0, 50152100, NO TRIGGER, 0, <d1.in1:>, <>
+Reaction ends, d1, 0, 0, 50000000, 0, 50174500, NO TRIGGER, 0, <>, <>
+Reaction starts, delay, 1, 0, 50000000, 0, 50174700, NO TRIGGER, 0, <delay.inp:>, <>
+Reaction ends, delay, 1, 0, 50000000, 0, 50175500, NO TRIGGER, 0, <>, <>

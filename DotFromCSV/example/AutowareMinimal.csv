@@ -1,0 +1,1818 @@
+Event, Reactor, Reaction, Worker, Elapsed Logical Time, Microstep, Elapsed Physical Time, Trigger, Extra Delay, Triggered By, Effects
+Schedule called, camera, 0, 0, 0, 0, 228500, camera.tCamera, 0, <>, <>
+Schedule called, lidar, 0, 0, 0, 0, 228900, lidar.tLidar, 0, <>, <>
+Schedule called, semantic, 0, 0, 0, 0, 229500, semantic.t, 0, <>, <>
+Schedule called, semantic, 0, 0, 0, 0, 229700, semantic.t, 0, <>, <>
+Schedule called, camera, 0, 0, 3000000, 0, 3135000, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 3000000, 0, 3138700, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 10000000, 0, 10290800, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 10000000, 0, 10296600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 20000000, 0, 20329900, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 20000000, 0, 20333100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 30000000, 0, 30144000, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 30000000, 0, 30147000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 36000000, 0, 36174900, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 36000000, 0, 36177800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 40000000, 0, 40210400, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 40000000, 0, 40210700, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 40000000, 0, 40212600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 50000000, 0, 50208000, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 50000000, 0, 50212300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 60000000, 0, 60131100, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 60000000, 0, 60139500, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 69000000, 0, 69128900, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 69000000, 0, 69132700, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 70000000, 0, 70068700, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 70000000, 0, 70070400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 80000000, 0, 80153100, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 80000000, 0, 80153400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 80000000, 0, 80166100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 90000000, 0, 90136100, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 90000000, 0, 90140000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 100000000, 0, 100192700, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 100000000, 0, 100196200, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 102000000, 0, 102268700, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 102000000, 0, 102272600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 110000000, 0, 110286100, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 110000000, 0, 110297700, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 120000000, 0, 120263700, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 120000000, 0, 120271000, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 120000000, 0, 120274600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 130000000, 0, 130152900, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 130000000, 0, 130160500, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 135000000, 0, 135348700, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 135000000, 0, 135358600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 140000000, 0, 140128100, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 140000000, 0, 140131000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 150000000, 0, 150243700, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 150000000, 0, 150254100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 160000000, 0, 160388100, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 160000000, 0, 160388600, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 160000000, 0, 160392100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 168000000, 0, 168207300, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 168000000, 0, 168211400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 170000000, 0, 170184100, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 170000000, 0, 170187000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 180000000, 0, 180093300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 180000000, 0, 180104400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 190000000, 0, 190221200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 190000000, 0, 190231000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 200000000, 0, 200194100, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 200000000, 0, 200195200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 200000000, 0, 200216100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 201000000, 0, 201192700, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 201000000, 0, 201201300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 210000000, 0, 210469300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 210000000, 0, 210472600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 220000000, 0, 220334800, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 220000000, 0, 220338400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 230000000, 0, 230093300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 230000000, 0, 230097100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 234000000, 0, 234122700, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 234000000, 0, 234125700, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 240000000, 0, 240120900, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 240000000, 0, 240121300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 240000000, 0, 240126500, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 250000000, 0, 250319000, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 250000000, 0, 250332200, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 260000000, 0, 260133800, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 260000000, 0, 260137500, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 267000000, 0, 267154500, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 267000000, 0, 267159300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 270000000, 0, 270233300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 270000000, 0, 270237100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 280000000, 0, 280137900, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 280000000, 0, 280138400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 280000000, 0, 280142100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 290000000, 0, 290343600, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 290000000, 0, 290347200, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 300000000, 0, 300278500, camera.tCamera, 0, <>, <>
+Schedule called, lidar, 0, 0, 300000000, 0, 300279300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 300000000, 0, 300318900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 310000000, 0, 310255500, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 310000000, 0, 310258400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 320000000, 0, 320447100, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 320000000, 0, 320447600, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 320000000, 0, 320450600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 330000000, 0, 330188500, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 330000000, 0, 330198700, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 333000000, 0, 333197200, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 333000000, 0, 333199600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 340000000, 0, 340235100, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 340000000, 0, 340237200, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 350000000, 0, 350167900, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 350000000, 0, 350177200, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 360000000, 0, 360166000, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 360000000, 0, 360166300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 360000000, 0, 360169600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 366000000, 0, 366334000, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 366000000, 0, 366344400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 370000000, 0, 370182300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 370000000, 0, 370189600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 380000000, 0, 380239500, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 380000000, 0, 380245300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 390000000, 0, 390207200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 390000000, 0, 390216400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 399000000, 0, 399228700, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 399000000, 0, 399238900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 400000000, 0, 400127600, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 400000000, 0, 400128700, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 400000000, 0, 400135800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 410000000, 0, 410210500, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 410000000, 0, 410220400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 420000000, 0, 420186900, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 420000000, 0, 420198600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 430000000, 0, 430143200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 430000000, 0, 430192300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 432000000, 0, 432175900, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 432000000, 0, 432199000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 440000000, 0, 440139600, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 440000000, 0, 440145400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 440000000, 0, 440149000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 450000000, 0, 450134400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 450000000, 0, 450142300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 460000000, 0, 460244400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 460000000, 0, 460271900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 465000000, 0, 465125300, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 465000000, 0, 465128200, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 470000000, 0, 470207400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 470000000, 0, 470231800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 480000000, 0, 480093100, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 480000000, 0, 480093500, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 480000000, 0, 480098000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 490000000, 0, 490126100, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 490000000, 0, 490129300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 498000000, 0, 498235100, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 498000000, 0, 498267700, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 500000000, 0, 500114200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 500000000, 0, 500116400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 510000000, 0, 510238400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 510000000, 0, 510248000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 520000000, 0, 520218100, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 520000000, 0, 520219300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 520000000, 0, 520241000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 530000000, 0, 530233400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 530000000, 0, 530243000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 531000000, 0, 531216300, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 531000000, 0, 531223900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 540000000, 0, 540209200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 540000000, 0, 540218100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 550000000, 0, 550136000, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 550000000, 0, 550139300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 560000000, 0, 560432800, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 560000000, 0, 560433500, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 560000000, 0, 560436400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 564000000, 0, 564254500, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 564000000, 0, 564257500, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 570000000, 0, 570230900, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 570000000, 0, 570256700, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 580000000, 0, 580181200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 580000000, 0, 580186000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 590000000, 0, 590218200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 590000000, 0, 590240100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 597000000, 0, 597257600, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 597000000, 0, 597267900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 600000000, 0, 600289100, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 600000000, 0, 600290300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 600000000, 0, 600298200, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 610000000, 0, 610229200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 610000000, 0, 610239800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 620000000, 0, 620159000, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 620000000, 0, 620165500, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 630000000, 0, 630287700, camera.tCamera, 0, <>, <>
+Schedule called, lidar, 0, 0, 630000000, 0, 630287900, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 630000000, 0, 630309900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 640000000, 0, 640158700, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 640000000, 0, 640159300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 640000000, 0, 640163900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 650000000, 0, 650274200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 650000000, 0, 650289900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 660000000, 0, 660425000, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 660000000, 0, 660428400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 663000000, 0, 663251100, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 663000000, 0, 663254300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 670000000, 0, 670221500, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 670000000, 0, 670253800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 680000000, 0, 680262100, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 680000000, 0, 680263400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 680000000, 0, 680274300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 690000000, 0, 690271800, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 690000000, 0, 690282000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 696000000, 0, 696232700, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 696000000, 0, 696256900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 700000000, 0, 700219300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 700000000, 0, 700228800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 710000000, 0, 710493400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 710000000, 0, 710496800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 720000000, 0, 720283700, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 720000000, 0, 720284200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 720000000, 0, 720296800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 729000000, 0, 729218800, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 729000000, 0, 729221500, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 730000000, 0, 730117100, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 730000000, 0, 730118800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 740000000, 0, 740295200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 740000000, 0, 740299000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 750000000, 0, 750348400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 750000000, 0, 750361800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 760000000, 0, 760281600, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 760000000, 0, 760282800, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 760000000, 0, 760294100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 762000000, 0, 762201900, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 762000000, 0, 762218900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 770000000, 0, 770311200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 770000000, 0, 770314300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 780000000, 0, 780203800, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 780000000, 0, 780228700, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 790000000, 0, 790306400, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 790000000, 0, 790309600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 795000000, 0, 795145900, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 795000000, 0, 795149300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 800000000, 0, 800241800, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 800000000, 0, 800242200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 800000000, 0, 800245200, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 810000000, 0, 810150500, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 810000000, 0, 810154300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 820000000, 0, 820315600, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 820000000, 0, 820327700, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 828000000, 0, 828136000, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 828000000, 0, 828139600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 830000000, 0, 830153500, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 830000000, 0, 830157300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 840000000, 0, 840280700, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 840000000, 0, 840282200, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 840000000, 0, 840291700, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 850000000, 0, 850208900, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 850000000, 0, 850216100, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 860000000, 0, 860184000, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 860000000, 0, 860192000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 861000000, 0, 861140900, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 861000000, 0, 861156300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 870000000, 0, 870213100, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 870000000, 0, 870220200, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 880000000, 0, 880166200, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 880000000, 0, 880166700, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 880000000, 0, 880170000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 890000000, 0, 890140800, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 890000000, 0, 890153000, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 894000000, 0, 894209500, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 894000000, 0, 894219800, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 900000000, 0, 900117900, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 900000000, 0, 900120900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 910000000, 0, 910239600, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 910000000, 0, 910262400, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 920000000, 0, 920225300, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 920000000, 0, 920226500, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 920000000, 0, 920235900, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, camera, 0, 0, 927000000, 0, 927262000, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 927000000, 0, 927265600, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 930000000, 0, 930240700, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 930000000, 0, 930246500, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 940000000, 0, 940250300, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 940000000, 0, 940280500, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, lidar, 0, 0, 950000000, 0, 950095700, lidar.tLidar, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 950000000, 0, 950099300, dataFusion.both_ports_are_present, 0, <>, <>
+Schedule called, semantic, 0, 0, 960000000, 0, 960156200, semantic.t, 0, <>, <>
+Schedule called, lidar, 0, 0, 960000000, 0, 960157300, lidar.tLidar, 0, <>, <>
+Schedule called, camera, 0, 0, 960000000, 0, 960171200, camera.tCamera, 0, <>, <>
+Schedule called, dataFusion, 0, 0, 960000000, 0, 960261800, dataFusion.both_ports_are_present, 0, <>, <>
+Reaction starts, semantic, 1, 1, 0, 0, 384600, NO TRIGGER, 0, <>, <>
+Reaction ends, semantic, 1, 1, 0, 0, 385300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 0, 0, 385800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 3000000, 0, 3135300, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 3000000, 0, 3136300, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 3000000, 0, 3136800, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 3000000, 0, 3137800, NO TRIGGER, 0, <dataFusion.imageobject:>, <>
+Reaction ends, dataFusion, 0, 1, 3000000, 0, 3139100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 3000000, 0, 3139400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 3000000, 1, 3140000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 3000000, 1, 3140100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 3000000, 1, 3174800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 3000000, 1, 3175200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 3000000, 1, 3175500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 3000000, 1, 3176200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 10000000, 0, 10290900, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 10000000, 0, 10291500, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 10000000, 0, 10292100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 10000000, 0, 10292600, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 10000000, 0, 10296800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 10000000, 0, 10297000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 10000000, 1, 10297300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 10000000, 1, 10297400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 10000000, 1, 10315100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 10000000, 1, 10315300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 10000000, 1, 10315500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 10000000, 1, 10315800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 20000000, 0, 20330100, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 20000000, 0, 20331300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 20000000, 0, 20332200, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 20000000, 0, 20332700, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 20000000, 0, 20338300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 20000000, 0, 20338500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 20000000, 1, 20338800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 20000000, 1, 20338900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 20000000, 1, 20364200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 20000000, 1, 20364400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 20000000, 1, 20365700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 20000000, 1, 20366000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 30000000, 0, 30144200, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 30000000, 0, 30145300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 30000000, 0, 30146100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 30000000, 0, 30146600, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 30000000, 0, 30147300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 30000000, 0, 30147400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 30000000, 1, 30147700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 30000000, 1, 30147800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 30000000, 1, 30171600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 30000000, 1, 30171800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 30000000, 1, 30172000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 30000000, 1, 30172300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 36000000, 0, 36175000, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 36000000, 0, 36176300, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 36000000, 0, 36176900, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 36000000, 0, 36177400, NO TRIGGER, 0, <dataFusion.imageobject:>, <>
+Reaction ends, dataFusion, 0, 1, 36000000, 0, 36183200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 36000000, 0, 36183400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 36000000, 1, 36183700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 36000000, 1, 36183800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 36000000, 1, 36211100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 36000000, 1, 36211300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 36000000, 1, 36211400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 36000000, 1, 36211700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 40000000, 0, 40210800, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 40000000, 0, 40211300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 40000000, 0, 40211800, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 40000000, 0, 40212200, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 40000000, 0, 40212800, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 40000000, 0, 40212900, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 40000000, 0, 40213000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 40000000, 0, 40213100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 40000000, 1, 40213400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 40000000, 1, 40213500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 40000000, 1, 40233000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 40000000, 1, 40233200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 40000000, 1, 40233400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 40000000, 1, 40233700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 50000000, 0, 50208300, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 50000000, 0, 50209900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 50000000, 0, 50211300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 50000000, 0, 50211900, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 50000000, 0, 50219000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 50000000, 0, 50219200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 50000000, 1, 50219600, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 50000000, 1, 50219600, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 50000000, 1, 50246600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 50000000, 1, 50246800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 50000000, 1, 50247000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 50000000, 1, 50247300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 60000000, 0, 60131400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 60000000, 0, 60132700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 60000000, 0, 60133600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 60000000, 0, 60139000, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 60000000, 0, 60139700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 60000000, 0, 60139900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 60000000, 1, 60140200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 60000000, 1, 60140200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 60000000, 1, 60167400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 60000000, 1, 60167600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 60000000, 1, 60167800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 60000000, 1, 60168100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 69000000, 0, 69129100, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 69000000, 0, 69130600, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 69000000, 0, 69131600, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 69000000, 0, 69132200, NO TRIGGER, 0, <dataFusion.imageobject:>, <>
+Reaction ends, dataFusion, 0, 1, 69000000, 0, 69132900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 69000000, 0, 69133000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 69000000, 1, 69133400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 69000000, 1, 69133400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 69000000, 1, 69158000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 69000000, 1, 69163100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 69000000, 1, 69163300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 69000000, 1, 69163700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 70000000, 0, 70068900, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 70000000, 0, 70069400, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 70000000, 0, 70069700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 70000000, 0, 70070100, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 70000000, 0, 70070600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 70000000, 0, 70070800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 70000000, 1, 70071000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 70000000, 1, 70071100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 70000000, 1, 70086600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 70000000, 1, 70086800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 70000000, 1, 70086900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 70000000, 1, 70087300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 80000000, 0, 80153700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 80000000, 0, 80156000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 80000000, 0, 80157600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 80000000, 0, 80165600, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 80000000, 0, 80166400, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 80000000, 0, 80166500, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 80000000, 0, 80166700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 80000000, 0, 80166800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 80000000, 1, 80167100, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 80000000, 1, 80167200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 80000000, 1, 80200100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 80000000, 1, 80200300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 80000000, 1, 80200400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 80000000, 1, 80200800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 90000000, 0, 90136400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 90000000, 0, 90137700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 90000000, 0, 90138700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 90000000, 0, 90139300, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 90000000, 0, 90140300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 90000000, 0, 90140400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 90000000, 1, 90140700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 90000000, 1, 90140800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 90000000, 1, 90188900, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 90000000, 1, 90189200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 90000000, 1, 90189300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 90000000, 1, 90189700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 100000000, 0, 100193000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 100000000, 0, 100194300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 100000000, 0, 100195100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 100000000, 0, 100195700, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 100000000, 0, 100196600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 100000000, 0, 100196700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 100000000, 1, 100197000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 100000000, 1, 100197100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 100000000, 1, 100228600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 100000000, 1, 100229000, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 100000000, 1, 100229100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 100000000, 1, 100229500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 102000000, 0, 102268900, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 102000000, 0, 102269400, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 102000000, 0, 102271900, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 102000000, 0, 102272300, NO TRIGGER, 0, <dataFusion.imageobject:>, <>
+Reaction ends, dataFusion, 0, 1, 102000000, 0, 102272800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 102000000, 0, 102273000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 102000000, 1, 102273300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 102000000, 1, 102273400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 102000000, 1, 102316400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 102000000, 1, 102316600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 102000000, 1, 102316700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 102000000, 1, 102317100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 110000000, 0, 110287000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 110000000, 0, 110290400, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 110000000, 0, 110293000, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 110000000, 0, 110295800, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 110000000, 0, 110298600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 110000000, 0, 110299500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 110000000, 1, 110301100, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 110000000, 1, 110301500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 110000000, 1, 110376100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 110000000, 1, 110376400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 110000000, 1, 110376500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 110000000, 1, 110376900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 120000000, 0, 120271200, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 120000000, 0, 120272500, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 120000000, 0, 120273300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 120000000, 0, 120273900, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 120000000, 0, 120275000, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 120000000, 0, 120275200, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 120000000, 0, 120275300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 120000000, 0, 120275400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 120000000, 1, 120275800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 120000000, 1, 120275800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 120000000, 1, 120302100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 120000000, 1, 120302500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 120000000, 1, 120302600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 120000000, 1, 120302900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 130000000, 0, 130157700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 130000000, 0, 130158900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 130000000, 0, 130159600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 130000000, 0, 130160000, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 130000000, 0, 130160900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 130000000, 0, 130161100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 130000000, 1, 130161400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 130000000, 1, 130161500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 130000000, 1, 130186000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 130000000, 1, 130186100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 130000000, 1, 130186300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 130000000, 1, 130186600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 135000000, 0, 135349500, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 135000000, 0, 135352100, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 135000000, 0, 135354300, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 135000000, 0, 135356900, NO TRIGGER, 0, <dataFusion.imageobject:>, <>
+Reaction ends, dataFusion, 0, 1, 135000000, 0, 135359600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 135000000, 0, 135360400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 135000000, 1, 135362200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 135000000, 1, 135392100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 135000000, 1, 135408400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 135000000, 1, 135408600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 135000000, 1, 135408700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 135000000, 1, 135409100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 140000000, 0, 140128300, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 140000000, 0, 140129300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 140000000, 0, 140130000, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 140000000, 0, 140130600, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 140000000, 0, 140131200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 140000000, 0, 140131400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 140000000, 1, 140131700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 140000000, 1, 140131700, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 140000000, 1, 140151900, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 140000000, 1, 140152100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 140000000, 1, 140152200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 140000000, 1, 140152600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 150000000, 0, 150243900, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 150000000, 0, 150251900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 150000000, 0, 150253000, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 150000000, 0, 150253500, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 150000000, 0, 150254600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 150000000, 0, 150254800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 150000000, 1, 150255100, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 150000000, 1, 150255200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 150000000, 1, 150279700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 150000000, 1, 150280100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 150000000, 1, 150280200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 150000000, 1, 150280600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 160000000, 0, 160388800, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 160000000, 0, 160390100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 160000000, 0, 160391100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 160000000, 0, 160391700, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 160000000, 0, 160392400, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 160000000, 0, 160392600, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 160000000, 0, 160392700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 160000000, 0, 160398300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 160000000, 1, 160398700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 160000000, 1, 160398800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 160000000, 1, 160427800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 160000000, 1, 160428100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 160000000, 1, 160428200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 160000000, 1, 160428700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 168000000, 0, 168207600, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 168000000, 0, 168209000, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 168000000, 0, 168210000, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 168000000, 0, 168210900, NO TRIGGER, 0, <dataFusion.imageobject:>, <>
+Reaction ends, dataFusion, 0, 1, 168000000, 0, 168211800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 168000000, 0, 168212000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 168000000, 1, 168212400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 168000000, 1, 168212500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 168000000, 1, 168244900, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 168000000, 1, 168245200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 168000000, 1, 168245300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 168000000, 1, 168245900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 170000000, 0, 170184400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 170000000, 0, 170185100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 170000000, 0, 170185800, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 170000000, 0, 170186600, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 170000000, 0, 170187400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 170000000, 0, 170187600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 170000000, 1, 170188000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 170000000, 1, 170188100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 170000000, 1, 170213000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 170000000, 1, 170213400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 170000000, 1, 170217200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 170000000, 1, 170217900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 180000000, 0, 180093600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 180000000, 0, 180095000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 180000000, 0, 180096500, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 180000000, 0, 180097000, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 180000000, 0, 180104700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 180000000, 0, 180104900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 180000000, 1, 180105900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 180000000, 1, 180106000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 180000000, 1, 180131100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 180000000, 1, 180131500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 180000000, 1, 180131600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 180000000, 1, 180131800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 190000000, 0, 190221800, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 190000000, 0, 190225200, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 190000000, 0, 190227400, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 190000000, 0, 190229500, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 190000000, 0, 190231900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 190000000, 0, 190232400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 190000000, 1, 190233600, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 190000000, 1, 190233900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 190000000, 1, 190319200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 190000000, 1, 190320100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 190000000, 1, 190320600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 190000000, 1, 190322600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 200000000, 0, 200207000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 200000000, 0, 200210000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 200000000, 0, 200212300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 200000000, 0, 200214500, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 200000000, 0, 200216900, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 200000000, 0, 200217600, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 200000000, 0, 200217900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 200000000, 0, 200218400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 200000000, 1, 200219600, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 200000000, 1, 200219900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 200000000, 1, 200293700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 200000000, 1, 200294400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 200000000, 1, 200294900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 200000000, 1, 200296600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 201000000, 0, 201193300, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 201000000, 0, 201195900, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 201000000, 0, 201197900, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 201000000, 0, 201200000, NO TRIGGER, 0, <dataFusion.imageobject:>, <>
+Reaction ends, dataFusion, 0, 1, 201000000, 0, 201213600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 201000000, 0, 201214300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 201000000, 1, 201215600, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 201000000, 1, 201215900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 201000000, 1, 201282400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 201000000, 1, 201283200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 201000000, 1, 201283600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 201000000, 1, 201285100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 210000000, 0, 210469500, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 210000000, 0, 210470700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 210000000, 0, 210471600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 210000000, 0, 210472200, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 210000000, 0, 210472900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 210000000, 0, 210473000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 210000000, 1, 210473300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 210000000, 1, 210473400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 210000000, 1, 210498500, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 210000000, 1, 210499100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 210000000, 1, 210499200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 210000000, 1, 210504000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 220000000, 0, 220335000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 220000000, 0, 220336500, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 220000000, 0, 220337400, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 220000000, 0, 220337900, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 220000000, 0, 220338700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 220000000, 0, 220338800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 220000000, 1, 220339100, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 220000000, 1, 220339200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 220000000, 1, 220373100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 220000000, 1, 220373300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 220000000, 1, 220373500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 220000000, 1, 220373900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 230000000, 0, 230093600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 230000000, 0, 230095200, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 230000000, 0, 230096100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 230000000, 0, 230096600, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 230000000, 0, 230097300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 230000000, 0, 230103100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 230000000, 1, 230103400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 230000000, 1, 230103500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 230000000, 1, 230129500, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 230000000, 1, 230129900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 230000000, 1, 230130000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 230000000, 1, 230130300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 234000000, 0, 234122900, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 234000000, 0, 234124200, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 234000000, 0, 234124800, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 234000000, 0, 234125300, NO TRIGGER, 0, <dataFusion.imageobject:>, <>
+Reaction ends, dataFusion, 0, 1, 234000000, 0, 234125900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 234000000, 0, 234126100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 234000000, 1, 234126300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 234000000, 1, 234126400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 234000000, 1, 234146600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 234000000, 1, 234146800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 234000000, 1, 234147000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 234000000, 1, 234150600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 240000000, 0, 240121400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 240000000, 0, 240122100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 240000000, 0, 240122600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 240000000, 0, 240123100, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 240000000, 0, 240126900, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 240000000, 0, 240127100, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 240000000, 0, 240145600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 240000000, 0, 240146000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 240000000, 1, 240146600, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 240000000, 1, 240146800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 240000000, 1, 240148200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 240000000, 1, 240148300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 240000000, 1, 240148400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 240000000, 1, 240148500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 250000000, 0, 250319500, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 250000000, 0, 250321100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 250000000, 0, 250322300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 250000000, 0, 250323000, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 250000000, 0, 250332500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 250000000, 0, 250332600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 250000000, 1, 250333000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 250000000, 1, 250333000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 250000000, 1, 250361200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 250000000, 1, 250361400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 250000000, 1, 250362800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 250000000, 1, 250363200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 260000000, 0, 260134000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 260000000, 0, 260135700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 260000000, 0, 260136400, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 260000000, 0, 260137000, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 260000000, 0, 260137700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 260000000, 0, 260137800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 260000000, 1, 260138100, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 260000000, 1, 260138200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 260000000, 1, 260165200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 260000000, 1, 260165400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 260000000, 1, 260170400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 260000000, 1, 260170900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 267000000, 0, 267154700, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 267000000, 0, 267156200, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 267000000, 0, 267157900, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 267000000, 0, 267158600, NO TRIGGER, 0, <dataFusion.imageobject:>, <>
+Reaction ends, dataFusion, 0, 1, 267000000, 0, 267159500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 267000000, 0, 267159700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 267000000, 1, 267160000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 267000000, 1, 267160100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 267000000, 1, 267192300, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 267000000, 1, 267192500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 267000000, 1, 267192700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 267000000, 1, 267193100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 270000000, 0, 270233600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 270000000, 0, 270234800, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 270000000, 0, 270235700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 270000000, 0, 270236600, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 270000000, 0, 270247600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 270000000, 0, 270247800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 270000000, 1, 270248200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 270000000, 1, 270248300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 270000000, 1, 270286800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 270000000, 1, 270287200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 270000000, 1, 270287300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 270000000, 1, 270287700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 280000000, 0, 280138600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 280000000, 0, 280140000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 280000000, 0, 280141100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 280000000, 0, 280141600, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 280000000, 0, 280142600, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 280000000, 0, 280142700, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 280000000, 0, 280142800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 280000000, 0, 280142900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 280000000, 1, 280143300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 280000000, 1, 280143300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 280000000, 1, 280173100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 280000000, 1, 280173500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 280000000, 1, 280173600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 280000000, 1, 280174000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 290000000, 0, 290343800, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 290000000, 0, 290345000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 290000000, 0, 290346000, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 290000000, 0, 290346700, NO TRIGGER, 0, <dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 290000000, 0, 290347500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 290000000, 0, 290347600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 290000000, 1, 290347900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 290000000, 1, 290348000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 290000000, 1, 290373100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 290000000, 1, 290373300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 290000000, 1, 290373500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 290000000, 1, 290373900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 300000000, 0, 300279500, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 300000000, 0, 300305500, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 300000000, 0, 300307300, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, lidar, 0, 1, 300000000, 0, 300317700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 300000000, 0, 300318000, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 300000000, 0, 300318200, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 300000000, 0, 300319100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 300000000, 0, 300319200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 300000000, 1, 300319700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 300000000, 1, 300319800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 300000000, 1, 300354500, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 300000000, 1, 300354700, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 300000000, 1, 300354800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 300000000, 1, 300355200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 310000000, 0, 310255700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 310000000, 0, 310256600, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 310000000, 0, 310257400, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 310000000, 0, 310258000, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 310000000, 0, 310258600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 310000000, 0, 310258700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 310000000, 1, 310259000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 310000000, 1, 310262500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 310000000, 1, 310283000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 310000000, 1, 310283200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 310000000, 1, 310283400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 310000000, 1, 310283800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 320000000, 0, 320447700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 320000000, 0, 320449000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 320000000, 0, 320449700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 320000000, 0, 320450200, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 320000000, 0, 320450900, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 320000000, 0, 320451000, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 320000000, 0, 320451100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 320000000, 0, 320451200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 320000000, 1, 320451600, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 320000000, 1, 320451600, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 320000000, 1, 320477400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 320000000, 1, 320477700, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 320000000, 1, 320477800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 320000000, 1, 320479500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 330000000, 0, 330189200, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 330000000, 0, 330193700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 330000000, 0, 330196500, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 330000000, 0, 330197400, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 330000000, 0, 330198900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 330000000, 0, 330199100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 330000000, 1, 330199400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 330000000, 1, 330199500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 330000000, 1, 330249600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 330000000, 1, 330250100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 330000000, 1, 330250200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 330000000, 1, 330250700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 333000000, 0, 333197400, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 333000000, 0, 333198300, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 333000000, 0, 333198800, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 333000000, 0, 333199300, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 333000000, 0, 333199700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 333000000, 0, 333199900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 333000000, 1, 333205400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 333000000, 1, 333205500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 333000000, 1, 333222300, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 333000000, 1, 333222500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 333000000, 1, 333223800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 333000000, 1, 333224200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 340000000, 0, 340235300, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 340000000, 0, 340235900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 340000000, 0, 340236300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 340000000, 0, 340236900, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 340000000, 0, 340237400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 340000000, 0, 340237500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 340000000, 1, 340237800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 340000000, 1, 340237900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 340000000, 1, 340258400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 340000000, 1, 340258600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 340000000, 1, 340258800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 340000000, 1, 340259200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 350000000, 0, 350173100, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 350000000, 0, 350175200, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 350000000, 0, 350176000, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 350000000, 0, 350176600, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 350000000, 0, 350177400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 350000000, 0, 350177500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 350000000, 1, 350177900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 350000000, 1, 350178000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 350000000, 1, 350205600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 350000000, 1, 350205800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 350000000, 1, 350206000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 350000000, 1, 350206400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 360000000, 0, 360166500, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 360000000, 0, 360167700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 360000000, 0, 360168600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 360000000, 0, 360169100, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 360000000, 0, 360169800, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 360000000, 0, 360170000, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 360000000, 0, 360176500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 360000000, 0, 360176600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 360000000, 1, 360176900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 360000000, 1, 360177000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 360000000, 1, 360204900, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 360000000, 1, 360205100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 360000000, 1, 360205200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 360000000, 1, 360205500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 366000000, 0, 366334900, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 366000000, 0, 366337900, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 366000000, 0, 366340100, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 366000000, 0, 366342700, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 366000000, 0, 366345500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 366000000, 0, 366346200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 366000000, 1, 366347800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 366000000, 1, 366348200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 366000000, 1, 366398000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 366000000, 1, 366398200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 366000000, 1, 366401700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 366000000, 1, 366402100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 370000000, 0, 370183000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 370000000, 0, 370185100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 370000000, 0, 370186700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 370000000, 0, 370188500, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 370000000, 0, 370190300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 370000000, 0, 370190900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 370000000, 1, 370192200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 370000000, 1, 370192500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 370000000, 1, 370262000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 370000000, 1, 370262800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 370000000, 1, 370263400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 370000000, 1, 370265100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 380000000, 0, 380239800, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 380000000, 0, 380241900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 380000000, 0, 380243500, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 380000000, 0, 380244600, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 380000000, 0, 380245600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 380000000, 0, 380249500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 380000000, 1, 380249800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 380000000, 1, 380249900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 380000000, 1, 380293500, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 380000000, 1, 380294200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 380000000, 1, 380294700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 380000000, 1, 380295100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 390000000, 0, 390208000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 390000000, 0, 390210800, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 390000000, 0, 390213100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 390000000, 0, 390214900, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 390000000, 0, 390217200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 390000000, 0, 390217800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 390000000, 1, 390219100, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 390000000, 1, 390219400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 390000000, 1, 390364700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 390000000, 1, 390365900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 390000000, 1, 390366400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 390000000, 1, 390380700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 399000000, 0, 399229300, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 399000000, 0, 399232600, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 399000000, 0, 399235400, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 399000000, 0, 399237500, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 399000000, 0, 399239800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 399000000, 0, 399240400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 399000000, 1, 399241800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 399000000, 1, 399242000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 399000000, 1, 399317500, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 399000000, 1, 399318500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 399000000, 1, 399319100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 399000000, 1, 399320900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 400000000, 0, 400129200, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 400000000, 0, 400131300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 400000000, 0, 400132700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 400000000, 0, 400134700, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 400000000, 0, 400136600, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 400000000, 0, 400187200, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 400000000, 0, 400254600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 400000000, 0, 400256500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 400000000, 1, 400259000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 400000000, 1, 400259900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 400000000, 1, 400265500, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 400000000, 1, 400266000, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 400000000, 1, 400266300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 400000000, 1, 400266800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 410000000, 0, 410211500, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 410000000, 0, 410214700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 410000000, 0, 410217000, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 410000000, 0, 410218900, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 410000000, 0, 410221300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 410000000, 0, 410222000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 410000000, 1, 410223200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 410000000, 1, 410223500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 410000000, 1, 410304800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 410000000, 1, 410305800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 410000000, 1, 410318900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 410000000, 1, 410320800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 420000000, 0, 420187400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 420000000, 0, 420189100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 420000000, 0, 420196500, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 420000000, 0, 420197700, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 420000000, 0, 420199100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 420000000, 0, 420199500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 420000000, 1, 420200300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 420000000, 1, 420200500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 420000000, 1, 420244800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 420000000, 1, 420245300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 420000000, 1, 420245600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 420000000, 1, 420246400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 430000000, 0, 430143700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 430000000, 0, 430169500, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 430000000, 0, 430171700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 430000000, 0, 430174000, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 430000000, 0, 430193500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 430000000, 0, 430193900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 430000000, 1, 430194900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 430000000, 1, 430195200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 430000000, 1, 430253700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 430000000, 1, 430254300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 430000000, 1, 430254700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 430000000, 1, 430255500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 432000000, 0, 432176300, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 432000000, 0, 432177600, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 432000000, 0, 432178600, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 432000000, 0, 432179700, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 432000000, 0, 432200000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 432000000, 0, 432200700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 432000000, 1, 432201800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 432000000, 1, 432202100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 432000000, 1, 432241200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 432000000, 1, 432241700, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 432000000, 1, 432246600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 432000000, 1, 432247500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 440000000, 0, 440145600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 440000000, 0, 440147000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 440000000, 0, 440148000, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 440000000, 0, 440148500, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 440000000, 0, 440149500, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 440000000, 0, 440149700, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 440000000, 0, 440149800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 440000000, 0, 440149900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 440000000, 1, 440150200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 440000000, 1, 440150300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 440000000, 1, 440179700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 440000000, 1, 440179900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 440000000, 1, 440180000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 440000000, 1, 440180400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 450000000, 0, 450134500, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 450000000, 0, 450135700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 450000000, 0, 450141200, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 450000000, 0, 450141900, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 450000000, 0, 450142600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 450000000, 0, 450142700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 450000000, 1, 450143100, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 450000000, 1, 450143200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 450000000, 1, 450170400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 450000000, 1, 450170900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 450000000, 1, 450171000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 450000000, 1, 450171400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 460000000, 0, 460245400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 460000000, 0, 460269600, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 460000000, 0, 460270600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 460000000, 0, 460271300, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 460000000, 0, 460272200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 460000000, 0, 460272300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 460000000, 1, 460272600, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 460000000, 1, 460272700, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 460000000, 1, 460297700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 460000000, 1, 460303200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 460000000, 1, 460303300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 460000000, 1, 460303700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 465000000, 0, 465125500, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 465000000, 0, 465126500, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 465000000, 0, 465127200, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 465000000, 0, 465127700, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 465000000, 0, 465128300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 465000000, 0, 465128500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 465000000, 1, 465128800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 465000000, 1, 465128900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 465000000, 1, 465151400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 465000000, 1, 465151600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 465000000, 1, 465151800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 465000000, 1, 465152200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 470000000, 0, 470208200, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 470000000, 0, 470211000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 470000000, 0, 470213200, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 470000000, 0, 470230100, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 470000000, 0, 470232900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 470000000, 0, 470233700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 470000000, 1, 470252800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 470000000, 1, 470252800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 470000000, 1, 470271300, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 470000000, 1, 470271500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 470000000, 1, 470271600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 470000000, 1, 470272000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 480000000, 0, 480093800, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 480000000, 0, 480095600, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 480000000, 0, 480096800, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 480000000, 0, 480097600, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 480000000, 0, 480098300, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 480000000, 0, 480098500, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 480000000, 0, 480098600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 480000000, 0, 480098700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 480000000, 1, 480099000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 480000000, 1, 480105700, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 480000000, 1, 480137100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 480000000, 1, 480137500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 480000000, 1, 480137700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 480000000, 1, 480138000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 490000000, 0, 490126300, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 490000000, 0, 490127500, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 490000000, 0, 490128300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 490000000, 0, 490128800, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 490000000, 0, 490129500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 490000000, 0, 490129700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 490000000, 1, 490130000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 490000000, 1, 490130000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 490000000, 1, 490153700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 490000000, 1, 490153900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 490000000, 1, 490154100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 490000000, 1, 490154500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 498000000, 0, 498236300, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 498000000, 0, 498259900, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 498000000, 0, 498266600, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 498000000, 0, 498267200, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 498000000, 0, 498267900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 498000000, 0, 498268100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 498000000, 1, 498268400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 498000000, 1, 498268500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 498000000, 1, 498290100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 498000000, 1, 498290400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 498000000, 1, 498290600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 498000000, 1, 498290900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 500000000, 0, 500114400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 500000000, 0, 500115200, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 500000000, 0, 500115600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 500000000, 0, 500116100, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 500000000, 0, 500118500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 500000000, 0, 500118700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 500000000, 1, 500119000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 500000000, 1, 500119100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 500000000, 1, 500138100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 500000000, 1, 500138200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 500000000, 1, 500138300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 500000000, 1, 500138700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 510000000, 0, 510239000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 510000000, 0, 510242100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 510000000, 0, 510244400, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 510000000, 0, 510246400, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 510000000, 0, 510248700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 510000000, 0, 510249200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 510000000, 1, 510250500, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 510000000, 1, 510250800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 510000000, 1, 510326000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 510000000, 1, 510327100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 510000000, 1, 510327600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 510000000, 1, 510329100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 520000000, 0, 520219900, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 520000000, 0, 520223100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 520000000, 0, 520237200, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 520000000, 0, 520239600, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 520000000, 0, 520241800, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 520000000, 0, 520242500, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 520000000, 0, 520242900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 520000000, 0, 520243300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 520000000, 1, 520244700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 520000000, 1, 520244900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 520000000, 1, 520324700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 520000000, 1, 520325600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 520000000, 1, 520326100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 520000000, 1, 520327700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 530000000, 0, 530234300, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 530000000, 0, 530237500, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 530000000, 0, 530239500, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 530000000, 0, 530241600, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 530000000, 0, 530243800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 530000000, 0, 530244400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 530000000, 1, 530255600, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 530000000, 1, 530255900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 530000000, 1, 530335700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 530000000, 1, 530336700, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 530000000, 1, 530337200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 530000000, 1, 530339100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 531000000, 0, 531217100, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 531000000, 0, 531219200, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 531000000, 0, 531220600, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 531000000, 0, 531222600, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 531000000, 0, 531224600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 531000000, 0, 531225100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 531000000, 1, 531226400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 531000000, 1, 531226700, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 531000000, 1, 531304500, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 531000000, 1, 531305400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 531000000, 1, 531306000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 531000000, 1, 531308000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 540000000, 0, 540209500, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 540000000, 0, 540216400, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 540000000, 0, 540217200, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 540000000, 0, 540217700, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 540000000, 0, 540218300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 540000000, 0, 540218400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 540000000, 1, 540218700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 540000000, 1, 540218800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 540000000, 1, 540238700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 540000000, 1, 540239000, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 540000000, 1, 540239100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 540000000, 1, 540239400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 550000000, 0, 550136200, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 550000000, 0, 550137400, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 550000000, 0, 550138300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 550000000, 0, 550138900, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 550000000, 0, 550139800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 550000000, 0, 550139900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 550000000, 1, 550140200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 550000000, 1, 550145400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 550000000, 1, 550170400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 550000000, 1, 550170600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 550000000, 1, 550170700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 550000000, 1, 550171100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 560000000, 0, 560433600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 560000000, 0, 560434800, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 560000000, 0, 560435500, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 560000000, 0, 560436000, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 560000000, 0, 560436700, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 560000000, 0, 560436800, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 560000000, 0, 560436900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 560000000, 0, 560437000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 560000000, 1, 560437300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 560000000, 1, 560437400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 560000000, 1, 560462300, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 560000000, 1, 560462500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 560000000, 1, 560462700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 560000000, 1, 560467400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 564000000, 0, 564254600, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 564000000, 0, 564255900, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 564000000, 0, 564256700, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 564000000, 0, 564257100, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 564000000, 0, 564257800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 564000000, 0, 564257900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 564000000, 1, 564258200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 564000000, 1, 564258300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 564000000, 1, 564280900, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 564000000, 1, 564281100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 564000000, 1, 564281200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 564000000, 1, 564281600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 570000000, 0, 570232000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 570000000, 0, 570255300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 570000000, 0, 570255800, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 570000000, 0, 570256400, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 570000000, 0, 570257900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 570000000, 0, 570258000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 570000000, 1, 570259000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 570000000, 1, 570259100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 570000000, 1, 570276800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 570000000, 1, 570277000, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 570000000, 1, 570277200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 570000000, 1, 570277500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 580000000, 0, 580181600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 580000000, 0, 580183300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 580000000, 0, 580184900, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 580000000, 0, 580185600, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 580000000, 0, 580186200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 580000000, 0, 580186400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 580000000, 1, 580186700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 580000000, 1, 580186800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 580000000, 1, 580251800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 580000000, 1, 580252100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 580000000, 1, 580252200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 580000000, 1, 580252500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 590000000, 0, 590230700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 590000000, 0, 590233900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 590000000, 0, 590236600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 590000000, 0, 590238700, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 590000000, 0, 590240900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 590000000, 0, 590241500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 590000000, 1, 590242900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 590000000, 1, 590243200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 590000000, 1, 590328300, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 590000000, 1, 590329200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 590000000, 1, 590329700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 590000000, 1, 590331500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 597000000, 0, 597258400, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 597000000, 0, 597261400, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 597000000, 0, 597264200, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 597000000, 0, 597266300, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 597000000, 0, 597268700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 597000000, 0, 597269400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 597000000, 1, 597283400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 597000000, 1, 597283800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 597000000, 1, 597369800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 597000000, 1, 597370700, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 597000000, 1, 597371200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 597000000, 1, 597372900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 600000000, 0, 600290800, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 600000000, 0, 600293300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 600000000, 0, 600295200, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 600000000, 0, 600297000, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 600000000, 0, 600299000, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 600000000, 0, 600299700, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 600000000, 0, 600375000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 600000000, 0, 600377100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 600000000, 1, 600379400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 600000000, 1, 600380300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 600000000, 1, 600385800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 600000000, 1, 600386300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 600000000, 1, 600395600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 600000000, 1, 600396400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 610000000, 0, 610230100, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 610000000, 0, 610234000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 610000000, 0, 610236300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 610000000, 0, 610238400, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 610000000, 0, 610240600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 610000000, 0, 610241200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 610000000, 1, 610242400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 610000000, 1, 610242700, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 610000000, 1, 610324400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 610000000, 1, 610325300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 610000000, 1, 610325900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 610000000, 1, 610327800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 620000000, 0, 620159900, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 620000000, 0, 620162000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 620000000, 0, 620163200, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 620000000, 0, 620164500, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 620000000, 0, 620166000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 620000000, 0, 620176000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 620000000, 1, 620176800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 620000000, 1, 620177000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 620000000, 1, 620225700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 620000000, 1, 620226300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 620000000, 1, 620226600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 620000000, 1, 620227400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 630000000, 0, 630288200, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 630000000, 0, 630306700, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 630000000, 0, 630307600, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, lidar, 0, 1, 630000000, 0, 630309000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 630000000, 0, 630309100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 630000000, 0, 630309400, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 630000000, 0, 630310100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 630000000, 0, 630310200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 630000000, 1, 630310700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 630000000, 1, 630310800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 630000000, 1, 630332900, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 630000000, 1, 630338600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 630000000, 1, 630338800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 630000000, 1, 630339100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 640000000, 0, 640159400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 640000000, 0, 640161200, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 640000000, 0, 640162600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 640000000, 0, 640163400, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 640000000, 0, 640164100, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 640000000, 0, 640164300, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 640000000, 0, 640164400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 640000000, 0, 640164500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 640000000, 1, 640164800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 640000000, 1, 640164900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 640000000, 1, 640202300, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 640000000, 1, 640202500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 640000000, 1, 640202600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 640000000, 1, 640203000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 650000000, 0, 650274500, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 650000000, 0, 650286400, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 650000000, 0, 650287400, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 650000000, 0, 650288100, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 650000000, 0, 650290100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 650000000, 0, 650290200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 650000000, 1, 650290500, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 650000000, 1, 650290600, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 650000000, 1, 650314900, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 650000000, 1, 650315200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 650000000, 1, 650315400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 650000000, 1, 650315700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 660000000, 0, 660425200, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 660000000, 0, 660426800, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 660000000, 0, 660427400, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 660000000, 0, 660427900, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 660000000, 0, 660435000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 660000000, 0, 660435200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 660000000, 1, 660435500, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 660000000, 1, 660435600, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 660000000, 1, 660463400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 660000000, 1, 660463600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 660000000, 1, 660463700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 660000000, 1, 660464100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 663000000, 0, 663251200, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 663000000, 0, 663251900, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 663000000, 0, 663253300, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 663000000, 0, 663254000, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 663000000, 0, 663254500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 663000000, 0, 663254600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 663000000, 1, 663254900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 663000000, 1, 663255000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 663000000, 1, 663277600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 663000000, 1, 663277800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 663000000, 1, 663278000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 663000000, 1, 663278400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 670000000, 0, 670222600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 670000000, 0, 670246400, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 670000000, 0, 670252700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 670000000, 0, 670253300, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 670000000, 0, 670254100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 670000000, 0, 670254200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 670000000, 1, 670254600, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 670000000, 1, 670254600, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 670000000, 1, 670277100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 670000000, 1, 670277300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 670000000, 1, 670277400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 670000000, 1, 670325900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 680000000, 0, 680264100, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 680000000, 0, 680267700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 680000000, 0, 680270600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 680000000, 0, 680272700, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 680000000, 0, 680275100, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 680000000, 0, 680275800, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 680000000, 0, 680276300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 680000000, 0, 680276900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 680000000, 1, 680292900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 680000000, 1, 680293300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 680000000, 1, 680408400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 680000000, 1, 680409200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 680000000, 1, 680409900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 680000000, 1, 680411900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 690000000, 0, 690272600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 690000000, 0, 690275900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 690000000, 0, 690278200, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 690000000, 0, 690280300, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 690000000, 0, 690282900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 690000000, 0, 690283400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 690000000, 1, 690284800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 690000000, 1, 690285100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 690000000, 1, 690369900, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 690000000, 1, 690370800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 690000000, 1, 690371300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 690000000, 1, 690373300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 696000000, 0, 696247200, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 696000000, 0, 696250600, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 696000000, 0, 696253000, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 696000000, 0, 696255100, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 696000000, 0, 696257900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 696000000, 0, 696258600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 696000000, 1, 696260000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 696000000, 1, 696260300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 696000000, 1, 696345600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 696000000, 1, 696346500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 696000000, 1, 696347100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 696000000, 1, 696348800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 700000000, 0, 700220100, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 700000000, 0, 700223300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 700000000, 0, 700225300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 700000000, 0, 700227300, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 700000000, 0, 700229600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 700000000, 0, 700230100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 700000000, 1, 700231500, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 700000000, 1, 700234500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 700000000, 1, 700309300, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 700000000, 1, 700310100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 700000000, 1, 700310700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 700000000, 1, 700312000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 710000000, 0, 710493600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 710000000, 0, 710494700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 710000000, 0, 710495800, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 710000000, 0, 710496400, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 710000000, 0, 710497100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 710000000, 0, 710497200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 710000000, 1, 710497500, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 710000000, 1, 710497600, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 710000000, 1, 710522700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 710000000, 1, 710522900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 710000000, 1, 710523100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 710000000, 1, 710523400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 720000000, 0, 720284700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 720000000, 0, 720294200, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 720000000, 0, 720295300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 720000000, 0, 720296100, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 720000000, 0, 720297000, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 720000000, 0, 720297200, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 720000000, 0, 720297300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 720000000, 0, 720297400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 720000000, 1, 720297700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 720000000, 1, 720297800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 720000000, 1, 720330500, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 720000000, 1, 720330800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 720000000, 1, 720330900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 720000000, 1, 720331300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 729000000, 0, 729219000, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 729000000, 0, 729219800, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 729000000, 0, 729220600, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 729000000, 0, 729221000, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 729000000, 0, 729221700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 729000000, 0, 729224700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 729000000, 1, 729225000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 729000000, 1, 729225100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 729000000, 1, 729243800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 729000000, 1, 729244100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 729000000, 1, 729244200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 729000000, 1, 729244500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 730000000, 0, 730117200, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 730000000, 0, 730117700, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 730000000, 0, 730118100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 730000000, 0, 730118500, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 730000000, 0, 730120800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 730000000, 0, 730121000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 730000000, 1, 730121300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 730000000, 1, 730121400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 730000000, 1, 730138600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 730000000, 1, 730138800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 730000000, 1, 730138900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 730000000, 1, 730139300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 740000000, 0, 740295700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 740000000, 0, 740296900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 740000000, 0, 740297900, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 740000000, 0, 740298600, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 740000000, 0, 740299200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 740000000, 0, 740299400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 740000000, 1, 740299700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 740000000, 1, 740299800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 740000000, 1, 740324700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 740000000, 1, 740324900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 740000000, 1, 740325100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 740000000, 1, 740325500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 750000000, 0, 750349900, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 750000000, 0, 750354600, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 750000000, 0, 750357600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 750000000, 0, 750360000, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 750000000, 0, 750362700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 750000000, 0, 750363400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 750000000, 1, 750387000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 750000000, 1, 750387500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 750000000, 1, 750492400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 750000000, 1, 750493300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 750000000, 1, 750493900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 750000000, 1, 750495500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 760000000, 0, 760283600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 760000000, 0, 760288300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 760000000, 0, 760290700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 760000000, 0, 760292500, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 760000000, 0, 760295100, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 760000000, 0, 760295800, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 760000000, 0, 760296100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 760000000, 0, 760296600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 760000000, 1, 760297800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 760000000, 1, 760298100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 760000000, 1, 760389100, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 760000000, 1, 760389900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 760000000, 1, 760401200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 760000000, 1, 760403000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 762000000, 0, 762202600, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 762000000, 0, 762205000, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 762000000, 0, 762206900, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 762000000, 0, 762208900, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 762000000, 0, 762219800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 762000000, 0, 762220600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 762000000, 1, 762221900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 762000000, 1, 762222200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 762000000, 1, 762296000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 762000000, 1, 762297000, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 762000000, 1, 762297700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 762000000, 1, 762299200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 770000000, 0, 770311400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 770000000, 0, 770312500, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 770000000, 0, 770313200, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 770000000, 0, 770313800, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 770000000, 0, 770322300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 770000000, 0, 770322500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 770000000, 1, 770322800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 770000000, 1, 770322800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 770000000, 1, 770355400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 770000000, 1, 770355600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 770000000, 1, 770355800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 770000000, 1, 770356100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 780000000, 0, 780204200, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 780000000, 0, 780223900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 780000000, 0, 780226400, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 780000000, 0, 780228200, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 780000000, 0, 780228900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 780000000, 0, 780229000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 780000000, 1, 780229300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 780000000, 1, 780229400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 780000000, 1, 780309700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 780000000, 1, 780310100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 780000000, 1, 780310300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 780000000, 1, 780338700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 790000000, 0, 790306600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 790000000, 0, 790307600, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 790000000, 0, 790308400, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 790000000, 0, 790309100, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 790000000, 0, 790309800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 790000000, 0, 790309900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 790000000, 1, 790310200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 790000000, 1, 790310300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 790000000, 1, 790335900, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 790000000, 1, 790336100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 790000000, 1, 790336300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 790000000, 1, 790336600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 795000000, 0, 795146400, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 795000000, 0, 795147500, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 795000000, 0, 795148300, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 795000000, 0, 795148900, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 795000000, 0, 795149600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 795000000, 0, 795154800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 795000000, 1, 795155200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 795000000, 1, 795155300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 795000000, 1, 795181400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 795000000, 1, 795181600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 795000000, 1, 795181700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 795000000, 1, 795182000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 800000000, 0, 800242300, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 800000000, 0, 800243200, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 800000000, 0, 800244100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 800000000, 0, 800244800, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 800000000, 0, 800245400, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 800000000, 0, 800245500, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 800000000, 0, 800265100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 800000000, 0, 800265500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 800000000, 1, 800266100, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 800000000, 1, 800266300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 800000000, 1, 800267700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 800000000, 1, 800270800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 800000000, 1, 800270900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 800000000, 1, 800271100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 810000000, 0, 810150700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 810000000, 0, 810152100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 810000000, 0, 810153200, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 810000000, 0, 810153700, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 810000000, 0, 810154500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 810000000, 0, 810154700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 810000000, 1, 810155000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 810000000, 1, 810155100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 810000000, 1, 810194500, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 810000000, 1, 810195000, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 810000000, 1, 810195100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 810000000, 1, 810195600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 820000000, 0, 820315800, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 820000000, 0, 820317200, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 820000000, 0, 820318700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 820000000, 0, 820319500, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 820000000, 0, 820327900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 820000000, 0, 820328100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 820000000, 1, 820328400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 820000000, 1, 820328500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 820000000, 1, 820357200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 820000000, 1, 820357500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 820000000, 1, 820357600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 820000000, 1, 820357900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 828000000, 0, 828136300, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 828000000, 0, 828137700, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 828000000, 0, 828138600, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 828000000, 0, 828139200, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 828000000, 0, 828139900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 828000000, 0, 828140000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 828000000, 1, 828140300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 828000000, 1, 828140400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 828000000, 1, 828169200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 828000000, 1, 828169600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 828000000, 1, 828175500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 828000000, 1, 828175900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 830000000, 0, 830153700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 830000000, 0, 830154600, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 830000000, 0, 830155800, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 830000000, 0, 830156800, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 830000000, 0, 830157400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 830000000, 0, 830157600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 830000000, 1, 830157900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 830000000, 1, 830158000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 830000000, 1, 830206300, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 830000000, 1, 830206600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 830000000, 1, 830206700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 830000000, 1, 830207000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 840000000, 0, 840282900, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 840000000, 0, 840286100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 840000000, 0, 840288300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 840000000, 0, 840290300, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 840000000, 0, 840302800, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 840000000, 0, 840303900, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 840000000, 0, 840304400, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 840000000, 0, 840305000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 840000000, 1, 840306400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 840000000, 1, 840306700, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 840000000, 1, 840390400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 840000000, 1, 840391300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 840000000, 1, 840391800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 840000000, 1, 840393400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 850000000, 0, 850209400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 850000000, 0, 850211600, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 850000000, 0, 850213700, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 850000000, 0, 850215100, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 850000000, 0, 850216800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 850000000, 0, 850217200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 850000000, 1, 850218200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 850000000, 1, 850218500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 850000000, 1, 850286600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 850000000, 1, 850287400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 850000000, 1, 850287900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 850000000, 1, 850289100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 860000000, 0, 860184600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 860000000, 0, 860186900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 860000000, 0, 860188900, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 860000000, 0, 860190800, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 860000000, 0, 860192700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 860000000, 0, 860193100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 860000000, 1, 860194000, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 860000000, 1, 860194300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 860000000, 1, 860255000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 860000000, 1, 860255700, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 860000000, 1, 860256100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 860000000, 1, 860257300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 861000000, 0, 861141400, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 861000000, 0, 861142900, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 861000000, 0, 861144000, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 861000000, 0, 861155300, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 861000000, 0, 861156900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 861000000, 0, 861157400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 861000000, 1, 861158400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 861000000, 1, 861158600, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 861000000, 1, 861207600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 861000000, 1, 861208300, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 861000000, 1, 861208800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 861000000, 1, 861210000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 870000000, 0, 870213700, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 870000000, 0, 870215900, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 870000000, 0, 870217900, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 870000000, 0, 870219200, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 870000000, 0, 870220800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 870000000, 0, 870221300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 870000000, 1, 870222300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 870000000, 1, 870222400, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 870000000, 1, 870280600, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 870000000, 1, 870290100, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 870000000, 1, 870290600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 870000000, 1, 870291800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 880000000, 0, 880166800, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 880000000, 0, 880168100, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 880000000, 0, 880169000, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 880000000, 0, 880169600, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 880000000, 0, 880205000, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 880000000, 0, 880205200, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 880000000, 0, 880205300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 880000000, 0, 880205500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 880000000, 1, 880205800, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 880000000, 1, 880205900, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 880000000, 1, 880265200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 880000000, 1, 880265500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 880000000, 1, 880265600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 880000000, 1, 880266000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 890000000, 0, 890141100, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 890000000, 0, 890150400, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 890000000, 0, 890151600, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 890000000, 0, 890152400, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 890000000, 0, 890153200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 890000000, 0, 890153400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 890000000, 1, 890153700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 890000000, 1, 890153800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 890000000, 1, 890183200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 890000000, 1, 890183400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 890000000, 1, 890184900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 890000000, 1, 890185300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 894000000, 0, 894210500, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 894000000, 0, 894213200, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 894000000, 0, 894215600, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 894000000, 0, 894218100, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 894000000, 0, 894220900, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 894000000, 0, 894221800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 894000000, 1, 894223400, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 894000000, 1, 894223800, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 894000000, 1, 894270400, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 894000000, 1, 894270600, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 894000000, 1, 894270700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 894000000, 1, 894271100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 900000000, 0, 900118100, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 900000000, 0, 900119400, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 900000000, 0, 900120000, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 900000000, 0, 900120600, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 900000000, 0, 900121100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 900000000, 0, 900121300, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 900000000, 1, 900121600, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 900000000, 1, 900121700, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 900000000, 1, 900142700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 900000000, 1, 900142900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 900000000, 1, 900143000, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 900000000, 1, 900143400, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 910000000, 0, 910240400, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 910000000, 0, 910243500, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 910000000, 0, 910258300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 910000000, 0, 910260900, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 910000000, 0, 910263200, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 910000000, 0, 910263800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 910000000, 1, 910265200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 910000000, 1, 910265600, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 910000000, 1, 910349700, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 910000000, 1, 910350500, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 910000000, 1, 910351100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 910000000, 1, 910352800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 920000000, 0, 920227000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 920000000, 0, 920230300, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 920000000, 0, 920232300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 920000000, 0, 920234400, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 920000000, 0, 920236800, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 920000000, 0, 920237400, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 920000000, 0, 920237800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 920000000, 0, 920238200, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 920000000, 1, 920252700, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 920000000, 1, 920253100, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 920000000, 1, 920353800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 920000000, 1, 920354900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 920000000, 1, 920355300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 920000000, 1, 920356800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 927000000, 0, 927262200, NO TRIGGER, 0, <>, <>
+Reaction starts, camera, 0, 1, 927000000, 0, 927263700, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 927000000, 0, 927264700, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 927000000, 0, 927265100, NO TRIGGER, 0, <dataFusion.imageobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 927000000, 0, 927265800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 927000000, 0, 927266000, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 927000000, 1, 927266300, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 927000000, 1, 927266300, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 927000000, 1, 927290000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 927000000, 1, 927290200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 927000000, 1, 927290300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 927000000, 1, 927290700, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 930000000, 0, 930244900, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 930000000, 0, 930245400, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 930000000, 0, 930245800, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 930000000, 0, 930246300, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 930000000, 0, 930246700, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 930000000, 0, 930246800, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 930000000, 1, 930247200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 930000000, 1, 930247200, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 930000000, 1, 930263000, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 930000000, 1, 930263200, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 930000000, 1, 930263300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 930000000, 1, 930263600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 940000000, 0, 940251500, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 940000000, 0, 940255200, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 940000000, 0, 940258100, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 940000000, 0, 940280100, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 940000000, 0, 940280800, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 940000000, 0, 940280900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 940000000, 1, 940281200, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 940000000, 1, 940287500, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 940000000, 1, 940311800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 940000000, 1, 940311900, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 940000000, 1, 940312100, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 940000000, 1, 940312500, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 950000000, 0, 950096000, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 950000000, 0, 950097400, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 950000000, 0, 950098300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, dataFusion, 0, 1, 950000000, 0, 950098800, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.LIDARobject:>, <>
+Reaction ends, dataFusion, 0, 1, 950000000, 0, 950099500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 950000000, 0, 950099600, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 950000000, 1, 950099900, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 950000000, 1, 950100000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 950000000, 1, 950127200, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 950000000, 1, 950127400, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 950000000, 1, 950127500, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 950000000, 1, 950127900, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 960000000, 0, 960171600, NO TRIGGER, 0, <>, <>
+Reaction starts, lidar, 0, 1, 960000000, 0, 960250000, NO TRIGGER, 0, <lidar.tLidar:>, <>
+Reaction ends, lidar, 0, 1, 960000000, 0, 960253300, NO TRIGGER, 0, <>, <dataFusion.LIDARobject:>
+Reaction starts, camera, 0, 1, 960000000, 0, 960257900, NO TRIGGER, 0, <camera.tCamera:>, <>
+Reaction ends, camera, 0, 1, 960000000, 0, 960258600, NO TRIGGER, 0, <>, <dataFusion.imageobject:>
+Reaction starts, dataFusion, 0, 1, 960000000, 0, 960259900, NO TRIGGER, 0, <dataFusion.LIDARobject:dataFusion.imageobject:>, <>
+Reaction ends, dataFusion, 0, 1, 960000000, 0, 960262500, NO TRIGGER, 0, <>, <>
+Reaction starts, semantic, 1, 1, 960000000, 0, 960263200, NO TRIGGER, 0, <semantic.t:>, <>
+Reaction ends, semantic, 1, 1, 960000000, 0, 960263600, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 960000000, 0, 960264100, NO TRIGGER, 0, <>, <>
+Worker advancing time ends, NO REACTOR, none, 1, 960000000, 1, 960266500, NO TRIGGER, 0, <>, <>
+Reaction starts, dataFusion, 1, 1, 960000000, 1, 960267000, NO TRIGGER, 0, <dataFusion.both_ports_are_present:>, <>
+Reaction ends, dataFusion, 1, 1, 960000000, 1, 960400800, NO TRIGGER, 0, <>, <semantic.fusedObject:>
+Reaction starts, semantic, 0, 1, 960000000, 1, 960401800, NO TRIGGER, 0, <semantic.fusedObject:>, <>
+Reaction ends, semantic, 0, 1, 960000000, 1, 960402300, NO TRIGGER, 0, <>, <>
+Worker advancing time starts, NO REACTOR, none, 1, 960000000, 1, 960404000, NO TRIGGER, 0, <>, <>
+Worker wait starts, NO REACTOR, none, 2, 0, 0, 393000, NO TRIGGER, 0, <>, <>
+Worker wait ends, NO REACTOR, none, 2, 300000000, 1, 300356900, NO TRIGGER, 0, <>, <>
+Worker wait starts, NO REACTOR, none, 2, 300000000, 1, 300357200, NO TRIGGER, 0, <>, <>
+Worker wait ends, NO REACTOR, none, 2, 630000000, 1, 630410300, NO TRIGGER, 0, <>, <>
+Worker wait starts, NO REACTOR, none, 2, 630000000, 1, 630410500, NO TRIGGER, 0, <>, <>
+Worker wait ends, NO REACTOR, none, 2, 960000000, 1, 960341500, NO TRIGGER, 0, <>, <>
+Worker wait starts, NO REACTOR, none, 2, 960000000, 1, 960342500, NO TRIGGER, 0, <>, <>

@@ -191,7 +191,7 @@ public class KLighDAnimatorBehaviorManager implements IEngineAddon {
 			if (associatedObject.eClass().getName().contains("VarRef")
 					||
 				associatedObject.eClass().getName().contains("Model")) {
-				DataRepresentationBehaviour drb = new DataRepresentationBehaviour(ced, _viewContext, resInEngine);
+				DataRepresentationBehaviour drb = new DataRepresentationBehaviour(ced, _viewContext, resInEngine, engine);
 				dataBehaviourList.add(drb);
 			}
 		}

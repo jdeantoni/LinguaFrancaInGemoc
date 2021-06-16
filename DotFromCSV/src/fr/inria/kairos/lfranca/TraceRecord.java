@@ -58,7 +58,7 @@ public class TraceRecord {
 
     /**
      *
-     * @param traceField
+     * @param traceField The String
      * @return an array of ReactorName.Trigger from strings where tokens are separated by ":"
      * Used for extracting token in the triggeredBy, Effects lists
      */

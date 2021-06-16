@@ -23,7 +23,7 @@ import java.util.Set;
 public class Transition {
     long logicalTime;
     long microStep;
-    private List<String> previousStepReactions;
+    private List<String> triggers;
     private Transition nextTransition;
     private Transition previousTransition;
     private boolean isTimeAdvancement;
@@ -39,11 +39,11 @@ public class Transition {
         this.pendingEffects = pendingEffects;
     }
 
-    public Transition(long logicalTime, long microStep, List<String> previousStepReactions, Transition nextTransition,
+    public Transition(long logicalTime, long microStep, List<String> triggers, Transition nextTransition,
                       Transition previousTransition, boolean isTimeAdvancement) {
         this.logicalTime = logicalTime;
         this.microStep = microStep;
-        this.previousStepReactions = previousStepReactions;
+        this.triggers = triggers;
         this.nextTransition = nextTransition;
         this.previousTransition = previousTransition;
         this.isTimeAdvancement = isTimeAdvancement;
@@ -58,8 +58,8 @@ public class Transition {
         return microStep;
     }
 
-    public List<String> getPreviousStepReactions() {
-        return previousStepReactions;
+    public List<String> getTriggers() {
+        return triggers;
     }
 
     public Transition getNextTransition() {
@@ -82,8 +82,8 @@ public class Transition {
         this.microStep = microStep;
     }
 
-    public void setPreviousStepReactions(List<String> previousStepReactions) {
-        this.previousStepReactions = previousStepReactions;
+    public void setTriggers(List<String> triggers) {
+        this.triggers = triggers;
     }
 
     public void setNextTransition(Transition nextTransition) {

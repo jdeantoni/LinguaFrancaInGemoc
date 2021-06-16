@@ -515,7 +515,7 @@ class ReactionExecutionContext{
 @Aspect(className=Reaction)
 class ReactionAspect{
 	@NotInStateSpace
-	public static final String lfGroovyFunctions = '''	
+	public String lfGroovyFunctions = '''	
 	void SET(Object port, Object val){
 	    //println 'SET ' + val +' on ' + port.variable.name 
 	    context.outAssignements.put(port.variable, val)
@@ -555,7 +555,7 @@ class ReactionAspect{
 	
 	'''	
 	@NotInStateSpace
-	var String returnStatement= "";
+	public var String returnStatement= ""; 
 	
 	def void exec(){
 		if (DebugLevel.level > 0) {
@@ -573,7 +573,7 @@ class ReactionAspect{
 		val ucl = ReactionAspect.classLoader
 		val shell = new GroovyShell(ucl,binding)
 		print(Colors.BG_YELLOW) //reaction code is highlighted in yellow
-		var res = shell.evaluate(lfGroovyFunctions+ 
+		var res = shell.evaluate(_self.lfGroovyFunctions+ 
 								_self.code.body +
 								_self.returnStatement)
 				as ArrayList<Object>

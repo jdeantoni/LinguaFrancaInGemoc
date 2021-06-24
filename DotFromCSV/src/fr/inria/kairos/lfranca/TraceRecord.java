@@ -1,11 +1,14 @@
 package fr.inria.kairos.lfranca;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class TraceRecord {
     private final String reactor;
-    private final String[] triggeredBy;
-    private final String[] effects;
+    //private final String[] triggeredBy;
+    private final List<String> triggeredBy;
+    //private final String[] effects;
+    private final List<String> effects;
     private final String event;
     private final String trigger;
     private final int reactionNumber;
@@ -14,6 +17,7 @@ public class TraceRecord {
     private final long elapsedPhysicalTime;
     private final long microStep;
     private final int worker;
+    private final TraceEvent eventType;
 
     private static final int NONE_PORT_NUMBER = -1;
     private static final String EMPTY_LIST = "<>";
@@ -30,15 +34,55 @@ public class TraceRecord {
         this.elapsedPhysicalTime = Long.parseLong(traceEvent[6].stripLeading());
         this.trigger = traceEvent[7].stripLeading();
         this.extraDelay = Long.parseLong(traceEvent[4].stripLeading());
-        this.triggeredBy = getTokensFromTraceLists(traceEvent[9]);
-        this.effects = getTokensFromTraceLists(traceEvent[10]);
+        //this.triggeredBy = getTokensFromTraceLists(traceEvent[9]);
+        this.triggeredBy = null;
+        //this.effects = getTokensFromTraceLists(traceEvent[10]);
+        this.effects = null;
+        this.eventType = null;
     }
 
+    /*public TraceRecord(TraceEvent eventType, String reactor, int reactionNumber, int worker, long elapsedLogicalTime,
+                       long elapsedPhysicalTime, int microStep, String trigger, long extraDelay, String[] triggeredBy,
+                       String[] effects){
+        this.eventType = eventType;
+        this.event = null;
+        this.reactor = reactor;
+        this.reactionNumber = reactionNumber;
+        this.worker = worker;
+        this.elapsedLogicalTime = elapsedLogicalTime;
+        this.microStep = microStep;
+        this.elapsedPhysicalTime = elapsedPhysicalTime;
+        this.trigger = trigger;
+        this.extraDelay = extraDelay;
+        this.triggeredBy = triggeredBy;
+        this.effects = effects;
+    }*/
+
+    public TraceRecord(TraceEvent eventType, String reactor, int reactionNumber, int worker, long elapsedLogicalTime,
+                       long elapsedPhysicalTime, int microStep, String trigger, long extraDelay, List<String> triggeredBy,
+                       List<String> effects){
+        this.eventType = eventType;
+        this.event = null;
+        this.reactor = reactor;
+        this.reactionNumber = reactionNumber;
+        this.worker = worker;
+        this.elapsedLogicalTime = elapsedLogicalTime;
+        this.microStep = microStep;
+        this.elapsedPhysicalTime = elapsedPhysicalTime;
+        this.trigger = trigger;
+        this.extraDelay = extraDelay;
+        this.triggeredBy = triggeredBy;
+        this.effects = effects;
+    }
+
+    /*
     @Override
     public String toString() {
         return "TraceEvent{" +
                 "reactor='" + reactor + '\'' +
-                ", triggeredBy=" + Arrays.toString(triggeredBy) +
+                //", triggeredBy=" + Arrays.toString(triggeredBy) +
+                ", triggeredBy=" + triggeredBy.stream().; +
+                //", effects=" + Arrays.toString(effects) +
                 ", effects=" + Arrays.toString(effects) +
                 ", event='" + event + '\'' +
                 ", trigger='" + trigger + '\'' +
@@ -49,7 +93,7 @@ public class TraceRecord {
                 ", microStep=" + microStep +
                 ", worker=" + worker +
                 '}';
-    }
+    }*/
 
     public int getWorker() {
         return worker;
@@ -75,20 +119,25 @@ public class TraceRecord {
 
     }
 
+
     public String getReactor() {
         return reactor;
     }
 
-    public String[] getTriggeredBy() {
+    public List<String> getTriggeredBy() {
         return triggeredBy;
     }
 
-    public String[] getEffects() {
+    public List<String> getEffects() {
         return effects;
     }
 
     public String getEvent() {
         return event;
+    }
+
+    public TraceEvent getEventType() {
+        return eventType;
     }
 
     public int getReactionNumber() {

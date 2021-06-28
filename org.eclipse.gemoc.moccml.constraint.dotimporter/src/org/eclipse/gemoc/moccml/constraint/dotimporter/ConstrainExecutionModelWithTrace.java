@@ -250,11 +250,12 @@ public Resource handleCreationOfScenarioFromTrace() {
 					label=label.substring(label.indexOf("(")+1);
 					label=label.substring(0, label.indexOf(")"));
 					String[] splittedLine = label.split(",");
-					String actionQN= getActionQN(splittedLine[0]);
+					String actionQN= getActionQN(splittedLine[0].substring(0,splittedLine[0].lastIndexOf('.')));
 					scenarioFile.append(("execute helper.setnextSchedule("+actionQN+","+splittedLine[1]+")\n").getBytes());
 					label = outgoingEdge.getAttributes().get("label");
 					label=label.substring(label.indexOf("(")+1);
 					label=label.substring(0, label.indexOf(","));
+					scenarioFile.append(("		expect "+clockNameToClock.get(splittedLine[0]).getName().replaceAll("\\.",  "_")+"\n").getBytes());
 					continue;
 				}
 				scenarioFile.append(("		expect ").getBytes());
@@ -454,7 +455,11 @@ public Resource handleCreationOfScenarioFromTrace() {
 				if(clockName.compareTo("LS !") == 0) {
 					continue;
 				}
-				res.add(clockName);
+				if(clockName.startsWith("schedule(")) {
+					res.add(clockName.substring(clockName.lastIndexOf('(')+1));
+				}else {
+					res.add(clockName);
+				}
 			}
 		}
 		return res.toArray(new String[res.size()]);

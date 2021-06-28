@@ -4,8 +4,7 @@ Bundle-Name: KlighD animator
 Bundle-SymbolicName: org.eclipse.gemoc.addon.klighdanimator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.gemoc.addon.klighdanimator.ActivatorKLD
-Require-Bundle: fr.inria.aoste.timesquare.launcher.core,
- fr.inria.aoste.timesquare.backend.manager;bundle-version="1.2.0",
+Require-Bundle: fr.inria.aoste.timesquare.backend.manager;bundle-version="1.2.0",
  fr.inria.aoste.timesquare.ccslkernel.model,
  org.eclipse.gemoc.xdsmlframework.api,
  org.eclipse.gemoc.execution.concurrent.ccsljavaengine.mse.model,

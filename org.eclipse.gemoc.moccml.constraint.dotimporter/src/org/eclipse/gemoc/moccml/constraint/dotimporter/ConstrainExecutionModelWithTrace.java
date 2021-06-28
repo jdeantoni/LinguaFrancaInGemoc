@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -39,10 +40,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.lflang.lf.Action;
 import org.lflang.lf.Instantiation;
 import org.lflang.lf.Model;
+import org.lflang.lf.Port;
 import org.lflang.lf.Reaction;
 import org.lflang.lf.Reactor;
+import org.lflang.lf.TypedVariable;
 
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.Parser;
@@ -53,6 +57,7 @@ import com.alexmerz.graphviz.objects.Node;
 import toools.io.file.RegularFile;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.Clock;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.EventKind;
+import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.ImportStatement;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.BasicType.Element;
 import fr.inria.aoste.timesquare.ccslkernel.model.TimeModel.CCSLModel.ClockConstraintSystem;
 import fr.inria.aoste.timesquare.ccslkernel.model.utils.ResourceLoader;
@@ -75,6 +80,9 @@ public class ConstrainExecutionModelWithTrace extends AbstractHandler {
 	}
 	private String[] observedClockNames;
 	private Map<String,Clock> clockNameToClock;
+	private String modelFilePath;
+	private Graph dotGraph;
+	private Model m;
 
 
 	@Override
@@ -114,7 +122,7 @@ public class ConstrainExecutionModelWithTrace extends AbstractHandler {
 		
 		
 		
-		Resource ccslTraceResource = handleCreationOfCCSLFromTrace();
+		Resource ccslTraceResource = handleCreationOfScenarioFromTrace();
 		monitor.worked(10);
 		
 		dotFile = null;
@@ -129,7 +137,7 @@ public class ConstrainExecutionModelWithTrace extends AbstractHandler {
 	
 	
 
-public Resource handleCreationOfCCSLFromTrace() {
+public Resource handleCreationOfScenarioFromTrace() {
 	Resource ccslResource = null;
 	try {
 		ccslResource = ResourceLoader.INSTANCE.loadResource(ccslFile.getFullPath());
@@ -140,7 +148,7 @@ public Resource handleCreationOfCCSLFromTrace() {
 	
 	Resource ccslTraceResource = null;
 	try {
-		ccslTraceResource = createCCSLFromDot(dotFile,ccslResource);
+		ccslTraceResource = createScenarioFromDot(dotFile,ccslResource);
 	} catch (IOException e2) {
 		e2.printStackTrace();
 	}
@@ -158,7 +166,7 @@ public Resource handleCreationOfCCSLFromTrace() {
 
 	
 	
-	private Resource createCCSLFromDot(IFile dotFile, Resource ccslResource) throws IOException {
+	private Resource createScenarioFromDot(IFile dotFile, Resource ccslResource) throws IOException {
 		InputStream is = null;
 		try {
 			is = dotFile.getContents();
@@ -175,8 +183,9 @@ public Resource handleCreationOfCCSLFromTrace() {
 			e1.printStackTrace();
 		}
 		ArrayList<Graph> al =p.getGraphs();
-		Graph dotGraph = al.get(0);
+		dotGraph = al.get(0);
 		
+		modelFilePath = getModelFilePathFromCCSL(ccslResource);
 		ArrayList<Clock> allCCSLClocks = getAllCCSLClocks(ccslResource);
 		
 		observedClockNames = getObservedClockNames(dotGraph);
@@ -189,16 +198,11 @@ public Resource handleCreationOfCCSLFromTrace() {
 		}
 		ResultsHolder.clockNameToClock = clockNameToClock;
 		
-		String traceSpecificConstraintDefinitionPath="";
-		try {
-			traceSpecificConstraintDefinitionPath = createConstraintSpecificMoCCMLDefinition(dotGraph, observedClockNames);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	
 		
 		String resultingCCSLFilePath="";
 		try {
-			resultingCCSLFilePath = createCCSLFile(clockNameToClock,observedClockNames,traceSpecificConstraintDefinitionPath, allCCSLClocks);
+			resultingCCSLFilePath = createScenarioFile(clockNameToClock,observedClockNames, allCCSLClocks);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -207,159 +211,86 @@ public Resource handleCreationOfCCSLFromTrace() {
 		return ResourceLoader.INSTANCE.loadResource(resultingCCSLFilePath);
 	}
 
-	private String createCCSLFile(Map<String, Clock> clockNameToClock,String[] observedClockNames, String traceSpecificConstraintDefinitionPath, ArrayList<Clock> allCCSLClocks) throws IOException {
-		RegularFile traceCCSLFile = new RegularFile(ccslFile.getParent().getLocation().toString()+"/SpecAugmentedWithTrace.extendedCCSL");
-		if(traceCCSLFile.exists()){
-			traceCCSLFile.delete();
+	private String createScenarioFile(Map<String, Clock> clockNameToClock,String[] observedClockNames, ArrayList<Clock> allCCSLClocks) throws IOException {
+		RegularFile scenarioFile = new RegularFile(ccslFile.getParent().getLocation().toString()+"/scenarioFromDotFile.moccmlscenario");
+		if(scenarioFile.exists()){
+			scenarioFile.delete();
 		}
 			
-		createCCSLHeader(traceCCSLFile, traceSpecificConstraintDefinitionPath);
+		createScenarioHeader(scenarioFile);
+		createContentScenario(scenarioFile);
 		
-//		ResultsHolder.physicalClockName = "";
-//		for(Clock c : allCCSLClocks){
-//			if (c.getName().endsWith("_ms")){
-//				ResultsHolder.physicalClockName = c.getName();
-//				break;
-//			}
-//		}
-		createCCSLTraceRelation(traceCCSLFile, clockNameToClock,observedClockNames);//, ResultsHolder.physicalClockName);
-		
-		return ccslFile.getParent().getFullPath().toString()+"/SpecAugmentedWithTrace.extendedCCSL";
-	}
-	private void createCCSLTraceRelation(RegularFile traceCCSLFile, Map<String, Clock> clockNameToClock,String[] observedClockNames) throws IOException{
-		traceCCSLFile.append(("\t Relation theUltimateRelation[TraceSpecificConstraint](\n").getBytes());
-		String sep="";
-		for(String observedClockName : observedClockNames ){
-			if (!observedClockName.contains(",") ) {
-				traceCCSLFile.append(("\t\t"+sep+"TraceSpecificConstraint_"+observedClockName.replaceAll("\\.",  "_")+"-> "+clockNameToClock.get(observedClockName).getName().replaceAll("\\.",  "_")+" \n").getBytes());
-			}
-			sep=",";
-		}
-		traceCCSLFile.append("\t)\n".getBytes());
-		traceCCSLFile.append("\t}\n".getBytes());
-		traceCCSLFile.append("}\n".getBytes());
-	}
-	private void createCCSLHeader(RegularFile traceCCSLFile, String traceSpecificConstraintDefinitionPath) throws IOException {
-		traceCCSLFile.append("/*\n".getBytes());
-		traceCCSLFile.append("* CCSL specification\n".getBytes());
-		traceCCSLFile.append(" * @author:  the trace checker written bu Julien Deantoni\n".getBytes());
-		traceCCSLFile.append(" * date :  Thu June 9 2016  10:51:42 CEST \n".getBytes());
-		traceCCSLFile.append(" */\n".getBytes());
-		traceCCSLFile.append("ClockConstraintSystem traceSpecification {\n".getBytes());
-		traceCCSLFile.append("    imports {\n".getBytes());
-		traceCCSLFile.append("        // import statements\n".getBytes());
-		traceCCSLFile.append("		import \"platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/kernel.ccslLib\" as lib0;\n".getBytes()); 
-		traceCCSLFile.append("		import \"platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/CCSL.ccslLib\" as lib1; \n".getBytes());
-		traceCCSLFile.append(("		import \""+traceSpecificConstraintDefinitionPath+"\" as TSC;\n").getBytes());
-		traceCCSLFile.append(("		import \"platform:/resource"+ccslFile.getFullPath().toString()+"\" as theSpec;\n").getBytes());
-		traceCCSLFile.append("    }\n".getBytes());
-		traceCCSLFile.append("    entryBlock main\n".getBytes());
-		traceCCSLFile.append("     \n".getBytes());
-		traceCCSLFile.append("        Block main {\n".getBytes());
-	}
-	private String createConstraintSpecificMoCCMLDefinition (Graph dotGraph, String[] observedClockNames) throws IOException{
-		RegularFile constraintDefFile = new RegularFile(ccslFile.getParent().getLocation().toString()+"/TraceSpecificConstraint.moccml");
-		
-		if(constraintDefFile.exists()){
-			constraintDefFile.delete();
-		}
-	
-		createConstraintDefHeader(constraintDefFile);
-//		createConstraintDefVariables(constraintDefFile, dotGraph);
-		createConstraintDefStates(constraintDefFile, dotGraph);
-		createConstraintDefFooter(constraintDefFile, observedClockNames);
-	
-		constraintDefFile.create();
-		return "platform:/resource"+ccslFile.getParent().getFullPath().toString()+"/TraceSpecificConstraint.moccml";
+		return ccslFile.getParent().getFullPath().toString()+"/scenarioFromDotFile.moccmlscenario";
 	}
 
-	private void createConstraintDefFooter(RegularFile constraintDefFile, String[] observedClockNames) throws IOException{
-		constraintDefFile.append("\n".getBytes());
-		constraintDefFile.append("RelationDeclaration	TraceSpecificConstraint(".getBytes());
-		String sep = "";
-		for(String aClock : observedClockNames){
-			if (!aClock.contains(",") ) {
-				constraintDefFile.append((sep+"TraceSpecificConstraint_"+aClock.replaceAll("\\.",  "_")+":clock").getBytes());
-				sep=",";
-			}
-		}
-		constraintDefFile.append(")\n".getBytes());
-		constraintDefFile.append("	           }\n".getBytes());
-		constraintDefFile.append("}\n".getBytes());
+	private void createScenarioHeader(RegularFile scenarioFile) throws IOException {
+		scenarioFile.append("/*\n".getBytes());
+		scenarioFile.append("* Scenario specification\n".getBytes());
+		scenarioFile.append(" * @author:  the trace checker written bu Julien Deantoni\n".getBytes());
+		scenarioFile.append((" * date :  "+toools.util.Date.now("yyyy-MM-dd HH:mm:ss")).getBytes());
+		scenarioFile.append(" */\n".getBytes());
+		scenarioFile.append("Scenario traceScenario \n".getBytes());
+		scenarioFile.append(("	importModel \"platform:/resource"+ccslFile.getFullPath().toString()+"\";\n").getBytes());
+		scenarioFile.append(("	importModel \""+modelFilePath+"\";\n").getBytes());
+		scenarioFile.append(("	importClass linguafranca.xdsml.api.impl.LinguaFrancaRTDAccessor;\n").getBytes());
+		scenarioFile.append((" 	Variable helper : LinguaFrancaRTDAccessor;\n").getBytes());
+		scenarioFile.append("     \n".getBytes());
 	}
-	
-	private void createConstraintDefStates(RegularFile constraintDefFile,Graph dotGraph) throws IOException{
-		constraintDefFile.append(("	          init:  fakeInit\n"
-				+ "	           State fakeInit(\n"
-				+ "	           	out : fakeTransition\n"
-				+ "	           )\n"
-				+ "	           from fakeInit to s0 : fakeTransition -> ()").getBytes());
-		
+	private void createContentScenario (RegularFile scenarioFile) throws IOException{
+
+		//hopefully they are sorted
 		for(Node node : dotGraph.getNodes(false)){
-			constraintDefFile.append(("	           State s"+node.getId().getId()+"(\n").getBytes());
 			
-			List<Edge> allIncomingEdges = dotGraph.getEdges().stream().filter(e -> e.getTarget().getNode().getId().getId() == node.getId().getId()).map(o -> (Edge)o).collect(Collectors.toList());
-			if(allIncomingEdges.size() > 0 ) {
-				constraintDefFile.append(("	           		in: ").getBytes());
-			}
-			String sep ="";
-			for(Edge incomingEdge : allIncomingEdges) {
-				constraintDefFile.append((sep+"s"+incomingEdge.getSource().getNode().getId().getId()+"s"+incomingEdge.getTarget().getNode().getId().getId()).getBytes());
-				sep = ",";
-			}
-//			if (i!=1){
-//				constraintDefFile.append((", s"+(i-1)+"s"+i+"bis, s"+(i-1)+"s"+i+"ter\n").getBytes());				
-//			}else{
-				constraintDefFile.append(("\n").getBytes());
-//			}
 			List<Edge> allOutgoingEdges = dotGraph.getEdges().stream().filter(e -> e.getSource().getNode().getId().getId() == node.getId().getId()).map(o -> (Edge)o).collect(Collectors.toList());
-			if (allOutgoingEdges.size() > 0) {
-							constraintDefFile.append(("					out : ").getBytes());
-			}
-			sep ="";
+			String sep ="";
 			for(Edge outgoingEdge : allOutgoingEdges) {
-				constraintDefFile.append((sep+"s"+outgoingEdge.getSource().getNode().getId().getId()+"s"+outgoingEdge.getTarget().getNode().getId().getId()).getBytes());
-				sep = ",";
-			}
-			constraintDefFile.append(("\n			   )\n").getBytes());
-			
-			for(Edge outgoingEdge : dotGraph.getEdges().stream().filter(e -> e.getSource().getNode().getId().getId() == node.getId().getId()).map(o -> (Edge)o).collect(Collectors.toList())) {
-				String sourceName = "s"+outgoingEdge.getSource().getNode().getId().getId();
-				String targetName = "s"+outgoingEdge.getTarget().getNode().getId().getId();
-				String[] splittedLine = outgoingEdge.getAttributes().get("label").split(",");
 				sep = "";
+				String label = outgoingEdge.getAttributes().get("label");
+				if(label.startsWith("schedule")) {
+					label=label.substring(label.indexOf("(")+1);
+					label=label.substring(0, label.indexOf(")"));
+					String[] splittedLine = label.split(",");
+					String actionQN= getActionQN(splittedLine[0]);
+					scenarioFile.append(("execute helper.setnextSchedule("+actionQN+","+splittedLine[1]+")\n").getBytes());
+					label = outgoingEdge.getAttributes().get("label");
+					label=label.substring(label.indexOf("(")+1);
+					label=label.substring(0, label.indexOf(","));
+					continue;
+				}
+				scenarioFile.append(("		expect ").getBytes());
+				String[] splittedLine = label.split(",");
 				String allClocks = "";
 				for (int j = 0; j < splittedLine.length; j++){
-					allClocks+=sep+" TraceSpecificConstraint_"+splittedLine[j].replaceAll("\\.",  "_");
-					sep = ",";
+					allClocks+=sep+clockNameToClock.get(splittedLine[j]).getName().replaceAll("\\.",  "_");
+					sep = " and ";
 				}
-				constraintDefFile.append(("				from "+sourceName+" to "+targetName+" : "+sourceName+targetName+" -> ( when "+ allClocks +")").getBytes());
+				label = outgoingEdge.getAttributes().get("label");
+
+				scenarioFile.append((allClocks+"\n").getBytes());
+			
 			}
 		}
-		constraintDefFile.append(("			   \n}\n").getBytes());
 		
 	}
-//	private void createConstraintDefVariables(RegularFile constraintDefFile, List<String> traceLines) throws IOException {
-//		constraintDefFile.append("			variables { \n".getBytes());
-//		constraintDefFile.append(" 				Integer un = 1\n".getBytes());
-//		constraintDefFile.append(" 				Integer currentTime = 0\n".getBytes());
-//		int i = 1;
-//		for(String line : traceLines){
-//			constraintDefFile.append((" 				Integer timeStamp"+(i++)+" = "+line.substring(0,line.indexOf(';'))+"\n").getBytes());
-//		}
-//		constraintDefFile.append(" 			}\n".getBytes());
-//	}
-
-	private void createConstraintDefHeader(RegularFile constraintDefFile) throws IOException {
-		constraintDefFile.append("AutomataConstraintLibrary temporalConstraints{\n".getBytes());
-		constraintDefFile.append("   import 'platform:/plugin/fr.inria.aoste.timesquare.ccslkernel.model/ccsllibrary/kernel.ccslLib' as kernel;\n".getBytes());
-		constraintDefFile.append("\n".getBytes());
-		constraintDefFile.append("   RelationLibrary temporalRelations{\n".getBytes());
-		constraintDefFile.append("\n".getBytes());
-		constraintDefFile.append("      AutomataRelationDefinition TraceSpecificConstraintDef[TraceSpecificConstraint]{\n".getBytes());
-		constraintDefFile.append("\n".getBytes());
+	/**
+	 * translate from instance.actionName to Type.actionName
+	 * @param theActionQN
+	 * @return
+	 */
+	private String getActionQN(String theActionQN) {
+		String[] splittedQN = theActionQN.split("\\.");
+		TreeIterator<EObject> it = m.eAllContents();
+		List<Instantiation> allInstances = new ArrayList<>();
+		while(it.hasNext()) {
+			EObject eo = it.next();
+			if (eo instanceof Instantiation) {
+				allInstances.add((Instantiation) eo);
+			}
+		}
+		Instantiation instanceOftheActionQN = allInstances.stream().filter(i -> i.getName().compareTo(splittedQN[0]) == 0).collect(Collectors.toList()).get(0);
+		String typeName = instanceOftheActionQN.getReactorClass().getName();
+		return typeName+"."+splittedQN[1];
 	}
-
 	private Map<String,Clock> computeClockMatchings(ArrayList<Clock> allCCSLClocks, String[] observedClockNames) {
 		Map<String,Clock> clockNameToClock = new HashMap<String,Clock>(observedClockNames.length); 
 		for(String clockName : observedClockNames){
@@ -373,26 +304,41 @@ public Resource handleCreationOfCCSLFromTrace() {
 
 	private void feedLFTraceNamesToClock(ArrayList<Clock> allCCSLClocks) {
 		clockNameToClock = new  HashMap<String,Clock>(observedClockNames.length); 
-		for(Clock aClock : allCCSLClocks) {
-			EObject associatedObject = getClockAssociatedObject(aClock);
-			if(! ((associatedObject instanceof Reaction) || (associatedObject instanceof Model))) {
-				continue;
-			}
-			if(associatedObject instanceof Reaction) {
-				if(aClock.getTickingEvent().getKind() == EventKind.PRODUCE) {
-					feedWithReactionName(aClock, associatedObject);
+		obsLoop: for(String observedName : observedClockNames) {
+			for(Clock aClock : allCCSLClocks) {
+				String associatedObjectNormalizedName = computeNormalizedName(aClock);
+				if(observedName.compareTo(associatedObjectNormalizedName) == 0) {
+					clockNameToClock.put(observedName, aClock);
+					System.out.println("OK: "+observedName);
+					continue obsLoop;
 				}
-			}else {
-				feedWithModelName(aClock, associatedObject);
 			}
+			System.out.println("KO: "+observedName);
 		}
-		return;
+			return;
 	}
-	private void feedWithReactionName(Clock aClock, EObject associatedObject) {
+	private String computeNormalizedName(Clock aClock) {
+		EObject associatedObject = getClockAssociatedObject(aClock);
+		if(associatedObject == null) {
+			return "noAssociatedObject";
+		}
+		if(! ((associatedObject instanceof Port) ||(associatedObject instanceof Action) || (associatedObject instanceof Reaction) || (associatedObject instanceof Model))) {
+			return "notUseful";
+		}
+		if (associatedObject instanceof Model && aClock.getTickingEvent().getKind() == EventKind.START){
+			return "Model.TimeAdvancement";
+		}
+		return getNormalizedName(associatedObject)+'.'+aClock.getName().substring(aClock.getName().lastIndexOf('_')+1);
 		
-		Reaction r = (Reaction) associatedObject;
-		Reactor rReactor = ((Reactor)r.eContainer());
-		Model m = (Model) r.eResource().getContents().get(0);
+	}
+	
+	
+	private String getNormalizedName(EObject associatedObject) {
+		Reactor rReactor = (Reactor) associatedObject.eContainer();
+		if(rReactor == null){
+			return "notUseful";
+		}
+		m = (Model) associatedObject.eResource().getContents().get(0);
 		TreeIterator<EObject> it = m.eAllContents();
 		List<Instantiation> allInstances = new ArrayList<>();
 		while(it.hasNext()) {
@@ -401,21 +347,29 @@ public Resource handleCreationOfCCSLFromTrace() {
 				allInstances.add((Instantiation) eo);
 			}
 		}
-		List<Instantiation> instancesOfrReactor = allInstances.stream().filter(i -> i.getReactorClass().getName().compareTo(rReactor.getName()) == 0).toList();
+		List<Instantiation> instancesOfrReactor = allInstances.stream().filter(i -> i.getReactorClass().getName().compareTo(rReactor.getName()) == 0).collect(Collectors.toList());
 		if (instancesOfrReactor.size() > 1) {
 			System.err.println("models with multiple instantiations of the same reactor are not supported yet.\n trying to continue but without guarantee");
 		}
-		String instanceName = instancesOfrReactor.get(0).getName();
-		int indexOfReactionInReactor = rReactor.getReactions().indexOf(r);
-		clockNameToClock.put(instanceName+"."+indexOfReactionInReactor, aClock);
+		String reactorInstanceName = instancesOfrReactor.get(0).getName();
+		
+		if(associatedObject instanceof Reaction) {
+			int indexOfReactionInReactor = rReactor.getReactions().indexOf(associatedObject);
+			String resultingName = reactorInstanceName+"."+indexOfReactionInReactor;
+			return resultingName;
+		}
+		if(associatedObject instanceof Action) {
+			String instanceName = instancesOfrReactor.get(0).getName();
+			return instanceName+"."+((Action)associatedObject).getName();
+		}
+		if(associatedObject instanceof Port) {
+			String instanceName = instancesOfrReactor.get(0).getName();
+			return instanceName+"."+((Port)associatedObject).getName();
+		}
+		return "not implemented case";
 	}
 	
-	private void feedWithModelName(Clock aClock, EObject associatedObject) {
-		if(aClock.getName().contains("timeJump")) {		
-			clockNameToClock.put("Model.TimeAdvancement", aClock);
-		}
 
-	}
 	
 	private EObject getClockAssociatedObject(Clock aClock) {
 		if (aClock.getTickingEvent() == null) {
@@ -465,6 +419,22 @@ public Resource handleCreationOfCCSLFromTrace() {
 		return traceLines;
 	}
 
+	private String getModelFilePathFromCCSL(Resource ccslResource) {
+		EList<ImportStatement> allCCSLImports = ((ClockConstraintSystem)ccslResource.getContents().get(0)).getImports();
+		
+		for(ImportStatement i : allCCSLImports) {
+			if (! (   i.getImportURI().contains("moccml")
+				   || i.getImportURI().contains("extendedCCSL")
+				   || i.getImportURI().contains("ccslLib")
+			)) {
+				return i.getImportURI();
+			}
+				   
+		}
+		
+		return "model not found";
+	}
+	
 	private ArrayList<Clock> getAllCCSLClocks(Resource ccslResource) {
 		EList<Element> allCCSLElements = ((ClockConstraintSystem)ccslResource.getContents().get(0)).getSuperBlock().getElements();
 		ArrayList<Clock> allCCSLClocks = new ArrayList<Clock>();

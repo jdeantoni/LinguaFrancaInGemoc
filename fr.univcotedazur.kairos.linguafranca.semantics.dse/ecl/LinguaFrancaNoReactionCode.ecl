@@ -35,15 +35,15 @@ package lf
  */
 context Model
 	def : timeJump : Event(StartEvent) = self.timeJump()
-	def : untimedAction : Event(StartEvent) = self
+	def : untimedAction : Event = self
 	
 --	def : allRelease : Event = self
 --	def : allCanRelease : Event = self
 --	def : allWait : Event = self
 
 context Reaction
-	def: startExecution: Event(produceEvent) = self.exec()
-	def: finishExecution: Event = self
+	def: starts: Event(produceEvent) = self  --.exec()
+	def: finishes: Event = self
 	def if(self.effects->size() > 0): allOutputAbsent: Event = self
 
 context Variable
@@ -60,15 +60,16 @@ context TriggerRef  --mother class of VarRef
 	def : present : Event(produceEvent) = self
 	def : absent : Event(FinishEvent) = self 
 	def if (self.oclIsKindOf(VarRef) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).effects->exists(t | t = self)
-		): isPresent : Event = self.isPresent()[result] 
-		       						switch 
-		       						case (result = true) forbid absent until updates;
-				      				case (result = false) forbid present on updates;
+		): isPresent : Event = self
+--								.isPresent()[result] 
+--		       						switch 
+--		       						case (result = true) forbid absent until updates;
+--				      				case (result = false) forbid present on updates;
 
 context TimedConcept
 	def 
 	if(not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
-	  ): starts : Event(produceEvent) = self.schedule() --coincides with update since Action is a Variable
+	  ): schedules : Event(produceEvent) = self.schedule() --coincides with update since Action is a Variable
 	def
 	if( not (self.oclIsKindOf(Connection) and self.oclAsType(Connection).delay = null)
 	  ): releases : Event(StartEvent) = self.release()	  
@@ -124,7 +125,7 @@ context TriggerRef
 		
 	inv AbsentOnlyOnceByCycle:
 		(self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).triggers->exists(t | t = self) and self.startup) implies
-		Relation AlternatesFSM(self.updates, theModel.timeJump) -- self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).finishExecution)
+		Relation AlternatesFSM(self.updates, theModel.timeJump) -- self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).finishes)
  
  
  
@@ -151,7 +152,7 @@ context VarRef
 
 	inv effectPresentVarRefToAction:
 		(self.variable.oclIsKindOf(Action) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).effects->exists(t | t = self)) implies
-		Relation Coincides(self.present, self.variable.oclAsType(Action).starts)
+		Relation Coincides(self.present, self.variable.oclAsType(Action).schedules)
 		
 	inv effectUpdateVarRefToAction1:
 		(self.variable.oclIsKindOf(Action) and self.oclAsType(ecore::EObject).eContainer().oclAsType(Reaction).effects->exists(t | t = self)) implies
@@ -193,35 +194,35 @@ context Model
  	inv defuntimedActionWithStartup:
  		let allStartups1 : Collection(TriggerRef) = self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(TriggerRef) and eo.oclAsType(TriggerRef).startup).oclAsType(TriggerRef) in
  		(allStartups1->size() > 0) implies
- 		let allStartExecution1: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Reaction)).oclAsType(Reaction).startExecution) in
- 		let allFinishExecution1: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Reaction)).oclAsType(Reaction).finishExecution) in
+ 		let allstarts1: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Reaction)).oclAsType(Reaction).starts) in
+ 		let allfinishes1: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Reaction)).oclAsType(Reaction).finishes) in
 		let allUpdates1: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Variable) and not eo.oclIsKindOf(TimedConcept)).oclAsType(Variable).updates) in
 		let allUpdates1a: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(TriggerRef)).oclAsType(TriggerRef).updates) in
-		let allTimedConceptsStarts1: Event = Expression Union(allTimedConcepts.starts) in
+		let allTimedConceptsschedules1: Event = Expression Union(allTimedConcepts.schedules) in
 		let allTimedConceptsWait1: Event = Expression Union(allTimedConcepts.wait) in
 		let allStartupStarts1: Event = Expression Union(allStartups1.updates) in
-		let union1_2a : Event = Expression Union(allUpdates1, allStartExecution1) in
-		let union1_2a2 : Event = Expression Union(union1_2a, allFinishExecution1) in
+		let union1_2a : Event = Expression Union(allUpdates1, allstarts1) in
+		let union1_2a2 : Event = Expression Union(union1_2a, allfinishes1) in
 		let union1_2a3 : Event = Expression Union(union1_2a2, allTimedConceptsWait1) in
 		let union1_2a4 : Event = Expression Union(union1_2a3, allUpdates1a) in
-		let union1_2_3a : Event = Expression Union(union1_2a4, allTimedConceptsStarts1) in
+		let union1_2_3a : Event = Expression Union(union1_2a4, allTimedConceptsschedules1) in
 		let union1_2_3_4a : Event = Expression Union(union1_2_3a, allStartupStarts1) in
 		Relation Coincides(self.untimedAction, union1_2_3_4a)
 		
 	inv defuntimedActionNoStartup:
 		let allStartups3 : Sequence(TriggerRef) = self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(TriggerRef) and eo.oclAsType(TriggerRef).startup).oclAsType(TriggerRef)->asSequence() in
  		(allStartups3->size() = 0) implies
- 		let allStartExecution3: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Reaction)).oclAsType(Reaction).startExecution) in
- 		let allFinishExecution3: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Reaction)).oclAsType(Reaction).finishExecution) in
+ 		let allstarts3: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Reaction)).oclAsType(Reaction).starts) in
+ 		let allfinishes3: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Reaction)).oclAsType(Reaction).finishes) in
 		let allUpdates3: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(Variable) and not eo.oclIsKindOf(TimedConcept)).oclAsType(Variable).updates) in
 		let allUpdates3a: Event = Expression Union(self.oclAsType(ecore::EObject).allSubobjects()->select(eo | eo.oclIsKindOf(TriggerRef)).oclAsType(TriggerRef).updates) in
-		let allTimedConceptsStarts3: Event = Expression Union(allTimedConcepts.starts) in
+		let allTimedConceptsschedules3: Event = Expression Union(allTimedConcepts.schedules) in
 		let allTimedConceptsWait3: Event = Expression Union(allTimedConcepts.wait) in
-		let union1_2c : Event = Expression Union(allUpdates3, allStartExecution3) in
-		let union1_2c2 : Event = Expression Union(union1_2c, allFinishExecution3) in
+		let union1_2c : Event = Expression Union(allUpdates3, allstarts3) in
+		let union1_2c2 : Event = Expression Union(union1_2c, allfinishes3) in
 		let union1_2c3 : Event = Expression Union(union1_2c2, allTimedConceptsWait3) in
 		let union1_2c4 : Event = Expression Union(union1_2c3, allUpdates3a) in
-		let union1_2_3c : Event = Expression Union(union1_2c4, allTimedConceptsStarts3) in
+		let union1_2_3c : Event = Expression Union(union1_2c4, allTimedConceptsschedules3) in
 		Relation Coincides(self.untimedAction, union1_2_3c)
 	 
 		
@@ -247,7 +248,7 @@ context Timer
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
  
 	inv timerSetActionLifeCycle:
-		Relation TimerConstraint(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+		Relation TimerConstraint(self.schedules, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 
 	inv TimerScheduledwithNextTimedActionOffset0:
 		((self.offset.time <> null and self.offset.time.interval = 0)
@@ -258,13 +259,13 @@ context Timer
 		) implies
 		let releasesSampledOnUntimed2 : Event = Expression SampledOn(self.releases, theModel.untimedAction) in
 		let one : Integer = 1 in
-		Relation Coincides(releasesSampledOnUntimed2, self.starts) 
+		Relation Coincides(releasesSampledOnUntimed2, self.schedules) 
 		
 context Action
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 
 	inv setActionLifeCycle: 
-		Relation ConnectionAction(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+		Relation ConnectionAction(self.schedules, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 
 context Connection
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
@@ -289,15 +290,15 @@ context Connection
 --		
 --	inv ConnectorConstraintsNoSelfLoop:
 --		(self.delay <> null and self.rightPorts->first().variable.oclAsType(ecore::EObject).eContainer() <> self.leftPorts->first().variable.oclAsType(ecore::EObject).eContainer()) implies
---		Relation ConnectionAction(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+--		Relation ConnectionAction(self.schedules, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 --		
 	inv ConnectionLifeCycle:
 		(self.delay <> null) implies
-		Relation ConnectionAction(self.starts, self.canRelease, self.wait, self.releases, theModel.timeJump) 
+		Relation ConnectionAction(self.schedules, self.canRelease, self.wait, self.releases, theModel.timeJump) 
 		
-	inv TimedConnectorStartsWithSource:
+	inv TimedConnectorschedulesWithSource:
 		(self.delay <> null) implies	
-		Relation Coincides(self.leftPorts.variable->first().present, self.starts)
+		Relation Coincides(self.leftPorts.variable->first().present, self.schedules)
 		
 	inv TimedConnectorReleaseWithTarget:
 		(self.delay <> null) implies
@@ -317,14 +318,14 @@ context Reaction
 		let allInputs: OrderedSet(TriggerRef) = self.triggers in 
 		let theInputsPresence : Event = Expression Union(allInputs.present) in
 		let theLastUpdate : Event = Expression Sup(allInputs.updates) in
-		Relation Reaction(theInputsPresence, theLastUpdate, self.startExecution, self.finishExecution, self.effects->first().updates, self.allOutputAbsent)
+		Relation Reaction(theInputsPresence, theLastUpdate, self.starts, self.finishes, self.effects->first().updates, self.allOutputAbsent)
 		
 	inv reactionLifeCycleNoOutput:
 		(self.effects->size() = 0) implies
 		let allInputsNO: Sequence(VarRef) = self.triggers.oclAsType(VarRef) in
 		let theInputsPresenceNO : Event = Expression Union(allInputsNO.present) in
 		let theLastUpdateNO : Event = Expression Sup(allInputsNO.updates) in
-		Relation ReactionNoOutput(theInputsPresenceNO, theLastUpdateNO, self.startExecution, self.finishExecution)
+		Relation ReactionNoOutput(theInputsPresenceNO, theLastUpdateNO, self.starts, self.finishes)
 	
 	inv UpdatesOutVarAllTogether:
 		(self.effects->size() > 1) implies
@@ -336,13 +337,13 @@ context Reaction
 	
 	inv StartUpdateProcessOutVarOnFinishExecute:
 		(self.effects->size()  > 0) implies
-		Relation Coincides(self.finishExecution, self.effects->first().isPresent)
+		Relation Coincides(self.finishes, self.effects->first().isPresent)
 
 	
 context Reactor
 	inv oneReactionAtATime:
 		(self.reactions->size() > 1) implies
-		Relation Exclusion(self.reactions.startExecution)
+		Relation Exclusion(self.reactions.starts)
 
 /**
  * PRIORITY
@@ -358,7 +359,7 @@ context Model
 
 --context Reactor --TODO generalize
 --	inv reactionPriorityAccordingToModel:
---		Prior : self.reactions->at(1).startExecution prevails on self.reactions->at(2).startExecution
+--		Prior : self.reactions->at(1).starts prevails on self.reactions->at(2).starts
  
 /**BEGIN For priority propagation (see paper@RIVF019 */
 
@@ -371,9 +372,9 @@ context Model
 context Reaction
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	inv propagatesPrio0:
-		Relation SubClock(self.finishExecution, theModel.untimedAction)
+		Relation SubClock(self.finishes, theModel.untimedAction)
 	inv propagatesPrio1:
-		Relation SubClock(self.startExecution, theModel.untimedAction)
+		Relation SubClock(self.starts, theModel.untimedAction)
 	inv propagatesPrio1a:
 	(self.effects->size() > 0) implies
 		Relation SubClock(self.allOutputAbsent, theModel.untimedAction)
@@ -393,7 +394,7 @@ context Variable
 context Timer
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	inv propagatesPrio5:
-		Relation SubClock(self.starts, theModel.untimedAction)
+		Relation SubClock(self.schedules, theModel.untimedAction)
 --	inv propagatesPrio7:
 --		Relation SubClock(self.canRelease, theModel.allCanRelease)
 	inv propagatesPrio9:
@@ -404,7 +405,7 @@ context Timer
 context Action
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	inv propagatesPrio6:
-		Relation SubClock(self.starts, theModel.untimedAction)
+		Relation SubClock(self.schedules, theModel.untimedAction)
 -- 	inv propagatesPrio8:
 -- 	(self.minDelay <> null and self.minDelay.time <> null) implies
 --		Relation SubClock(self.canRelease, theModel.allCanRelease)
@@ -416,7 +417,7 @@ context Connection --only timed ones
 	def : theModel : Model = self.oclAsType(ecore::EObject)->closure(s | s.oclAsType(ecore::EObject).eContainer())->select(eo | eo.oclIsKindOf(Model))->asSequence()->first().oclAsType(Model)
 	inv propagatesPrio11:
 	(self.delay <> null ) implies
-		Relation SubClock(self.starts, theModel.untimedAction)
+		Relation SubClock(self.schedules, theModel.untimedAction)
 -- 	inv propagatesPrio12:
 -- 	(self.delay <> null ) implies
 --		Relation SubClock(self.canRelease, theModel.allCanRelease)

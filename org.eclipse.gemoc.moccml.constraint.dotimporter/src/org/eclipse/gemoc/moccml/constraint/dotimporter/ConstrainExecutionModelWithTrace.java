@@ -41,11 +41,14 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.lflang.lf.Action;
+import org.lflang.lf.Connection;
 import org.lflang.lf.Instantiation;
 import org.lflang.lf.Model;
 import org.lflang.lf.Port;
 import org.lflang.lf.Reaction;
 import org.lflang.lf.Reactor;
+import org.lflang.lf.TimedConcept;
+import org.lflang.lf.Timer;
 import org.lflang.lf.TypedVariable;
 
 import com.alexmerz.graphviz.ParseException;
@@ -247,15 +250,27 @@ public Resource handleCreationOfScenarioFromTrace() {
 				sep = "";
 				String label = outgoingEdge.getAttributes().get("label");
 				if(label.startsWith("schedule")) {
-					label=label.substring(label.indexOf("(")+1);
-					label=label.substring(0, label.indexOf(")"));
-					String[] splittedLine = label.split(",");
-					String actionQN= getActionQN(splittedLine[0].substring(0,splittedLine[0].lastIndexOf('.')));
-					scenarioFile.append(("execute helper.setnextSchedule("+actionQN+","+splittedLine[1]+")\n").getBytes());
-					label = outgoingEdge.getAttributes().get("label");
-					label=label.substring(label.indexOf("(")+1);
-					label=label.substring(0, label.indexOf(","));
-					scenarioFile.append(("		expect "+clockNameToClock.get(splittedLine[0]).getName().replaceAll("\\.",  "_")+"\n").getBytes());
+					ArrayList<String> allClockNames = new ArrayList<String>();
+					for(String l : label.split("\\)")) {
+						if(l.length() == 0) {
+							continue;
+						}
+						l=l.substring(l.indexOf("(")+1);
+						if(l.indexOf(")") != -1) {
+							l=l.substring(0, l.indexOf(")"));
+						}
+						String[] splittedLine = l.split(",");
+						String actionQN= getActionQN(splittedLine[0].substring(0,splittedLine[0].lastIndexOf('.')));
+						scenarioFile.append(("execute helper.setnextSchedule("+actionQN+","+splittedLine[1]+")\n").getBytes());
+						allClockNames.add(clockNameToClock.get(splittedLine[0]).getName().replaceAll("\\.",  "_"));
+					}
+					scenarioFile.append(("		expect ").getBytes());
+					String sep2="";
+					for(String cName : allClockNames) {
+						scenarioFile.append((sep2+cName).getBytes());
+						sep2 = " and ";
+					}
+					scenarioFile.append("\n".getBytes());
 					continue;
 				}
 				scenarioFile.append(("		expect ").getBytes());
@@ -323,7 +338,7 @@ public Resource handleCreationOfScenarioFromTrace() {
 		if(associatedObject == null) {
 			return "noAssociatedObject";
 		}
-		if(! ((associatedObject instanceof Port) ||(associatedObject instanceof Action) || (associatedObject instanceof Reaction) || (associatedObject instanceof Model))) {
+		if(! ((associatedObject instanceof Port) ||(associatedObject instanceof TimedConcept) || (associatedObject instanceof Reaction) || (associatedObject instanceof Model))) {
 			return "notUseful";
 		}
 		if (associatedObject instanceof Model && aClock.getTickingEvent().getKind() == EventKind.START){
@@ -362,6 +377,13 @@ public Resource handleCreationOfScenarioFromTrace() {
 		if(associatedObject instanceof Action) {
 			String instanceName = instancesOfrReactor.get(0).getName();
 			return instanceName+"."+((Action)associatedObject).getName();
+		}
+		if(associatedObject instanceof Timer) {
+			String instanceName = instancesOfrReactor.get(0).getName();
+			return instanceName+"."+((Timer)associatedObject).getName();
+		}
+		if(associatedObject instanceof Connection) {
+			throw new RuntimeException("Connections not supported yet");
 		}
 		if(associatedObject instanceof Port) {
 			String instanceName = instancesOfrReactor.get(0).getName();

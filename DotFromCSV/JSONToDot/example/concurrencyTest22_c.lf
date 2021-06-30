@@ -1,0 +1,59 @@
+/**
+ * A minimal example that demonstrates how fusion between two sensors
+ *  induce concurrency
+ * 
+ * @author Julien Deantoni {julien.deantoni@univ-cotedazur.fr}
+ */
+
+target C {
+	tracing : true,
+    threads  : 2,
+	timeout : 100msec
+};
+
+
+reactor Source1 {
+    output p1:int
+    timer t(0, 20 msec);
+    reaction (t) -> p1 {=
+		SET(p1, 42);
+    =}
+}
+
+reactor Source2 {
+    output p2:int
+    timer t(0, 10 msec);
+    reaction (t) -> p2 {=
+		SET(p2, 84);
+    =}
+}
+
+reactor Fusion {
+    input p1:int
+    input p2:int
+    
+    logical action la1: int
+    
+     reaction (p1, p2) -> la1{=
+          if(p1->is_present && p2->is_present){
+          	schedule_int(la1, 0, p2->value - p1->value);
+          }   
+    =}
+    
+    reaction (la1){=
+             
+    =}
+    
+}
+
+main  realtime reactor concurrencyTest2_c {
+
+    s1 = new Source1();
+    s2 = new Source2();
+    
+    fusion = new Fusion();
+    
+    s1.p1 -> fusion.p1;
+    s2.p2 -> fusion.p2;
+    
+}

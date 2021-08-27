@@ -54,8 +54,11 @@ class ScheduledTimeAdvancement{
 		if (timedConcept instanceof Variable){
 			return timedConcept.name+"@("+releaseDate+","+microStep+")"
 		}else{
-			return "aConnection@("+releaseDate+","+microStep+")"
+			if (timedConcept instanceof Connection){
+				return timedConcept.leftPorts.get(0).variable.name+" -> "+timedConcept.rightPorts.get(0).variable.name+"@("+releaseDate+","+microStep+")"
+			}
 		}
+		return "a"+timedConcept.class.toString()
 	}
 	
 	override boolean equals(Object v){
@@ -227,7 +230,7 @@ class ModelAspect {
 				return
 			}
 		}
-		_self.eventQueue.addLast(new ScheduledTimeAdvancement(tc, rlt, 0))//add to the end
+		_self.eventQueue.addLast(new ScheduledTimeAdvancement(tc, rlt, lastMS+1))//add to the end
 		if (DebugLevel.level > 1) println("afterSchedule end of list: (2)"+_self.eventQueue)
 		if (DebugLevel.level > 0) println("\t\t scheduled time advancements: "+_self.eventQueue)
 		return

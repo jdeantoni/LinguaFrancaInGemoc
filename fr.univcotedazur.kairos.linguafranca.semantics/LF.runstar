@@ -1,0 +1,65 @@
+RunStaR configuration
+import "platform:/plugin/org.lflang/model/generated/LF.ecore";
+import "platform:/plugin/fr.univcotedazur.kairos.linguafranca.semantics.dse/ecl/LinguaFranca.ecl";
+
+let Variable('currentValue', 'bufferedValues' for lf.Output BEFORE updates) be outputValue;
+let Variable('currentValue' for lf.Input AFTER updates) be inputValue;
+let Variable('currentTime' for lf.Model) be currentTime;
+let Variable('offset' for lf.Timer AFTER releases) be timer;
+let Variable('currentTime', 'currentMicroStep' for lf.Model AFTER a step) be superDenseTime;
+let Variable('bufferedValues' for lf.Connection AFTER a step) be bufferedValues;
+let Variable('eventQueue' for lf.Model AFTER a step) be eventQueue;
+let Image('icons/horloge.png' for lf.Model) be horloge;
+let Chart(x=currentTime, y=inputValue, path="/home/ran/eclipse-workspaces/runtime-EclipseXtext/icons") with {
+    title='currentValue';
+    nbValues=30; 
+    xLabel='currentTime';
+    yLabel='currentValue';
+    lineStyle=DIGITAL;
+} be inputGraph;
+create: Paint((255,0,255), type=BACKGROUND) for lf.Output BEFORE updates; 
+create: Paint((255,255,0), type=BACKGROUND) for lf.Input AFTER updates;
+create: Paint((0,255,255), type=FOREGROUND) for lf.Timer AFTER releases;
+create: Mark(outputValue, type=WARNING);
+create: Mark(timer, type=INFORMATION);
+create: Mark(currentTime, type=ERROR);
+create: Mark(inputValue, type=INFORMATION);
+create: Comment(inputValue);
+create: Hover(image = inputGraph);
+create: Hover(eventQueue, fromStart=TRUE);
+create: Hover(decoratedCurrentTimeValue, /*image=horloge,*/ fromStart=TRUE);
+let DecoratedText (currentTime) with {
+    color=(125,0,255);
+    fontSize=5;
+    fontStyle=ITALIC;
+} be decoratedCurrentTimeValue;
+let DecoratedText(outputValue) with {
+	prefix='currentValue: ';
+	color=(0,0,255);
+	errorText='┴';
+	errorColor=(120,120,120);
+} be decoratedOutputValue;
+let DecoratedText(inputValue) with {
+	prefix='currentValue: ';
+	color=(0,0,255);
+	errorText='┴';
+	errorColor=(120,120,120);
+} be decoratedInputValue;
+let DecoratedText(superDenseTime) with {
+	fontSize=8;
+	prefix='(';
+	suffix=')';
+} be decoratedCurrentTime;
+create: Stack(eventQueue, length=8, shape=RECTANGLE, vertical=TRUE, strategy=FIRSTS, title='Event Queue');
+create: Stack(bufferedValues, length=8, vertical=FALSE, shape=ROUNDED_RECTANGLE, depth=1, title='Buffered Values');
+create: Paint((255,0,0), type=FOREGROUND, persistent=FALSE) AFTER releases;
+create: Paint((120,120,120), type=FOREGROUND, persistent=FALSE) AFTER absent;
+create: Paint((0,0,255), type=FOREGROUND, persistent=FALSE) AFTER present;
+create: Paint((0,0,255), type=FOREGROUND, persistent=TRUE) AFTER starts;
+create: Paint((255,0,0), type=BACKGROUND, persistent=TRUE) AFTER startExecution;
+create: Paint(clear, type=BACKGROUND) AFTER finishExecution;
+create: Label(decoratedOutputValue);
+create: Label(decoratedInputValue);
+create: Label(bufferedValues);
+create: Image(inputGraph);
+create: Image(horloge, depth=1, size=30, label=decoratedCurrentTime);

@@ -9,3 +9,4 @@ k3 = fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.ModelAspect,\
      fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.VarRefAspect,\
      fr.univcotedazur.kairos.linguafranca.semantics.k3dsa.StateVarAspect
 ecl = /fr.univcotedazur.kairos.linguafranca.semantics.dse/ecl/LinguaFrancaNoReactionCode.ecl
+runstar = /fr.univcotedazur.kairos.linguafranca.noreactioncode.semantics/LF.runstar

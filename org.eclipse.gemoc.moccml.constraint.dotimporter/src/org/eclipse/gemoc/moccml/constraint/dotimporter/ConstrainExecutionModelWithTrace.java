@@ -124,9 +124,9 @@ public class ConstrainExecutionModelWithTrace extends AbstractHandler {
 	protected IStatus doIt(IProgressMonitor monitor) {
 		
 		
-		
-		Resource ccslTraceResource = handleCreationOfScenarioFromTrace();
 		monitor.worked(10);
+		Resource ccslTraceResource = handleCreationOfScenarioFromTrace();
+		
 		
 		dotFile = null;
 		dotFilePath="";
@@ -261,28 +261,39 @@ public Resource handleCreationOfScenarioFromTrace() {
 						}
 						String[] splittedLine = l.split(",");
 						String actionQN= getActionQN(splittedLine[0].substring(0,splittedLine[0].lastIndexOf('.')));
+						if (actionQN == null) { //the action is not in the model (typically for reaction generated from timed connections
+							continue;
+						}
 						scenarioFile.append(("execute helper.setnextSchedule("+actionQN+","+splittedLine[1]+")\n").getBytes());
-						allClockNames.add(clockNameToClock.get(splittedLine[0]).getName().replaceAll("\\.",  "_"));
+//						allClockNames.add(clockNameToClock.get(splittedLine[0]).getName().replaceAll("\\.",  "_"));
 					}
-					scenarioFile.append(("		expect ").getBytes());
-					String sep2="";
-					for(String cName : allClockNames) {
-						scenarioFile.append((sep2+cName).getBytes());
-						sep2 = " and ";
-					}
-					scenarioFile.append("\n".getBytes());
+//					if(! allClockNames.isEmpty()) {
+//						scenarioFile.append(("		expect ").getBytes());
+//						String sep2="";
+//						for(String cName : allClockNames) {
+//							scenarioFile.append((sep2+cName).getBytes());
+//							sep2 = " and ";
+//						}
+//						scenarioFile.append("\n".getBytes());
+//					}
 					continue;
 				}
-				scenarioFile.append(("		expect ").getBytes());
+				
+				
 				String[] splittedLine = label.split(",");
-				String allClocks = "";
-				for (int j = 0; j < splittedLine.length; j++){
-					allClocks+=sep+clockNameToClock.get(splittedLine[j]).getName().replaceAll("\\.",  "_");
-					sep = " and ";
-				}
-				label = outgoingEdge.getAttributes().get("label");
-
-				scenarioFile.append((allClocks+"\n").getBytes());
+					String allClocks = "";
+					for (int j = 0; j < splittedLine.length; j++){
+						if (clockNameToClock.get(splittedLine[j]) != null) {
+							if (j == 0) {
+								scenarioFile.append(("		expect ").getBytes());
+							}
+							allClocks+=sep+clockNameToClock.get(splittedLine[j]).getName().replaceAll("\\.",  "_");
+							sep = " and ";
+						}
+					}
+					label = outgoingEdge.getAttributes().get("label");
+					scenarioFile.append((allClocks+"\n").getBytes());
+				
 			
 			}
 		}
@@ -303,7 +314,11 @@ public Resource handleCreationOfScenarioFromTrace() {
 				allInstances.add((Instantiation) eo);
 			}
 		}
-		Instantiation instanceOftheActionQN = allInstances.stream().filter(i -> i.getName().compareTo(splittedQN[0]) == 0).collect(Collectors.toList()).get(0);
+		List<Instantiation> instanceList = allInstances.stream().filter(i -> i.getName().compareTo(splittedQN[0]) == 0).collect(Collectors.toList());
+		if (instanceList.isEmpty()) { //typically for reaction generated from untimed connetions
+			return null;
+		}
+		Instantiation instanceOftheActionQN = instanceList.get(0);
 		String typeName = instanceOftheActionQN.getReactorClass().getName();
 		return typeName+"."+splittedQN[1];
 	}
@@ -321,6 +336,7 @@ public Resource handleCreationOfScenarioFromTrace() {
 	private void feedLFTraceNamesToClock(ArrayList<Clock> allCCSLClocks) {
 		clockNameToClock = new  HashMap<String,Clock>(observedClockNames.length); 
 		obsLoop: for(String observedName : observedClockNames) {
+			List<String> allClocksNormalizedName = allCCSLClocks.stream().map(aClock -> computeNormalizedName(aClock)).collect(Collectors.toList());
 			for(Clock aClock : allCCSLClocks) {
 				String associatedObjectNormalizedName = computeNormalizedName(aClock);
 				if(observedName.compareTo(associatedObjectNormalizedName) == 0) {
@@ -342,7 +358,7 @@ public Resource handleCreationOfScenarioFromTrace() {
 			return "notUseful";
 		}
 		if (associatedObject instanceof Model && aClock.getTickingEvent().getKind() == EventKind.START){
-			return "Model.TimeAdvancement";
+			return "Model.TimeJump";
 		}
 		return getNormalizedName(associatedObject)+'.'+aClock.getName().substring(aClock.getName().lastIndexOf('_')+1);
 		
@@ -351,7 +367,7 @@ public Resource handleCreationOfScenarioFromTrace() {
 	
 	private String getNormalizedName(EObject associatedObject) {
 		Reactor rReactor = (Reactor) associatedObject.eContainer();
-		if(rReactor == null){
+		if(rReactor == null || (rReactor != null && rReactor.isMain())){
 			return "notUseful";
 		}
 		m = (Model) associatedObject.eResource().getContents().get(0);
@@ -367,6 +383,7 @@ public Resource handleCreationOfScenarioFromTrace() {
 		if (instancesOfrReactor.size() > 1) {
 			System.err.println("models with multiple instantiations of the same reactor are not supported yet.\n trying to continue but without guarantee");
 		}
+		
 		String reactorInstanceName = instancesOfrReactor.get(0).getName();
 		
 		if(associatedObject instanceof Reaction) {
